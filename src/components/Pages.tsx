@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InputPage from "./InputPage";
 import { InterfaceInputs } from "../Modal/Interfaces";
+import PreviewPage from "./PreviewPage";
 
 function Pages() {
   const [inputs, setInputs] = useState<InterfaceInputs>({
@@ -30,10 +31,7 @@ function Pages() {
         handleInputChange={handleInputChange}
         generateReport={generateReport}
       ></InputPage>
-      <div className="w-1/2 ml-8">
-        <h2 className="text-2xl font-medium mb-4 text-center">Preview</h2>
-        <div className="bg-gray-100 rounded-md p-4">{preview}</div>
-      </div>
+      <PreviewPage preview={preview}></PreviewPage>
     </div>
   );
 }
