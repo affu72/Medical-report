@@ -1,4 +1,9 @@
-import { useState } from "react";
+import {
+  FormEvent,
+  FormEventHandler,
+  MouseEventHandler,
+  useState,
+} from "react";
 import InputPage from "./InputPage";
 import { InterfaceInputs } from "../Modal/Interfaces";
 import PreviewPage from "./PreviewPage";
@@ -14,13 +19,15 @@ function Pages() {
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    event.preventDefault();
     const { name, value } = event.target;
     setInputs((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const generateReport = () => {
+  const generateReport = (event: FormEvent<HTMLFormElement>) => {
     // Write code to generate medical report based on inputs
     // Set the generated report to preview state
+    event.preventDefault();
     setPreview("This is a sample medical report.");
   };
 
