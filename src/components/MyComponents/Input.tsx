@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 interface InputProps {
   label?: string;
@@ -7,15 +7,21 @@ interface InputProps {
   type?: string;
   value?: string;
   id?: string;
+  basis?: number;
 }
 
-function Input({ label, type = "text", placeholder, name }: InputProps) {
+const Input: React.FC<InputProps> = ({
+  label,
+  type = "text",
+  placeholder,
+  name,
+  basis = "auto",
+}) => {
   return (
-    <div className="w-full mb-4">
+    <div className="mb-4">
       <label htmlFor="name">{label}</label>
-
       <input
-        className="border-2 border-gray-300 py-2 px-4 w-full rounded-md"
+        className={`border-2 border-gray-300 py-2 px-4 w-full rounded-md basis-${basis}`}
         type={type}
         name={name}
         id="name"
@@ -23,6 +29,6 @@ function Input({ label, type = "text", placeholder, name }: InputProps) {
       />
     </div>
   );
-}
+};
 
 export default Input;

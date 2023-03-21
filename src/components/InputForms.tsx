@@ -4,36 +4,20 @@ import Input from "./MyComponents/Input";
 import PersonalInformation from "./PersonalInformation";
 import Medicines from "./Medicines";
 
-// interface IProp {
-//   inputs: InterfaceInputs;
-//   handleInputChange: (
-//     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-//   ) => void;
-//   generateReport: (event: FormEvent<HTMLFormElement>) => void;
-// }
+interface IProp {
+  // inputs: InterfaceInputs;
+  inputs: [boolean, boolean, boolean, boolean];
+  // handleInputChange: (
+  //   event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  // ) => void;
+  // generateReport: (event: FormEvent<HTMLFormElement>) => void;
+}
 
-function InputForms() {
-  // type SideBarTuples = [boolean, boolean, boolean, boolean];
-
-  // const sideBarTuples: SideBarTuples = [true, false, false, false];
-
-  // const [showForm, setShowForm] = useState<SideBarTuples>(sideBarTuples);
-
-  // const showFormHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   setShowForm((prev) => {
-  //     const list = prev;
-
-  //     for (let i = 0; i < list.length; i++) list[i] = false;
-
-  //     list[+event.currentTarget.value] = true;
-
-  //     return list;
-  //   });
-  // };
-
+function InputForms(props: IProp) {
+  console.log(props.inputs);
   return (
-    <form className="bg-white flex flex-col gap-6 p-10 basis-2/3">
-      {/* <PersonalInformation></PersonalInformation> */}
+    <form className="bg-white flex flex-col gap-6 p-6 basis-2/3">
+      <PersonalInformation></PersonalInformation>
       <Medicines />
 
       <button

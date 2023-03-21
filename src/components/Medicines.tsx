@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "./MyComponents/Input";
 import MedicineInput from "./MyComponents/MedicineInput";
+import Button from "./MyComponents/Button";
 
 export interface IMedicine {
   name: string;
@@ -48,39 +49,43 @@ const Medicines = () => {
   return (
     <div>
       {medicines.map((medicine, index) => (
-        <div key={index}>
+        <div key={index} className="flex items-center gap-2">
           <MedicineInput />
 
-          <div className="flex items-center gap-8">
-            <Input
-              type="text"
-              placeholder="Dose"
-              name="dose"
-              value={medicine.dose}
-              // onChange={(e) => handleInputChange(e, index)}
-            />
-          </div>
+          <input
+            type="text"
+            placeholder="dose"
+            className={`border-2 border-gray-300 py-2 px-4 rounded-md w-1/5 mt-6`}
+          />
 
           {medicines.length !== 1 && (
-            <span
-              className="remove-button button"
+            <Button
+              type="button"
+              value="x"
+              margin={6}
+              bgColor="red"
               // onClick={() => handleRemoveClick(index)}
-            >
-              Remove
-            </span>
+            />
           )}
         </div>
       ))}
 
       <div className="flex gap-4">
-        <span
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+        <Button
+          type="button"
+          value="Add Medicine"
+          bgColor="blue"
           onClick={addMedicine}
-        >
-          Add medicine
-        </span>
-        <span onClick={handleClearClick}>Clear all</span>
-        <span>Save</span>
+        />
+
+        <Button
+          type="button"
+          bgColor="yellow"
+          value="Clear All"
+          onClick={handleClearClick}
+        />
+
+        {/* <span>Save</span> */}
       </div>
     </div>
   );
