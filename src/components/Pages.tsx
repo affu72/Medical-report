@@ -1,44 +1,33 @@
-import {
-  FormEvent,
-  FormEventHandler,
-  MouseEventHandler,
-  useState,
-} from "react";
-import InputPage from "./InputPage";
+import { FormEvent, useState } from "react";
 import { InterfaceInputs } from "../Modal/Interfaces";
 import PreviewPage from "./PreviewPage";
+import MainPage from "./MainPage";
 
 function Pages() {
-  const [inputs, setInputs] = useState<InterfaceInputs>({
-    name: "",
-    age: 0,
-    symptoms: "",
-  });
-  const [preview, setPreview] = useState("");
+  // const [inputs, setInputs] = useState<InterfaceInputs>({
+  //   name: "",
+  //   age: 0,
+  //   symptoms: "",
+  // });
+  // const [preview, setPreview] = useState("");
 
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    event.preventDefault();
-    const { name, value } = event.target;
-    setInputs((prevState) => ({ ...prevState, [name]: value }));
-  };
+  // const handleInputChange = (
+  //   event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  // ) => {
+  //   event.preventDefault();
+  //   const { name, value } = event.target;
+  //   setInputs((prevState) => ({ ...prevState, [name]: value }));
+  // };
 
-  const generateReport = (event: FormEvent<HTMLFormElement>) => {
-    // Write code to generate medical report based on inputs
-    // Set the generated report to preview state
-    event.preventDefault();
-    setPreview("This is a sample medical report.");
-  };
+  // const generateReport = (event: FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   setPreview("This is a sample medical report.");
+  // };
 
   return (
     <div className="flex justify-center p-10 gap-x-5">
-      <InputPage
-        inputs={inputs}
-        handleInputChange={handleInputChange}
-        generateReport={generateReport}
-      ></InputPage>
-      <PreviewPage preview={preview}></PreviewPage>
+      <MainPage></MainPage>
+      <PreviewPage></PreviewPage>
     </div>
   );
 }

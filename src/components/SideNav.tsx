@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { IoIosPersonAdd } from "react-icons/io";
 import { FaBookMedical, FaPrescription, FaMoneyBillAlt } from "react-icons/fa";
 
@@ -6,7 +6,7 @@ interface SidebarProp {
   onNavClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-function SidebarNav(props: SidebarProp) {
+function SideNav(props: SidebarProp) {
   enum sideButtons {
     personal,
     history,
@@ -50,4 +50,4 @@ function SidebarNav(props: SidebarProp) {
   );
 }
 
-export default SidebarNav;
+export default SideNav;
