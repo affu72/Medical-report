@@ -1,15 +1,23 @@
 import React from "react";
 import Input from "./MyComponents/Input";
+import IndianStateDropdown from "./IndianStateDropDown";
 
 function PersonalInformation() {
   return (
     <div>
-      <Input
-        name="First Name"
-        label="First Name"
-        placeholder="First Name"
-      ></Input>
-      <Input name="Last Name" label="Last Name" placeholder="Last Name"></Input>
+      <div className="flex gap-8">
+        <Input
+          name="First Name"
+          label="First Name"
+          placeholder="First Name"
+        ></Input>
+        <Input
+          name="Last Name"
+          label="Last Name"
+          placeholder="Last Name"
+        ></Input>
+      </div>
+
       <Input name="age" label="Age" placeholder="Age" type="number"></Input>
 
       <div className=" flex gap-16 items-center w-full mb-4">
@@ -58,7 +66,10 @@ function PersonalInformation() {
         ></Input>
       </div>
 
-      <Input name="staet" placeholder="State" label="State"></Input>
+      <div className="w-full mb-4">
+        <label htmlFor="name">State</label>
+        <IndianStateDropdown value=""></IndianStateDropdown>
+      </div>
     </div>
   );
 }

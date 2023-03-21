@@ -19,7 +19,7 @@ function SideNav(props: SidebarProp) {
       <button
         value={sideButtons.personal}
         onClick={props.onNavClick}
-        className="flex items-center gap-4 hover:font-semibold hover:scale-105 border-b-2 border-cyan-500 transition-all duration-100 pl-1"
+        className="w-full flex items-center gap-4 hover:font-semibold hover:scale-105 border-b-2 border-cyan-500 transition-all duration-100 pl-1 focus:bg-white"
       >
         <IoIosPersonAdd /> Personal Information
       </button>

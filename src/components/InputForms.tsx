@@ -2,6 +2,7 @@ import React, { FormEvent } from "react";
 import { InterfaceInputs } from "../Modal/Interfaces";
 import Input from "./MyComponents/Input";
 import PersonalInformation from "./PersonalInformation";
+import Medicines from "./Medicines";
 
 // interface IProp {
 //   inputs: InterfaceInputs;
@@ -32,7 +33,8 @@ function InputForms() {
 
   return (
     <form className="bg-white flex flex-col gap-6 p-10 basis-2/3">
-      <PersonalInformation></PersonalInformation>
+      {/* <PersonalInformation></PersonalInformation> */}
+      <Medicines />
 
       <button
         type="submit"

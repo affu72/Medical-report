@@ -1,10 +1,12 @@
 import React from "react";
 
 interface InputProps {
-  label: string;
+  label?: string;
   placeholder: string;
   name: string;
   type?: string;
+  value?: string;
+  id?: string;
 }
 
 function Input({ label, type = "text", placeholder, name }: InputProps) {
