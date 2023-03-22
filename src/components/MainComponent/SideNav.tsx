@@ -14,6 +14,8 @@ function SideNav(props: SidebarProp) {
     bill,
   }
 
+  console.log("rendere");
+
   return (
     <div className="flex flex-col bg-slate-100 pl-2 py-10 gap-10 items-baseline basis-1/3 drop-shadow-md font-thin box-border">
       <button
