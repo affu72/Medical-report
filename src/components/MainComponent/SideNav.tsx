@@ -44,6 +44,7 @@ function SideNav(props: SidebarProp) {
         <FaBookMedical />
         Medical history
       </button>
+
       <button
         tabIndex={0}
         id="medicine-tab"

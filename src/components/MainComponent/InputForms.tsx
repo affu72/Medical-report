@@ -9,10 +9,10 @@ interface PropInput {
 
 const InputForms: React.FC<PropInput> = ({ tabIndex }) => {
   const formSection = [
-    <PersonalInformation key={1} />,
+    <PersonalInformation key={0} />,
+    <MedicalHistory key={1} />,
     <Medicines key={2} />,
-    <MedicalHistory key={3} />,
-    <MedicalBill key={4} />,
+    <MedicalBill key={3} />,
   ];
 
   return (

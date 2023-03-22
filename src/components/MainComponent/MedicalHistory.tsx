@@ -53,6 +53,32 @@ const MedicalHistory: React.FC = () => {
     }
   };
 
+  interface IOption {
+    label: string;
+    value: string;
+  }
+
+  const option: IOption[] = [
+    { label: "Abdominal pain", value: "abdominal pain" },
+    { label: "Blood in stool", value: "blood in stool" },
+    { label: "Chest pain", value: "chest pain" },
+    { label: "Constipation", value: "constipation" },
+    { label: "Cough", value: "cough" },
+    { label: "Diarrhea", value: "diarrhea" },
+    { label: "Dizziness", value: "dizziness" },
+    { label: "Fatigue", value: "fatigue" },
+    { label: "Fever", value: "fever" },
+    { label: "Headache", value: "headache" },
+    { label: "Heart palpitations", value: "heart palpitations" },
+    { label: "Joint pain", value: "joint pain" },
+    { label: "Nausea and vomiting", value: "nausea and vomiting" },
+    { label: "Shortness of breath", value: "shortness of breath" },
+    { label: "Skin rash", value: "skin rash" },
+    { label: "Sore throat", value: "sore throat" },
+    { label: "Urinary problems", value: "urinary problems" },
+    { label: "Vision problems", value: "vision problems" },
+  ];
+
   return (
     <>
       <div>
@@ -72,17 +98,21 @@ const MedicalHistory: React.FC = () => {
       </div>
 
       <div>
-        <label>Symptoms</label>
+        <label>
+          Symptoms{" "}
+          <span className="text-sm">
+            [ type to search or press enter to create new one ]
+          </span>
+        </label>
         <CreatableSelect
-          components={components}
           inputValue={inputSymptoms}
           isClearable
           isMulti
-          menuIsOpen={false}
+          options={option}
           onChange={(newValue) => setSymptoms(newValue)}
           onInputChange={(newValue) => setInputSymptoms(newValue)}
           onKeyDown={handleKeySymptoms}
-          placeholder="Type Symptoms and press enter..."
+          placeholder="Type to select or press enter to create..."
           value={symptoms}
         />
       </div>
