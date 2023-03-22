@@ -1,6 +1,5 @@
 import { FormEvent, useState } from "react";
-import { InterfaceInputs } from "../Modal/Interfaces";
-import PreviewPage from "./PreviewPage";
+import PreviewPage from "./PreveiwComponent/PreviewPage";
 import MainPage from "./MainComponent//MainPage";
 
 function Pages() {
