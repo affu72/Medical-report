@@ -3,9 +3,9 @@ import React, { FC } from "react";
 interface InputProps {
   label?: string;
   placeholder: string;
-  name: string;
+  name?: string;
   type?: string;
-  value?: string;
+  value?: string | number;
   id?: string;
   basis?: number;
 }
