@@ -3,6 +3,7 @@ import { InterfaceInputs } from "../Modal/Interfaces";
 import Input from "./MyComponents/Input";
 import PersonalInformation from "./PersonalInformation";
 import Medicines from "./Medicines";
+import Creatable from "./Creatabe";
 
 interface IProp {
   // inputs: InterfaceInputs;
@@ -17,8 +18,9 @@ function InputForms(props: IProp) {
   console.log(props.inputs);
   return (
     <form className="bg-white flex flex-col gap-6 p-6 basis-2/3">
-      <PersonalInformation></PersonalInformation>
-      <Medicines />
+      {/* <PersonalInformation></PersonalInformation> */}
+      {/* <Medicines /> */}
+      <Creatable />
 
       <button
         type="submit"

@@ -1,6 +1,5 @@
-import React from "react";
 import Input from "./MyComponents/Input";
-import IndianStateDropdown from "./IndianStateDropDown";
+import IndianStateDropdown from "./MyComponents/IndianStateDropDown";
 
 function PersonalInformation() {
   return (

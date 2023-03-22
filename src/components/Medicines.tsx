@@ -19,7 +19,7 @@ const Medicines = () => {
   ]);
 
   const addMedicine = () => {
-    setMedicines([...medicines, { name: "", dose: "", type: "" }]);
+    setMedicines((prev) => [...prev, { name: "", dose: "", type: "" }]);
   };
 
   const handleInputChange = (
@@ -45,6 +45,7 @@ const Medicines = () => {
   // const handleSaveClick = () => {
   //   getData(medicines);
   // };
+  console.log(medicines);
 
   return (
     <div>
@@ -64,7 +65,7 @@ const Medicines = () => {
               value="x"
               margin={6}
               bgColor="red"
-              // onClick={() => handleRemoveClick(index)}
+              onClick={() => handleRemoveClick(index)}
             />
           )}
         </div>
