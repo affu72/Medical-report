@@ -19,14 +19,15 @@ function SideNav(props: SidebarProp) {
       <button
         value={sideButtons.personal}
         onClick={props.onNavClick}
-        className="w-full flex items-center gap-4 hover:font-semibold focus:font-semibold  border-b-2 border-cyan-500 transition-all duration-100 focus:bg-blue-100 hover:bg-blue-100 focus:py-4 hover:py-4 focus:translate-x-1"
+        className="w-full flex items-center gap-4 hover:font-semibold focus:font-semibold  border-b-2 border-cyan-500 transition-all duration-100 focus:bg-blue-100 hover:bg-blue-100 py-4 focus:translate-x-1"
       >
         <IoIosPersonAdd /> Personal Information
       </button>
+
       <button
         value={sideButtons.history}
         onClick={props.onNavClick}
-        className="w-full flex gap-4 items-center hover:font-semibold focus:font-semibold hover:scale-105 border-b-2 border-cyan-500 transition-all duration-100 focus:bg-blue-100 hover:bg-blue-100 focus:py-4 hover:py-4 focus:translate-x-1"
+        className="w-full flex gap-4 items-center hover:font-semibold focus:font-semibold  border-b-2 border-cyan-500 transition-all duration-100 focus:bg-blue-100 hover:bg-blue-100 py-4 focus:translate-x-1"
       >
         <FaBookMedical />
         Medical history
@@ -34,7 +35,7 @@ function SideNav(props: SidebarProp) {
       <button
         value={sideButtons.medicines}
         onClick={props.onNavClick}
-        className="w-full flex gap-4 items-center hover:font-semibold focus:font-semibold hover:scale-105 border-b-2 border-cyan-500 transition-all duration-100 focus:bg-blue-100 hover:bg-blue-100 focus:py-4 hover:py-4 focus:translate-x-1"
+        className="w-full flex gap-4 items-center hover:font-semibold focus:font-semibold  border-b-2 border-cyan-500 transition-all duration-100 focus:bg-blue-100 hover:bg-blue-100 py-4 focus:translate-x-1"
       >
         <FaPrescription />
         Medicines
@@ -42,7 +43,7 @@ function SideNav(props: SidebarProp) {
       <button
         value={sideButtons.bill}
         onClick={props.onNavClick}
-        className="w-full flex gap-4 items-center hover:font-semibold focus:font-semibold hover:scale-105 border-b-2 border-cyan-500 transition-all duration-100 focus:bg-blue-100 hover:bg-blue-100 focus:py-4 hover:py-4 focus:translate-x-1"
+        className="w-full flex gap-4 items-center hover:font-semibold focus:font-semibold  border-b-2 border-cyan-500 transition-all duration-100 focus:bg-blue-100 hover:bg-blue-100 py-4 focus:translate-x-1"
       >
         <FaMoneyBillAlt />
         Medical Bill

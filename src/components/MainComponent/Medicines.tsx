@@ -45,7 +45,7 @@ const Medicines = () => {
   // const handleSaveClick = () => {
   //   getData(medicines);
   // };
-  console.log(medicines);
+  // console.log(medicines);
 
   return (
     <div>

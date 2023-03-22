@@ -1,7 +1,14 @@
 import Input from "../MyComponents/Input";
 import IndianStateDropdown from "../MyComponents/IndianStateDropDown";
+import { useState } from "react";
+
+type PropPersonal = {
+  setTabIndex: number;
+};
 
 function PersonalInformation() {
+  const [tabIndex, settabIndex] = useState();
+
   return (
     <div>
       <div className="flex gap-8">
