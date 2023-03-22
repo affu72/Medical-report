@@ -1,5 +1,5 @@
-import Input from "./MyComponents/Input";
-import IndianStateDropdown from "./MyComponents/IndianStateDropDown";
+import Input from "../MyComponents/Input";
+import IndianStateDropdown from "../MyComponents/IndianStateDropDown";
 
 function PersonalInformation() {
   return (

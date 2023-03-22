@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { InterfaceInputs } from "../Modal/Interfaces";
 import PreviewPage from "./PreviewPage";
-import MainPage from "./MainPage";
+import MainPage from "./MainComponent//MainPage";
 
 function Pages() {
   // const [inputs, setInputs] = useState<InterfaceInputs>({

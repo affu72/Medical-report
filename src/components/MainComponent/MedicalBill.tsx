@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Button from "./MyComponents/Button";
-import Input from "./MyComponents/Input";
+import Button from "../MyComponents/Button";
+import Input from "../MyComponents/Input";
 
 interface MedicalBillProps {
   onInputChange?: (bill: { name: string; value: number }[]) => void;

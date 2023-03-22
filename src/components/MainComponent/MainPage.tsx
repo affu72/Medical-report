@@ -1,7 +1,6 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import SideNav from "./SideNav";
 import InputForms from "./InputForms";
-import { InterfaceInputs } from "../Modal/Interfaces";
 
 function MainPage() {
   type SideBarTuples = [boolean, boolean, boolean, boolean];
@@ -21,7 +20,7 @@ function MainPage() {
       return list;
     });
   };
-
+  console.log("re-render main page");
   return (
     <div className="w-1/2 flex gap-4 bg-slate-100 p-4">
       <SideNav onNavClick={showFormHandler} />

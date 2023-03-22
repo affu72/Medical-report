@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Input from "./MyComponents/Input";
-import MedicineInput from "./MyComponents/MedicineInput";
-import Button from "./MyComponents/Button";
+import Input from "../MyComponents/Input";
+import MedicineInput from "../MyComponents/MedicineInput";
+import Button from "../MyComponents/Button";
 
 export interface IMedicine {
   name: string;
