@@ -17,19 +17,39 @@ const createOption = (label: string) => ({
 });
 
 const Creatable: React.FC = () => {
-  const [medicalHistory, setInputValue] = React.useState("");
+  const [inputMedicalHistory, setInputMedicalHistory] = React.useState("");
 
-  const [symptoms, setSymptoms] = React.useState("");
+  const [medicalHistory, setMedicalHistory] = React.useState<readonly Option[]>(
+    []
+  );
 
-  const [value, setValue] = React.useState<readonly Option[]>([]);
+  const [inputSymptoms, setInputSymptoms] = React.useState("");
+
+  const [symptoms, setSymptoms] = React.useState<readonly Option[]>([]);
 
   const handleKeyDown: KeyboardEventHandler = (event) => {
-    if (!medicalHistory) return;
+    if (!inputMedicalHistory) return;
     switch (event.key) {
       case "Enter":
       case "Tab":
-        setValue((prev) => [...prev, createOption(medicalHistory)]);
-        setInputValue("");
+        setMedicalHistory((prev) => [
+          ...prev,
+          createOption(inputMedicalHistory),
+        ]);
+        setInputMedicalHistory("");
+        setInputSymptoms("");
+        event.preventDefault();
+    }
+  };
+
+  const handleKeySymptoms: KeyboardEventHandler = (event) => {
+    if (!inputSymptoms) return;
+    switch (event.key) {
+      case "Enter":
+      case "Tab":
+        setSymptoms((prev) => [...prev, createOption(inputSymptoms)]);
+
+        setInputSymptoms("");
         event.preventDefault();
     }
   };
@@ -40,33 +60,33 @@ const Creatable: React.FC = () => {
         <label>Medical History</label>
         <CreatableSelect
           components={components}
-          inputValue={medicalHistory}
+          inputValue={inputMedicalHistory}
           isClearable
           isMulti
           menuIsOpen={false}
-          onChange={(newValue) => setValue(newValue)}
-          onInputChange={(newValue) => setInputValue(newValue)}
+          onChange={(newValue) => setMedicalHistory(newValue)}
+          onInputChange={(newValue) => setInputMedicalHistory(newValue)}
           onKeyDown={handleKeyDown}
           placeholder="Type Medical history and press enter..."
-          value={value}
+          value={medicalHistory}
         />
       </div>
 
-      {/* <div>
+      <div>
         <label>Symptoms</label>
         <CreatableSelect
           components={components}
-          inputValue={medicalHistory}
+          inputValue={inputSymptoms}
           isClearable
           isMulti
           menuIsOpen={false}
-          onChange={(newValue) => setValue(newValue)}
-          onInputChange={(newValue) => setInputValue(newValue)}
-          onKeyDown={handleKeyDown}
+          onChange={(newValue) => setSymptoms(newValue)}
+          onInputChange={(newValue) => setInputSymptoms(newValue)}
+          onKeyDown={handleKeySymptoms}
           placeholder="Type Symptoms and press enter..."
-          value={value}
+          value={symptoms}
         />
-      </div> */}
+      </div>
     </>
   );
 };
