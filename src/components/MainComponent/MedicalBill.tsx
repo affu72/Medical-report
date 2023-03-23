@@ -48,7 +48,10 @@ const MedicalBill: React.FC<MedicalBillProps> = ({ onInputChange }) => {
         Medical Bill
       </label>
       {bills.map((bill, index) => (
-        <div key={index} className="flex space-x-4 place-items-start">
+        <div
+          key={index}
+          className="flex space-x-4 place-items-start xl:justify-between"
+        >
           <Input
             placeholder="Bill Name"
             value={bill.name}

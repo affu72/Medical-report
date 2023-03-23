@@ -50,7 +50,7 @@ const Medicines = () => {
   return (
     <div>
       {medicines.map((medicine, index) => (
-        <div key={index} className="flex items-center gap-2">
+        <div key={index} className="flex items-center gap-2 xl:justify-between">
           <MedicineInput />
 
           <input

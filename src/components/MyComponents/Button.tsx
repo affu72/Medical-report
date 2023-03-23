@@ -24,7 +24,7 @@ const Button: React.FC<PropButton<buttonType>> = ({
     <button
       tabIndex={tabIndex}
       type={type}
-      className={`bg-${bgColor}-500 hover:bg-${bgColor}-700 text-white font-bold py-2 px-4 rounded mt-${margin}`}
+      className={`bg-red-500 hover:bg-${bgColor}-700 text-white font-bold py-2 px-4 rounded mt-${margin}`}
       onClick={onClick}
     >
       {value}
