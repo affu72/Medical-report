@@ -13,15 +13,17 @@ function MainPage() {
       <SideNav onNavClick={showFormHandler} tabIndex={tabIndex} />
       <InputForms tabIndex={tabIndex}></InputForms>
 
-      <button
-        type="button"
-        value="Save & Next"
-        tabIndex={tabIndex}
-        className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute bottom-12 right-8`}
-        onClick={() => settabIndex((prev) => (prev + 1) % 4)}
-      >
-        Save & Next
-      </button>
+      {tabIndex < 3 && (
+        <button
+          type="button"
+          value="Save & Next"
+          tabIndex={tabIndex}
+          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute bottom-12 right-8`}
+          onClick={() => settabIndex((prev) => prev + 1)}
+        >
+          Save & Next
+        </button>
+      )}
     </div>
   );
 }
