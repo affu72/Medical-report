@@ -22,7 +22,7 @@ interface PersonalInfoProp {
 const PersonalInfoPreview: React.FC<PersonalInfoProp> = (props) => {
   const { ID, name, age, gender, address, phone } = props;
   return (
-    <div className="flex flex-col pt-8 pb-10 px-2 gap  border-b-2 border-stone-600">
+    <div className="flex flex-col pt-8 pb-10 px-2 gap border-double  border-b-4 border-stone-600">
       <div className="flex justify-between">
         <div>
           {/* <FaBarcode /> */}

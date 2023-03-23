@@ -11,7 +11,7 @@ const MedicalRecordPreview: React.FC<PropMedicalRecord> = ({
   optionSymptoms,
 }) => {
   return (
-    <div className="flex flex-col gap-4 border-t-2 border-stone-600 mt-2 pt-4">
+    <div className="flex flex-col gap-4 mt-2 p-4">
       <div>
         <span className="font-bold">Medical history: </span>
         {optionsHistory.map((option, index) => (

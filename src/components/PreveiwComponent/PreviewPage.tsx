@@ -2,6 +2,8 @@ import Header from "./Header";
 import PersonalInfoPreview from "./PersonalDetailPreview";
 import { IAddress } from "../../ts/interfaces/Address";
 import MedicalRecordPreview from "./MedicalRecordPreview";
+import Medicines from "../MainComponent/Medicines";
+import MedicinePreview from "./MedicinePreview";
 
 function PreviewPage() {
   const firstName = "Aniruddha";
@@ -20,7 +22,7 @@ function PreviewPage() {
   };
 
   return (
-    <div className="bg-gray-100 w-1/2 h-screen p-12">
+    <div className="bg-gray-100 w-1/2 h-screen p-12 border-double border-4">
       <Header
         clinicName="Care Medical Center"
         doctorName="B.S Tiwari"
@@ -52,13 +54,19 @@ function PreviewPage() {
         phone={{ phone1: phone }}
       />
 
-      <MedicalRecordPreview
-        optionSymptoms={[
-          { value: "Fever", label: "Fever" },
-          { value: "Headache", label: "Headache" },
-        ]}
-        optionsHistory={[{ value: "Sugar", label: "Sugar" }]}
-      ></MedicalRecordPreview>
+      <div className="">
+        <MedicalRecordPreview
+          optionSymptoms={[
+            { value: "Fever", label: "Fever" },
+            { value: "Headache", label: "Headache" },
+          ]}
+          optionsHistory={[{ value: "Sugar", label: "Sugar" }]}
+        />
+
+        <MedicinePreview
+          medicines={[{ type: "Tab", name: "Paracetamol", dose: "1TBD" }]}
+        />
+      </div>
     </div>
   );
 }
