@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "../MyComponents/Input";
 import MedicineInput from "../MyComponents/MedicineInput";
-import Button from "../MyComponents/Button";
+import Button from "../Button";
 
 export interface IMedicine {
   name: string;
@@ -76,13 +76,13 @@ const Medicines = () => {
         <Button
           type="button"
           value="Add Medicine"
-          bgColor="blue"
+          bgColor={"blue"}
           onClick={addMedicine}
         />
 
         <Button
           type="button"
-          bgColor="yellow"
+          bgColor={"yellow"}
           value="Clear All"
           onClick={handleClearClick}
         />

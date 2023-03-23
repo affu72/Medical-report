@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../MyComponents/Button";
+import Button from "../Button";
 import Input from "../MyComponents/Input";
 
 interface MedicalBillProps {

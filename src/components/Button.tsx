@@ -1,5 +1,4 @@
 import React from "react";
-
 interface PropButton<T> {
   value: string;
   bgColor: string;
@@ -9,9 +8,7 @@ interface PropButton<T> {
   margin?: number;
   tabIndex?: number;
 }
-
 type buttonType = "button" | "submit" | "reset";
-
 const Button: React.FC<PropButton<buttonType>> = ({
   value,
   bgColor,
@@ -20,16 +17,19 @@ const Button: React.FC<PropButton<buttonType>> = ({
   margin = 0,
   tabIndex,
 }) => {
+  // const backgroundColor = ``;
+  // const hoverBackgroundColor = ``;
+
   return (
     <button
       tabIndex={tabIndex}
       type={type}
-      className={`bg-red-500 hover:bg-${bgColor}-700 text-white font-bold py-2 px-4 rounded mt-${margin}`}
+      className={`bg-${bgColor}-500 hover:bg-${bgColor}-700 text-white font-bold py-2 px-4 rounded mt-${margin}`}
       onClick={onClick}
+      // style={{ backgroundColor: bgColor }}
     >
       {value}
     </button>
   );
 };
-
 export default Button;

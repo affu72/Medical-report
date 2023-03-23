@@ -2,7 +2,7 @@ import Header from "./Header";
 import PersonalInfoPreview from "./PersonalDetailPreview";
 import { IAddress } from "../../ts/interfaces/Address";
 import MedicalRecordPreview from "./MedicalRecordPreview";
-import Medicines from "../MainComponent/Medicines";
+import { IMedicine } from "../MainComponent/Medicines";
 import MedicinePreview from "./MedicinePreview";
 
 function PreviewPage() {
@@ -21,8 +21,20 @@ function PreviewPage() {
     pin: 400016,
   };
 
+  //dummy data
+
+  const medicines: IMedicine[] = [
+    { name: "Aspirin", dose: "81mg", type: "Tablet", quantity: "100" },
+    { name: "Ibuprofen", dose: "200mg", type: "Tablet", quantity: "50" },
+    { name: "Acetaminophen", dose: "325mg", type: "Syrup", quantity: "75" },
+    { name: "Lisinopril", dose: "10mg", type: "Tablet", quantity: "30" },
+    { name: "Atorvastatin", dose: "20mg", type: "Tablet", quantity: "60" },
+  ];
+
+  //JSX
+
   return (
-    <div className="bg-gray-100 w-1/2 h-screen p-12 border-double border-4">
+    <div className="bg-gray-100 w-1/2 min-h-screen p-12 border-double border-4 flex-none">
       <Header
         clinicName="Care Medical Center"
         doctorName="B.S Tiwari"
@@ -63,9 +75,7 @@ function PreviewPage() {
           optionsHistory={[{ value: "Sugar", label: "Sugar" }]}
         />
 
-        <MedicinePreview
-          medicines={[{ type: "Tab", name: "Paracetamol", dose: "1TBD" }]}
-        />
+        <MedicinePreview medicines={medicines} />
       </div>
     </div>
   );
