@@ -7,6 +7,7 @@ export interface IMedicine {
   name: string;
   dose: string;
   type: string;
+  quantity?: string;
 }
 
 // type propType = {

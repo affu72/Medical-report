@@ -1,4 +1,5 @@
 import React, { KeyboardEventHandler } from "react";
+import IOption from "../../ts/interfaces/Option";
 
 import CreatableSelect from "react-select/creatable";
 
@@ -52,11 +53,6 @@ const MedicalHistory: React.FC = () => {
         event.preventDefault();
     }
   };
-
-  interface IOption {
-    label: string;
-    value: string;
-  }
 
   const option: IOption[] = [
     { label: "Abdominal pain", value: "abdominal pain" },

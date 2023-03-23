@@ -1,6 +1,7 @@
 import Header from "./Header";
-import PersonalInfoPreview from "./PersonalInfoPreview";
+import PersonalInfoPreview from "./PersonalDetailPreview";
 import { IAddress } from "../../ts/interfaces/Address";
+import MedicalRecordPreview from "./MedicalRecordPreview";
 
 function PreviewPage() {
   const firstName = "Aniruddha";
@@ -50,6 +51,14 @@ function PreviewPage() {
         }}
         phone={{ phone1: phone }}
       />
+
+      <MedicalRecordPreview
+        optionSymptoms={[
+          { value: "Fever", label: "Fever" },
+          { value: "Headache", label: "Headache" },
+        ]}
+        optionsHistory={[{ value: "Sugar", label: "Sugar" }]}
+      ></MedicalRecordPreview>
     </div>
   );
 }

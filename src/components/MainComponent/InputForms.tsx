@@ -1,6 +1,6 @@
-import PersonalInformation from "./PersonalInformation";
+import PersonalInformation from "./PersonaDetails";
 import Medicines from "./Medicines";
-import MedicalHistory from "./MedicalHistory";
+import MedicalHistory from "./MedicalRecord";
 import MedicalBill from "./MedicalBill";
 
 interface PropInput {

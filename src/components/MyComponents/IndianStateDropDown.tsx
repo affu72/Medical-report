@@ -41,7 +41,7 @@ const IndianStateDropdown = ({ value, onChange }: Props) => {
   return (
     <select
       value={value}
-      className="border-2 border-gray-300 py-2 px-4 w-full rounded-md"
+      className="border-2 border-gray-300 py-4 px-4 w-full rounded-md"
     >
       {states.map((state) => (
         <option key={state.value} value={state.value}>

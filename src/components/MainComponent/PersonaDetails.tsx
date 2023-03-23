@@ -7,8 +7,6 @@ type PropPersonal = {
 };
 
 function PersonalInformation() {
-  const [tabIndex, settabIndex] = useState();
-
   return (
     <div>
       <div className="flex gap-8">
