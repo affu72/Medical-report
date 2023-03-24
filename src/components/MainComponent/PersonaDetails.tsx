@@ -1,7 +1,5 @@
 import Input from "../MyComponents/Input";
 import IndianStateDropdown from "../MyComponents/IndianStateDropDown";
-import { ChangeEvent, useState } from "react";
-import PreviewPage from "../PreveiwComponent/PreviewPage";
 
 export interface IFormData {
   firstName: string;
@@ -13,34 +11,19 @@ export interface IFormData {
 }
 
 type PropType = {
-  getData: (data: IFormData) => void;
+  formData: IFormData;
+  getData: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
 };
 
-function PersonaDetails({ getData }: PropType) {
-  const [formData, setFormData] = useState<IFormData>({
-    firstName: "",
-    lastName: "",
-    age: 0,
-    mobile: "",
-    gender: "",
-    state: "",
-  });
-
+function PersonaDetails({ getData, formData }: PropType) {
   const inputChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const target = event.target as HTMLInputElement;
-    const value = target.type === "radio" ? target.id : target.value;
-    const name = target.name;
-
-    setFormData((prev) => {
-      return { ...prev, [name]: value };
-    });
-
-    getData(formData);
+    getData(event);
   };
 
-  console.log(formData);
   return (
     <div>
       <div className="flex gap-8">

@@ -5,7 +5,7 @@ import { IPhone } from "../../ts/interfaces/mobiles";
 import { IPatientName } from "../../ts/interfaces/name";
 
 export interface PersonalInfoProp {
-  ID?: number;
+  ID: number;
   name: IPatientName;
   age: number;
   gender: string;

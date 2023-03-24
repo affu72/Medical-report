@@ -5,7 +5,7 @@ import { IFormData } from "./components/MainComponent/PersonaDetails";
 import { useState } from "react";
 
 function App() {
-  const [data, setData] = useState<IFormData>({
+  const [formData, setFormData] = useState<IFormData>({
     firstName: "",
     lastName: "",
     age: 0,
@@ -14,14 +14,22 @@ function App() {
     state: "",
   });
 
-  const handlePersonalData = (d: IFormData) => {
-    setData({ ...d });
+  const inputChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const target = event.target as HTMLInputElement;
+    const value = target.type === "radio" ? target.id : target.value;
+    const name = target.name;
+
+    setFormData((prev) => {
+      return { ...prev, [name]: value };
+    });
   };
-  console.log("app", data);
+
   return (
     <div className="flex p-2 xs:block">
-      <MainPage getPersonalData={handlePersonalData}></MainPage>
-      <PreviewPage></PreviewPage>
+      <MainPage getPersonalData={inputChangeHandler} data={formData}></MainPage>
+      <PreviewPage personalData={formData}></PreviewPage>
     </div>
   );
 }

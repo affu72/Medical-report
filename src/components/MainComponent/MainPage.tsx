@@ -4,9 +4,13 @@ import InputForms from "./InputForms";
 import { IFormData } from "./PersonaDetails";
 
 type PropMainApp = {
-  getPersonalData: (data: IFormData) => void;
+  data: IFormData;
+  getPersonalData: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
 };
-function MainPage({ getPersonalData }: PropMainApp) {
+
+function MainPage({ getPersonalData, data }: PropMainApp) {
   const [tabIndex, settabIndex] = useState(0);
 
   const showFormHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -18,9 +22,8 @@ function MainPage({ getPersonalData }: PropMainApp) {
       <SideNav onNavClick={showFormHandler} tabIndex={tabIndex} />
       <InputForms
         tabIndex={tabIndex}
-        getData={(data: IFormData) => {
-          getPersonalData(data);
-        }}
+        getData={getPersonalData}
+        data={data}
       ></InputForms>
 
       {tabIndex < 3 && (

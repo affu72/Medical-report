@@ -6,18 +6,16 @@ import { FormEvent } from "react";
 import PersonaDetails, { IFormData } from "./PersonaDetails";
 
 interface PropInput {
+  data: IFormData;
   tabIndex: number;
-  getData: (data: IFormData) => void;
+  getData: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
 }
 
-const InputForms: React.FC<PropInput> = ({ tabIndex, getData }) => {
+const InputForms: React.FC<PropInput> = ({ data, tabIndex, getData }) => {
   const formSection = [
-    <PersonaDetails
-      key={0}
-      getData={(data: IFormData) => {
-        getData(data);
-      }}
-    />,
+    <PersonaDetails key={0} getData={getData} formData={data} />,
     <MedicalHistory key={1} />,
     <Medicines key={2} />,
     <MedicalBill key={3} />,

@@ -4,14 +4,19 @@ import { IAddress } from "../../ts/interfaces/Address";
 import MedicalRecordPreview from "./MedicalRecordPreview";
 import { IMedicine } from "../MainComponent/Medicines";
 import MedicinePreview from "./MedicinePreview";
+import { IFormData } from "../MainComponent/PersonaDetails";
 
-function PreviewPage() {
-  const firstName = "Aniruddha";
-  const secondName = "";
+interface PropPreview {
+  personalData: IFormData;
+}
+
+function PreviewPage({ personalData }: PropPreview) {
+  const firstName = personalData.firstName;
+  const secondName = personalData.lastName;
   const id = 78625287;
-  const age = 24;
-  const gender = "Male";
-  const phone = 9876543210;
+  const age = personalData.age;
+  const gender = personalData.gender;
+  const phone = personalData.mobile;
 
   const address: IAddress = {
     address1: "B-1 Nilesh 142 Senapati Bapat Rd",
@@ -32,7 +37,6 @@ function PreviewPage() {
   ];
 
   //JSX
-
   return (
     <div className="bg-gray-100 w-1/2 min-h-screen p-6 border-double border-4 flex-none xs:w-full">
       <Header
