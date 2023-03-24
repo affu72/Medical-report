@@ -1,8 +1,8 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 
 type Props = {
   value: string;
-  onChange?: () => void;
+  onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
 };
 
 const IndianStateDropdown = ({ value, onChange }: Props) => {
@@ -40,6 +40,8 @@ const IndianStateDropdown = ({ value, onChange }: Props) => {
 
   return (
     <select
+      onChange={onChange}
+      name="state"
       value={value}
       className="border-2 border-gray-300 py-4 px-4 w-full rounded-md"
     >

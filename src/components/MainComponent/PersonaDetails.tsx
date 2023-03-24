@@ -1,28 +1,67 @@
 import Input from "../MyComponents/Input";
 import IndianStateDropdown from "../MyComponents/IndianStateDropDown";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import PreviewPage from "../PreveiwComponent/PreviewPage";
 
-type PropPersonal = {
-  setTabIndex: number;
-};
+interface IFormData {
+  firstName: string;
+  lastName: string;
+  age: number;
+  mobile: string;
+  gender: string;
+  state: string;
+}
 
 function PersonalInformation() {
+  const [formData, setFormData] = useState<IFormData>({
+    firstName: "",
+    lastName: "",
+    age: 0,
+    mobile: "",
+    gender: "",
+    state: "",
+  });
+
+  const inputChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const target = event.target as HTMLInputElement;
+    const value = target.type === "radio" ? target.id : target.value;
+    const name = target.name;
+
+    setFormData((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
+
+  console.log(formData);
   return (
     <div>
       <div className="flex gap-8">
         <Input
-          name="First Name"
+          name="firstName"
           label="First Name"
           placeholder="First Name"
+          value={formData.firstName}
+          onChange={inputChangeHandler}
         ></Input>
         <Input
-          name="Last Name"
+          name="lastName"
           label="Last Name"
           placeholder="Last Name"
+          value={formData.lastName}
+          onChange={inputChangeHandler}
         ></Input>
       </div>
 
-      <Input name="age" label="Age" placeholder="Age" type="number"></Input>
+      <Input
+        name="age"
+        label="Age"
+        placeholder="Age"
+        type="number"
+        onChange={inputChangeHandler}
+        value={formData.age}
+      ></Input>
 
       <div className=" flex gap-16 items-center w-full mb-4">
         <label htmlFor="gender" className="m-0">
@@ -37,7 +76,13 @@ function PersonalInformation() {
             >
               Male
             </label>
-            <input type="radio" name="gender" id="male" className="mt-0" />
+            <input
+              type="radio"
+              name="gender"
+              id="male"
+              className="mt-0"
+              onChange={inputChangeHandler}
+            />
           </div>
 
           <div className="flex items-center gap-4">
@@ -47,7 +92,14 @@ function PersonalInformation() {
             >
               Female
             </label>
-            <input type="radio" name="gender" id="female" className="mt-0" />
+            <input
+              type="radio"
+              name="gender"
+              id="female"
+              className="mt-0"
+              onChange={inputChangeHandler}
+              value={formData.gender}
+            />
           </div>
         </div>
       </div>
@@ -57,8 +109,15 @@ function PersonalInformation() {
         placeholder="Mobile"
         label="Mobile"
         type="number"
+        onChange={inputChangeHandler}
+        value={formData.mobile}
       ></Input>
-      <Input name="Address" placeholder="Address" label="Address"></Input>
+      <Input
+        name="Address"
+        placeholder="Address"
+        label="Address"
+        labelOption={true}
+      ></Input>
 
       <div className="flex justify-between gap-8">
         <Input name="City" placeholder="City" label="City"></Input>
@@ -66,13 +125,17 @@ function PersonalInformation() {
           name="Pin Code"
           placeholder="PIN"
           label="Pin Code"
+          labelOption={true}
           type="number"
         ></Input>
       </div>
 
       <div className="w-full mb-4">
         <label htmlFor="name">State</label>
-        <IndianStateDropdown value=""></IndianStateDropdown>
+        <IndianStateDropdown
+          value={formData.state}
+          onChange={inputChangeHandler}
+        ></IndianStateDropdown>
       </div>
     </div>
   );

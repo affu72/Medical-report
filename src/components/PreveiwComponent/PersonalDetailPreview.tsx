@@ -2,15 +2,10 @@ import React from "react";
 import { FaBarcode, FaPhone } from "react-icons/fa";
 import { IAddress } from "../../ts/interfaces/Address";
 import { IPhone } from "../../ts/interfaces/mobiles";
+import { IPatientName } from "../../ts/interfaces/name";
 
-interface IPatientName {
-  firstName: string;
-  secondName?: string;
-  lastName?: string;
-}
-
-interface PersonalInfoProp {
-  ID: number;
+export interface PersonalInfoProp {
+  ID?: number;
   name: IPatientName;
   age: number;
   gender: string;
