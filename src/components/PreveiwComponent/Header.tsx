@@ -2,7 +2,7 @@ import React from "react";
 import { IAddress } from "../../ts/interfaces/Address";
 import { IDegree } from "../../ts/interfaces/Degree";
 import { IPhone } from "../../ts/interfaces/mobiles";
-
+// import logo from "./logo.png";
 interface ITime {
   open: string;
   close: string;
@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProp> = ({
   closingDay,
 }) => {
   return (
-    <div className="flex justify-between pb-12 border-b-4 border-stone-600">
+    <div className="flex justify-between pb-6 border-b-4 border-stone-600 xs:hidden">
       <div className="">
         <h3 className="text-3xl font-bold mb-2">{`Dr. ${doctorName}`}</h3>
         <p>{`${degree.degree1}, ${degree.degree2}, ${degree.degree3}`}</p>
@@ -40,11 +40,7 @@ const Header: React.FC<HeaderProp> = ({
         <p>{`Mob. No:+91-${phone?.phone1}`}</p>
       </div>
       <div className="border-2 border-slate-400 self-start">
-        <img
-          src="/home/afzal/reactAndTsProjects/medical-report/public/logo.png"
-          alt=""
-          className="w-28"
-        />
+        <img src="./logo.png" alt="" className="w-28" />
       </div>
 
       <div className="flex flex-col items-start">

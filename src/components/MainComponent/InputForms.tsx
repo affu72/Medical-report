@@ -2,7 +2,7 @@ import PersonalInformation from "./PersonaDetails";
 import Medicines from "./Medicines";
 import MedicalHistory from "./MedicalRecord";
 import MedicalBill from "./MedicalBill";
-import Button from "../Button";
+import Button from "../MyComponents/Button";
 import { FormEvent } from "react";
 
 interface PropInput {
@@ -24,7 +24,7 @@ const InputForms: React.FC<PropInput> = ({ tabIndex }) => {
 
   return (
     <div className="bg-white flex flex-col justify-between gap-8 p-6 basis-2/3 xl:basis-11/12 relative overflow-auto flex-none">
-      <form id="main-form" onSubmit={submitHandler}>
+      <form id="main-form" onSubmit={submitHandler} className="xs:pb-8">
         {formSection[tabIndex]}
       </form>
 
@@ -32,7 +32,7 @@ const InputForms: React.FC<PropInput> = ({ tabIndex }) => {
         <button
           form="main-form"
           type="submit"
-          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute bottom-12 right-8`}
+          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute bottom-4 right-8`}
         >
           Submit & Generate Pdf
         </button>

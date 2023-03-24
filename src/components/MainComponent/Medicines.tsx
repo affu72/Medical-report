@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "../MyComponents/Input";
 import MedicineInput from "../MyComponents/MedicineInput";
-import Button from "../Button";
+import Button from "../MyComponents/Button";
 
 export interface IMedicine {
   name: string;
@@ -51,7 +51,10 @@ const Medicines = () => {
   return (
     <div>
       {medicines.map((medicine, index) => (
-        <div key={index} className="flex items-center gap-2 xl:justify-between">
+        <div
+          key={index}
+          className="flex items-center gap-2 xl:justify-between space-y-4"
+        >
           <MedicineInput />
 
           <input

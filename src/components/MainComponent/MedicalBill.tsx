@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../Button";
+import Button from "../MyComponents/Button";
 import Input from "../MyComponents/Input";
 
 interface MedicalBillProps {
@@ -78,7 +78,7 @@ const MedicalBill: React.FC<MedicalBillProps> = ({ onInputChange }) => {
       ))}
       <Button
         type="button"
-        value="Add Medicine"
+        value="Add Anoher Bill"
         bgColor="blue"
         onClick={handleAddBill}
       />

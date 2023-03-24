@@ -14,7 +14,7 @@ interface PersonalInfoProp {
   name: IPatientName;
   age: number;
   gender: string;
-  address: IAddress;
+  address?: IAddress;
   barCodeSrc?: string;
   phone: IPhone;
 }
@@ -22,7 +22,7 @@ interface PersonalInfoProp {
 const PersonalInfoPreview: React.FC<PersonalInfoProp> = (props) => {
   const { ID, name, age, gender, address, phone } = props;
   return (
-    <div className="flex flex-col pt-8 pb-10 px-2 gap border-double  border-b-4 border-stone-600">
+    <div className="flex flex-col pt-6 pb-6 px-2 gap border-double  border-b-4 border-stone-600">
       <div className="flex justify-between">
         <div>
           {/* <FaBarcode /> */}
@@ -51,13 +51,13 @@ const PersonalInfoPreview: React.FC<PersonalInfoProp> = (props) => {
       </div>
 
       <div className="flex justify-between">
-        <div>
+        {/* <div>
           <p>
             <span className="font-bold">Address: </span>{" "}
             {`${address.address1} ${address.address2}`}
           </p>
           <p>{`${address.city} - ${address.pin} (${address.state})`}</p>
-        </div>
+        </div> */}
 
         <p>
           <span className="font-bold">Mobile: </span>

@@ -34,7 +34,7 @@ function PreviewPage() {
   //JSX
 
   return (
-    <div className="bg-gray-100 w-1/2 min-h-screen p-12 border-double border-4 flex-none">
+    <div className="bg-gray-100 w-1/2 min-h-screen p-6 border-double border-4 flex-none xs:w-full">
       <Header
         clinicName="Care Medical Center"
         doctorName="B.S Tiwari"
