@@ -1,17 +1,23 @@
-import PersonalInformation from "./PersonaDetails";
 import Medicines from "./Medicines";
 import MedicalHistory from "./MedicalRecord";
 import MedicalBill from "./MedicalBill";
-import Button from "../MyComponents/Button";
+
 import { FormEvent } from "react";
+import PersonaDetails, { IFormData } from "./PersonaDetails";
 
 interface PropInput {
   tabIndex: number;
+  getData: (data: IFormData) => void;
 }
 
-const InputForms: React.FC<PropInput> = ({ tabIndex }) => {
+const InputForms: React.FC<PropInput> = ({ tabIndex, getData }) => {
   const formSection = [
-    <PersonalInformation key={0} />,
+    <PersonaDetails
+      key={0}
+      getData={(data: IFormData) => {
+        getData(data);
+      }}
+    />,
     <MedicalHistory key={1} />,
     <Medicines key={2} />,
     <MedicalBill key={3} />,

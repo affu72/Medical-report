@@ -3,7 +3,7 @@ import IndianStateDropdown from "../MyComponents/IndianStateDropDown";
 import { ChangeEvent, useState } from "react";
 import PreviewPage from "../PreveiwComponent/PreviewPage";
 
-interface IFormData {
+export interface IFormData {
   firstName: string;
   lastName: string;
   age: number;
@@ -12,7 +12,11 @@ interface IFormData {
   state: string;
 }
 
-function PersonalInformation() {
+type PropType = {
+  getData: (data: IFormData) => void;
+};
+
+function PersonaDetails({ getData }: PropType) {
   const [formData, setFormData] = useState<IFormData>({
     firstName: "",
     lastName: "",
@@ -32,6 +36,8 @@ function PersonalInformation() {
     setFormData((prev) => {
       return { ...prev, [name]: value };
     });
+
+    getData(formData);
   };
 
   console.log(formData);
@@ -140,4 +146,4 @@ function PersonalInformation() {
     </div>
   );
 }
-export default PersonalInformation;
+export default PersonaDetails;

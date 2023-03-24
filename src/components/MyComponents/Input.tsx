@@ -24,7 +24,7 @@ const Input = ({
   return (
     <div className="mb-4">
       <label htmlFor="name">
-        {label}{" "}
+        {label}
         {labelOption ? <span className="font-light">(Optional)</span> : ""}{" "}
       </label>
       <input
@@ -32,6 +32,7 @@ const Input = ({
         type={type}
         name={name}
         id="name"
+        min={1}
         placeholder={placeholder}
         onChange={onChange}
       />

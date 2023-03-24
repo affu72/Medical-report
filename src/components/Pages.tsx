@@ -24,9 +24,9 @@ function Pages() {
   // };
 
   return (
-    <div className="flex justify-center p-2 gap-x-4 xs:block">
-      <MainPage></MainPage>
-      <PreviewPage></PreviewPage>
+    <div className="flex justify-center p-2 gap-x-4 ">
+      {/* <MainPage></MainPage>
+      <PreviewPage></PreviewPage> */}
     </div>
   );
 }
