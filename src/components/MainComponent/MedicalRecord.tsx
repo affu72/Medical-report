@@ -17,7 +17,11 @@ const createOption = (label: string) => ({
   value: label,
 });
 
-const MedicalHistory: React.FC = () => {
+type PropRecord = {
+  getRecord: (data: Option[]) => void;
+};
+
+const MedicalRecord = ({ getRecord }: PropRecord) => {
   const [inputMedicalHistory, setInputMedicalHistory] = React.useState("");
 
   const [medicalHistory, setMedicalHistory] = React.useState<readonly Option[]>(
@@ -85,7 +89,10 @@ const MedicalHistory: React.FC = () => {
           isClearable
           isMulti
           menuIsOpen={false}
-          onChange={(newValue) => setMedicalHistory(newValue)}
+          onChange={(newValue) => {
+            setMedicalHistory(newValue);
+            getRecord(medicalHistory);
+          }}
           onInputChange={(newValue) => setInputMedicalHistory(newValue)}
           onKeyDown={handleKeyDown}
           placeholder="Type Medical history and press enter..."
@@ -116,4 +123,4 @@ const MedicalHistory: React.FC = () => {
   );
 };
 
-export default MedicalHistory;
+export default MedicalRecord;

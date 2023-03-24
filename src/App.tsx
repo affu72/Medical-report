@@ -26,9 +26,19 @@ function App() {
     });
   };
 
+  interface IMedicalRecord {
+    label: string;
+    value: string;
+  }
+  const [history, setHistory] = useState<IMedicalRecord[] | null>(null);
+
   return (
     <div className="flex p-2 xs:block">
-      <MainPage getPersonalData={inputChangeHandler} data={formData}></MainPage>
+      <MainPage
+        getPersonalData={inputChangeHandler}
+        data={formData}
+        getRecord={(data: IMedicalRecord[]) => setHistory(data)}
+      ></MainPage>
       <PreviewPage personalData={formData}></PreviewPage>
     </div>
   );

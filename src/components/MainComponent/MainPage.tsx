@@ -8,9 +8,10 @@ type PropMainApp = {
   getPersonalData: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
+  getRecord: (data: unknown) => void;
 };
 
-function MainPage({ getPersonalData, data }: PropMainApp) {
+function MainPage({ getPersonalData, data, getRecord }: PropMainApp) {
   const [tabIndex, settabIndex] = useState(0);
 
   const showFormHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -24,6 +25,7 @@ function MainPage({ getPersonalData, data }: PropMainApp) {
         tabIndex={tabIndex}
         getData={getPersonalData}
         data={data}
+        getRecord={getRecord}
       ></InputForms>
 
       {tabIndex < 3 && (

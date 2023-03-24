@@ -1,5 +1,5 @@
 import Medicines from "./Medicines";
-import MedicalHistory from "./MedicalRecord";
+import MedicalRecord from "./MedicalRecord";
 import MedicalBill from "./MedicalBill";
 
 import { FormEvent } from "react";
@@ -11,12 +11,18 @@ interface PropInput {
   getData: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
+  getRecord: (data: unknown) => void;
 }
 
-const InputForms: React.FC<PropInput> = ({ data, tabIndex, getData }) => {
+const InputForms: React.FC<PropInput> = ({
+  data,
+  tabIndex,
+  getData,
+  getRecord,
+}) => {
   const formSection = [
     <PersonaDetails key={0} getData={getData} formData={data} />,
-    <MedicalHistory key={1} />,
+    <MedicalRecord key={1} getRecord={getRecord} />,
     <Medicines key={2} />,
     <MedicalBill key={3} />,
   ];
