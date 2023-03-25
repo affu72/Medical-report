@@ -2,13 +2,14 @@ import { useState } from "react";
 import SideNav from "./SideNav";
 import InputForms from "./InputForms";
 import { IFormData } from "./PersonaDetails";
+import { IMedicalRecord } from "../../ts/interfaces/MedicalRecord";
 
 type PropMainApp = {
   data: IFormData;
   getPersonalData: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
-  getRecord: (data: unknown) => void;
+  getRecord: (data: IMedicalRecord[]) => void;
 };
 
 function MainPage({ getPersonalData, data, getRecord }: PropMainApp) {

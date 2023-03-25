@@ -5,12 +5,14 @@ import MedicalRecordPreview from "./MedicalRecordPreview";
 import { IMedicine } from "../MainComponent/Medicines";
 import MedicinePreview from "./MedicinePreview";
 import { IFormData } from "../MainComponent/PersonaDetails";
+import { IMedicalRecord } from "../../ts/interfaces/MedicalRecord";
 
 interface PropPreview {
   personalData: IFormData;
+  medicalRecord: IMedicalRecord[];
 }
 
-function PreviewPage({ personalData }: PropPreview) {
+function PreviewPage({ personalData, medicalRecord }: PropPreview) {
   const firstName = personalData.firstName;
   const secondName = personalData.lastName;
   const id = 78625287;
@@ -76,7 +78,7 @@ function PreviewPage({ personalData }: PropPreview) {
             { value: "Fever", label: "Fever" },
             { value: "Headache", label: "Headache" },
           ]}
-          optionsHistory={[{ value: "Sugar", label: "Sugar" }]}
+          optionsHistory={medicalRecord}
         />
 
         <MedicinePreview medicines={medicines} />

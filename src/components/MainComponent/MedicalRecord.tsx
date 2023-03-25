@@ -1,36 +1,34 @@
 import React, { KeyboardEventHandler } from "react";
 import IOption from "../../ts/interfaces/Option";
-
 import CreatableSelect from "react-select/creatable";
-
+import { IMedicalRecord } from "../../ts/interfaces/MedicalRecord";
 const components = {
   DropdownIndicator: null,
 };
-
 interface Option {
-  readonly label: string;
-  readonly value: string;
+  label: string;
+  value: string;
 }
-
 const createOption = (label: string) => ({
   label,
   value: label,
 });
 
-type PropRecord = {
-  getRecord: (data: Option[]) => void;
-};
+interface PropMedicalRecord {
+  getRecord: (data: IMedicalRecord[]) => void;
+}
 
-const MedicalRecord = ({ getRecord }: PropRecord) => {
+const MedicalRecord = ({ getRecord }: PropMedicalRecord) => {
   const [inputMedicalHistory, setInputMedicalHistory] = React.useState("");
-
-  const [medicalHistory, setMedicalHistory] = React.useState<readonly Option[]>(
-    []
-  );
+  const [medicalHistory, setMedicalHistory] = React.useState<
+    (Option | { label: string; value: string })[]
+  >([]);
 
   const [inputSymptoms, setInputSymptoms] = React.useState("");
 
-  const [symptoms, setSymptoms] = React.useState<readonly Option[]>([]);
+  const [symptoms, setSymptoms] = React.useState<
+    (Option | { label: string; value: string })[]
+  >([]);
 
   const handleKeyDown: KeyboardEventHandler = (event) => {
     if (!inputMedicalHistory) return;
@@ -45,14 +43,12 @@ const MedicalRecord = ({ getRecord }: PropRecord) => {
         event.preventDefault();
     }
   };
-
   const handleKeySymptoms: KeyboardEventHandler = (event) => {
     if (!inputSymptoms) return;
     switch (event.key) {
       case "Enter":
       case "Tab":
         setSymptoms((prev) => [...prev, createOption(inputSymptoms)]);
-
         setInputSymptoms("");
         event.preventDefault();
     }
@@ -79,6 +75,8 @@ const MedicalRecord = ({ getRecord }: PropRecord) => {
     { label: "Vision problems", value: "vision problems" },
   ];
 
+  // console.log(medicalHistory);
+
   return (
     <div className="xs:pb-8 space-y-4">
       <div>
@@ -90,10 +88,14 @@ const MedicalRecord = ({ getRecord }: PropRecord) => {
           isMulti
           menuIsOpen={false}
           onChange={(newValue) => {
-            setMedicalHistory(newValue);
+            setMedicalHistory(
+              newValue as (Option | { label: string; value: string })[]
+            );
+          }}
+          onInputChange={(newValue) => {
+            setInputMedicalHistory(newValue);
             getRecord(medicalHistory);
           }}
-          onInputChange={(newValue) => setInputMedicalHistory(newValue)}
           onKeyDown={handleKeyDown}
           placeholder="Type Medical history and press enter..."
           value={medicalHistory}
@@ -112,8 +114,14 @@ const MedicalRecord = ({ getRecord }: PropRecord) => {
           isClearable
           isMulti
           options={option}
-          onChange={(newValue) => setSymptoms(newValue)}
-          onInputChange={(newValue) => setInputSymptoms(newValue)}
+          onChange={(newValue) =>
+            setSymptoms(
+              newValue as (Option | { label: string; value: string })[]
+            )
+          }
+          onInputChange={(newValue) => {
+            setInputSymptoms(newValue);
+          }}
           onKeyDown={handleKeySymptoms}
           placeholder="Type to select or press enter to create..."
           value={symptoms}

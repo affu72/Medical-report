@@ -2,7 +2,8 @@ import React from "react";
 import { IAddress } from "../../ts/interfaces/Address";
 import { IDegree } from "../../ts/interfaces/Degree";
 import { IPhone } from "../../ts/interfaces/mobiles";
-// import logo from "./logo.png";
+import logo from "./logo.png";
+
 interface ITime {
   open: string;
   close: string;
@@ -40,7 +41,7 @@ const Header: React.FC<HeaderProp> = ({
         <p>{`Mob. No:+91-${phone?.phone1}`}</p>
       </div>
       <div className="border-2 border-slate-400 self-start">
-        <img src="./logo.png" alt="" className="w-28" />
+        <img src={logo} alt="" className="w-28" />
       </div>
 
       <div className="flex flex-col items-start">

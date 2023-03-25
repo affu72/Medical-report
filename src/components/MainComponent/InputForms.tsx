@@ -1,6 +1,7 @@
 import Medicines from "./Medicines";
 import MedicalRecord from "./MedicalRecord";
 import MedicalBill from "./MedicalBill";
+import { IMedicalRecord } from "../../ts/interfaces/MedicalRecord";
 
 import { FormEvent } from "react";
 import PersonaDetails, { IFormData } from "./PersonaDetails";
@@ -11,7 +12,7 @@ interface PropInput {
   getData: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
-  getRecord: (data: unknown) => void;
+  getRecord: (data: IMedicalRecord[]) => void;
 }
 
 const InputForms: React.FC<PropInput> = ({

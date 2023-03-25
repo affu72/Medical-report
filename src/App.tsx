@@ -3,6 +3,7 @@ import PreviewPage from "./components/PreveiwComponent/PreviewPage";
 import MainPage from "./components/MainComponent/MainPage";
 import { IFormData } from "./components/MainComponent/PersonaDetails";
 import { useState } from "react";
+import { IMedicalRecord } from "./ts/interfaces/MedicalRecord";
 
 function App() {
   const [formData, setFormData] = useState<IFormData>({
@@ -26,11 +27,14 @@ function App() {
     });
   };
 
-  interface IMedicalRecord {
-    label: string;
-    value: string;
-  }
-  const [history, setHistory] = useState<IMedicalRecord[] | null>(null);
+  // export interface IMedicalRecord {
+  //   label: string;
+  //   value: string;
+  // }
+
+  const [history, setHistory] = useState<IMedicalRecord[]>([
+    { label: "", value: "" },
+  ]);
 
   return (
     <div className="flex p-2 xs:block">
@@ -39,7 +43,10 @@ function App() {
         data={formData}
         getRecord={(data: IMedicalRecord[]) => setHistory(data)}
       ></MainPage>
-      <PreviewPage personalData={formData}></PreviewPage>
+      <PreviewPage
+        personalData={formData}
+        medicalRecord={history}
+      ></PreviewPage>
     </div>
   );
 }
