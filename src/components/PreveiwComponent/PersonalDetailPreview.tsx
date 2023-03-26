@@ -41,7 +41,7 @@ const PersonalInfoPreview: React.FC<PersonalInfoProp> = (props) => {
 
         <p>
           <span className="font-bold">Sex / Age: </span>
-          {` ${gender} / ${age}`}
+          {` ${gender} / ${age}yr.`}
         </p>
       </div>
 

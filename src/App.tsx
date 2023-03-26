@@ -4,6 +4,7 @@ import MainPage from "./components/MainComponent/MainPage";
 import { IFormData } from "./components/MainComponent/PersonaDetails";
 import { useState } from "react";
 import { IMedicalRecord } from "./ts/interfaces/MedicalRecord";
+import FormContext from "./Context/FormContext";
 
 function App() {
   const [formData, setFormData] = useState<IFormData>({
@@ -15,6 +16,7 @@ function App() {
     state: "",
   });
 
+  //Personal Information
   const inputChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -27,27 +29,21 @@ function App() {
     });
   };
 
-  // export interface IMedicalRecord {
-  //   label: string;
-  //   value: string;
-  // }
-
   const [history, setHistory] = useState<IMedicalRecord[]>([
     { label: "", value: "" },
   ]);
 
   return (
-    <div className="flex p-2 xs:block">
-      <MainPage
-        getPersonalData={inputChangeHandler}
-        data={formData}
-        getRecord={(data: IMedicalRecord[]) => setHistory(data)}
-      ></MainPage>
-      <PreviewPage
-        personalData={formData}
-        medicalRecord={history}
-      ></PreviewPage>
-    </div>
+    <FormContext.Provider value={formData}>
+      <div className="flex p-2 xs:block">
+        <MainPage
+          getPersonalData={inputChangeHandler}
+          data={formData}
+          getRecord={(data: IMedicalRecord[]) => setHistory(data)}
+        ></MainPage>
+        <PreviewPage medicalRecord={history}></PreviewPage>
+      </div>
+    </FormContext.Provider>
   );
 }
 

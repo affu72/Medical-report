@@ -4,21 +4,25 @@ import { IAddress } from "../../ts/interfaces/Address";
 import MedicalRecordPreview from "./MedicalRecordPreview";
 import { IMedicine } from "../MainComponent/Medicines";
 import MedicinePreview from "./MedicinePreview";
-import { IFormData } from "../MainComponent/PersonaDetails";
 import { IMedicalRecord } from "../../ts/interfaces/MedicalRecord";
+import { useContext } from "react";
+import FormContext from "../../Context/FormContext";
 
 interface PropPreview {
-  personalData: IFormData;
   medicalRecord: IMedicalRecord[];
 }
 
-function PreviewPage({ personalData, medicalRecord }: PropPreview) {
-  const firstName = personalData.firstName;
-  const secondName = personalData.lastName;
+function PreviewPage({ medicalRecord }: PropPreview) {
+  const personalData = useContext(FormContext);
+
+  console.log(personalData);
+
+  const firstName = personalData?.firstName;
+  const secondName = personalData?.lastName;
   const id = 78625287;
-  const age = personalData.age;
-  const gender = personalData.gender;
-  const phone = personalData.mobile;
+  const age = personalData?.age;
+  const gender = personalData?.gender;
+  const phone = personalData?.mobile;
 
   const address: IAddress = {
     address1: "B-1 Nilesh 142 Senapati Bapat Rd",
