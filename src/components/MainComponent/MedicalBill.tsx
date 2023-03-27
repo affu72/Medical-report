@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Button from "../MyComponents/Button";
-import Input from "../MyComponents/Input";
+import Button from "../CustomComp/Button";
+import Input from "../CustomComp/Input";
 
 interface MedicalBillProps {
   onInputChange?: (bill: { name: string; value: number }[]) => void;
@@ -19,17 +19,6 @@ const MedicalBill: React.FC<MedicalBillProps> = ({ onInputChange }) => {
     const newBills = [...bills];
     newBills[index].name = value;
     setBills(newBills);
-  };
-
-  const handleBillValueChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const value = Number(event.target.value);
-    const newBills = [...bills];
-    newBills[index].value = value;
-    setBills(newBills);
-    // onInputChange(newBills);
   };
 
   const handleAddBill = () => {

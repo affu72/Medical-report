@@ -1,10 +1,10 @@
-import Pages from "./components/Pages";
 import PreviewPage from "./components/PreveiwComponent/PreviewPage";
 import MainPage from "./components/MainComponent/MainPage";
 import { IFormData } from "./components/MainComponent/PersonaDetails";
-import { useState } from "react";
-import { IMedicalRecord } from "./ts/interfaces/MedicalRecord";
+import { KeyboardEventHandler, useState } from "react";
 import FormContext from "./Context/FormContext";
+import React from "react";
+import IOption from "./ts/interfaces/Option";
 
 function App() {
   const [formData, setFormData] = useState<IFormData>({
@@ -14,6 +14,9 @@ function App() {
     mobile: "",
     gender: "",
     state: "",
+    pin: 0,
+    city: "",
+    address: "",
   });
 
   //Personal Information
@@ -29,19 +32,75 @@ function App() {
     });
   };
 
-  const [history, setHistory] = useState<IMedicalRecord[]>([
-    { label: "", value: "" },
-  ]);
+  //MedicalRecord state handling
+
+  const createOption = (label: string) => ({
+    label,
+    value: label,
+  });
+
+  const [inputMedicalHistory, setInputMedicalHistory] = React.useState("");
+
+  const [medicalHistory, setMedicalHistory] = React.useState<IOption[]>([]);
+
+  const [inputSymptoms, setInputSymptoms] = React.useState("");
+
+  const [symptoms, setSymptoms] = React.useState<IOption[]>([]);
+
+  const handleKeyDown: KeyboardEventHandler = (event) => {
+    if (!inputMedicalHistory) return;
+    switch (event.key) {
+      case "Enter":
+      case "Tab":
+        setMedicalHistory((prev) => [
+          ...prev,
+          createOption(inputMedicalHistory),
+        ]);
+        setInputMedicalHistory("");
+        event.preventDefault();
+    }
+  };
+
+  const handleKeySymptoms: KeyboardEventHandler = (event) => {
+    if (!inputSymptoms) return;
+    switch (event.key) {
+      case "Enter":
+      case "Tab":
+        setSymptoms((prev) => [...prev, createOption(inputSymptoms)]);
+        setInputSymptoms("");
+        event.preventDefault();
+    }
+  };
+
+  const inputHandlers = {
+    handleKeyDown,
+    handleKeySymptoms,
+    setInputMedicalHistory,
+    setMedicalHistory,
+    setInputSymptoms,
+    setSymptoms,
+  };
+
+  //test data
 
   return (
-    <FormContext.Provider value={formData}>
+    <FormContext.Provider
+      value={{
+        personalData: formData,
+        medicalRecord: {
+          histories: medicalHistory,
+          symptoms,
+          inputMedicalHistory,
+          inputSymptoms,
+        },
+        inputHandlers,
+      }}
+    >
       <div className="flex p-2 xs:block">
-        <MainPage
-          getPersonalData={inputChangeHandler}
-          data={formData}
-          getRecord={(data: IMedicalRecord[]) => setHistory(data)}
-        ></MainPage>
-        <PreviewPage medicalRecord={history}></PreviewPage>
+        <MainPage getPersonalData={inputChangeHandler}></MainPage>
+        <PreviewPage
+          medicalRecord={{ histories: medicalHistory, symptoms }}
+        ></PreviewPage>
       </div>
     </FormContext.Provider>
   );

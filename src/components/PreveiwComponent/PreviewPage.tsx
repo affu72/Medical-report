@@ -4,18 +4,16 @@ import { IAddress } from "../../ts/interfaces/Address";
 import MedicalRecordPreview from "./MedicalRecordPreview";
 import { IMedicine } from "../MainComponent/Medicines";
 import MedicinePreview from "./MedicinePreview";
-import { IMedicalRecord } from "../../ts/interfaces/MedicalRecord";
 import { useContext } from "react";
-import FormContext from "../../Context/FormContext";
+import FormContext, { IMedicalRecordPreview } from "../../Context/FormContext";
 
 interface PropPreview {
-  medicalRecord: IMedicalRecord[];
+  medicalRecord: IMedicalRecordPreview;
 }
 
 function PreviewPage({ medicalRecord }: PropPreview) {
-  const personalData = useContext(FormContext);
-
-  console.log(personalData);
+  console.log("medical record");
+  const personalData = useContext(FormContext)?.personalData!;
 
   const firstName = personalData?.firstName;
   const secondName = personalData?.lastName;
@@ -25,21 +23,17 @@ function PreviewPage({ medicalRecord }: PropPreview) {
   const phone = personalData?.mobile;
 
   const address: IAddress = {
-    address1: "B-1 Nilesh 142 Senapati Bapat Rd",
-    address2: "Matunga ",
-    city: "Pune",
-    state: "Mumbai",
-    pin: 400016,
+    address1: personalData.address,
+    address2: "",
+    city: personalData.city,
+    state: personalData.state,
+    pin: personalData.pin,
   };
 
   //dummy data
 
   const medicines: IMedicine[] = [
-    { name: "Aspirin", dose: "81mg", type: "Tablet", quantity: "100" },
-    { name: "Ibuprofen", dose: "200mg", type: "Tablet", quantity: "50" },
-    { name: "Acetaminophen", dose: "325mg", type: "Syrup", quantity: "75" },
-    { name: "Lisinopril", dose: "10mg", type: "Tablet", quantity: "30" },
-    { name: "Atorvastatin", dose: "20mg", type: "Tablet", quantity: "60" },
+    { name: "Aspirin", dose: "81mg", type: "Tablet", quantity: "100", id: 0 },
   ];
 
   //JSX
@@ -56,6 +50,7 @@ function PreviewPage({ medicalRecord }: PropPreview) {
           address2: "Kothrud",
           city: "Pune",
           pin: 416086,
+          state: "Mumbai",
         }}
         time={{ open: "09:00AM", close: "02:00PM" }}
         closingDay="Thursday"
@@ -78,11 +73,8 @@ function PreviewPage({ medicalRecord }: PropPreview) {
 
       <div className="">
         <MedicalRecordPreview
-          optionSymptoms={[
-            { value: "Fever", label: "Fever" },
-            { value: "Headache", label: "Headache" },
-          ]}
-          optionsHistory={medicalRecord}
+          optionSymptoms={medicalRecord.symptoms}
+          optionsHistory={medicalRecord.histories}
         />
 
         <MedicinePreview medicines={medicines} />
