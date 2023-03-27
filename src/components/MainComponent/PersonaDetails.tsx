@@ -110,7 +110,7 @@ function PersonaDetails({ getData }: PropType) {
       <div className="flex justify-between gap-8">
         <Input name="City" placeholder="City" label="City"></Input>
         <Input
-          name="Pin Code"
+          name="pin"
           placeholder="PIN"
           label="Pin Code"
           labelOption={true}

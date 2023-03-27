@@ -46,7 +46,7 @@ const PersonalInfoPreview: React.FC<PersonalInfoProp> = (props) => {
         <div>
           <p>
             <span className="font-bold">Address: </span>{" "}
-            {`${address?.address1} ${address?.city} ${address?.state})`}
+            {`${address?.address1} ${address?.city} ${address?.state}`}
           </p>
         </div>
 

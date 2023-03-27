@@ -4,6 +4,8 @@ import { IAddress } from "../../ts/interfaces/Address";
 import MedicalRecordPreview from "./MedicalRecordPreview";
 import MedicinePreview from "./MedicinePreview";
 import { useFormContext } from "../../Context/FormContext";
+import MedicineTable from "./MedicineTable";
+import PersonaDetails from "../MainComponent/PersonaDetails";
 
 function PreviewPage() {
   const { personalData, medicalHistories, symptoms, medicines } =
@@ -15,6 +17,7 @@ function PreviewPage() {
   const age = personalData?.age;
   const gender = personalData?.gender;
   const phone = personalData?.mobile;
+  const city = personalData?.city;
 
   const address: IAddress = {
     address1: personalData.address,
@@ -65,7 +68,7 @@ function PreviewPage() {
           optionsHistory={medicalHistories}
         />
 
-        <MedicinePreview medicines={medicines} />
+        <MedicineTable />
       </div>
     </div>
   );
