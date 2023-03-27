@@ -1,9 +1,8 @@
 import Input from "../CustomComp/Input";
 import IndianStateDropdown from "../CustomComp/IndianStateDropDown";
-import { useContext } from "react";
-import FormContext from "../../Context/FormContext";
+import { useFormContext } from "../../Context/FormContext";
 
-export interface IFormData {
+export interface IPersonalData {
   pin: number | undefined;
   city: string;
   firstName: string;
@@ -16,21 +15,13 @@ export interface IFormData {
 }
 
 type PropType = {
-  getData: (
+  getData?: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
 };
 
 function PersonaDetails({ getData }: PropType) {
-  const formData = useContext(FormContext)?.personalData!;
-
-  console.log(formData);
-
-  const inputChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    getData(event);
-  };
+  const { personalData, inputPersonalDetailsHandler } = useFormContext();
 
   return (
     <div>
@@ -39,15 +30,15 @@ function PersonaDetails({ getData }: PropType) {
           name="firstName"
           label="First Name"
           placeholder="First Name"
-          value={formData.firstName}
-          onChange={inputChangeHandler}
+          value={personalData.firstName}
+          onChange={inputPersonalDetailsHandler}
         ></Input>
         <Input
           name="lastName"
           label="Last Name"
           placeholder="Last Name"
-          value={formData.lastName}
-          onChange={inputChangeHandler}
+          value={personalData.lastName}
+          onChange={inputPersonalDetailsHandler}
         ></Input>
       </div>
 
@@ -56,8 +47,8 @@ function PersonaDetails({ getData }: PropType) {
         label="Age"
         placeholder="Age"
         type="number"
-        onChange={inputChangeHandler}
-        value={formData.age}
+        onChange={inputPersonalDetailsHandler}
+        value={personalData.age}
       ></Input>
 
       <div className=" flex gap-16 items-center w-full mb-4">
@@ -78,7 +69,7 @@ function PersonaDetails({ getData }: PropType) {
               name="gender"
               id="male"
               className="mt-0"
-              onChange={inputChangeHandler}
+              onChange={inputPersonalDetailsHandler}
             />
           </div>
 
@@ -94,8 +85,8 @@ function PersonaDetails({ getData }: PropType) {
               name="gender"
               id="female"
               className="mt-0"
-              onChange={inputChangeHandler}
-              value={formData.gender}
+              onChange={inputPersonalDetailsHandler}
+              value={personalData.gender}
             />
           </div>
         </div>
@@ -106,8 +97,8 @@ function PersonaDetails({ getData }: PropType) {
         placeholder="Mobile"
         label="Mobile"
         type="number"
-        onChange={inputChangeHandler}
-        value={formData.mobile}
+        onChange={inputPersonalDetailsHandler}
+        value={personalData.mobile}
       ></Input>
       <Input
         name="Address"
@@ -130,8 +121,8 @@ function PersonaDetails({ getData }: PropType) {
       <div className="w-full mb-4">
         <label htmlFor="name">State</label>
         <IndianStateDropdown
-          value={formData.state}
-          onChange={inputChangeHandler}
+          value={personalData.state}
+          onChange={inputPersonalDetailsHandler}
         ></IndianStateDropdown>
       </div>
     </div>

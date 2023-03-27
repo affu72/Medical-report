@@ -4,16 +4,10 @@ import { IAddress } from "../../ts/interfaces/Address";
 import MedicalRecordPreview from "./MedicalRecordPreview";
 import { IMedicine } from "../MainComponent/Medicines";
 import MedicinePreview from "./MedicinePreview";
-import { useContext } from "react";
-import FormContext, { IMedicalRecordPreview } from "../../Context/FormContext";
+import { useFormContext } from "../../Context/FormContext";
 
-interface PropPreview {
-  medicalRecord: IMedicalRecordPreview;
-}
-
-function PreviewPage({ medicalRecord }: PropPreview) {
-  console.log("medical record");
-  const personalData = useContext(FormContext)?.personalData!;
+function PreviewPage() {
+  const { personalData, medicalHistories, symptoms } = useFormContext();
 
   const firstName = personalData?.firstName;
   const secondName = personalData?.lastName;
@@ -33,11 +27,7 @@ function PreviewPage({ medicalRecord }: PropPreview) {
   //dummy data
 
   const medicines: IMedicine[] = [
-    { name: "Aspirin", dose: "81mg", type: "Tablet", quantity: "100" },
-    { name: "Ibuprofen", dose: "200mg", type: "Tablet", quantity: "50" },
-    { name: "Acetaminophen", dose: "325mg", type: "Syrup", quantity: "75" },
-    { name: "Lisinopril", dose: "10mg", type: "Tablet", quantity: "30" },
-    { name: "Atorvastatin", dose: "20mg", type: "Tablet", quantity: "60" },
+    { name: "Aspirin", dose: "81mg", type: "Tablet", quantity: "100", id: 0 },
   ];
 
   //JSX
@@ -77,8 +67,8 @@ function PreviewPage({ medicalRecord }: PropPreview) {
 
       <div className="">
         <MedicalRecordPreview
-          optionSymptoms={medicalRecord.symptoms}
-          optionsHistory={medicalRecord.histories}
+          optionSymptoms={symptoms}
+          optionsHistory={medicalHistories}
         />
 
         <MedicinePreview medicines={medicines} />

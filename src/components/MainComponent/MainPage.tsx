@@ -3,7 +3,7 @@ import SideNav from "./SideNav";
 import InputForms from "./InputForms";
 
 type PropMainApp = {
-  getPersonalData: (
+  getPersonalData?: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
 };
@@ -18,7 +18,7 @@ function MainPage({ getPersonalData }: PropMainApp) {
   return (
     <div className="w-1/2 flex gap-4 bg-slate-100 p-4  xl:flex-col overflow-hidden relative xs:w-full">
       <SideNav onNavClick={showFormHandler} tabIndex={tabIndex} />
-      <InputForms tabIndex={tabIndex} getData={getPersonalData}></InputForms>
+      <InputForms tabIndex={tabIndex}></InputForms>
 
       {tabIndex < 3 && (
         <button

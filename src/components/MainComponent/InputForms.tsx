@@ -6,14 +6,14 @@ import PersonaDetails from "./PersonaDetails";
 
 interface PropInput {
   tabIndex: number;
-  getData: (
+  getData?: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
 }
 
 const InputForms: React.FC<PropInput> = ({ tabIndex, getData }) => {
   const formSection = [
-    <PersonaDetails key={0} getData={getData} />,
+    <PersonaDetails key={0} />,
     <MedicalRecord key={1} />,
     <Medicines key={2} />,
     <MedicalBill key={3} />,
