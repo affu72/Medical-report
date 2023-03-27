@@ -1,23 +1,31 @@
-import Input from "../MyComponents/Input";
-import IndianStateDropdown from "../MyComponents/IndianStateDropDown";
+import Input from "../CustomComp/Input";
+import IndianStateDropdown from "../CustomComp/IndianStateDropDown";
+import { useContext } from "react";
+import FormContext from "../../Context/FormContext";
 
 export interface IFormData {
+  pin: number | undefined;
+  city: string;
   firstName: string;
   lastName: string;
   age: number;
   mobile: string;
   gender: string;
   state: string;
+  address: string;
 }
 
 type PropType = {
-  formData: IFormData;
   getData: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
 };
 
-function PersonaDetails({ getData, formData }: PropType) {
+function PersonaDetails({ getData }: PropType) {
+  const formData = useContext(FormContext)?.personalData!;
+
+  console.log(formData);
+
   const inputChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {

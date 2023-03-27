@@ -1,5 +1,4 @@
 import React from "react";
-import { FaBarcode, FaPhone } from "react-icons/fa";
 import { IAddress } from "../../ts/interfaces/Address";
 import { IPhone } from "../../ts/interfaces/mobiles";
 import { IPatientName } from "../../ts/interfaces/name";
@@ -10,7 +9,6 @@ export interface PersonalInfoProp {
   age: number;
   gender: string;
   address?: IAddress;
-  barCodeSrc?: string;
   phone: IPhone;
 }
 
@@ -20,7 +18,6 @@ const PersonalInfoPreview: React.FC<PersonalInfoProp> = (props) => {
     <div className="flex flex-col pt-6 pb-6 px-2 gap border-double  border-b-4 border-stone-600">
       <div className="flex justify-between">
         <div>
-          {/* <FaBarcode /> */}
           <p>
             <span className="font-bold">Id: </span>
             {`${ID}`}
@@ -46,13 +43,12 @@ const PersonalInfoPreview: React.FC<PersonalInfoProp> = (props) => {
       </div>
 
       <div className="flex justify-between">
-        {/* <div>
+        <div>
           <p>
             <span className="font-bold">Address: </span>{" "}
-            {`${address.address1} ${address.address2}`}
+            {`${address?.address1} ${address?.city} ${address?.state})`}
           </p>
-          <p>{`${address.city} - ${address.pin} (${address.state})`}</p>
-        </div> */}
+        </div>
 
         <p>
           <span className="font-bold">Mobile: </span>

@@ -1,29 +1,20 @@
 import Medicines from "./Medicines";
 import MedicalRecord from "./MedicalRecord";
 import MedicalBill from "./MedicalBill";
-import { IMedicalRecord } from "../../ts/interfaces/MedicalRecord";
-
 import { FormEvent } from "react";
-import PersonaDetails, { IFormData } from "./PersonaDetails";
+import PersonaDetails from "./PersonaDetails";
 
 interface PropInput {
-  data: IFormData;
   tabIndex: number;
   getData: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
-  getRecord: (data: IMedicalRecord[]) => void;
 }
 
-const InputForms: React.FC<PropInput> = ({
-  data,
-  tabIndex,
-  getData,
-  getRecord,
-}) => {
+const InputForms: React.FC<PropInput> = ({ tabIndex, getData }) => {
   const formSection = [
-    <PersonaDetails key={0} getData={getData} formData={data} />,
-    <MedicalRecord key={1} getRecord={getRecord} />,
+    <PersonaDetails key={0} getData={getData} />,
+    <MedicalRecord key={1} />,
     <Medicines key={2} />,
     <MedicalBill key={3} />,
   ];

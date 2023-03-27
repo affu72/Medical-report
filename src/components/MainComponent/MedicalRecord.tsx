@@ -1,58 +1,15 @@
-import React, { KeyboardEventHandler } from "react";
+import React, { useContext } from "react";
 import IOption from "../../ts/interfaces/Option";
 import CreatableSelect from "react-select/creatable";
-import { IMedicalRecord } from "../../ts/interfaces/MedicalRecord";
+import FormContext from "../../Context/FormContext";
+
 const components = {
   DropdownIndicator: null,
 };
-interface Option {
-  label: string;
-  value: string;
-}
-const createOption = (label: string) => ({
-  label,
-  value: label,
-});
 
-interface PropMedicalRecord {
-  getRecord: (data: IMedicalRecord[]) => void;
-}
-
-const MedicalRecord = ({ getRecord }: PropMedicalRecord) => {
-  const [inputMedicalHistory, setInputMedicalHistory] = React.useState("");
-  const [medicalHistory, setMedicalHistory] = React.useState<
-    (Option | { label: string; value: string })[]
-  >([]);
-
-  const [inputSymptoms, setInputSymptoms] = React.useState("");
-
-  const [symptoms, setSymptoms] = React.useState<
-    (Option | { label: string; value: string })[]
-  >([]);
-
-  const handleKeyDown: KeyboardEventHandler = (event) => {
-    if (!inputMedicalHistory) return;
-    switch (event.key) {
-      case "Enter":
-      case "Tab":
-        setMedicalHistory((prev) => [
-          ...prev,
-          createOption(inputMedicalHistory),
-        ]);
-        setInputMedicalHistory("");
-        event.preventDefault();
-    }
-  };
-  const handleKeySymptoms: KeyboardEventHandler = (event) => {
-    if (!inputSymptoms) return;
-    switch (event.key) {
-      case "Enter":
-      case "Tab":
-        setSymptoms((prev) => [...prev, createOption(inputSymptoms)]);
-        setInputSymptoms("");
-        event.preventDefault();
-    }
-  };
+const MedicalRecord = () => {
+  const callBacks = useContext(FormContext)?.callBacks!;
+  const recordValue = useContext(FormContext)?.medicalRecord!;
 
   const option: IOption[] = [
     { label: "Abdominal pain", value: "abdominal pain" },
@@ -75,7 +32,7 @@ const MedicalRecord = ({ getRecord }: PropMedicalRecord) => {
     { label: "Vision problems", value: "vision problems" },
   ];
 
-  // console.log(medicalHistory);
+  console.log(recordValue.histories, recordValue.symptoms);
 
   return (
     <div className="xs:pb-8 space-y-4">
@@ -83,22 +40,19 @@ const MedicalRecord = ({ getRecord }: PropMedicalRecord) => {
         <label>Medical History</label>
         <CreatableSelect
           components={components}
-          inputValue={inputMedicalHistory}
+          inputValue={recordValue.inputMedicalHistory}
           isClearable
           isMulti
           menuIsOpen={false}
           onChange={(newValue) => {
-            setMedicalHistory(
-              newValue as (Option | { label: string; value: string })[]
-            );
+            callBacks.setMedicalHistory(newValue);
           }}
           onInputChange={(newValue) => {
-            setInputMedicalHistory(newValue);
-            getRecord(medicalHistory);
+            callBacks.setInputMedicalHistory(newValue);
           }}
-          onKeyDown={handleKeyDown}
+          onKeyDown={callBacks.handleKeyDown}
           placeholder="Type Medical history and press enter..."
-          value={medicalHistory}
+          value={recordValue.histories}
         />
       </div>
 
@@ -110,21 +64,17 @@ const MedicalRecord = ({ getRecord }: PropMedicalRecord) => {
           </span>
         </label>
         <CreatableSelect
-          inputValue={inputSymptoms}
+          inputValue={recordValue.inputSymptoms}
           isClearable
           isMulti
           options={option}
-          onChange={(newValue) =>
-            setSymptoms(
-              newValue as (Option | { label: string; value: string })[]
-            )
-          }
+          onChange={(newValue) => callBacks.setSymptoms(newValue)}
           onInputChange={(newValue) => {
-            setInputSymptoms(newValue);
+            callBacks.setInputSymptoms(newValue);
           }}
-          onKeyDown={handleKeySymptoms}
+          onKeyDown={callBacks.handleKeySymptoms}
           placeholder="Type to select or press enter to create..."
-          value={symptoms}
+          value={recordValue.symptoms}
         />
       </div>
     </div>
