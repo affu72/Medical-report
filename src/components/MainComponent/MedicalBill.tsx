@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 import Button from "../CustomComp/Button";
 import Input from "../CustomComp/Input";
+import { useFormContext } from "../../Context/FormContext";
 
-interface IMedicalBill {
+export interface IMedicalBill {
   billName: string;
   billValue: string;
   id: number;
 }
-interface PropMedicalBill {
-  onInputChange?: (bill: IMedicalBill[]) => void;
-}
 
-const MedicalBill = ({ onInputChange }: PropMedicalBill) => {
-  const [bills, setBills] = useState<IMedicalBill[]>([
-    { billName: "", billValue: "", id: 0 },
-  ]);
+const MedicalBill = () => {
+  const { bills, setBills, handleAddBill } = useFormContext();
 
   const handlerMedicalBill = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -27,13 +23,6 @@ const MedicalBill = ({ onInputChange }: PropMedicalBill) => {
     newBills[index][name as "billName" | "billValue"] = value;
 
     setBills(newBills);
-  };
-
-  const handleAddBill = () => {
-    setBills((prev) => [
-      ...prev,
-      { billName: "", billValue: "", id: prev[prev.length - 1]["id"] + 1 },
-    ]);
   };
 
   const handleRemoveClick = (index: number) => {

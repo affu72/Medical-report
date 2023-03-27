@@ -2,12 +2,12 @@ import Header from "./Header";
 import PersonalInfoPreview from "./PersonalDetailPreview";
 import { IAddress } from "../../ts/interfaces/Address";
 import MedicalRecordPreview from "./MedicalRecordPreview";
-import { IMedicine } from "../MainComponent/Medicines";
 import MedicinePreview from "./MedicinePreview";
 import { useFormContext } from "../../Context/FormContext";
 
 function PreviewPage() {
-  const { personalData, medicalHistories, symptoms } = useFormContext();
+  const { personalData, medicalHistories, symptoms, medicines } =
+    useFormContext();
 
   const firstName = personalData?.firstName;
   const secondName = personalData?.lastName;
@@ -23,12 +23,6 @@ function PreviewPage() {
     state: personalData.state,
     pin: personalData.pin,
   };
-
-  //dummy data
-
-  const medicines: IMedicine[] = [
-    { name: "Aspirin", dose: "81mg", type: "Tablet", quantity: "100", id: 0 },
-  ];
 
   //JSX
   return (

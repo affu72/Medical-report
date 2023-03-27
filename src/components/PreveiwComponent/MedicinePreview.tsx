@@ -14,7 +14,7 @@ const MedicinePreview: React.FC<PropMedicinePreview> = ({ medicines }) => {
       </div>
       {medicines.map((medicine) => {
         return (
-          <div key={medicine.name} className="flex gap-1 justify-around">
+          <div key={medicine.id} className="flex gap-1 justify-around">
             <span>{`${medicine.type} ${medicine.name}`}</span>
             <span>{medicine.dose}</span>
             {/* <span>{medicine.quantity}</span> */}

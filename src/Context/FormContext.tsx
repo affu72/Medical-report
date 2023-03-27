@@ -1,18 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
-
 import { IPersonalData } from "../components/MainComponent/PersonaDetails";
-
 import IOption from "../ts/interfaces/Option";
+import { IMedicine } from "../components/MainComponent/Medicines";
+import { IMedicalBill } from "../components/MainComponent/MedicalBill";
 
-export interface IMedicalRecordPreview {
-  histories: IOption[];
-  symptoms: IOption[];
-}
-
-export interface IMedicalRecord extends IMedicalRecordPreview {
-  inputSymptoms: string;
-  inputMedicalHistory: string;
-}
+//context value type
 interface IFormContext {
   personalData: IPersonalData;
   setPersonalData: (data: IPersonalData) => void;
@@ -29,10 +21,25 @@ interface IFormContext {
   inputPersonalDetailsHandler: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
+  medicines: IMedicine[];
+  setMedicines: (medicines: IMedicine[]) => void;
+  addMedicine: () => void;
+  medicineInputChangeHandler: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    index: number
+  ) => void;
+  removeMedicineHandler: (index: number) => void;
+  clearMedicineHandler: () => void;
+  bills: IMedicalBill[];
+  setBills: (newBills: IMedicalBill[]) => void;
+  handleAddBill: () => void;
 }
+
+// creatig conetxt
 
 const FormContext = createContext<IFormContext | null>(null);
 
+//context provider
 export const FormContextProvider = ({
   children,
 }: {
@@ -64,7 +71,7 @@ export const FormContextProvider = ({
     });
   };
 
-  //MedicalRecord state handling
+  //MedicalRecord
 
   const createOption = (label: string) => ({
     label,
@@ -104,6 +111,53 @@ export const FormContextProvider = ({
     }
   };
 
+  //medicines
+
+  const [medicines, setMedicines] = useState<IMedicine[]>([
+    { name: "", dose: "", type: "", id: 0 },
+  ]);
+
+  const addMedicine = () => {
+    setMedicines((prev) => [
+      ...prev,
+      { name: "", dose: "", type: "", id: prev[prev.length - 1]["id"] + 1 },
+    ]);
+  };
+
+  const medicineInputChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    index: number
+  ) => {
+    const { name, value } = e.target;
+
+    const list = [...medicines];
+
+    list[index][name as "name" | "dose" | "type"] = value;
+
+    setMedicines(list);
+  };
+
+  const removeMedicineHandler = (index: number) => {
+    setMedicines((prev) => prev.filter((medicine) => index !== medicine.id));
+  };
+
+  const clearMedicineHandler = () => {
+    setMedicines([{ name: "", dose: "", type: "", id: 0 }]);
+  };
+
+  //Medical Bill
+
+  const [bills, setBills] = useState<IMedicalBill[]>([
+    { billName: "", billValue: "", id: 0 },
+  ]);
+
+  const handleAddBill = () => {
+    setBills((prev) => [
+      ...prev,
+      { billName: "", billValue: "", id: prev[prev.length - 1]["id"] + 1 },
+    ]);
+  };
+
   const value: IFormContext = {
     personalData,
     setPersonalData,
@@ -118,6 +172,15 @@ export const FormContextProvider = ({
     handleKeyDown,
     handleKeySymptoms,
     inputPersonalDetailsHandler,
+    medicineInputChangeHandler,
+    medicines,
+    setMedicines,
+    removeMedicineHandler,
+    clearMedicineHandler,
+    addMedicine,
+    bills,
+    setBills,
+    handleAddBill,
   };
 
   return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
