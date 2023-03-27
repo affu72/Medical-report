@@ -72,7 +72,7 @@ function App() {
     }
   };
 
-  const callBacks = {
+  const inputHandlers = {
     handleKeyDown,
     handleKeySymptoms,
     setInputMedicalHistory,
@@ -89,11 +89,11 @@ function App() {
         personalData: formData,
         medicalRecord: {
           histories: medicalHistory,
-          symptoms: symptoms,
+          symptoms,
           inputMedicalHistory,
           inputSymptoms,
         },
-        callBacks: callBacks,
+        inputHandlers,
       }}
     >
       <div className="flex p-2 xs:block">

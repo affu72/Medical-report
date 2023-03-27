@@ -8,7 +8,8 @@ const components = {
 };
 
 const MedicalRecord = () => {
-  const callBacks = useContext(FormContext)?.callBacks!;
+  const inputHandlers = useContext(FormContext)?.inputHandlers;
+
   const recordValue = useContext(FormContext)?.medicalRecord!;
 
   const option: IOption[] = [
@@ -45,12 +46,12 @@ const MedicalRecord = () => {
           isMulti
           menuIsOpen={false}
           onChange={(newValue) => {
-            callBacks.setMedicalHistory(newValue);
+            inputHandlers.setMedicalHistory(newValue);
           }}
           onInputChange={(newValue) => {
-            callBacks.setInputMedicalHistory(newValue);
+            inputHandlers.setInputMedicalHistory(newValue);
           }}
-          onKeyDown={callBacks.handleKeyDown}
+          onKeyDown={inputHandlers.handleKeyDown}
           placeholder="Type Medical history and press enter..."
           value={recordValue.histories}
         />
@@ -68,11 +69,11 @@ const MedicalRecord = () => {
           isClearable
           isMulti
           options={option}
-          onChange={(newValue) => callBacks.setSymptoms(newValue)}
+          onChange={(newValue) => inputHandlers.setSymptoms(newValue)}
           onInputChange={(newValue) => {
-            callBacks.setInputSymptoms(newValue);
+            inputHandlers.setInputSymptoms(newValue);
           }}
-          onKeyDown={callBacks.handleKeySymptoms}
+          onKeyDown={inputHandlers.handleKeySymptoms}
           placeholder="Type to select or press enter to create..."
           value={recordValue.symptoms}
         />

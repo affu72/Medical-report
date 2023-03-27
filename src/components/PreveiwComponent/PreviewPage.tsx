@@ -33,11 +33,7 @@ function PreviewPage({ medicalRecord }: PropPreview) {
   //dummy data
 
   const medicines: IMedicine[] = [
-    { name: "Aspirin", dose: "81mg", type: "Tablet", quantity: "100" },
-    { name: "Ibuprofen", dose: "200mg", type: "Tablet", quantity: "50" },
-    { name: "Acetaminophen", dose: "325mg", type: "Syrup", quantity: "75" },
-    { name: "Lisinopril", dose: "10mg", type: "Tablet", quantity: "30" },
-    { name: "Atorvastatin", dose: "20mg", type: "Tablet", quantity: "60" },
+    { name: "Aspirin", dose: "81mg", type: "Tablet", quantity: "100", id: 0 },
   ];
 
   //JSX

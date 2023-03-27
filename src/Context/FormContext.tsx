@@ -14,20 +14,10 @@ export interface IMedicalRecord extends IMedicalRecordPreview {
 interface IContext {
   personalData: IFormData;
   medicalRecord: IMedicalRecord;
-  callBacks: any;
+  inputHandlers: any;
   // medicines?: IMedicine;
 }
 
-// const PersonalDetails = createContext<IFormData>({
-//   firstName: "",
-//   lastName: "",
-//   age: 0,
-//   mobile: "",
-//   gender: "",
-//   state: "",
-// });
-
 const FormContext = createContext<IContext | null>(null);
 
-// export default PersonalDetails;
 export default FormContext;

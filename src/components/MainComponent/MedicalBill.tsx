@@ -21,17 +21,6 @@ const MedicalBill: React.FC<MedicalBillProps> = ({ onInputChange }) => {
     setBills(newBills);
   };
 
-  const handleBillValueChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const value = Number(event.target.value);
-    const newBills = [...bills];
-    newBills[index].value = value;
-    setBills(newBills);
-    // onInputChange(newBills);
-  };
-
   const handleAddBill = () => {
     setBills((prev) => [...prev, { name: "", value: 0 }]);
   };
