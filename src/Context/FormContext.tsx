@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useState } from "react";
+import React, {
+  ChangeEvent,
+  createContext,
+  useContext,
+  useState,
+  KeyboardEvent,
+  ReactNode,
+} from "react";
 import { IPersonalData } from "../components/MainComponent/PersonaDetails";
 import IOption from "../ts/interfaces/Option";
 import { IMedicine } from "../components/MainComponent/Medicines";
@@ -16,16 +23,16 @@ interface IFormContext {
   setInputSymptoms: (inputSymptom: string) => void;
   symptoms: IOption[];
   setSymptoms: (symptom: IOption[]) => void;
-  handleKeySymptoms: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-  handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleKeySymptoms: (event: KeyboardEvent<HTMLInputElement>) => void;
+  handleKeyDown: (event: KeyboardEvent<HTMLInputElement>) => void;
   inputPersonalDetailsHandler: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   medicines: IMedicine[];
   setMedicines: (medicines: IMedicine[]) => void;
   addMedicine: () => void;
   medicineInputChangeHandler: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     index: number
   ) => void;
   removeMedicineHandler: (index: number) => void;
@@ -40,11 +47,7 @@ interface IFormContext {
 const FormContext = createContext<IFormContext | null>(null);
 
 //context provider
-export const FormContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const FormContextProvider = ({ children }: { children: ReactNode }) => {
   //Personal Information
 
   const [personalData, setPersonalData] = useState<IPersonalData>({
@@ -60,7 +63,7 @@ export const FormContextProvider = ({
   });
 
   const inputPersonalDetailsHandler = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const target = event.target as HTMLInputElement;
     const value = target.type === "radio" ? target.id : target.value;
@@ -78,13 +81,13 @@ export const FormContextProvider = ({
     value: label,
   });
 
-  const [inputMedicalHistory, setInputMedicalHistory] = React.useState("");
+  const [inputMedicalHistory, setInputMedicalHistory] = useState("");
 
-  const [medicalHistories, setMedicalHistories] = React.useState<IOption[]>([]);
+  const [medicalHistories, setMedicalHistories] = useState<IOption[]>([]);
 
-  const [inputSymptoms, setInputSymptoms] = React.useState("");
+  const [inputSymptoms, setInputSymptoms] = useState("");
 
-  const [symptoms, setSymptoms] = React.useState<IOption[]>([]);
+  const [symptoms, setSymptoms] = useState<IOption[]>([]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (!inputMedicalHistory) return;
@@ -125,7 +128,7 @@ export const FormContextProvider = ({
   };
 
   const medicineInputChangeHandler = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     index: number
   ) => {
     const { name, value } = e.target;
