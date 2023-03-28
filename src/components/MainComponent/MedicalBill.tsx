@@ -61,7 +61,7 @@ const MedicalBill = () => {
             <Button
               type="button"
               value="x"
-              bgColor="red"
+              bgColor="bg-red-500"
               margin={0.5}
               onClick={() => handleRemoveClick(bill.id)}
             />
@@ -71,7 +71,7 @@ const MedicalBill = () => {
       <Button
         type="button"
         value="Add Anoher Bill"
-        bgColor="blue"
+        bgColor="bg-blue-500"
         onClick={handleAddBill}
       />
     </div>

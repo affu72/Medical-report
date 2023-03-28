@@ -141,10 +141,26 @@ export const MyFormContextProvider = ({
 
     //medicines
     const addMedicine = () => {
-      setMedicines((prev) => [
-        ...prev,
-        { name: "", dose: "", type: "", id: prev[prev.length - 1]["id"] + 1 },
-      ]);
+      if (
+        medicines[medicines.length - 1].name === "" ||
+        medicines[medicines.length - 1].dose === "" ||
+        medicines[medicines.length - 1].type === ""
+      ) {
+        alert("Medicines field is empty");
+        return;
+      }
+
+      setMedicines((prev) => {
+        return [
+          ...prev,
+          {
+            name: "",
+            dose: "",
+            type: "",
+            id: prev[prev.length - 1]["id"] + 1,
+          },
+        ];
+      });
     };
 
     const medicineInputChangeHandler = (
@@ -170,6 +186,14 @@ export const MyFormContextProvider = ({
 
     //Medical Bill
     const handleAddBill = () => {
+      if (
+        bills[bills.length - 1].billName === "" ||
+        bills[bills.length - 1].billValue === ""
+      ) {
+        alert("Bill field is empty");
+        return;
+      }
+
       setBills((prev) => [
         ...prev,
         { billName: "", billValue: "", id: prev[prev.length - 1]["id"] + 1 },
