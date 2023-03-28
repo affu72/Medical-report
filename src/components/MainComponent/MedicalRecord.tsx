@@ -1,6 +1,6 @@
 import IOption from "../../ts/interfaces/Option";
 import CreatableSelect from "react-select/creatable";
-import { useFormContext } from "../../Context/FormContext";
+import { useMyFormContext } from "../../Context/MyFormContext";
 
 const components = {
   DropdownIndicator: null,
@@ -18,7 +18,7 @@ const MedicalRecord = () => {
     setSymptoms,
     handleKeyDown,
     handleKeySymptoms,
-  } = useFormContext();
+  } = useMyFormContext();
 
   const option: IOption[] = [
     { label: "Abdominal pain", value: "abdominal pain" },

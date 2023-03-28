@@ -44,7 +44,7 @@ interface IFormContext {
 
 // creatig conetxt
 
-const FormContext = createContext<IFormContext | null>(null);
+const MyFormContext = createContext<IFormContext | null>(null);
 
 //context provider
 export const FormContextProvider = ({ children }: { children: ReactNode }) => {
@@ -203,11 +203,13 @@ export const FormContextProvider = ({ children }: { children: ReactNode }) => {
     bills,
     setBills,
   ]);
-  return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
+  return (
+    <MyFormContext.Provider value={value}>{children}</MyFormContext.Provider>
+  );
 };
 
-export const useFormContext = () => {
-  const context = useContext(FormContext) as IFormContext;
+export const useMyFormContext = () => {
+  const context = useContext(MyFormContext) as IFormContext;
   if (!context)
     throw new Error(
       "useFormContext must be used within FormContextProvider component"
@@ -216,4 +218,4 @@ export const useFormContext = () => {
   return context;
 };
 
-export default FormContext;
+export default MyFormContext;

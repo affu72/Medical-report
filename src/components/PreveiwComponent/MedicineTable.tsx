@@ -1,8 +1,8 @@
 import React from "react";
-import { useFormContext } from "../../Context/FormContext";
+import { useMyFormContext } from "../../Context/MyFormContext";
 
 function MedicineTable() {
-  const { medicines } = useFormContext();
+  const { medicines } = useMyFormContext();
   return (
     <table className="w-full">
       <thead className="  bg-blue-300">

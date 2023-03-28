@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "../CustomComp/Input";
 import Button from "../CustomComp/Button";
-import { useFormContext } from "../../Context/FormContext";
+import { useMyFormContext } from "../../Context/MyFormContext";
 
 export interface IMedicine {
   id: number;
@@ -18,7 +18,7 @@ const Medicines = () => {
     clearMedicineHandler,
     removeMedicineHandler,
     medicineInputChangeHandler,
-  } = useFormContext();
+  } = useMyFormContext();
 
   console.log(medicines);
 

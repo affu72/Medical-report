@@ -1,6 +1,6 @@
 import Button from "../CustomComp/Button";
 import Input from "../CustomComp/Input";
-import { useFormContext } from "../../Context/FormContext";
+import { useMyFormContext } from "../../Context/MyFormContext";
 
 export interface IMedicalBill {
   billName: string;
@@ -9,7 +9,7 @@ export interface IMedicalBill {
 }
 
 const MedicalBill = () => {
-  const { bills, setBills, handleAddBill } = useFormContext();
+  const { bills, setBills, handleAddBill } = useMyFormContext();
 
   const handlerMedicalBill = (
     event: React.ChangeEvent<HTMLInputElement>,

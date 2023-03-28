@@ -1,6 +1,6 @@
 import Input from "../CustomComp/Input";
 import IndianStateDropdown from "../CustomComp/IndianStateDropDown";
-import { useFormContext } from "../../Context/FormContext";
+import { useMyFormContext } from "../../Context/MyFormContext";
 
 export interface IPersonalData {
   pin: number | undefined;
@@ -21,7 +21,7 @@ type PropType = {
 };
 
 function PersonaDetails({ getData }: PropType) {
-  const { personalData, inputPersonalDetailsHandler } = useFormContext();
+  const { personalData, inputPersonalDetailsHandler } = useMyFormContext();
 
   return (
     <div>
