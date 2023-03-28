@@ -46,6 +46,8 @@ interface IFormContext {
   tabClickHandler: () => void;
   handleBackClick: () => void;
   onNavClick?: () => void;
+
+  generatePdf: (pdf: any) => void;
 }
 
 // creatig conetxt
@@ -210,6 +212,10 @@ export const MyFormContextProvider = ({
 
     const handleBackClick = () => setTabIndex((prev) => prev - 1);
 
+    const generatePdf = (pdf: any) => {
+      pdf();
+    };
+
     const value: IFormContext = {
       personalData,
       inputMedicalHistory,
@@ -237,6 +243,7 @@ export const MyFormContextProvider = ({
       setTabIndex,
       tabClickHandler,
       handleBackClick,
+      generatePdf,
     };
 
     return value;

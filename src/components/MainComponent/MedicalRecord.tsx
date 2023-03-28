@@ -42,7 +42,7 @@ const MedicalRecord = () => {
   ];
 
   return (
-    <div className="xs:pb-8 space-y-4">
+    <div className="xs:pb-8 space-y-4 ">
       <div>
         <label>Medical History</label>
         <CreatableSelect

@@ -36,6 +36,7 @@ const InputForms = () => {
             onClick={handleBackClick}
           />
         )}
+
         {tabIndex < 3 && (
           <button
             type="button"

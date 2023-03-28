@@ -36,7 +36,7 @@ function PreviewPage() {
                 form="main-form"
                 type="submit"
                 onClick={toPdf}
-                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute bottom-6 left-1/4 md:`}
+                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute xl:bottom-[2.5%] xl:left-[26%] md:bottom-[76.9%] md:left-[80%]`}
               >
                 Generate Pdf
               </button>

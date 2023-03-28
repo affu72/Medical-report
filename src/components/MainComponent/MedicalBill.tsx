@@ -31,7 +31,7 @@ const MedicalBill = () => {
   };
 
   return (
-    <div className="flex flex-col space-y-2 items-start">
+    <div className="flex flex-col space-y-2 items-start md:w-full md:item-between">
       <label className="self-center" htmlFor="">
         Medical Bill
       </label>
