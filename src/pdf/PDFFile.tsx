@@ -7,12 +7,9 @@ import {
   View,
 } from "@react-pdf/renderer";
 import PdfHeader from "./PdfHeader";
+import PdfPersonalDetails from "./PdfPersonalDetails";
 
-interface PropPdf {
-  data?: any;
-}
-
-const PDFFile = ({ data }: PropPdf) => {
+const PDFFile = () => {
   const styles = StyleSheet.create({
     page: {
       paddingVertical: 12,
@@ -27,6 +24,7 @@ const PDFFile = ({ data }: PropPdf) => {
     <Document>
       <Page style={styles.page}>
         <PdfHeader />
+        <PdfPersonalDetails />
       </Page>
     </Document>
   );

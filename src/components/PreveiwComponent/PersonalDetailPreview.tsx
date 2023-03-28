@@ -2,7 +2,6 @@ import React from "react";
 import { IAddress } from "../../ts/interfaces/Address";
 import { IPhone } from "../../ts/interfaces/mobiles";
 import { IPatientName } from "../../ts/interfaces/name";
-
 export interface PersonalInfoProp {
   ID: number;
   name: IPatientName;

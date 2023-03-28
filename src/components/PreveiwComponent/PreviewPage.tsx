@@ -6,10 +6,14 @@ import { useMyFormContext } from "../../Context/MyFormContext";
 import MedicineTable from "./MedicineTable";
 import PDFFile from "../../pdf/PDFFile";
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import Pdf from "react-to-pdf";
+import React from "react";
 
 function PreviewPage() {
   const { personalData, medicalHistories, symptoms, medicines } =
     useMyFormContext();
+
+  const ref = React.createRef<HTMLDivElement>();
 
   const firstName = personalData?.firstName;
   const secondName = personalData?.lastName;
@@ -27,12 +31,39 @@ function PreviewPage() {
     pin: personalData.pin,
   };
 
-  //Doctors Details in Header:
+  const options = {
+    orientation: "p",
+    unit: "px",
+    format: "a4",
+    floatPrecision: 20,
+  };
 
   //JSX
   return (
     <>
-      {/* <div className="bg-gray-100 w-1/2 min-h-screen p-6 border-double border-4 flex-none xs:w-full relative">
+      <div
+        ref={ref}
+        className="bg-gray-100 w-[800px] min-h-screen p-6 border-double border-4 flex-none xs:w-full"
+      >
+        <Pdf
+          targetRef={ref}
+          filename="div-blue.pdf"
+          options={options}
+          x={1}
+          y={1}
+          scale={1}
+        >
+          {({ toPdf }: any) => (
+            <button
+              form="main-form"
+              type="submit"
+              onClick={toPdf}
+              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute bottom-4 left-8`}
+            >
+              Generate Pdf
+            </button>
+          )}
+        </Pdf>
         <Header
           clinicName="Care Medical Center"
           doctorName="B.S Tiwari"
@@ -73,9 +104,9 @@ function PreviewPage() {
 
           <MedicineTable />
         </div>
-      </div> */}
+      </div>
 
-      <PDFViewer showToolbar={true} className="w-1/2">
+      {/* <PDFViewer showToolbar={true} className="w-1/2">
         <PDFFile></PDFFile>
       </PDFViewer>
       <PDFDownloadLink
@@ -84,7 +115,7 @@ function PreviewPage() {
         className="absolute bottom-0 left-1/2 -translate-x-1/2 px-4 bg-blue-700 py-2 decoration-none hover:bg-blue-900 text-white hover:text-white"
       >
         <button>Generate Pdf</button>
-      </PDFDownloadLink>
+      </PDFDownloadLink> */}
     </>
   );
 }

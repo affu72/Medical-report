@@ -47,7 +47,11 @@ interface IFormContext {
 const MyFormContext = createContext<IFormContext | null>(null);
 
 //context provider
-export const FormContextProvider = ({ children }: { children: ReactNode }) => {
+export const MyFormContextProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
   //Persnal details
   const [personalData, setPersonalData] = useState<IPersonalData>({
     firstName: "",
@@ -212,7 +216,7 @@ export const useMyFormContext = () => {
   const context = useContext(MyFormContext) as IFormContext;
   if (!context)
     throw new Error(
-      "useFormContext must be used within FormContextProvider component"
+      "useMyFormContext must be used within MyFormContextProvider component"
     );
 
   return context;

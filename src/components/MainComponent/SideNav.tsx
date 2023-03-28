@@ -16,7 +16,7 @@ function SideNav(props: SidebarProp) {
   }
 
   const tabClass = (index: number) =>
-    `w-full flex items-center gap-4  border-b-2  py-4 hover:bg-blue-100 ${
+    `w-full flex items-center gap-2  border-b-2  py-2 hover:bg-blue-100 ${
       props.tabIndex === index
         ? "font-semibold transition-all duration-100 bg-blue-300 min-xl:translate-x-3 xl:translate-y-4"
         : ""
@@ -63,7 +63,7 @@ function SideNav(props: SidebarProp) {
         className={tabClass(3)}
       >
         <FaMoneyBillAlt className="xl:hidden" />
-        Medical Bill
+        Bills
       </button>
     </div>
   );

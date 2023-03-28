@@ -29,16 +29,6 @@ const InputForms: React.FC<PropInput> = ({ tabIndex, getData }) => {
       <form id="main-form" onSubmit={submitHandler} className="xs:pb-8">
         {formSection[tabIndex]}
       </form>
-
-      {tabIndex === 3 && (
-        <button
-          form="main-form"
-          type="submit"
-          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute bottom-4 right-8`}
-        >
-          Submit & Generate Pdf
-        </button>
-      )}
     </div>
   );
 };
