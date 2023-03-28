@@ -23,7 +23,7 @@ function SideNav(props: SidebarProp) {
     } border-cyan-500 xl:w-auto xl:py-2 xl:px-4`;
 
   return (
-    <div className="flex flex-col bg-slate-100 pl-2 py-10 gap-10 items-baseline basis-1/3 drop-shadow-md font-thin box-border  xl:flex-row xl:justify-between xl:p-4 xl:basis-auto">
+    <div className="flex flex-col bg-slate-100 pl-2 py-10 items-baseline basis-1/3 drop-shadow-md font-thin box-border  xl:flex-row xl:justify-between xl:p-4 xl:basis-auto">
       <button
         tabIndex={0}
         id="personal-tab"

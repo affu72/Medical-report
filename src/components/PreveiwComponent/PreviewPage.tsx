@@ -4,13 +4,11 @@ import { IAddress } from "../../ts/interfaces/Address";
 import MedicalRecordPreview from "./MedicalRecordPreview";
 import { useMyFormContext } from "../../Context/MyFormContext";
 import MedicineTable from "./MedicineTable";
-import PDFFile from "../../pdf/PDFFile";
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import Pdf from "react-to-pdf";
 import React from "react";
 
 function PreviewPage() {
-  const { personalData, medicalHistories, symptoms, medicines } =
+  const { tabIndex, personalData, medicalHistories, symptoms, medicines } =
     useMyFormContext();
 
   const ref = React.createRef<HTMLDivElement>();
@@ -53,16 +51,18 @@ function PreviewPage() {
           y={1}
           scale={1}
         >
-          {({ toPdf }: any) => (
-            <button
-              form="main-form"
-              type="submit"
-              onClick={toPdf}
-              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute bottom-4 left-8`}
-            >
-              Generate Pdf
-            </button>
-          )}
+          {({ toPdf }: any) =>
+            tabIndex === 3 && (
+              <button
+                form="main-form"
+                type="submit"
+                onClick={toPdf}
+                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute bottom-4 left-8`}
+              >
+                Generate Pdf
+              </button>
+            )
+          }
         </Pdf>
         <Header
           clinicName="Care Medical Center"

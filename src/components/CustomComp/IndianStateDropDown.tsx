@@ -43,7 +43,7 @@ const IndianStateDropdown = ({ value, onChange }: Props) => {
       onChange={onChange}
       name="state"
       value={value}
-      className="border-2 border-gray-300 py-4 px-4 w-full rounded-md"
+      className="border-2 border-gray-300 py-3 px-4 rounded-md"
     >
       {states.map((state) => (
         <option key={state.value} value={state.value}>

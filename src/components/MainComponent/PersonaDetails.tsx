@@ -100,30 +100,31 @@ function PersonaDetails({ getData }: PropType) {
         onChange={inputPersonalDetailsHandler}
         value={personalData.mobile}
       ></Input>
-      <Input
+
+      {/* <Input
         name="Address"
         placeholder="Address"
         label="Address"
         labelOption={true}
-      ></Input>
+      ></Input> */}
 
       <div className="flex justify-between gap-8">
         <Input name="City" placeholder="City" label="City"></Input>
-        <Input
+        {/* <Input
           name="pin"
           placeholder="PIN"
           label="Pin Code"
           labelOption={true}
           type="number"
-        ></Input>
-      </div>
+        ></Input> */}
 
-      <div className="w-full mb-4">
-        <label htmlFor="name">State</label>
-        <IndianStateDropdown
-          value={personalData.state}
-          onChange={inputPersonalDetailsHandler}
-        ></IndianStateDropdown>
+        <div className="w-full flex flex-col">
+          <label htmlFor="name">State</label>
+          <IndianStateDropdown
+            value={personalData.state}
+            onChange={inputPersonalDetailsHandler}
+          ></IndianStateDropdown>
+        </div>
       </div>
     </div>
   );

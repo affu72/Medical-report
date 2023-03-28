@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SideNav from "./SideNav";
 import InputForms from "./InputForms";
+import { useMyFormContext } from "../../Context/MyFormContext";
 
 type PropMainApp = {
   getPersonalData?: (
@@ -9,11 +10,8 @@ type PropMainApp = {
 };
 
 function MainPage({ getPersonalData }: PropMainApp) {
-  const [tabIndex, settabIndex] = useState(0);
-
-  const showFormHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    settabIndex(+event.currentTarget.value);
-  };
+  const { tabClickHandler, setTabIndex, tabIndex, showFormHandler } =
+    useMyFormContext();
 
   return (
     <div className="w-1/2 flex gap-4 bg-slate-100 p-4  xl:flex-col overflow-hidden relative xs:w-full">
@@ -26,7 +24,7 @@ function MainPage({ getPersonalData }: PropMainApp) {
           value="Save & Next"
           tabIndex={tabIndex}
           className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute bottom-8 right-8`}
-          onClick={() => settabIndex((prev) => prev + 1)}
+          onClick={tabClickHandler}
         >
           Save & Next
         </button>

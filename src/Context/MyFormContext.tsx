@@ -40,6 +40,10 @@ interface IFormContext {
   bills: IMedicalBill[];
   setBills: (newBills: IMedicalBill[]) => void;
   handleAddBill: () => void;
+  showFormHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  tabIndex: number;
+  setTabIndex: (tabIndex: number) => void;
+  tabClickHandler: () => void;
 }
 
 // creatig conetxt
@@ -84,6 +88,7 @@ export const MyFormContextProvider = ({
     { billName: "", billValue: "", id: 0 },
   ]);
 
+  const [tabIndex, setTabIndex] = useState(0);
   const value = useMemo(() => {
     const inputPersonalDetailsHandler = (
       event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -167,6 +172,12 @@ export const MyFormContextProvider = ({
       ]);
     };
 
+    const showFormHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+      setTabIndex(+event.currentTarget.value);
+    };
+
+    const tabClickHandler = () => setTabIndex((prev) => prev + 1);
+
     const value: IFormContext = {
       personalData,
       inputMedicalHistory,
@@ -189,6 +200,10 @@ export const MyFormContextProvider = ({
       bills,
       setBills,
       handleAddBill,
+      showFormHandler,
+      tabIndex,
+      setTabIndex,
+      tabClickHandler,
     };
 
     return value;
@@ -206,6 +221,7 @@ export const MyFormContextProvider = ({
     setMedicines,
     bills,
     setBills,
+    tabIndex,
   ]);
   return (
     <MyFormContext.Provider value={value}>{children}</MyFormContext.Provider>
