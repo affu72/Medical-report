@@ -33,7 +33,7 @@ function PreviewPage() {
     orientation: "p",
     unit: "px",
     format: "a4",
-    floatPrecision: 20,
+    floatPrecision: 2,
   };
 
   //JSX
@@ -41,7 +41,7 @@ function PreviewPage() {
     <>
       <div
         ref={ref}
-        className="bg-gray-100 w-[800px] min-h-screen p-6 border-double border-4 flex-none xs:w-full"
+        className=" w-[800px] min-h-screen p-6 border-double border-4 flex-none xs:w-full"
       >
         <Pdf
           targetRef={ref}

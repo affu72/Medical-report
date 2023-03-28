@@ -10,8 +10,6 @@ const MedicalRecordPreview: React.FC<PropMedicalRecord> = ({
   optionsHistory,
   optionSymptoms,
 }) => {
-  console.log("hello");
-
   return (
     <div className="gap-2 p-4">
       <div className="break-words">
