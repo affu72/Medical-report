@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProp> = ({
   closingDay,
 }) => {
   return (
-    <div className="flex justify-between pb-6 border-b-4 border-stone-600 xs:hidden">
+    <div className="flex justify-between p-6 border-b-4 border-stone-600 xs:hidden">
       <div className="">
         <h3 className="text-3xl font-bold mb-2">{`Dr. ${doctorName}`}</h3>
         <p>{`${degree.degree1}, ${degree.degree2}, ${degree.degree3}`}</p>

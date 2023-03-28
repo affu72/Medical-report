@@ -1,43 +1,33 @@
-import React from "react";
-import { IAddress } from "../../ts/interfaces/Address";
-import { IPhone } from "../../ts/interfaces/mobiles";
-import { IPatientName } from "../../ts/interfaces/name";
-export interface PersonalInfoProp {
-  ID: number;
-  name: IPatientName;
-  age: number;
-  gender: string;
-  address?: IAddress;
-  phone: IPhone;
-}
+import { useMyFormContext } from "../../Context/MyFormContext";
 
-const PersonalInfoPreview: React.FC<PersonalInfoProp> = (props) => {
-  const { ID, name, age, gender, address, phone } = props;
+const PersonalInfoPreview = () => {
+  const { personalData } = useMyFormContext();
+
   return (
-    <div className="flex flex-col pt-6 pb-6 px-2 gap border-double  border-b-4 border-stone-600">
+    <div className="flex flex-col p-6 gap border-double  border-b-4 border-stone-600">
       <div className="flex justify-between">
         <div>
           <p>
             <span className="font-bold">Id: </span>
-            {`${ID}`}
+            {`${123654}`}
           </p>
         </div>
 
         <p>
           <span className="font-bold">Date: </span>
-          {` ${new Date(2023, 2, 3).toLocaleDateString()}`}
+          {` ${new Date().toJSON().slice(0, 10).replace(/-/g, "/")}`}
         </p>
       </div>
 
       <div className="flex justify-between">
         <p>
           <span className="font-bold">Patient Name:</span>
-          {` ${name.firstName} ${name.secondName}`}
+          {` ${personalData.firstName} ${personalData.lastName}`}
         </p>
 
         <p>
           <span className="font-bold">Sex / Age: </span>
-          {` ${gender} / ${age}yr.`}
+          {` ${personalData.gender} / ${personalData.age}yr.`}
         </p>
       </div>
 
@@ -45,13 +35,13 @@ const PersonalInfoPreview: React.FC<PersonalInfoProp> = (props) => {
         <div>
           <p>
             <span className="font-bold">Address: </span>{" "}
-            {`${address?.address1} ${address?.city} ${address?.state}`}
+            {`${personalData.address} ${personalData?.city} ${personalData?.state}`}
           </p>
         </div>
 
         <p>
           <span className="font-bold">Mobile: </span>
-          {phone.phone1}
+          {personalData.mobile}
         </p>
       </div>
     </div>

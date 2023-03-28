@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Input from "../CustomComp/Input";
 import Button from "../CustomComp/Button";
 import { useMyFormContext } from "../../Context/MyFormContext";
@@ -69,7 +68,7 @@ const Medicines = () => {
               type="button"
               value="x"
               margin={6}
-              bgColor="red"
+              bgColor="bg-red-500"
               onClick={() => removeMedicineHandler(medicine.id)}
             />
           )}
@@ -80,13 +79,13 @@ const Medicines = () => {
         <Button
           type="button"
           value="Add Medicine"
-          bgColor={"blue"}
+          bgColor={"bg-blue-500"}
           onClick={addMedicine}
         />
 
         <Button
           type="button"
-          bgColor={"yellow"}
+          bgColor={"bg-yellow-500"}
           value="Clear All"
           onClick={clearMedicineHandler}
         />

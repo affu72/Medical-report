@@ -1,33 +1,16 @@
+import React, { createRef } from "react";
 import Header from "./Header";
 import PersonalInfoPreview from "./PersonalDetailPreview";
-import { IAddress } from "../../ts/interfaces/Address";
 import MedicalRecordPreview from "./MedicalRecordPreview";
 import { useMyFormContext } from "../../Context/MyFormContext";
 import MedicineTable from "./MedicineTable";
 import Pdf from "react-to-pdf";
-import React from "react";
 
 function PreviewPage() {
-  const { tabIndex, personalData, medicalHistories, symptoms, medicines } =
+  const { tabIndex, personalData, medicalHistories, symptoms } =
     useMyFormContext();
 
-  const ref = React.createRef<HTMLDivElement>();
-
-  const firstName = personalData?.firstName;
-  const secondName = personalData?.lastName;
-  const id = 78625287;
-  const age = personalData?.age;
-  const gender = personalData?.gender;
-  const phone = personalData?.mobile;
-  const city = personalData?.city;
-
-  const address: IAddress = {
-    address1: personalData.address,
-    address2: "",
-    city: personalData.city,
-    state: personalData.state,
-    pin: personalData.pin,
-  };
+  const ref = createRef<HTMLDivElement>();
 
   const options = {
     orientation: "p",
@@ -45,7 +28,7 @@ function PreviewPage() {
       >
         <Pdf
           targetRef={ref}
-          filename="div-blue.pdf"
+          filename={`${personalData.firstName}.pdf`}
           options={options}
           x={1}
           y={1}
@@ -57,7 +40,7 @@ function PreviewPage() {
                 form="main-form"
                 type="submit"
                 onClick={toPdf}
-                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute bottom-4 left-8`}
+                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute bottom-6 left-1/4`}
               >
                 Generate Pdf
               </button>
@@ -81,20 +64,7 @@ function PreviewPage() {
           closingDay="Thursday"
         ></Header>
 
-        <PersonalInfoPreview
-          ID={id}
-          name={{ firstName: firstName, secondName: secondName }}
-          age={age}
-          gender={gender}
-          address={{
-            address1: address.address1,
-            address2: address.address2,
-            city: address.city,
-            state: address.state,
-            pin: address.pin,
-          }}
-          phone={{ phone1: phone }}
-        />
+        <PersonalInfoPreview />
 
         <div className="">
           <MedicalRecordPreview
@@ -105,6 +75,8 @@ function PreviewPage() {
           <MedicineTable />
         </div>
       </div>
+
+      {/* react-pdf */}
 
       {/* <PDFViewer showToolbar={true} className="w-1/2">
         <PDFFile></PDFFile>

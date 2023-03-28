@@ -1,11 +1,4 @@
-import {
-  Page,
-  Text,
-  Image,
-  Document,
-  StyleSheet,
-  View,
-} from "@react-pdf/renderer";
+import { Text, Image, View } from "@react-pdf/renderer";
 import logo from "../components/PreveiwComponent/logo.png";
 import { styles } from "./PdfStyle";
 
@@ -61,6 +54,3 @@ function PdfHeader() {
 }
 
 export default PdfHeader;
-function rgb(arg0: number, arg1: number, arg2: number) {
-  throw new Error("Function not implemented.");
-}

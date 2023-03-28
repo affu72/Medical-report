@@ -1,11 +1,4 @@
-import {
-  Page,
-  Text,
-  Image,
-  Document,
-  StyleSheet,
-  View,
-} from "@react-pdf/renderer";
+import { Page, Document, StyleSheet } from "@react-pdf/renderer";
 import PdfHeader from "./PdfHeader";
 import PdfPersonalDetails from "./PdfPersonalDetails";
 

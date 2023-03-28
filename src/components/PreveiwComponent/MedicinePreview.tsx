@@ -6,7 +6,7 @@ interface PropMedicinePreview {
 
 const MedicinePreview: React.FC<PropMedicinePreview> = ({ medicines }) => {
   return (
-    <div className="flex flex-col gap-2 mt-6 align-middle">
+    <div className="flex flex-col gap-2 p-6 align-middle">
       <div className="flex justify-around font-bold border-2 border-red bg-slate-300">
         <span>Medicne Name</span>
         <span>Dose</span>

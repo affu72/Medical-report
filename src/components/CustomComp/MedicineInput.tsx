@@ -19,7 +19,7 @@ const MedicineInput: React.FC<MedicineInputProps> = () => {
       />
       <select
         aria-label="Select medicine type"
-        className="absolute bottom-5 right-1 pl-4 py-2 bg-white h-12 border-l-0 border-gray-300 rounded-r-md pointer-events-auto text-slate-500"
+        className="absolute bottom-4 right-1 pl-4 py-2 bg-white h-10 border-l-2 border-gray-300 rounded-r-md pointer-events-auto text-slate-500 outline-none"
         value={medicineType}
         onChange={(event) => setMedicineType(event.target.value)}
       >

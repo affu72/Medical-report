@@ -35,6 +35,7 @@ const Input = ({
         min={1}
         placeholder={placeholder}
         onChange={onChange}
+        required
       />
     </div>
   );

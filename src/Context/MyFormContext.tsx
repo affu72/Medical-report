@@ -89,7 +89,11 @@ export const MyFormContextProvider = ({
   ]);
 
   const [tabIndex, setTabIndex] = useState(0);
+
+  //useMemo
+
   const value = useMemo(() => {
+    //personal information
     const inputPersonalDetailsHandler = (
       event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => {
