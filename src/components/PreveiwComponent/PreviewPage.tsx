@@ -27,6 +27,8 @@ function PreviewPage() {
     pin: personalData.pin,
   };
 
+  //Doctors Details in Header:
+
   //JSX
   return (
     <div className="bg-gray-100 w-1/2 min-h-screen p-6 border-double border-4 flex-none xs:w-full">

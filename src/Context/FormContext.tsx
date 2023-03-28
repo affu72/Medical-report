@@ -5,6 +5,7 @@ import React, {
   useState,
   KeyboardEvent,
   ReactNode,
+  useMemo,
 } from "react";
 import { IPersonalData } from "../components/MainComponent/PersonaDetails";
 import IOption from "../ts/interfaces/Option";
@@ -14,7 +15,6 @@ import { IMedicalBill } from "../components/MainComponent/MedicalBill";
 //context value type
 interface IFormContext {
   personalData: IPersonalData;
-  setPersonalData: (data: IPersonalData) => void;
   inputMedicalHistory: string;
   setInputMedicalHistory: (inputHistory: string) => void;
   medicalHistories: IOption[];
@@ -48,8 +48,7 @@ const FormContext = createContext<IFormContext | null>(null);
 
 //context provider
 export const FormContextProvider = ({ children }: { children: ReactNode }) => {
-  //Personal Information
-
+  //Persnal details
   const [personalData, setPersonalData] = useState<IPersonalData>({
     firstName: "",
     lastName: "",
@@ -62,25 +61,7 @@ export const FormContextProvider = ({ children }: { children: ReactNode }) => {
     state: "",
   });
 
-  const inputPersonalDetailsHandler = (
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const target = event.target as HTMLInputElement;
-    const value = target.type === "radio" ? target.id : target.value;
-    const name = target.name;
-
-    setPersonalData((prev) => {
-      return { ...prev, [name]: value };
-    });
-  };
-
-  //MedicalRecord
-
-  const createOption = (label: string) => ({
-    label,
-    value: label,
-  });
-
+  //medical record
   const [inputMedicalHistory, setInputMedicalHistory] = useState("");
 
   const [medicalHistories, setMedicalHistories] = useState<IOption[]>([]);
@@ -89,81 +70,126 @@ export const FormContextProvider = ({ children }: { children: ReactNode }) => {
 
   const [symptoms, setSymptoms] = useState<IOption[]>([]);
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!inputMedicalHistory) return;
-    switch (event.key) {
-      case "Enter":
-      case "Tab":
-        setMedicalHistories((prev) => [
-          ...prev,
-          createOption(inputMedicalHistory),
-        ]);
-        setInputMedicalHistory("");
-        event.preventDefault();
-    }
-  };
-
-  const handleKeySymptoms = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!inputSymptoms) return;
-    switch (event.key) {
-      case "Enter":
-      case "Tab":
-        setSymptoms((prev) => [...prev, createOption(inputSymptoms)]);
-        setInputSymptoms("");
-        event.preventDefault();
-    }
-  };
-
   //medicines
-
   const [medicines, setMedicines] = useState<IMedicine[]>([
     { name: "", dose: "", type: "", id: 0 },
   ]);
 
-  const addMedicine = () => {
-    setMedicines((prev) => [
-      ...prev,
-      { name: "", dose: "", type: "", id: prev[prev.length - 1]["id"] + 1 },
-    ]);
-  };
-
-  const medicineInputChangeHandler = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    index: number
-  ) => {
-    const { name, value } = e.target;
-
-    const list = [...medicines];
-
-    list[index][name as "name" | "dose" | "type"] = value;
-
-    setMedicines(list);
-  };
-
-  const removeMedicineHandler = (index: number) => {
-    setMedicines((prev) => prev.filter((medicine) => index !== medicine.id));
-  };
-
-  const clearMedicineHandler = () => {
-    setMedicines([{ name: "", dose: "", type: "", id: 0 }]);
-  };
-
-  //Medical Bill
-
+  //medical bills
   const [bills, setBills] = useState<IMedicalBill[]>([
     { billName: "", billValue: "", id: 0 },
   ]);
 
-  const handleAddBill = () => {
-    setBills((prev) => [
-      ...prev,
-      { billName: "", billValue: "", id: prev[prev.length - 1]["id"] + 1 },
-    ]);
-  };
+  const value = useMemo(() => {
+    const inputPersonalDetailsHandler = (
+      event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => {
+      const target = event.target as HTMLInputElement;
+      const value = target.type === "radio" ? target.id : target.value;
+      const name = target.name;
 
-  const value: IFormContext = {
+      setPersonalData((prev) => {
+        return { ...prev, [name]: value };
+      });
+    };
+
+    //MedicalRecord
+    const createOption = (label: string) => ({
+      label,
+      value: label,
+    });
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (!inputMedicalHistory) return;
+      switch (event.key) {
+        case "Enter":
+        case "Tab":
+          setMedicalHistories((prev) => [
+            ...prev,
+            createOption(inputMedicalHistory),
+          ]);
+          setInputMedicalHistory("");
+          event.preventDefault();
+      }
+    };
+
+    const handleKeySymptoms = (
+      event: React.KeyboardEvent<HTMLInputElement>
+    ) => {
+      if (!inputSymptoms) return;
+      switch (event.key) {
+        case "Enter":
+        case "Tab":
+          setSymptoms((prev) => [...prev, createOption(inputSymptoms)]);
+          setInputSymptoms("");
+          event.preventDefault();
+      }
+    };
+
+    //medicines
+    const addMedicine = () => {
+      setMedicines((prev) => [
+        ...prev,
+        { name: "", dose: "", type: "", id: prev[prev.length - 1]["id"] + 1 },
+      ]);
+    };
+
+    const medicineInputChangeHandler = (
+      e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+      index: number
+    ) => {
+      const { name, value } = e.target;
+
+      const list = [...medicines];
+
+      list[index][name as "name" | "dose" | "type"] = value;
+
+      setMedicines(list);
+    };
+
+    const removeMedicineHandler = (index: number) => {
+      setMedicines((prev) => prev.filter((medicine) => index !== medicine.id));
+    };
+
+    const clearMedicineHandler = () => {
+      setMedicines([{ name: "", dose: "", type: "", id: 0 }]);
+    };
+
+    //Medical Bill
+    const handleAddBill = () => {
+      setBills((prev) => [
+        ...prev,
+        { billName: "", billValue: "", id: prev[prev.length - 1]["id"] + 1 },
+      ]);
+    };
+
+    const value: IFormContext = {
+      personalData,
+      inputMedicalHistory,
+      setInputMedicalHistory,
+      medicalHistories,
+      setMedicalHistories,
+      inputSymptoms,
+      setInputSymptoms,
+      symptoms,
+      setSymptoms,
+      handleKeyDown,
+      handleKeySymptoms,
+      inputPersonalDetailsHandler,
+      medicineInputChangeHandler,
+      medicines,
+      setMedicines,
+      removeMedicineHandler,
+      clearMedicineHandler,
+      addMedicine,
+      bills,
+      setBills,
+      handleAddBill,
+    };
+
+    return value;
+  }, [
     personalData,
-    setPersonalData,
     inputMedicalHistory,
     setInputMedicalHistory,
     medicalHistories,
@@ -172,20 +198,11 @@ export const FormContextProvider = ({ children }: { children: ReactNode }) => {
     setInputSymptoms,
     symptoms,
     setSymptoms,
-    handleKeyDown,
-    handleKeySymptoms,
-    inputPersonalDetailsHandler,
-    medicineInputChangeHandler,
     medicines,
     setMedicines,
-    removeMedicineHandler,
-    clearMedicineHandler,
-    addMedicine,
     bills,
     setBills,
-    handleAddBill,
-  };
-
+  ]);
   return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
 };
 
