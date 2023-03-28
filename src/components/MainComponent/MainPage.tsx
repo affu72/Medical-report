@@ -9,7 +9,7 @@ type PropMainApp = {
 };
 
 function MainPage({ getPersonalData }: PropMainApp) {
-  const { tabClickHandler, tabIndex, showFormHandler } = useMyFormContext();
+  const { tabIndex, showFormHandler } = useMyFormContext();
 
   return (
     <div className="w-1/2 flex gap-4 bg-slate-100 p-4  xl:flex-col overflow-hidden relative xs:w-full md:w-full md:flex-row">

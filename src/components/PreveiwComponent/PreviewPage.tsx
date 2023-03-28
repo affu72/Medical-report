@@ -7,8 +7,7 @@ import MedicineTable from "./MedicineTable";
 import Pdf from "react-to-pdf";
 
 function PreviewPage() {
-  const { tabIndex, personalData, medicalHistories, symptoms } =
-    useMyFormContext();
+  const { tabIndex, personalData } = useMyFormContext();
 
   const ref = useRef(null);
 
@@ -67,10 +66,7 @@ function PreviewPage() {
         <PersonalInfoPreview />
 
         <div className="">
-          <MedicalRecordPreview
-            optionSymptoms={symptoms}
-            optionsHistory={medicalHistories}
-          />
+          <MedicalRecordPreview />
 
           <MedicineTable />
         </div>
