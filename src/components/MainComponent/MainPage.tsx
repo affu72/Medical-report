@@ -12,22 +12,9 @@ function MainPage({ getPersonalData }: PropMainApp) {
   const { tabClickHandler, tabIndex, showFormHandler } = useMyFormContext();
 
   return (
-    <div className="w-1/2 flex gap-4 bg-slate-100 p-4  xl:flex-col overflow-hidden relative xs:w-full">
+    <div className="w-1/2 flex gap-4 bg-slate-100 p-4  xl:flex-col overflow-hidden relative xs:w-full md:w-full md:flex-row">
       <SideNav onNavClick={showFormHandler} tabIndex={tabIndex} />
       <InputForms tabIndex={tabIndex}></InputForms>
-
-      {tabIndex < 3 && (
-        <button
-          type="button"
-          form="main-form"
-          value="Save & Next"
-          tabIndex={tabIndex}
-          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute bottom-8 right-16`}
-          onClick={tabClickHandler}
-        >
-          Save & Next
-        </button>
-      )}
     </div>
   );
 }

@@ -24,8 +24,8 @@ function PersonaDetails({ getData }: PropType) {
   const { personalData, inputPersonalDetailsHandler } = useMyFormContext();
 
   return (
-    <div>
-      <div className="flex gap-8">
+    <div className="">
+      <div className="flex gap-8 md:justify-between">
         <Input
           name="firstName"
           label="First Name"

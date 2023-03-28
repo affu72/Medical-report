@@ -30,10 +30,8 @@ const MedicalBill = () => {
     setBills(list);
   };
 
-  console.log(bills);
-
   return (
-    <div className="flex flex-col space-y-4 items-start">
+    <div className="flex flex-col space-y-2 items-start">
       <label className="self-center" htmlFor="">
         Medical Bill
       </label>

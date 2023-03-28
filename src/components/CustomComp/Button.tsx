@@ -19,7 +19,7 @@ const Button: React.FC<PropButton<buttonType>> = ({
 }) => {
   const bgHover = bgColor.slice(0, bgColor.length - 3) + "700";
 
-  console.log(bgHover);
+
 
   return (
     <button

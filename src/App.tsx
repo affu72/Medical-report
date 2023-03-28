@@ -8,7 +8,7 @@ function App() {
 
   return (
     <MyFormContextProvider>
-      <div className="flex p-2 xs:block mx-auto">
+      <div className="flex p-2 xs:block m-auto md:flex-col">
         <MainPage></MainPage>
         <PreviewPage></PreviewPage>
       </div>

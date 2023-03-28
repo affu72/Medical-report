@@ -20,10 +20,10 @@ function SideNav(props: SidebarProp) {
       props.tabIndex === index
         ? "font-semibold transition-all duration-100 bg-blue-300 min-xl:translate-x-3 xl:translate-y-4"
         : ""
-    } border-cyan-500 xl:w-auto xl:py-2 xl:px-1`;
+    } border-cyan-500 xl:w-auto xl:py-2 xl:px-1 md:`;
 
   return (
-    <div className="flex flex-col bg-slate-100 pl-2 py-4 items-baseline basis-1/3 drop-shadow-md font-thin box-border  xl:flex-row xl:justify-between xl:p-4 xl:basis-auto">
+    <div className="flex flex-col bg-slate-100 p-2 items-baseline  drop-shadow-md  box-border  xl:flex-row xl:justify-between xl:basis-auto md:flex-col ">
       <button
         tabIndex={0}
         id="personal-tab"

@@ -22,8 +22,8 @@ const Input = ({
   labelOption = false,
 }: InputProps) => {
   return (
-    <div className="mb-4">
-      <label htmlFor="name">
+    <div className="mb-3">
+      <label htmlFor="name" className="font-semibold">
         {label}
         {labelOption ? <span className="font-light">(Optional)</span> : ""}{" "}
       </label>

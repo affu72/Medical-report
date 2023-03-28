@@ -3,6 +3,7 @@ import MedicalRecord from "./MedicalRecord";
 import MedicalBill from "./MedicalBill";
 import { FormEvent } from "react";
 import PersonaDetails from "./PersonaDetails";
+import { useMyFormContext } from "../../Context/MyFormContext";
 
 interface PropInput {
   tabIndex: number;
@@ -12,6 +13,8 @@ interface PropInput {
 }
 
 const InputForms: React.FC<PropInput> = ({ tabIndex, getData }) => {
+  const { tabClickHandler } = useMyFormContext();
+
   const formSection = [
     <PersonaDetails key={0} />,
     <MedicalRecord key={1} />,
@@ -21,7 +24,6 @@ const InputForms: React.FC<PropInput> = ({ tabIndex, getData }) => {
 
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(event);
   };
 
   return (
@@ -29,6 +31,19 @@ const InputForms: React.FC<PropInput> = ({ tabIndex, getData }) => {
       <form id="main-form" onSubmit={submitHandler} className="xs:pb-8">
         {formSection[tabIndex]}
       </form>
+
+      {tabIndex < 3 && (
+        <button
+          type="button"
+          form="main-form"
+          value="Save & Next"
+          tabIndex={tabIndex}
+          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  bottom-4 right-16`}
+          onClick={tabClickHandler}
+        >
+          Save & Next
+        </button>
+      )}
     </div>
   );
 };

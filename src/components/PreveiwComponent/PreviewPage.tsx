@@ -1,4 +1,4 @@
-import React, { createRef } from "react";
+import React, { createRef, useRef } from "react";
 import Header from "./Header";
 import PersonalInfoPreview from "./PersonalDetailPreview";
 import MedicalRecordPreview from "./MedicalRecordPreview";
@@ -10,7 +10,7 @@ function PreviewPage() {
   const { tabIndex, personalData, medicalHistories, symptoms } =
     useMyFormContext();
 
-  const ref = createRef<HTMLDivElement>();
+  const ref = useRef(null);
 
   const options = {
     orientation: "p",
@@ -24,7 +24,7 @@ function PreviewPage() {
     <>
       <div
         ref={ref}
-        className=" w-[800px] min-h-screen p-6 border-double border-4 flex-none xs:w-full"
+        className="w-[800px] min-h-screen p-6 flex-none md:h-screen"
       >
         <Pdf
           targetRef={ref}
@@ -40,7 +40,7 @@ function PreviewPage() {
                 form="main-form"
                 type="submit"
                 onClick={toPdf}
-                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute bottom-6 left-1/4`}
+                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute bottom-6 left-1/4 md:`}
               >
                 Generate Pdf
               </button>
