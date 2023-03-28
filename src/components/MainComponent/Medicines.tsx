@@ -41,7 +41,7 @@ const Medicines = () => {
             <select
               name="type"
               aria-label="Select medicine type"
-              className="absolute bottom-2.5 right-1 pl-4 py-2 bg-white h-12 border-l-0 border-gray-300 rounded-r-md pointer-events-auto text-slate-500 bg-transparent"
+              className="absolute bottom-3.5 right-1 pl-4 py-2  h-10 border-l-0 border-gray-300 rounded-r-md pointer-events-auto text-slate-500 bg-transparent"
               value={medicine.type}
               onChange={(e) => medicineInputChangeHandler(e, medicine.id)}
             >

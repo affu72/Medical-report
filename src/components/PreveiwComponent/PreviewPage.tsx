@@ -21,10 +21,7 @@ function PreviewPage() {
   //JSX
   return (
     <>
-      <div
-        ref={ref}
-        className="w-[800px] min-h-screen p-6 flex-none md:h-screen"
-      >
+      <div ref={ref} className="w-[800px] min-h-screen p-6 flex-none">
         <Pdf
           targetRef={ref}
           filename={`${personalData.firstName}.pdf`}

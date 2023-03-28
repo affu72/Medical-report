@@ -4,16 +4,10 @@ import MedicalBill from "./MedicalBill";
 import { FormEvent } from "react";
 import PersonaDetails from "./PersonaDetails";
 import { useMyFormContext } from "../../Context/MyFormContext";
+import Button from "../CustomComp/Button";
 
-interface PropInput {
-  tabIndex: number;
-  getData?: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => void;
-}
-
-const InputForms: React.FC<PropInput> = ({ tabIndex, getData }) => {
-  const { tabClickHandler } = useMyFormContext();
+const InputForms = () => {
+  const { tabClickHandler, handleBackClick, tabIndex } = useMyFormContext();
 
   const formSection = [
     <PersonaDetails key={0} />,
@@ -32,18 +26,29 @@ const InputForms: React.FC<PropInput> = ({ tabIndex, getData }) => {
         {formSection[tabIndex]}
       </form>
 
-      {tabIndex < 3 && (
-        <button
-          type="button"
-          form="main-form"
-          value="Save & Next"
-          tabIndex={tabIndex}
-          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  bottom-4 right-16`}
-          onClick={tabClickHandler}
-        >
-          Save & Next
-        </button>
-      )}
+      <div className="flex justify-between">
+        {tabIndex >= 1 && (
+          <Button
+            type="button"
+            value="Back"
+            tabIndex={tabIndex}
+            bgColor={"bg-blue-300"}
+            onClick={handleBackClick}
+          />
+        )}
+        {tabIndex < 3 && (
+          <button
+            type="button"
+            form="main-form"
+            value="Save & Next"
+            tabIndex={tabIndex}
+            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  bottom-4 right-16`}
+            onClick={tabClickHandler}
+          >
+            Save & Next
+          </button>
+        )}
+      </div>
     </div>
   );
 };

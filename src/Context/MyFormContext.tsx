@@ -44,6 +44,8 @@ interface IFormContext {
   tabIndex: number;
   setTabIndex: (tabIndex: number) => void;
   tabClickHandler: () => void;
+  handleBackClick: () => void;
+  onNavClick?: () => void;
 }
 
 // creatig conetxt
@@ -206,6 +208,8 @@ export const MyFormContextProvider = ({
 
     const tabClickHandler = () => setTabIndex((prev) => prev + 1);
 
+    const handleBackClick = () => setTabIndex((prev) => prev - 1);
+
     const value: IFormContext = {
       personalData,
       inputMedicalHistory,
@@ -232,6 +236,7 @@ export const MyFormContextProvider = ({
       tabIndex,
       setTabIndex,
       tabClickHandler,
+      handleBackClick,
     };
 
     return value;
