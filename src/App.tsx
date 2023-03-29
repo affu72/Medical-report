@@ -10,7 +10,7 @@ function App() {
 
   return (
     <MyFormContextProvider>
-      <div className="flex p-2 xs:block m-auto md:flex-col">
+      <div className="flex p-2 justify-evenly xs:block m-auto md:flex-col">
         <MainPage></MainPage>
         {/* 
         <div>

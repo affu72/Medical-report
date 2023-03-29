@@ -21,7 +21,7 @@ function PreviewPage() {
   //JSX
   return (
     <>
-      <div ref={ref} className="w-[800px] min-h-screen p-6 flex-none">
+      <div ref={ref} className="w-[800px] min-h-screen p-6 flex-none relative">
         <Pdf
           targetRef={ref}
           filename={`${personalData.firstName}.pdf`}
@@ -36,7 +36,7 @@ function PreviewPage() {
                 form="main-form"
                 type="submit"
                 onClick={toPdf}
-                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute xl:bottom-[2.5%] xl:left-[26%] md:bottom-[76.9%] md:left-[80%]`}
+                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute  bottom-[2.5%] -left-8 -translate-x-full xl:bottom-[4.5%] xl:-left-8 xl:-translate-x-full md:left-[650px] md:bottom-[102.5%] lg:bottom-[3%] lg:-left-8`}
               >
                 Generate Pdf
               </button>

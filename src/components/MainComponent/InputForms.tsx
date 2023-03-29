@@ -26,7 +26,7 @@ const InputForms = () => {
         {formSection[tabIndex]}
       </form>
 
-      <div className="flex justify-between">
+      <div className=" justify-between flex">
         {tabIndex >= 1 && (
           <Button
             type="button"

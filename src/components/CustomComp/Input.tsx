@@ -26,7 +26,8 @@ const Input = ({
       <label htmlFor="name" className="font-semibold">
         {label}
         {labelOption ? <span className="font-light">(Optional)</span> : ""}{" "}
-      </label>
+      </label>{" "}
+      <span className=""></span>
       <input
         className={`border-2 border-gray-300 py-2 px-4 w-full rounded-md basis-${basis}`}
         type={type}
