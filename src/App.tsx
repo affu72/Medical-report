@@ -5,7 +5,7 @@ import {
   MyFormContextProvider,
   useMyFormContext,
 } from "./Context/MyFormContext";
-import DoctorDetails from "./components/PreveiwComponent/DoctorDetails";
+import DoctorDetails from "./components/DoctorDetails";
 
 function App() {
   const { hasDoctorData } = useMyFormContext();

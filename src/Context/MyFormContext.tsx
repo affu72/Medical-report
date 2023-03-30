@@ -11,7 +11,7 @@ import { IPersonalData } from "../components/MainComponent/PersonaDetails";
 import IOption from "../ts/interfaces/Option";
 import { IMedicine } from "../components/MainComponent/Medicines";
 import { IMedicalBill } from "../components/MainComponent/MedicalBill";
-import { IDoctorDetails } from "../components/PreveiwComponent/DoctorDetails";
+import { IDoctorDetails } from "../components/DoctorDetails";
 //context value type
 interface IFormContext {
   personalData: IPersonalData;

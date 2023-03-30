@@ -1,6 +1,6 @@
-import Input from "../CustomComp/Input";
-import Button from "../CustomComp/Button";
-import { useMyFormContext } from "../../Context/MyFormContext";
+import Input from "./CustomComp/Input";
+import Button from "./CustomComp/Button";
+import { useMyFormContext } from "../Context/MyFormContext";
 
 export interface IDoctorDetails {
   clinicName: string;
@@ -27,10 +27,10 @@ const DoctorDetails = () => {
   // };
 
   return (
-    <div className=" bg-blue-100 h-screen pt-12">
+    <div className=" bg-blue-100 h-screen pt-6">
       <form
         onSubmit={handleDoctorForm}
-        className="grid grid-cols-2 gap-x-4 max-w-4xl mx-auto p-8 bg-white rounded-md shadow-md"
+        className="grid grid-cols-2 gap-x-4 max-w-4xl mx-auto p-6 bg-white rounded-md shadow-md"
       >
         <h2 className="col-span-2 text-center mb-8 font-semibold text-3xl text-blue-400">
           Fill Details That will be shown on Prescription
@@ -86,7 +86,7 @@ const DoctorDetails = () => {
           value={doctorData.qualification}
           onChange={handleDoctorInput}
           placeholder="Qualification"
-          label="Qualification (Seprated by Comma)"
+          label="Qualification (ex. M.B.B.S, M.D, M.S)"
         />
 
         <Input
