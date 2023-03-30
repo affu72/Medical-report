@@ -3,17 +3,14 @@ import MedicalRecord from "./MedicalRecord";
 import MedicalBill from "./MedicalBill";
 import { FormEvent } from "react";
 import PersonaDetails from "./PersonaDetails";
+import { useMyFormContext } from "../../Context/MyFormContext";
+import Button from "../CustomComp/Button";
 
-interface PropInput {
-  tabIndex: number;
-  getData: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => void;
-}
+const InputForms = () => {
+  const { tabClickHandler, handleBackClick, tabIndex } = useMyFormContext();
 
-const InputForms: React.FC<PropInput> = ({ tabIndex, getData }) => {
   const formSection = [
-    <PersonaDetails key={0} getData={getData} />,
+    <PersonaDetails key={0} />,
     <MedicalRecord key={1} />,
     <Medicines key={2} />,
     <MedicalBill key={3} />,
@@ -21,7 +18,6 @@ const InputForms: React.FC<PropInput> = ({ tabIndex, getData }) => {
 
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(event);
   };
 
   return (
@@ -30,15 +26,30 @@ const InputForms: React.FC<PropInput> = ({ tabIndex, getData }) => {
         {formSection[tabIndex]}
       </form>
 
-      {tabIndex === 3 && (
-        <button
-          form="main-form"
-          type="submit"
-          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute bottom-4 right-8`}
-        >
-          Submit & Generate Pdf
-        </button>
-      )}
+      <div className=" justify-between flex">
+        {tabIndex >= 1 && (
+          <Button
+            type="button"
+            value="Back"
+            tabIndex={tabIndex}
+            bgColor={"bg-blue-300"}
+            onClick={handleBackClick}
+          />
+        )}
+
+        {tabIndex < 3 && (
+          <button
+            type="button"
+            form="main-form"
+            value="Save & Next"
+            tabIndex={tabIndex}
+            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  bottom-4 right-16`}
+            onClick={tabClickHandler}
+          >
+            Save & Next
+          </button>
+        )}
+      </div>
     </div>
   );
 };

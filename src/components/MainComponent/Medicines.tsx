@@ -1,7 +1,6 @@
-import React, { useState } from "react";
 import Input from "../CustomComp/Input";
-
 import Button from "../CustomComp/Button";
+import { useMyFormContext } from "../../Context/MyFormContext";
 
 export interface IMedicine {
   id: number;
@@ -12,37 +11,13 @@ export interface IMedicine {
 }
 
 const Medicines = () => {
-  const [medicines, setMedicines] = useState<IMedicine[]>([
-    { name: "", dose: "", type: "", id: 0 },
-  ]);
-
-  const addMedicine = () => {
-    setMedicines((prev) => [
-      ...prev,
-      { name: "", dose: "", type: "", id: prev[prev.length - 1]["id"] + 1 },
-    ]);
-  };
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    index: number
-  ) => {
-    const { name, value } = e.target;
-
-    const list = [...medicines];
-
-    list[index][name as "name" | "dose" | "type"] = value;
-
-    setMedicines(list);
-  };
-
-  const handleRemoveClick = (index: number) => {
-    setMedicines((prev) => prev.filter((medicine) => index !== medicine.id));
-  };
-
-  const handleClearClick = () => {
-    setMedicines([{ name: "", dose: "", type: "", id: 0 }]);
-  };
+  const {
+    addMedicine,
+    medicines,
+    clearMedicineHandler,
+    removeMedicineHandler,
+    medicineInputChangeHandler,
+  } = useMyFormContext();
 
   console.log(medicines);
 
@@ -60,15 +35,15 @@ const Medicines = () => {
               name="name"
               placeholder="Enter medicine name..."
               label="Medicine Name"
-              onChange={(e) => handleInputChange(e, medicine.id)}
+              onChange={(e) => medicineInputChangeHandler(e, medicine.id)}
               value={medicine.name}
             />
             <select
               name="type"
               aria-label="Select medicine type"
-              className="absolute bottom-5 right-1 pl-4 py-2 bg-white h-12 border-l-0 border-gray-300 rounded-r-md pointer-events-auto text-slate-500"
+              className="absolute bottom-3.5 right-1 pl-4 py-2  h-10 border-l-0 border-gray-300 rounded-r-md pointer-events-auto text-slate-500 bg-transparent"
               value={medicine.type}
-              onChange={(e) => handleInputChange(e, medicine.id)}
+              onChange={(e) => medicineInputChangeHandler(e, medicine.id)}
             >
               <option value="" disabled>
                 Type
@@ -84,7 +59,7 @@ const Medicines = () => {
             type="text"
             placeholder="dose"
             className={`border-2 border-gray-300 py-2 px-4 rounded-md w-1/5 mt-6`}
-            onChange={(e) => handleInputChange(e, medicine.id)}
+            onChange={(e) => medicineInputChangeHandler(e, medicine.id)}
             value={medicine.dose}
           />
 
@@ -93,8 +68,8 @@ const Medicines = () => {
               type="button"
               value="x"
               margin={6}
-              bgColor="red"
-              onClick={() => handleRemoveClick(medicine.id)}
+              bgColor="bg-red-500"
+              onClick={() => removeMedicineHandler(medicine.id)}
             />
           )}
         </div>
@@ -104,15 +79,15 @@ const Medicines = () => {
         <Button
           type="button"
           value="Add Medicine"
-          bgColor={"blue"}
+          bgColor={"bg-blue-500"}
           onClick={addMedicine}
         />
 
         <Button
           type="button"
-          bgColor={"yellow"}
+          bgColor={"bg-yellow-500"}
           value="Clear All"
-          onClick={handleClearClick}
+          onClick={clearMedicineHandler}
         />
       </div>
     </div>

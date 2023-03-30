@@ -1,28 +1,27 @@
-import React, { useState } from "react";
 import Button from "../CustomComp/Button";
 import Input from "../CustomComp/Input";
+import { useMyFormContext } from "../../Context/MyFormContext";
 
-interface MedicalBillProps {
-  onInputChange?: (bill: { name: string; value: number }[]) => void;
+export interface IMedicalBill {
+  billName: string;
+  billValue: string;
+  id: number;
 }
 
-const MedicalBill: React.FC<MedicalBillProps> = ({ onInputChange }) => {
-  const [bills, setBills] = useState<{ name: string; value: number }[]>([
-    { name: "", value: 0 },
-  ]);
+const MedicalBill = () => {
+  const { bills, setBills, handleAddBill } = useMyFormContext();
 
-  const handleBillNameChange = (
+  const handlerMedicalBill = (
     event: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
-    const value = event.target.value;
-    const newBills = [...bills];
-    newBills[index].name = value;
-    setBills(newBills);
-  };
+    const { value, name } = event.target;
 
-  const handleAddBill = () => {
-    setBills((prev) => [...prev, { name: "", value: 0 }]);
+    const newBills = [...bills];
+
+    newBills[index][name as "billName" | "billValue"] = value;
+
+    setBills(newBills);
   };
 
   const handleRemoveClick = (index: number) => {
@@ -32,35 +31,36 @@ const MedicalBill: React.FC<MedicalBillProps> = ({ onInputChange }) => {
   };
 
   return (
-    <div className="flex flex-col space-y-4 items-start">
-      <label className="self-center" htmlFor="">
-        Medical Bill
-      </label>
-      {bills.map((bill, index) => (
+    <div className="flex flex-col space-y-2  md:w-full md:item-between">
+      {bills.map((bill) => (
         <div
-          key={index}
+          key={bill.id}
           className="flex space-x-4 place-items-start xl:justify-between"
         >
           <Input
+            name="billName"
             placeholder="Bill Name"
-            value={bill.name}
-            // onChange={(event) => handleBillNameChange(event, index)}
+            value={bill.billName}
+            onChange={(event) => handlerMedicalBill(event, bill.id)}
+            label="Bill Name"
           />
 
           <Input
             placeholder="Bill Value"
             type="number"
-            value={bill.value}
-            // onChange={(event) => handleBillValueChange(event, index)}
+            name="billValue"
+            value={bill.billValue}
+            onChange={(event) => handlerMedicalBill(event, bill.id)}
+            label="Bill value"
           />
 
           {bills.length !== 1 && (
             <Button
               type="button"
               value="x"
-              bgColor="red"
+              bgColor="bg-red-500"
               margin={0.5}
-              onClick={() => handleRemoveClick(index)}
+              onClick={() => handleRemoveClick(bill.id)}
             />
           )}
         </div>
@@ -68,7 +68,7 @@ const MedicalBill: React.FC<MedicalBillProps> = ({ onInputChange }) => {
       <Button
         type="button"
         value="Add Anoher Bill"
-        bgColor="blue"
+        bgColor="bg-blue-500"
         onClick={handleAddBill}
       />
     </div>

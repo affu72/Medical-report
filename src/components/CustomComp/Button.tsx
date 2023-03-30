@@ -17,17 +17,13 @@ const Button: React.FC<PropButton<buttonType>> = ({
   margin = 0,
   tabIndex,
 }) => {
-  // type Color = "red" | "blue" | "yellow";
-
-  const color = bgColor;
-
-  const backgroundColor = `bg-${color}-500`;
+  const bgHover = bgColor.slice(0, bgColor.length - 3) + "700";
 
   return (
     <button
       tabIndex={tabIndex}
       type={type}
-      className={`${backgroundColor} hover:bg-${bgColor}-700 text-white font-bold py-2 px-4 rounded mt-${margin}`}
+      className={`${bgColor} hover:${bgHover} text-white font-bold py-2 px-4 rounded mt-${margin}`}
       onClick={onClick}
       // style={{ backgroundColor: bgColor }}
     >
