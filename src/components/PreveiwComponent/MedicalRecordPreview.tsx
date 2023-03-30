@@ -1,31 +1,28 @@
 import React from "react";
 import IOption from "../../ts/interfaces/Option";
+import { useMyFormContext } from "../../Context/MyFormContext";
 
-interface PropMedicalRecord {
-  optionsHistory: IOption[];
-  optionSymptoms: IOption[];
-}
+const MedicalRecordPreview = () => {
+  const { medicalHistories, symptoms } = useMyFormContext();
 
-const MedicalRecordPreview: React.FC<PropMedicalRecord> = ({
-  optionsHistory,
-  optionSymptoms,
-}) => {
   return (
-    <div className="flex flex-col gap-2 p-4">
-      <div>
+    <div className="gap-2 p-6">
+      <div className="break-words">
         <span className="font-bold">Medical history: </span>
-        {optionsHistory.map((option, index) => (
+        {medicalHistories.map((option, index) => (
           <span key={option.value + index} className="px-2 py-1">
             {option.value}
+            {index < medicalHistories.length - 1 ? "," : ""}
           </span>
         ))}
       </div>
 
-      <div>
+      <div className="break-words">
         <span className="font-bold">Known Symptoms: </span>
-        {optionSymptoms.map((option, index) => (
+        {symptoms.map((option, index) => (
           <span key={option.value + index} className="px-2 py-1">
             {option.value}
+            {index < symptoms.length - 1 ? "," : ""}
           </span>
         ))}
       </div>
