@@ -52,6 +52,7 @@ interface IFormContext {
   handleDoctorInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
   doctorData: IDoctorDetails;
   hasDoctorData: boolean;
+  setDoctorData: (data: IDoctorDetails) => void;
 }
 
 // creatig conetxt
@@ -131,6 +132,7 @@ export const MyFormContextProvider = ({
     const handleDoctorForm = (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       localStorage.setItem("doctorData", JSON.stringify(doctorData));
+
       setHasDoctorData(true);
     };
 
@@ -237,7 +239,9 @@ export const MyFormContextProvider = ({
         bills[bills.length - 1].billName === "" ||
         bills[bills.length - 1].billValue === ""
       ) {
-        setError(true);
+        setTimeout(() => {
+          setError(false);
+        }, 3000);
         return;
       }
 
@@ -288,6 +292,7 @@ export const MyFormContextProvider = ({
       handleDoctorInput,
       doctorData,
       hasDoctorData,
+      setDoctorData,
     };
 
     return value;

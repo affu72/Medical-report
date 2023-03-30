@@ -33,7 +33,10 @@ const Header: React.FC<HeaderProp> = ({
   time,
   closingDay,
 }) => {
-  const { doctorData } = useMyFormContext();
+  let { doctorData } = useMyFormContext();
+
+  if (!doctorData.clinicName)
+    doctorData = JSON.parse(localStorage.getItem("doctorData")!);
 
   return (
     <div className="flex justify-between p-6 border-b-4 border-stone-600 xs:hidden">

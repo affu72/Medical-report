@@ -8,10 +8,11 @@ import {
 import DoctorDetails from "./components/DoctorDetails";
 
 function App() {
-  const { hasDoctorData } = useMyFormContext();
+  const { hasDoctorData, setDoctorData } = useMyFormContext();
+
   return (
     <div>
-      {!hasDoctorData ? (
+      {!hasDoctorData && !localStorage.getItem("doctorData") ? (
         <DoctorDetails />
       ) : (
         <div className="flex p-2 justify-evenly xs:block m-auto md:flex-col">
