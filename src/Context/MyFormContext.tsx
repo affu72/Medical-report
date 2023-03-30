@@ -11,7 +11,6 @@ import { IPersonalData } from "../components/MainComponent/PersonaDetails";
 import IOption from "../ts/interfaces/Option";
 import { IMedicine } from "../components/MainComponent/Medicines";
 import { IMedicalBill } from "../components/MainComponent/MedicalBill";
-
 //context value type
 interface IFormContext {
   personalData: IPersonalData;
@@ -46,8 +45,8 @@ interface IFormContext {
   tabClickHandler: () => void;
   handleBackClick: () => void;
   onNavClick?: () => void;
-
-  generatePdf: (pdf: any) => void;
+  error: boolean;
+  setError: (error: boolean) => void;
 }
 
 // creatig conetxt
@@ -93,6 +92,8 @@ export const MyFormContextProvider = ({
   ]);
 
   const [tabIndex, setTabIndex] = useState(0);
+
+  const [error, setError] = useState<boolean>(false);
 
   //useMemo
 
@@ -144,13 +145,17 @@ export const MyFormContextProvider = ({
     };
 
     //medicines
+
     const addMedicine = () => {
       if (
         medicines[medicines.length - 1].name === "" ||
         medicines[medicines.length - 1].dose === "" ||
         medicines[medicines.length - 1].type === ""
       ) {
-        alert("Medicines field is empty");
+        setError(true);
+        setTimeout(() => {
+          setError(false);
+        }, 3000);
         return;
       }
 
@@ -165,6 +170,7 @@ export const MyFormContextProvider = ({
           },
         ];
       });
+      setError(false);
     };
 
     const medicineInputChangeHandler = (
@@ -189,12 +195,13 @@ export const MyFormContextProvider = ({
     };
 
     //Medical Bill
+
     const handleAddBill = () => {
       if (
         bills[bills.length - 1].billName === "" ||
         bills[bills.length - 1].billValue === ""
       ) {
-        alert("Bill field is empty");
+        setError(true);
         return;
       }
 
@@ -211,10 +218,6 @@ export const MyFormContextProvider = ({
     const tabClickHandler = () => setTabIndex((prev) => prev + 1);
 
     const handleBackClick = () => setTabIndex((prev) => prev - 1);
-
-    const generatePdf = (pdf: any) => {
-      pdf();
-    };
 
     const value: IFormContext = {
       personalData,
@@ -243,7 +246,8 @@ export const MyFormContextProvider = ({
       setTabIndex,
       tabClickHandler,
       handleBackClick,
-      generatePdf,
+      setError,
+      error,
     };
 
     return value;
@@ -262,6 +266,7 @@ export const MyFormContextProvider = ({
     bills,
     setBills,
     tabIndex,
+    error,
   ]);
   return (
     <MyFormContext.Provider value={value}>{children}</MyFormContext.Provider>

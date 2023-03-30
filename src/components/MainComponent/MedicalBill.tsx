@@ -31,10 +31,7 @@ const MedicalBill = () => {
   };
 
   return (
-    <div className="flex flex-col space-y-2 items-start md:w-full md:item-between">
-      <label className="self-center" htmlFor="">
-        Medical Bill
-      </label>
+    <div className="flex flex-col space-y-2  md:w-full md:item-between">
       {bills.map((bill) => (
         <div
           key={bill.id}
@@ -45,6 +42,7 @@ const MedicalBill = () => {
             placeholder="Bill Name"
             value={bill.billName}
             onChange={(event) => handlerMedicalBill(event, bill.id)}
+            label="Bill Name"
           />
 
           <Input
@@ -53,6 +51,7 @@ const MedicalBill = () => {
             name="billValue"
             value={bill.billValue}
             onChange={(event) => handlerMedicalBill(event, bill.id)}
+            label="Bill value"
           />
 
           {bills.length !== 1 && (

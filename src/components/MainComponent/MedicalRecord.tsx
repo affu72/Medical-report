@@ -44,7 +44,7 @@ const MedicalRecord = () => {
   return (
     <div className="xs:pb-8 space-y-4 ">
       <div>
-        <label>Medical History</label>
+        <label className=" font-semibold">Medical History</label>
         <CreatableSelect
           components={components}
           inputValue={inputMedicalHistory}
@@ -64,12 +64,10 @@ const MedicalRecord = () => {
       </div>
 
       <div>
-        <label>
-          Symptoms{" "}
-          <span className="text-sm">
-            [ type to search or press enter to create new one ]
-          </span>
-        </label>
+        <label className="font-semibold">Symptoms </label>
+        <span className="text-sm">
+          ( type to search or press enter to create new one )
+        </span>
         <CreatableSelect
           inputValue={inputSymptoms}
           isClearable
