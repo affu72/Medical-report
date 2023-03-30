@@ -11,6 +11,7 @@ import { IPersonalData } from "../components/MainComponent/PersonaDetails";
 import IOption from "../ts/interfaces/Option";
 import { IMedicine } from "../components/MainComponent/Medicines";
 import { IMedicalBill } from "../components/MainComponent/MedicalBill";
+import { IDoctorDetails } from "../components/PreveiwComponent/DoctorDetails";
 //context value type
 interface IFormContext {
   personalData: IPersonalData;
@@ -47,6 +48,10 @@ interface IFormContext {
   onNavClick?: () => void;
   error: boolean;
   setError: (error: boolean) => void;
+  handleDoctorForm: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleDoctorInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  doctorData: IDoctorDetails;
+  hasDoctorData: boolean;
 }
 
 // creatig conetxt
@@ -71,6 +76,22 @@ export const MyFormContextProvider = ({
     pin: 0,
     state: "",
   });
+
+  //deoctor's details
+  const [doctorData, setDoctorData] = useState<IDoctorDetails>({
+    clinicName: "",
+    doctorName: "",
+    clinicAddress: "",
+    doctorPhoneNumber: "",
+    regNumber: "",
+    qualification: "",
+    logo: "",
+    openingTime: "",
+    closingTime: "",
+    closingDay: "",
+  });
+
+  const [hasDoctorData, setHasDoctorData] = useState(false);
 
   //medical record
   const [inputMedicalHistory, setInputMedicalHistory] = useState("");
@@ -98,6 +119,21 @@ export const MyFormContextProvider = ({
   //useMemo
 
   const value = useMemo(() => {
+    //Doctors Details
+    const handleDoctorInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = event.target;
+      setDoctorData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    };
+
+    const handleDoctorForm = (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      localStorage.setItem("doctorData", JSON.stringify(doctorData));
+      setHasDoctorData(true);
+    };
+
     //personal information
     const inputPersonalDetailsHandler = (
       event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -248,6 +284,10 @@ export const MyFormContextProvider = ({
       handleBackClick,
       setError,
       error,
+      handleDoctorForm,
+      handleDoctorInput,
+      doctorData,
+      hasDoctorData,
     };
 
     return value;
@@ -267,6 +307,8 @@ export const MyFormContextProvider = ({
     setBills,
     tabIndex,
     error,
+    doctorData,
+    hasDoctorData,
   ]);
   return (
     <MyFormContext.Provider value={value}>{children}</MyFormContext.Provider>

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
 import Input from "../CustomComp/Input";
 import Button from "../CustomComp/Button";
+import { useMyFormContext } from "../../Context/MyFormContext";
 
-interface FormState {
+export interface IDoctorDetails {
   clinicName: string;
   doctorName: string;
   clinicAddress: string;
@@ -16,44 +16,20 @@ interface FormState {
 }
 
 const DoctorDetails = () => {
-  const [formData, setFormData] = useState<FormState>({
-    clinicName: "",
-    doctorName: "",
-    clinicAddress: "",
-    doctorPhoneNumber: "",
-    regNumber: "",
-    qualification: "",
-    logo: "",
-    openingTime: "",
-    closingTime: "",
-    closingDay: "",
-  });
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    localStorage.setItem("doctorData", JSON.stringify(formData));
-    alert("Form data saved to local storage!");
-  };
+  const { handleDoctorForm, handleDoctorInput, doctorData } =
+    useMyFormContext();
 
   // const handleEdit = () => {
-  //   const savedFormData = localStorage.getItem("formData");
+  //   const savedFormData = localStorage.getItem("doctorData");
   //   if (savedFormData) {
   //     setFormData(JSON.parse(savedFormData));
   //   }
   // };
 
   return (
-    <div className=" bg-blue-100 h-screen pt-24">
+    <div className=" bg-blue-100 h-screen pt-12">
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleDoctorForm}
         className="grid grid-cols-2 gap-x-4 max-w-4xl mx-auto p-8 bg-white rounded-md shadow-md"
       >
         <h2 className="col-span-2 text-center mb-8 font-semibold text-3xl text-blue-400">
@@ -62,8 +38,8 @@ const DoctorDetails = () => {
         <Input
           type="text"
           name="clinicName"
-          value={formData.clinicName}
-          onChange={handleChange}
+          value={doctorData.clinicName}
+          onChange={handleDoctorInput}
           placeholder="Clinic Name"
           label="Clinic Name"
         />
@@ -71,8 +47,8 @@ const DoctorDetails = () => {
         <Input
           type="text"
           name="doctorName"
-          value={formData.doctorName}
-          onChange={handleChange}
+          value={doctorData.doctorName}
+          onChange={handleDoctorInput}
           placeholder={"Doctor's Name"}
           label="Doctor's Name"
         />
@@ -80,8 +56,8 @@ const DoctorDetails = () => {
         <Input
           type="text"
           name="regNumber"
-          value={formData.regNumber}
-          onChange={handleChange}
+          value={doctorData.regNumber}
+          onChange={handleDoctorInput}
           label="Registration No."
           placeholder="Registration No."
         />
@@ -89,8 +65,8 @@ const DoctorDetails = () => {
         <Input
           type="text"
           name="clinicAddress"
-          value={formData.clinicAddress}
-          onChange={handleChange}
+          value={doctorData.clinicAddress}
+          onChange={handleDoctorInput}
           placeholder="Clinic Address"
           label="Address"
         />
@@ -98,8 +74,8 @@ const DoctorDetails = () => {
         <Input
           type="text"
           name="doctorPhoneNumber"
-          value={formData.doctorPhoneNumber}
-          onChange={handleChange}
+          value={doctorData.doctorPhoneNumber}
+          onChange={handleDoctorInput}
           label="Mobile"
           placeholder="Mobile No. "
         />
@@ -107,8 +83,8 @@ const DoctorDetails = () => {
         <Input
           type="text"
           name="qualification"
-          value={formData.qualification}
-          onChange={handleChange}
+          value={doctorData.qualification}
+          onChange={handleDoctorInput}
           placeholder="Qualification"
           label="Qualification (Seprated by Comma)"
         />
@@ -116,23 +92,23 @@ const DoctorDetails = () => {
         <Input
           type="time"
           name="openingTime"
-          value={formData.openingTime}
-          onChange={handleChange}
+          value={doctorData.openingTime}
+          onChange={handleDoctorInput}
           label="Opening Time"
         />
         <Input
           type="time"
           name="ClosingTime"
-          value={formData.closingTime}
-          onChange={handleChange}
+          value={doctorData.closingTime}
+          onChange={handleDoctorInput}
           label="Closing Time"
         />
 
         <Input
           type="file"
           name="logo"
-          value={formData.logo}
-          onChange={handleChange}
+          value={doctorData.logo}
+          onChange={handleDoctorInput}
           placeholder="Logo"
           accept="image/*"
           label="Upload logo"
@@ -141,8 +117,8 @@ const DoctorDetails = () => {
         <Input
           type="text"
           name="closingDay"
-          value={formData.closingDay}
-          onChange={handleChange}
+          value={doctorData.closingDay}
+          onChange={handleDoctorInput}
           placeholder="Closing Day"
           label="Closing Day"
         />
