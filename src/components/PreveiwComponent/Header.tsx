@@ -1,7 +1,7 @@
 import React from "react";
-import { IAddress } from "../../ts/interfaces/Address";
-import { IDegree } from "../../ts/interfaces/Degree";
-import { IPhone } from "../../ts/interfaces/mobiles";
+import { IAddress } from "../../ts/Address";
+import { IDegree } from "../../ts/Degree";
+import { IPhone } from "../../ts/mobiles";
 import logo from "./logo.png";
 import { useMyFormContext } from "../../Context/MyFormContext";
 

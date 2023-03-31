@@ -1,5 +1,3 @@
-import React from "react";
-import IOption from "../../ts/interfaces/Option";
 import { useMyFormContext } from "../../Context/MyFormContext";
 
 const MedicalRecordPreview = () => {

@@ -1,6 +1,7 @@
-import Input from "./CustomComp/Input";
 import Button from "./CustomComp/Button";
 import { useMyFormContext } from "../Context/MyFormContext";
+import { useForm } from "react-hook-form";
+import { inputClassname } from "../ts/Contants";
 
 export interface IDoctorDetails {
   clinicName: string;
@@ -16,112 +17,146 @@ export interface IDoctorDetails {
 }
 
 const DoctorDetails = () => {
-  const { handleDoctorForm, handleDoctorInput, doctorData } =
-    useMyFormContext();
+  //react-hook-form
 
-  // const handleEdit = () => {
-  //   const savedFormData = localStorage.getItem("doctorData");
-  //   if (savedFormData) {
-  //     setFormData(JSON.parse(savedFormData));
-  //   }
-  // };
+  // (async () => {
+  //   const userData = await fetch("https://randomuser.me/api/")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       return data;
+  //     });
+
+  //   console.log(userData.results[0].email);
+  // })();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IDoctorDetails>({
+    defaultValues: {
+      clinicName: "Care Medical Center",
+    },
+  });
+  const { handleDoctorForm, doctorData } = useMyFormContext();
+
+  const onFormSubmit = (data: IDoctorDetails) => console.log(data);
 
   return (
-    <div className=" bg-blue-100 h-screen pt-6">
+    <div className="bg-blue-100 h-screen pt-6">
       <form
-        onSubmit={handleDoctorForm}
-        className="grid grid-cols-2 gap-x-4 max-w-4xl mx-auto p-6 bg-white rounded-md shadow-md"
+        // onSubmit={handleDoctorForm}
+        onSubmit={handleSubmit(onFormSubmit)}
+        className="grid grid-cols-2 gap-x-8 gap-y-8 max-w-5xl mx-auto p-6 bg-white rounded-md shadow-md"
       >
         <h2 className="col-span-2 text-center mb-8 font-semibold text-3xl text-blue-400">
           Fill Details That will be shown on Prescription
         </h2>
-        <Input
-          type="text"
-          name="clinicName"
-          value={doctorData.clinicName}
-          onChange={handleDoctorInput}
-          placeholder="Clinic Name"
-          label="Clinic Name"
-        />
 
-        <Input
-          type="text"
-          name="doctorName"
-          value={doctorData.doctorName}
-          onChange={handleDoctorInput}
-          placeholder={"Doctor's Name"}
-          label="Doctor's Name"
-        />
+        <div>
+          <label>Clinic Name</label>
+          <input
+            placeholder="Clinic Name"
+            type="text"
+            {...register("clinicName")}
+            className={inputClassname}
+          />
 
-        <Input
-          type="text"
-          name="regNumber"
-          value={doctorData.regNumber}
-          onChange={handleDoctorInput}
-          label="Registration No."
-          placeholder="Registration No."
-        />
+          <span className="text-red-900">{errors.clinicName?.message}</span>
+        </div>
 
-        <Input
-          type="text"
-          name="clinicAddress"
-          value={doctorData.clinicAddress}
-          onChange={handleDoctorInput}
-          placeholder="Clinic Address"
-          label="Address"
-        />
+        <div>
+          <label>Doctors Name</label>
+          <input
+            type="text"
+            placeholder={"Doctor's Name"}
+            className={inputClassname}
+          />
+        </div>
 
-        <Input
-          type="text"
-          name="doctorPhoneNumber"
-          value={doctorData.doctorPhoneNumber}
-          onChange={handleDoctorInput}
-          label="Mobile"
-          placeholder="Mobile No. "
-        />
+        <div>
+          <label>Registration No.</label>
 
-        <Input
-          type="text"
-          name="qualification"
-          value={doctorData.qualification}
-          onChange={handleDoctorInput}
-          placeholder="Qualification"
-          label="Qualification (ex. M.B.B.S, M.D, M.S)"
-        />
+          <input
+            type="text"
+            placeholder="Registration No."
+            className={inputClassname}
+            {...register("regNumber")}
+          />
+        </div>
 
-        <Input
-          type="time"
-          name="openingTime"
-          value={doctorData.openingTime}
-          onChange={handleDoctorInput}
-          label="Opening Time"
-        />
-        <Input
-          type="time"
-          name="ClosingTime"
-          value={doctorData.closingTime}
-          onChange={handleDoctorInput}
-          label="Closing Time"
-        />
+        <div>
+          <label>Address</label>
+          <input
+            type="text"
+            placeholder="Clinic Address"
+            className={inputClassname}
+            {...register("clinicAddress")}
+          />
+        </div>
 
-        <Input
-          type="file"
-          name="logo"
-          value={doctorData.logo}
-          onChange={handleDoctorInput}
-          placeholder="Logo"
-          accept="image/*"
-          label="Upload logo"
-        />
+        <div>
+          <label>Mobile No. </label>
+          <input
+            type="text"
+            placeholder="Mobile no."
+            className={inputClassname}
+            {...register("doctorPhoneNumber")}
+          />
+        </div>
 
-        <Input
-          type="text"
-          name="closingDay"
-          value={doctorData.closingDay}
-          onChange={handleDoctorInput}
-          placeholder="Closing Day"
-          label="Closing Day"
-        />
+        <div>
+          <label>Qualification (ex. M.B.B.S, M.D, M.S)</label>
+
+          <input
+            type="text"
+            placeholder="Qualification"
+            className={inputClassname}
+            {...register("qualification")}
+          />
+        </div>
+
+        <div>
+          <label>Opening Time</label>
+
+          <input
+            type="time"
+            className={inputClassname}
+            {...register("openingTime")}
+          />
+        </div>
+
+        <div>
+          <label>Closing Time</label>
+          <input
+            type="time"
+            className={inputClassname}
+            {...register("closingTime")}
+          />
+        </div>
+
+        <div>
+          <label>Logo</label>
+          <input
+            type="file"
+            placeholder="Logo"
+            accept="image/*"
+            className={inputClassname}
+            {...register("logo")}
+          />
+        </div>
+
+        <div>
+          <label>Closing Day</label>
+
+          <input
+            type="text"
+            placeholder="Closing Day"
+            className={inputClassname}
+            {...register("closingDay")}
+          />
+        </div>
+
         <div className="mt-8 text-center col-span-2">
           <Button type="submit" value="Save & Submit" bgColor="bg-blue-500" />
         </div>

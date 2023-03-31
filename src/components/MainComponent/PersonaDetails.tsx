@@ -105,7 +105,7 @@ function PersonaDetails({ getData }: PropType) {
         name="address"
         placeholder="Address"
         label="Address"
-        labelOption={true}
+        labelOptional={true}
         onChange={inputPersonalDetailsHandler}
         value={personalData.address}
       ></Input>

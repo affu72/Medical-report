@@ -8,7 +8,7 @@ import React, {
   useMemo,
 } from "react";
 import { IPersonalData } from "../components/MainComponent/PersonaDetails";
-import IOption from "../ts/interfaces/Option";
+import IOption from "../ts/Option";
 import { IMedicine } from "../components/MainComponent/Medicines";
 import { IMedicalBill } from "../components/MainComponent/MedicalBill";
 import { IDoctorDetails } from "../components/DoctorDetails";
@@ -49,7 +49,6 @@ interface IFormContext {
   error: boolean;
   setError: (error: boolean) => void;
   handleDoctorForm: (event: React.FormEvent<HTMLFormElement>) => void;
-  handleDoctorInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
   doctorData: IDoctorDetails;
   hasDoctorData: boolean;
   setDoctorData: (data: IDoctorDetails) => void;
@@ -121,13 +120,6 @@ export const MyFormContextProvider = ({
 
   const value = useMemo(() => {
     //Doctors Details
-    const handleDoctorInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = event.target;
-      setDoctorData((prevFormData) => ({
-        ...prevFormData,
-        [name]: value,
-      }));
-    };
 
     const handleDoctorForm = (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
@@ -289,7 +281,6 @@ export const MyFormContextProvider = ({
       setError,
       error,
       handleDoctorForm,
-      handleDoctorInput,
       doctorData,
       hasDoctorData,
       setDoctorData,
