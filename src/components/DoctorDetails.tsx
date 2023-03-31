@@ -22,7 +22,11 @@ const DoctorDetails = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IDoctorDetails>();
+  } = useForm<IDoctorDetails>({
+    criteriaMode: "all",
+    mode: "onChange",
+  });
+
   const { handleDoctorForm } = useMyFormContext();
 
   const onFormSubmit = (data: IDoctorDetails) => handleDoctorForm(data);
@@ -31,9 +35,9 @@ const DoctorDetails = () => {
     <div className="bg-blue-900 h-screen pt-6">
       <form
         onSubmit={handleSubmit(onFormSubmit)}
-        className="grid grid-cols-2 gap-x-8 gap-y-8 max-w-5xl mx-auto p-6 bg-white rounded-md shadow-md"
+        className="grid grid-cols-2 gap-x-8 gap-y-6 max-w-6xl mx-auto px-8 py-6 bg-white rounded-md shadow-md"
       >
-        <h2 className="col-span-2 text-center mb-8 font-semibold text-3xl text-blue-400">
+        <h2 className="col-span-2 text-center mb-2 font-semibold text-3xl text-blue-400">
           Fill Details That will be shown on Prescription
         </h2>
 
@@ -96,7 +100,7 @@ const DoctorDetails = () => {
             })}
           />
 
-          {errors.clinicName && (
+          {errors.regNumber && (
             <FormError errors={errors} inputName="regNumber" />
           )}
         </div>
@@ -117,7 +121,7 @@ const DoctorDetails = () => {
               },
             })}
           />
-          {errors.clinicName && (
+          {errors.clinicAddress && (
             <FormError errors={errors} inputName="clinicAddress" />
           )}
         </div>
@@ -134,11 +138,23 @@ const DoctorDetails = () => {
             {...register("doctorPhoneNumber", {
               required: {
                 value: true,
-                message: getErrorMsg("Mobile Number"),
+                message: "Mobile Cannot be empty",
+              },
+              minLength: {
+                value: 1,
+                message: "Should be of 10 digit",
+              },
+              maxLength: {
+                value: 10,
+                message: "Should be of 10 digit",
+              },
+              pattern: {
+                value: /^(\+\d{1,3}[- ]?)?\d{10}$/,
+                message: "Should be numbers only",
               },
             })}
           />
-          {errors.clinicName && (
+          {errors.doctorPhoneNumber && (
             <FormError errors={errors} inputName="doctorPhoneNumber" />
           )}
         </div>
@@ -159,16 +175,13 @@ const DoctorDetails = () => {
               },
             })}
           />
-          {errors.clinicName && (
-            <FormError errors={errors} inputName="clinicName" />
+          {errors.qualification && (
+            <FormError errors={errors} inputName="qualification" />
           )}
         </div>
 
         <div>
           <label>Opening Time</label>
-          {errors.clinicName && (
-            <FormError errors={errors} inputName="clinicName" />
-          )}
 
           <input
             type="time"
@@ -182,6 +195,9 @@ const DoctorDetails = () => {
               },
             })}
           />
+          {errors.openingTime && (
+            <FormError errors={errors} inputName="clinicName" />
+          )}
         </div>
 
         <div>
@@ -199,8 +215,8 @@ const DoctorDetails = () => {
               },
             })}
           />
-          {errors.clinicName && (
-            <FormError errors={errors} inputName="clinicName" />
+          {errors.closingTime && (
+            <FormError errors={errors} inputName="closingTime" />
           )}
         </div>
 
@@ -221,9 +237,7 @@ const DoctorDetails = () => {
               },
             })}
           />
-          {errors.clinicName && (
-            <FormError errors={errors} inputName="clinicName" />
-          )}
+          {errors.logo && <FormError errors={errors} inputName="logo" />}
         </div>
 
         <div>
@@ -242,8 +256,8 @@ const DoctorDetails = () => {
               },
             })}
           />
-          {errors.clinicName && (
-            <FormError errors={errors} inputName="clinicName" />
+          {errors.closingDay && (
+            <FormError errors={errors} inputName="closingDay" />
           )}
         </div>
 
