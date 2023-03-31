@@ -43,22 +43,7 @@ function PreviewPage() {
             )
           }
         </Pdf>
-        <Header
-          clinicName="Care Medical Center"
-          doctorName="B.S Tiwari"
-          degree={{ degree1: "M.B.B.S", degree2: "M.D", degree3: "M.S" }}
-          regNumber={270999}
-          phone={{ phone1: 987654321 }}
-          address={{
-            address1: "123 Main road near Axis Bank",
-            address2: "Kothrud",
-            city: "Pune",
-            pin: 416086,
-            state: "Mumbai",
-          }}
-          time={{ open: "09:00AM", close: "02:00PM" }}
-          closingDay="Thursday"
-        ></Header>
+        <Header></Header>
 
         <PersonalInfoPreview />
 

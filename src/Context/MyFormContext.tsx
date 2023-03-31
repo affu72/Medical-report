@@ -82,7 +82,7 @@ export const MyFormContextProvider = ({
     clinicName: "",
     doctorName: "",
     clinicAddress: "",
-    doctorPhoneNumber: "",
+    doctorPhoneNumber: 0,
     regNumber: "",
     qualification: "",
     logo: "",
@@ -122,7 +122,7 @@ export const MyFormContextProvider = ({
     //Doctors Details
 
     const handleDoctorForm = (data: IDoctorDetails) => {
-      localStorage.setItem("doctorData", JSON.stringify(doctorData));
+      localStorage.setItem("doctorData", JSON.stringify(data));
       console.log("doctors data");
       setHasDoctorData(true);
     };

@@ -1,14 +1,14 @@
 import Button from "./CustomComp/Button";
 import { useMyFormContext } from "../Context/MyFormContext";
 import { useForm } from "react-hook-form";
-import { getInputClassName, getErrorMsg } from "../ts/Contants";
+import { getInputClassName, getErrorMsg, testData } from "../ts/Contants";
 import FormError from "./CustomComp/FormError";
 
 export interface IDoctorDetails {
   clinicName: string;
   doctorName: string;
   clinicAddress: string;
-  doctorPhoneNumber: string;
+  doctorPhoneNumber: number;
   regNumber: string;
   qualification: string;
   logo: string;
@@ -32,7 +32,7 @@ const DoctorDetails = () => {
   const onFormSubmit = (data: IDoctorDetails) => handleDoctorForm(data);
 
   return (
-    <div className="bg-blue-100 h-screen pt-6">
+    <div className="bg-blue-900 h-screen pt-6">
       <form
         onSubmit={handleSubmit(onFormSubmit)}
         className="grid grid-cols-2 gap-x-8 gap-y-8 max-w-5xl mx-auto p-6 bg-white rounded-md shadow-md"
@@ -63,7 +63,7 @@ const DoctorDetails = () => {
         </div>
 
         <div>
-          <label>Doctors Name</label>
+          <label>Doctor's Name</label>
 
           <input
             type="text"
@@ -74,7 +74,7 @@ const DoctorDetails = () => {
             {...register("doctorName", {
               required: {
                 value: true,
-                message: getErrorMsg("Doctor Name"),
+                message: getErrorMsg("Doctor's Name"),
               },
             })}
           />
@@ -130,7 +130,7 @@ const DoctorDetails = () => {
           <label>Mobile No. </label>
 
           <input
-            type="text"
+            type="tel"
             placeholder="Mobile no."
             className={getInputClassName(
               `${errors.doctorPhoneNumber ? " outline-red-700" : ""}`
@@ -251,8 +251,21 @@ const DoctorDetails = () => {
           )}
         </div>
 
-        <div className="mt-8 text-center col-span-2">
-          <Button type="submit" value="Save & Submit" bgColor="bg-blue-500" />
+        <div className=" flex justify-between mt-8 col-span-2 relative">
+          <p className="absolute -top-10 left-10">(only for test)</p>
+          <Button
+            className="self-start"
+            type="button"
+            value="Fill With Test Data"
+            bgColor="bg-yellow-500"
+            onClick={() => handleDoctorForm(testData)}
+          ></Button>
+          <Button
+            className="self-end"
+            type="submit"
+            value="Save & Submit"
+            bgColor="bg-blue-500"
+          />
         </div>
       </form>
     </div>

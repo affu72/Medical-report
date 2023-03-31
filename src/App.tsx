@@ -12,7 +12,7 @@ function App() {
       {!hasDoctorData && !localStorage.getItem("doctorData") ? (
         <DoctorDetails />
       ) : (
-        <div className="flex p-2 justify-evenly xs:block m-auto md:flex-col">
+        <div className="flex justify-evenly xs:block m-auto md:flex-col">
           <MainPage></MainPage>
           <PreviewPage></PreviewPage>
         </div>
