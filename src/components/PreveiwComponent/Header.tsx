@@ -1,7 +1,4 @@
 import React from "react";
-import { IAddress } from "../../ts/Address";
-import { IDegree } from "../../ts/Degree";
-import { IPhone } from "../../ts/mobiles";
 import logo from "./logo.png";
 import { useMyFormContext } from "../../Context/MyFormContext";
 
@@ -27,7 +24,7 @@ const Header = () => {
         <h2 className="text-center from-neutral-800 text-3xl font-bold mb-2">
           {doctorData.clinicName}
         </h2>
-        <p>{`${doctorData.clinicAddress},`}</p>
+        <p>{`${doctorData.clinicAddress}`}</p>
         <p className="mt-2 font-semibold">{`Timing: ${doctorData.openingTime} - ${doctorData.closingTime}`}</p>
         <p className="font-semibold text-red-500">{`Closed: ${doctorData.closingDay}`}</p>
       </div>

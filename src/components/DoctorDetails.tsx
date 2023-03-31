@@ -22,11 +22,7 @@ const DoctorDetails = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IDoctorDetails>({
-    defaultValues: {
-      clinicName: "Care Medical Center",
-    },
-  });
+  } = useForm<IDoctorDetails>();
   const { handleDoctorForm } = useMyFormContext();
 
   const onFormSubmit = (data: IDoctorDetails) => handleDoctorForm(data);
@@ -101,7 +97,7 @@ const DoctorDetails = () => {
           />
 
           {errors.clinicName && (
-            <FormError errors={errors} inputName="clinicName" />
+            <FormError errors={errors} inputName="regNumber" />
           )}
         </div>
 
@@ -122,7 +118,7 @@ const DoctorDetails = () => {
             })}
           />
           {errors.clinicName && (
-            <FormError errors={errors} inputName="clinicName" />
+            <FormError errors={errors} inputName="clinicAddress" />
           )}
         </div>
 
@@ -143,7 +139,7 @@ const DoctorDetails = () => {
             })}
           />
           {errors.clinicName && (
-            <FormError errors={errors} inputName="clinicName" />
+            <FormError errors={errors} inputName="doctorPhoneNumber" />
           )}
         </div>
 

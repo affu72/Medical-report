@@ -5,9 +5,10 @@ import MedicalRecordPreview from "./MedicalRecordPreview";
 import { useMyFormContext } from "../../Context/MyFormContext";
 import MedicineTable from "./MedicineTable";
 import Pdf from "react-to-pdf";
+import Button from "../CustomComp/Button";
 
 function PreviewPage() {
-  const { tabIndex, personalData } = useMyFormContext();
+  const { tabIndex, personalData, setHasDoctorData } = useMyFormContext();
 
   const ref = useRef(null);
 
@@ -20,8 +21,21 @@ function PreviewPage() {
 
   //JSX
   return (
-    <>
-      <div ref={ref} className="w-[800px] min-h-screen p-6 flex-none relative">
+    <div className="flex flex-col gap-4  bg-slate-100  p-4">
+      <div className="w-full flex bg-slate-100 py-[6px] px-2 drop-shadow-md box-border text-right justify-end md:hidden">
+        <Button
+          value="Edit Form"
+          bgColor="bg-blue-500"
+          onClick={() => {
+            localStorage.removeItem("doctorData");
+            setHasDoctorData(false);
+          }}
+        />
+      </div>
+      <div
+        ref={ref}
+        className="w-[800px] min-h-screen px-6 flex-none relative bg-white"
+      >
         <Pdf
           targetRef={ref}
           filename={`${personalData.firstName}.pdf`}
@@ -66,7 +80,7 @@ function PreviewPage() {
       >
         <button>Generate Pdf</button>
       </PDFDownloadLink> */}
-    </>
+    </div>
   );
 }
 

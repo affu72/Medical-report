@@ -52,6 +52,7 @@ interface IFormContext {
   doctorData: IDoctorDetails;
   hasDoctorData: boolean;
   setDoctorData: (data: IDoctorDetails) => void;
+  setHasDoctorData: (value: boolean) => void;
 }
 
 // creatig conetxt
@@ -283,6 +284,7 @@ export const MyFormContextProvider = ({
       doctorData,
       hasDoctorData,
       setDoctorData,
+      setHasDoctorData,
     };
 
     return value;
