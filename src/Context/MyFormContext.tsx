@@ -48,7 +48,7 @@ interface IFormContext {
   onNavClick?: () => void;
   error: boolean;
   setError: (error: boolean) => void;
-  handleDoctorForm: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleDoctorForm: (data: IDoctorDetails) => void;
   doctorData: IDoctorDetails;
   hasDoctorData: boolean;
   setDoctorData: (data: IDoctorDetails) => void;
@@ -121,10 +121,9 @@ export const MyFormContextProvider = ({
   const value = useMemo(() => {
     //Doctors Details
 
-    const handleDoctorForm = (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
+    const handleDoctorForm = (data: IDoctorDetails) => {
       localStorage.setItem("doctorData", JSON.stringify(doctorData));
-
+      console.log("doctors data");
       setHasDoctorData(true);
     };
 

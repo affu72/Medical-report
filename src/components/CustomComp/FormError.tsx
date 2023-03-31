@@ -1,17 +1,18 @@
 import React from "react";
-import { useMyFormContext } from "../../Context/MyFormContext";
+import { IDoctorDetails } from "../DoctorDetails";
 
-const FormError = () => {
-  const { error } = useMyFormContext();
+interface IError {
+  errors: any;
+  inputName: keyof IDoctorDetails;
+}
 
-  const cls = error ? "translate-x-[210px]" : "";
+const FormError = ({ errors, inputName }: IError) => {
+  console.log(errors);
 
   return (
-    <div
-      className={`border-2 text-red-700 px-8 py-4 absolute bg-red-100 w-80 -left-80 top-24 -z-1000 ${cls} transition-all duration-1000 outline-none border-none rounded-r-md rounded-b-md`}
-    >
-      Field cannot be blank
-    </div>
+    <span className="text-red-900 self-start">
+      {errors[inputName]?.message}
+    </span>
   );
 };
 

@@ -1,3 +1,9 @@
 @tailwind base;
+@layer base {
+  label {
+    @apply: margin-bottom: "4px";
+    box-sizing: border-box;
+  }
+}
 @tailwind components;
 @tailwind utilities;

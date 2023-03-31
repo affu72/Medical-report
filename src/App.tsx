@@ -1,14 +1,11 @@
 import React from "react";
 import PreviewPage from "./components/PreveiwComponent/PreviewPage";
 import MainPage from "./components/MainComponent/MainPage";
-import {
-  MyFormContextProvider,
-  useMyFormContext,
-} from "./Context/MyFormContext";
+import { useMyFormContext } from "./Context/MyFormContext";
 import DoctorDetails from "./components/DoctorDetails";
 
 function App() {
-  const { hasDoctorData, setDoctorData } = useMyFormContext();
+  const { hasDoctorData } = useMyFormContext();
 
   return (
     <div>
