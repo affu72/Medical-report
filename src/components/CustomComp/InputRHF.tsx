@@ -1,6 +1,7 @@
 import React from "react";
 import { getInputClassName } from "../../ts/Contants";
 import FormError from "./FormError";
+import { type } from "os";
 
 interface PropInput {
   name: string;
@@ -8,6 +9,7 @@ interface PropInput {
   label: string;
   error: any;
   placeholder: string;
+  type?: string;
 }
 
 const InputRHF = ({ register, name, label, error, ...rest }: PropInput) => {
