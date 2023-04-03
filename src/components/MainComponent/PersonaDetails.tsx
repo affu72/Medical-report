@@ -23,8 +23,12 @@ type PropType = {
 function PersonaDetails({ getData }: PropType) {
   const { personalData, inputPersonalDetailsHandler } = useMyFormContext();
 
-  const { handleSubmit, register } = useForm({
-    mode,
+  const { register } = useForm({
+    mode: "onChange",
+  });
+
+  const myname = register("firstName", {
+    required: "It is required field",
   });
 
   return (
@@ -37,12 +41,14 @@ function PersonaDetails({ getData }: PropType) {
           value={personalData.firstName}
           onChange={inputPersonalDetailsHandler}
         ></Input>
+
         <Input
           name="lastName"
           label="Last Name"
           placeholder="Last Name"
           value={personalData.lastName}
-          onChange={inputPersonalDetailsHandler}
+          // onChange={inputPersonalDetailsHandler}
+          onChange={myname.onChange}
         ></Input>
       </div>
 

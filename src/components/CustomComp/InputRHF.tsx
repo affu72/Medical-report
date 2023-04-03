@@ -1,22 +1,31 @@
 import React from "react";
-import { useController, UseControllerProps } from "react-hook-form";
+import { getInputClassName } from "../../ts/Contants";
+import FormError from "./FormError";
 
-interface PropInput extends UseControllerProps {
+interface PropInput {
   name: string;
+  register: any;
+  label: string;
+  error: any;
+  placeholder: string;
 }
 
-const InputRHF = (props: UseControllerProps<PropInput>) => {
-  const { field } = useController(props);
-
+const InputRHF = ({ register, name, label, error, ...rest }: PropInput) => {
+  console.log(error);
   return (
     <div>
-      <label htmlFor={propInput.name}>{label}</label>
-      <input {...field} />
-      {invalid && (
-        <span role="alert" style={{ color: "red" }}>
-          {error?.message || `${label} is required`}
-        </span>
-      )}
+      <label>{label}</label>
+
+      <input
+        {...register(name, {
+          required: `This field is Required`,
+        })}
+        className={getInputClassName(
+          `${error[name] ? " outline-red-700" : ""}`
+        )}
+        {...rest}
+      />
+      {error[name] && <FormError errors={error} inputName={name} />}
     </div>
   );
 };

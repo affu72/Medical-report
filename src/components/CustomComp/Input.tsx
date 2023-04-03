@@ -7,7 +7,6 @@ interface InputProps {
   type?: string;
   value?: string | number;
   id?: string;
-  basis?: number | "auto";
   labelOptional?: boolean;
   accept?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -19,7 +18,6 @@ const Input = ({
   placeholder,
   name,
   onChange,
-  basis = "auto",
   labelOptional = false,
   accept,
 }: InputProps) => {
@@ -34,7 +32,7 @@ const Input = ({
         )}{" "}
       </label>{" "}
       <input
-        className={`border-2 border-gray-300 py-2 px-4 w-full rounded-md basis-${basis}`}
+        className={`border-2 border-gray-300 py-2 px-4 w-full rounded-md`}
         type={type}
         name={name}
         id="name"

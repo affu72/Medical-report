@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { getInputClassName, getErrorMsg, testData } from "../ts/Contants";
 import FormError from "./CustomComp/FormError";
 import { useEffect } from "react";
+import InputRHF from "./CustomComp/InputRHF";
 
 export interface IDoctorDetails {
   clinicName: string;
@@ -48,9 +49,15 @@ const DoctorDetails = () => {
           Fill Details That will be shown on Prescription
         </h2>
 
-        <div>
-          {/* <InputRHF label="name" name="first name" control={control} /> */}
+        <InputRHF
+          label="First Name"
+          name="firstName"
+          register={register}
+          error={errors}
+          placeholder="First Name"
+        />
 
+        {/* <div>
           <label>Clinic Name</label>
 
           <input
@@ -69,7 +76,7 @@ const DoctorDetails = () => {
           {errors.clinicName && (
             <FormError errors={errors} inputName="clinicName" />
           )}
-        </div>
+        </div> */}
 
         <div>
           <label>Doctor's Name</label>

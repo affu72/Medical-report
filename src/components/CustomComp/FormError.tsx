@@ -3,7 +3,7 @@ import { IDoctorDetails } from "../DoctorDetails";
 
 interface IError {
   errors: any;
-  inputName: keyof IDoctorDetails;
+  inputName?: keyof IDoctorDetails | any;
 }
 
 const FormError = ({ errors, inputName }: IError) => {
