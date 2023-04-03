@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 export interface IFormValue {
   medicines: IMedicine[];
   personalDetails: IPersonalData;
-  medicallBill: IMedicalBill[];
+  medicalBills: IMedicalBill[];
   medicalRecord: { name: string; value: string }[];
 }
 
@@ -24,6 +24,7 @@ const InputForms = () => {
     defaultValues: {
       medicines: [{ name: "", dose: "", id: 0, type: "" }],
     },
+    shouldUnregister: false,
   });
 
   const { tabClickHandler, handleBackClick, tabIndex } = useMyFormContext();
@@ -32,7 +33,12 @@ const InputForms = () => {
     <PersonaDetails key={0} />,
     <MedicalRecord key={1} />,
     <Medicines key={2} register={register} errors={errors} control={control} />,
-    <MedicalBill key={3} />,
+    <MedicalBill
+      key={3}
+      register={register}
+      errors={errors}
+      control={control}
+    />,
   ];
 
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
@@ -40,7 +46,7 @@ const InputForms = () => {
   };
 
   return (
-    <div className="bg-white flex flex-col justify-between gap-8 p-6 basis-2/3 xl:basis-11/12 relative overflow-auto flex-none">
+    <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto ">
       <form id="main-form" onSubmit={submitHandler} className="xs:pb-8">
         {formSection[tabIndex]}
       </form>

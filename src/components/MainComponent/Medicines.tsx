@@ -13,13 +13,13 @@ export interface IMedicine {
   quantity?: string;
 }
 
-type PropMedicines = {
+export type PropRHF = {
   register: UseFormRegister<IFormValue>;
   errors: any;
   control: Control<IFormValue>;
 };
 
-const Medicines = ({ register, errors, control }: PropMedicines) => {
+const Medicines = ({ register, errors, control }: PropRHF) => {
   const { append, fields, remove } = useFieldArray({
     name: "medicines",
     control,
@@ -34,23 +34,24 @@ const Medicines = ({ register, errors, control }: PropMedicines) => {
   } = useMyFormContext();
 
   return (
-    <div>
+    <>
       {fields.map((medicine, index) => (
         <div
           key={medicine.id}
-          className="flex items-center gap-2 xl:justify-between space-y-4"
+          className="xl:justify-between shadow-xl px-4 rounded-md py-4 flex-1"
         >
-          <div className="relative">
+          <div className="relative border-2 border-red-500">
             <input
               type="text"
               placeholder="Medicine name..."
               {...register(`medicines.${index}.name`)}
               defaultValue={medicine.name}
-              className={`border-2 border-gray-300 py-2 px-4 w-full rounded-md`}
+              className={`border-2 border-gray-300 py-2 px-4 rounded-md`}
             />
+
             <select
               aria-label="Select medicine type"
-              className="absolute bottom-3.5 right-1 pl-4 py-2  h-10 border-l-0 border-gray-300 rounded-r-md pointer-events-auto text-slate-500 bg-transparent"
+              className="absolute border-l-2 rounded-r-md text-slate-500 bg-transparent outline-none inline-block"
               {...register(`medicines.${index}.type`)}
               defaultValue={medicine.type}
             >
@@ -66,7 +67,7 @@ const Medicines = ({ register, errors, control }: PropMedicines) => {
           <input
             type="text"
             placeholder="dose"
-            className={`border-2 border-gray-300 py-2 px-4 rounded-md w-1/5 mt-6`}
+            className={`border-2 border-gray-300 py-2 px-4 rounded-md`}
             {...register(`medicines.${index}.dose`)}
             defaultValue={medicine.dose}
           />
@@ -98,7 +99,7 @@ const Medicines = ({ register, errors, control }: PropMedicines) => {
           onClick={clearMedicineHandler}
         />
       </div>
-    </div>
+    </>
   );
 };
 

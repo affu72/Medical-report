@@ -1,6 +1,8 @@
 import Button from "../CustomComp/Button";
 import Input from "../CustomComp/Input";
 import { useMyFormContext } from "../../Context/MyFormContext";
+import { PropRHF } from "./Medicines";
+import { useFieldArray } from "react-hook-form";
 
 export interface IMedicalBill {
   billName: string;
@@ -8,7 +10,12 @@ export interface IMedicalBill {
   id: number;
 }
 
-const MedicalBill = () => {
+const MedicalBill = ({ register, errors, control }: PropRHF) => {
+  const { fields, remove, append } = useFieldArray({
+    name: "medicalBills",
+    control,
+  });
+
   const { bills, setBills, handleAddBill } = useMyFormContext();
 
   const handlerMedicalBill = (
@@ -32,7 +39,7 @@ const MedicalBill = () => {
 
   return (
     <div className="flex flex-col space-y-2  md:w-full md:item-between">
-      {bills.map((bill) => (
+      {fields.map((bill) => (
         <div
           key={bill.id}
           className="flex space-x-4 place-items-start xl:justify-between"

@@ -21,7 +21,7 @@ const SideNav = () => {
     } border-cyan-500 xl:w-auto xl:py-2 xl:px-1 rounded-4 rounded`;
 
   return (
-    <div className="flex w-full flex-col bg-slate-100 p-2 drop-shadow-md  box-border  xl:flex-row xl:justify-between xl:basis-auto md:flex-col md:justify-start md:gap-4">
+    <div className="flex flex-col bg-slate-100 p-2 drop-shadow-md  box-border xl:flex-row xl:justify-between xl:basis-auto md:flex-col md:justify-start md:gap-4">
       <button
         tabIndex={0}
         id="personal-tab"
