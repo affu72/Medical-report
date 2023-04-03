@@ -3,6 +3,7 @@ import { useMyFormContext } from "../Context/MyFormContext";
 import { useForm } from "react-hook-form";
 import { getInputClassName, getErrorMsg, testData } from "../ts/Contants";
 import FormError from "./CustomComp/FormError";
+import { useEffect } from "react";
 
 export interface IDoctorDetails {
   clinicName: string;
@@ -19,20 +20,26 @@ export interface IDoctorDetails {
 
 const DoctorDetails = () => {
   const {
+    setFocus,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IDoctorDetails>({
     criteriaMode: "all",
-    mode: "onChange",
+    mode: "all",
+    // delayError: 500,
   });
 
   const { handleDoctorForm } = useMyFormContext();
 
   const onFormSubmit = (data: IDoctorDetails) => handleDoctorForm(data);
 
+  useEffect(() => {
+    setFocus("clinicName");
+  }, [setFocus]);
+
   return (
-    <div className="bg-blue-900 h-screen pt-6">
+    <div className="bg-blue-900 h-screen pt-6 flex items-center">
       <form
         onSubmit={handleSubmit(onFormSubmit)}
         className="grid grid-cols-2 gap-x-8 gap-y-6 max-w-6xl mx-auto px-8 py-6 bg-white rounded-md shadow-md"
@@ -42,6 +49,8 @@ const DoctorDetails = () => {
         </h2>
 
         <div>
+          {/* <InputRHF label="name" name="first name" control={control} /> */}
+
           <label>Clinic Name</label>
 
           <input

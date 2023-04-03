@@ -1,4 +1,4 @@
-import React, { createRef, useRef } from "react";
+import React, { useRef } from "react";
 import Header from "./Header";
 import PersonalInfoPreview from "./PersonalDetailPreview";
 import MedicalRecordPreview from "./MedicalRecordPreview";
@@ -22,20 +22,16 @@ function PreviewPage() {
   //JSX
   return (
     <div className="flex flex-col gap-4  bg-slate-100  p-4">
-      <div className="w-full flex bg-slate-100 py-[6px] px-2 drop-shadow-md box-border text-right justify-end md:hidden">
+      <div className="w-full flex bg-slate-100 py-[6px] px-2 drop-shadow-md box-border text-right justify-between md:hidden">
         <Button
-          value="Edit Form"
+          value="Edit Doctor's Details"
           bgColor="bg-blue-500"
           onClick={() => {
             localStorage.removeItem("doctorData");
             setHasDoctorData(false);
           }}
         />
-      </div>
-      <div
-        ref={ref}
-        className="w-[800px] min-h-screen px-6 flex-none relative bg-white"
-      >
+
         <Pdf
           targetRef={ref}
           filename={`${personalData.firstName}.pdf`}
@@ -50,13 +46,18 @@ function PreviewPage() {
                 form="main-form"
                 type="submit"
                 onClick={toPdf}
-                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute  bottom-[2.5%] -left-8 -translate-x-full xl:bottom-[2.5%] xl:-left-8 xl:-translate-x-full md:left-[650px] md:bottom-[102.5%] lg:bottom-[3%] lg:-left-8`}
+                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded `}
               >
                 Generate Pdf
               </button>
             )
           }
         </Pdf>
+      </div>
+      <div
+        ref={ref}
+        className="w-[800px] min-h-screen px-6 flex-none relative bg-white"
+      >
         <Header></Header>
 
         <PersonalInfoPreview />

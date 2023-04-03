@@ -1,6 +1,4 @@
 import React, { ChangeEvent } from "react";
-import { useMyFormContext } from "../../Context/MyFormContext";
-import { FieldElement, FieldValues } from "react-hook-form";
 
 interface InputProps {
   label?: string;

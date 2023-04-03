@@ -7,8 +7,6 @@ interface IError {
 }
 
 const FormError = ({ errors, inputName }: IError) => {
-  console.log(errors);
-
   return (
     <span className="text-red-900 self-start">
       {errors[inputName]?.message}

@@ -1,7 +1,7 @@
 import Input from "../CustomComp/Input";
 import IndianStateDropdown from "../CustomComp/IndianStateDropDown";
 import { useMyFormContext } from "../../Context/MyFormContext";
-
+import { useForm } from "react-hook-form";
 export interface IPersonalData {
   pin: number | undefined;
   city: string;
@@ -22,6 +22,10 @@ type PropType = {
 
 function PersonaDetails({ getData }: PropType) {
   const { personalData, inputPersonalDetailsHandler } = useMyFormContext();
+
+  const { handleSubmit, register } = useForm({
+    mode,
+  });
 
   return (
     <div className="">
