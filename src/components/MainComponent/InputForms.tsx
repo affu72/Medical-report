@@ -1,18 +1,37 @@
-import Medicines from "./Medicines";
+import Medicines, { IMedicine } from "./Medicines";
 import MedicalRecord from "./MedicalRecord";
-import MedicalBill from "./MedicalBill";
+import MedicalBill, { IMedicalBill } from "./MedicalBill";
 import { FormEvent } from "react";
-import PersonaDetails from "./PersonaDetails";
+import PersonaDetails, { IPersonalData } from "./PersonaDetails";
 import { useMyFormContext } from "../../Context/MyFormContext";
 import Button from "../CustomComp/Button";
+import { useForm } from "react-hook-form";
+
+export interface IFormValue {
+  medicines: IMedicine[];
+  personalDetails: IPersonalData;
+  medicallBill: IMedicalBill[];
+  medicalRecord: { name: string; value: string }[];
+}
 
 const InputForms = () => {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<IFormValue>({
+    defaultValues: {
+      medicines: [{ name: "", dose: "", id: 0, type: "" }],
+    },
+  });
+
   const { tabClickHandler, handleBackClick, tabIndex } = useMyFormContext();
 
   const formSection = [
     <PersonaDetails key={0} />,
     <MedicalRecord key={1} />,
-    <Medicines key={2} />,
+    <Medicines key={2} register={register} errors={errors} control={control} />,
     <MedicalBill key={3} />,
   ];
 

@@ -1,38 +1,8 @@
 import React from "react";
-import { IAddress } from "../../ts/interfaces/Address";
-import { IDegree } from "../../ts/interfaces/Degree";
-import { IPhone } from "../../ts/interfaces/mobiles";
 import logo from "./logo.png";
 import { useMyFormContext } from "../../Context/MyFormContext";
 
-interface ITime {
-  open: string;
-  close: string;
-}
-
-interface HeaderProp {
-  doctorName: string;
-  clinicName: string;
-  logoSrc?: string;
-  address: IAddress;
-  regNumber: number;
-  degree: IDegree;
-  phone: IPhone;
-  time: ITime;
-
-  closingDay?: string;
-}
-
-const Header: React.FC<HeaderProp> = ({
-  clinicName,
-  doctorName,
-  address,
-  degree,
-  regNumber,
-  phone,
-  time,
-  closingDay,
-}) => {
+const Header = () => {
   let { doctorData } = useMyFormContext();
 
   if (!doctorData.clinicName)
@@ -54,8 +24,7 @@ const Header: React.FC<HeaderProp> = ({
         <h2 className="text-center from-neutral-800 text-3xl font-bold mb-2">
           {doctorData.clinicName}
         </h2>
-        <p>{`${address.address1},`}</p>
-        <p>{`${address.address2}, ${address.city} - ${address.pin}`}</p>
+        <p>{`${doctorData.clinicAddress}`}</p>
         <p className="mt-2 font-semibold">{`Timing: ${doctorData.openingTime} - ${doctorData.closingTime}`}</p>
         <p className="font-semibold text-red-500">{`Closed: ${doctorData.closingDay}`}</p>
       </div>

@@ -8,7 +8,7 @@ import React, {
   useMemo,
 } from "react";
 import { IPersonalData } from "../components/MainComponent/PersonaDetails";
-import IOption from "../ts/interfaces/Option";
+import IOption from "../ts/Option";
 import { IMedicine } from "../components/MainComponent/Medicines";
 import { IMedicalBill } from "../components/MainComponent/MedicalBill";
 import { IDoctorDetails } from "../components/DoctorDetails";
@@ -48,11 +48,11 @@ interface IFormContext {
   onNavClick?: () => void;
   error: boolean;
   setError: (error: boolean) => void;
-  handleDoctorForm: (event: React.FormEvent<HTMLFormElement>) => void;
-  handleDoctorInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleDoctorForm: (data: IDoctorDetails) => void;
   doctorData: IDoctorDetails;
   hasDoctorData: boolean;
   setDoctorData: (data: IDoctorDetails) => void;
+  setHasDoctorData: (value: boolean) => void;
 }
 
 // creatig conetxt
@@ -83,7 +83,7 @@ export const MyFormContextProvider = ({
     clinicName: "",
     doctorName: "",
     clinicAddress: "",
-    doctorPhoneNumber: "",
+    doctorPhoneNumber: 0,
     regNumber: "",
     qualification: "",
     logo: "",
@@ -121,18 +121,10 @@ export const MyFormContextProvider = ({
 
   const value = useMemo(() => {
     //Doctors Details
-    const handleDoctorInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = event.target;
-      setDoctorData((prevFormData) => ({
-        ...prevFormData,
-        [name]: value,
-      }));
-    };
 
-    const handleDoctorForm = (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      localStorage.setItem("doctorData", JSON.stringify(doctorData));
-
+    const handleDoctorForm = (data: IDoctorDetails) => {
+      localStorage.setItem("doctorData", JSON.stringify(data));
+      console.log("doctors data");
       setHasDoctorData(true);
     };
 
@@ -289,10 +281,10 @@ export const MyFormContextProvider = ({
       setError,
       error,
       handleDoctorForm,
-      handleDoctorInput,
       doctorData,
       hasDoctorData,
       setDoctorData,
+      setHasDoctorData,
     };
 
     return value;

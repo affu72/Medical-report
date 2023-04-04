@@ -1,7 +1,7 @@
 import Input from "../CustomComp/Input";
 import IndianStateDropdown from "../CustomComp/IndianStateDropDown";
 import { useMyFormContext } from "../../Context/MyFormContext";
-
+import { useForm } from "react-hook-form";
 export interface IPersonalData {
   pin: number | undefined;
   city: string;
@@ -23,6 +23,14 @@ type PropType = {
 function PersonaDetails({ getData }: PropType) {
   const { personalData, inputPersonalDetailsHandler } = useMyFormContext();
 
+  const { register } = useForm({
+    mode: "onChange",
+  });
+
+  const myname = register("firstName", {
+    required: "It is required field",
+  });
+
   return (
     <div className="">
       <div className="flex gap-8 md:justify-between">
@@ -33,12 +41,14 @@ function PersonaDetails({ getData }: PropType) {
           value={personalData.firstName}
           onChange={inputPersonalDetailsHandler}
         ></Input>
+
         <Input
           name="lastName"
           label="Last Name"
           placeholder="Last Name"
           value={personalData.lastName}
-          onChange={inputPersonalDetailsHandler}
+          // onChange={inputPersonalDetailsHandler}
+          onChange={myname.onChange}
         ></Input>
       </div>
 
@@ -105,7 +115,7 @@ function PersonaDetails({ getData }: PropType) {
         name="address"
         placeholder="Address"
         label="Address"
-        labelOption={true}
+        labelOptional={true}
         onChange={inputPersonalDetailsHandler}
         value={personalData.address}
       ></Input>

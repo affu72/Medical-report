@@ -1,4 +1,4 @@
-import IOption from "../../ts/interfaces/Option";
+import IOption from "../../ts/Option";
 import CreatableSelect from "react-select/creatable";
 import { useMyFormContext } from "../../Context/MyFormContext";
 

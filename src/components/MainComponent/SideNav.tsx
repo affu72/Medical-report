@@ -18,7 +18,7 @@ const SideNav = () => {
       tabIndex === index
         ? "font-semibold transition-all duration-100 bg-blue-300 min-xl:translate-x-3 xl:translate-y-4"
         : ""
-    } border-cyan-500 xl:w-auto xl:py-2 xl:px-1`;
+    } border-cyan-500 xl:w-auto xl:py-2 xl:px-1 rounded-4 rounded`;
 
   return (
     <div className="flex w-full flex-col bg-slate-100 p-2 drop-shadow-md  box-border  xl:flex-row xl:justify-between xl:basis-auto md:flex-col md:justify-start md:gap-4">

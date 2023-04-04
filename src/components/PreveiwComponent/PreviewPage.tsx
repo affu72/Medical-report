@@ -1,13 +1,14 @@
-import React, { createRef, useRef } from "react";
+import React, { useRef } from "react";
 import Header from "./Header";
 import PersonalInfoPreview from "./PersonalDetailPreview";
 import MedicalRecordPreview from "./MedicalRecordPreview";
 import { useMyFormContext } from "../../Context/MyFormContext";
 import MedicineTable from "./MedicineTable";
 import Pdf from "react-to-pdf";
+import Button from "../CustomComp/Button";
 
 function PreviewPage() {
-  const { tabIndex, personalData } = useMyFormContext();
+  const { tabIndex, personalData, setHasDoctorData } = useMyFormContext();
 
   const ref = useRef(null);
 
@@ -20,8 +21,17 @@ function PreviewPage() {
 
   //JSX
   return (
-    <>
-      <div ref={ref} className="w-[800px] min-h-screen p-6 flex-none relative">
+    <div className="flex flex-col gap-4  bg-slate-100  p-4">
+      <div className="w-full flex bg-slate-100 py-[6px] px-2 drop-shadow-md box-border text-right justify-between md:hidden">
+        <Button
+          value="Edit Doctor's Details"
+          bgColor="bg-blue-500"
+          onClick={() => {
+            localStorage.removeItem("doctorData");
+            setHasDoctorData(false);
+          }}
+        />
+
         <Pdf
           targetRef={ref}
           filename={`${personalData.firstName}.pdf`}
@@ -36,29 +46,19 @@ function PreviewPage() {
                 form="main-form"
                 type="submit"
                 onClick={toPdf}
-                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded absolute  bottom-[2.5%] -left-8 -translate-x-full xl:bottom-[2.5%] xl:-left-8 xl:-translate-x-full md:left-[650px] md:bottom-[102.5%] lg:bottom-[3%] lg:-left-8`}
+                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded `}
               >
                 Generate Pdf
               </button>
             )
           }
         </Pdf>
-        <Header
-          clinicName="Care Medical Center"
-          doctorName="B.S Tiwari"
-          degree={{ degree1: "M.B.B.S", degree2: "M.D", degree3: "M.S" }}
-          regNumber={270999}
-          phone={{ phone1: 987654321 }}
-          address={{
-            address1: "123 Main road near Axis Bank",
-            address2: "Kothrud",
-            city: "Pune",
-            pin: 416086,
-            state: "Mumbai",
-          }}
-          time={{ open: "09:00AM", close: "02:00PM" }}
-          closingDay="Thursday"
-        ></Header>
+      </div>
+      <div
+        ref={ref}
+        className="w-[800px] min-h-screen px-6 flex-none relative bg-white"
+      >
+        <Header></Header>
 
         <PersonalInfoPreview />
 
@@ -81,7 +81,7 @@ function PreviewPage() {
       >
         <button>Generate Pdf</button>
       </PDFDownloadLink> */}
-    </>
+    </div>
   );
 }
 

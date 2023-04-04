@@ -7,6 +7,7 @@ interface PropButton<T> {
   type?: T;
   margin?: number;
   tabIndex?: number;
+  className?: string;
 }
 type buttonType = "button" | "submit" | "reset";
 const Button: React.FC<PropButton<buttonType>> = ({
@@ -16,6 +17,7 @@ const Button: React.FC<PropButton<buttonType>> = ({
   onClick,
   margin = 0,
   tabIndex,
+  className,
 }) => {
   const bgHover = bgColor.slice(0, bgColor.length - 3) + "700";
 
@@ -23,7 +25,7 @@ const Button: React.FC<PropButton<buttonType>> = ({
     <button
       tabIndex={tabIndex}
       type={type}
-      className={`${bgColor} hover:${bgHover} text-white font-bold py-2 px-4 rounded mt-${margin}`}
+      className={`${bgColor} hover:${bgHover} text-white font-bold py-2 px-4 rounded mt-${margin} ${className}`}
       onClick={onClick}
       // style={{ backgroundColor: bgColor }}
     >
