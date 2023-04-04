@@ -38,20 +38,20 @@ const Medicines = ({ register, errors, control }: PropRHF) => {
       {fields.map((medicine, index) => (
         <div
           key={medicine.id}
-          className="xl:justify-between shadow-xl px-4 rounded-md py-4 flex-1"
+          className="xl:justify-between px-4 rounded-md py-4 flex gap-4 items-center border-2"
         >
-          <div className="relative border-2 border-red-500">
+          <div className="relative flex w-full border-2 border-gray-300  rounded-md">
             <input
               type="text"
               placeholder="Medicine name..."
               {...register(`medicines.${index}.name`)}
               defaultValue={medicine.name}
-              className={`border-2 border-gray-300 py-2 px-4 rounded-md`}
+              className={`py-2 px-4 w-full`}
             />
 
             <select
               aria-label="Select medicine type"
-              className="absolute border-l-2 rounded-r-md text-slate-500 bg-transparent outline-none inline-block"
+              className="absolute border-l-2 text-slate-500 bg-transparent outline-none inline-block right-0 bottom-1/2 translate-y-1/2 py-2 px-2"
               {...register(`medicines.${index}.type`)}
               defaultValue={medicine.type}
             >
@@ -67,7 +67,7 @@ const Medicines = ({ register, errors, control }: PropRHF) => {
           <input
             type="text"
             placeholder="dose"
-            className={`border-2 border-gray-300 py-2 px-4 rounded-md`}
+            className={`border-2 border-gray-300 py-2 px-4 rounded-md w-1/4`}
             {...register(`medicines.${index}.dose`)}
             defaultValue={medicine.dose}
           />
@@ -79,12 +79,13 @@ const Medicines = ({ register, errors, control }: PropRHF) => {
               margin={6}
               bgColor="bg-red-500"
               onClick={() => remove(index)}
+              className=""
             />
           )}
         </div>
       ))}
 
-      <div className="flex gap-4">
+      <div className="flex gap-4 mt-4">
         <Button
           type="button"
           value="Add Medicine"

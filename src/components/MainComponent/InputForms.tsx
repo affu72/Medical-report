@@ -46,7 +46,7 @@ const InputForms = () => {
   };
 
   return (
-    <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto ">
+    <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto">
       <form id="main-form" onSubmit={submitHandler} className="xs:pb-8">
         {formSection[tabIndex]}
       </form>
