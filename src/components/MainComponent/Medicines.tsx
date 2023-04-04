@@ -17,6 +17,7 @@ export type PropRHF = {
   register: UseFormRegister<IFormValue>;
   errors: any;
   control: Control<IFormValue>;
+  setValue?: any;
 };
 
 const Medicines = ({ register, errors, control }: PropRHF) => {

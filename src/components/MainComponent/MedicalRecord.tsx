@@ -1,12 +1,15 @@
 import IOption from "../../ts/Option";
 import CreatableSelect from "react-select/creatable";
 import { useMyFormContext } from "../../Context/MyFormContext";
+import { option } from "../../ts/Contants";
+import { Controller } from "react-hook-form";
+import { PropRHF } from "./Medicines";
 
 const components = {
   DropdownIndicator: null,
 };
 
-const MedicalRecord = () => {
+const MedicalRecord = ({ control, setValue }: PropRHF) => {
   const {
     inputMedicalHistory,
     setInputMedicalHistory,
@@ -20,46 +23,26 @@ const MedicalRecord = () => {
     handleKeySymptoms,
   } = useMyFormContext();
 
-  const option: IOption[] = [
-    { label: "Abdominal pain", value: "abdominal pain" },
-    { label: "Blood in stool", value: "blood in stool" },
-    { label: "Chest pain", value: "chest pain" },
-    { label: "Constipation", value: "constipation" },
-    { label: "Cough", value: "cough" },
-    { label: "Diarrhea", value: "diarrhea" },
-    { label: "Dizziness", value: "dizziness" },
-    { label: "Fatigue", value: "fatigue" },
-    { label: "Fever", value: "fever" },
-    { label: "Headache", value: "headache" },
-    { label: "Heart palpitations", value: "heart palpitations" },
-    { label: "Joint pain", value: "joint pain" },
-    { label: "Nausea and vomiting", value: "nausea and vomiting" },
-    { label: "Shortness of breath", value: "shortness of breath" },
-    { label: "Skin rash", value: "skin rash" },
-    { label: "Sore throat", value: "sore throat" },
-    { label: "Urinary problems", value: "urinary problems" },
-    { label: "Vision problems", value: "vision problems" },
-  ];
-
   return (
     <div className="xs:pb-8 space-y-4 ">
       <div>
         <label className=" font-semibold">Medical History</label>
-        <CreatableSelect
-          components={components}
-          inputValue={inputMedicalHistory}
-          isClearable
-          isMulti
-          menuIsOpen={false}
-          onChange={(newValue) => {
-            setMedicalHistories(newValue as IOption[]);
-          }}
-          onInputChange={(newValue) => {
-            setInputMedicalHistory(newValue);
-          }}
-          onKeyDown={handleKeyDown}
-          placeholder="Type Medical history and press enter..."
-          value={medicalHistories}
+
+        <Controller
+          control={control}
+          name="medicalRecord.histories"
+          render={({ field }) => (
+            <CreatableSelect
+              components={components}
+              isClearable
+              isMulti
+              menuIsOpen={false}
+              onChange={(value) => console.log(value)}
+              onInputChange={(value) => console.log(value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Type Medical history and press enter..."
+            />
+          )}
         />
       </div>
 

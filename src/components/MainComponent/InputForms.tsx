@@ -6,16 +6,22 @@ import PersonaDetails, { IPersonalData } from "./PersonaDetails";
 import { useMyFormContext } from "../../Context/MyFormContext";
 import Button from "../CustomComp/Button";
 import { useForm } from "react-hook-form";
+import IOption from "../../ts/Option";
 
+interface IMedicalRecord {
+  histories: IOption[];
+  symptoms: IOption[];
+}
 export interface IFormValue {
   medicines: IMedicine[];
   personalDetails: IPersonalData;
   medicalBills: IMedicalBill[];
-  medicalRecord: { name: string; value: string }[];
+  medicalRecord: IMedicalRecord;
 }
 
 const InputForms = () => {
   const {
+    setValue,
     register,
     handleSubmit,
     control,
@@ -24,6 +30,10 @@ const InputForms = () => {
     defaultValues: {
       medicines: [{ name: "", dose: "", id: 0, type: "" }],
       medicalBills: [{ billName: "", id: 0, billValue: "" }],
+      medicalRecord: {
+        histories: [{ label: "", value: "" }],
+        symptoms: [{ label: "", value: "" }],
+      },
     },
     shouldUnregister: false,
   });
@@ -32,7 +42,13 @@ const InputForms = () => {
 
   const formSection = [
     <PersonaDetails key={0} />,
-    <MedicalRecord key={1} />,
+    <MedicalRecord
+      key={1}
+      control={control}
+      register={register}
+      errors={errors}
+      setValue={setValue}
+    />,
     <Medicines key={2} register={register} errors={errors} control={control} />,
     <MedicalBill
       key={3}
