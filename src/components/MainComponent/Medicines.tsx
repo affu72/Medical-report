@@ -76,7 +76,6 @@ const Medicines = ({ register, errors, control }: PropRHF) => {
             <Button
               type="button"
               value="x"
-              margin={6}
               bgColor="bg-red-500"
               onClick={() => remove(index)}
               className=""

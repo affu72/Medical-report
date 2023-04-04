@@ -31,52 +31,42 @@ const MedicalBill = ({ register, errors, control }: PropRHF) => {
     setBills(newBills);
   };
 
-  const handleRemoveClick = (index: number) => {
-    const list = [...bills];
-    list.splice(index, 1);
-    setBills(list);
-  };
-
   return (
-    <div className="flex flex-col space-y-2  md:w-full md:item-between">
-      {fields.map((bill) => (
+    <div className="">
+      {fields.map((bill, index) => (
         <div
           key={bill.id}
-          className="flex space-x-4 place-items-start xl:justify-between"
+          className="px-4 rounded-md py-4 flex gap-4 items-center border-2"
         >
           <Input
-            name="billName"
             placeholder="Bill Name"
             value={bill.billName}
-            onChange={(event) => handlerMedicalBill(event, bill.id)}
-            label="Bill Name"
+            {...register(`medicalBills.${index}.billName`)}
           />
 
           <Input
             placeholder="Bill Value"
             type="number"
-            name="billValue"
             value={bill.billValue}
-            onChange={(event) => handlerMedicalBill(event, bill.id)}
-            label="Bill value"
+            {...register(`medicalBills.${index}.billValue`)}
           />
 
-          {bills.length !== 1 && (
+          {fields.length === 1 || (
             <Button
               type="button"
               value="x"
               bgColor="bg-red-500"
-              margin={0.5}
-              onClick={() => handleRemoveClick(bill.id)}
+              onClick={() => remove(index)}
             />
           )}
         </div>
       ))}
+
       <Button
         type="button"
         value="Add Anoher Bill"
         bgColor="bg-blue-500"
-        onClick={handleAddBill}
+        onClick={() => append({ billName: "", billValue: "", id: 0 })}
       />
     </div>
   );

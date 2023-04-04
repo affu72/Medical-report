@@ -23,6 +23,7 @@ const InputForms = () => {
   } = useForm<IFormValue>({
     defaultValues: {
       medicines: [{ name: "", dose: "", id: 0, type: "" }],
+      medicalBills: [{ billName: "", id: 0, billValue: "" }],
     },
     shouldUnregister: false,
   });
@@ -47,34 +48,39 @@ const InputForms = () => {
 
   return (
     <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto">
-      <form id="main-form" onSubmit={submitHandler} className="xs:pb-8">
+      <form
+        id="main-form"
+        onSubmit={handleSubmit((data) => console.log(data))}
+        className="xs:pb-8"
+      >
         {formSection[tabIndex]}
+
+        <div className="mt-12 flex justify-between">
+          {tabIndex >= 1 && (
+            <Button
+              type="button"
+              value="Back"
+              tabIndex={tabIndex}
+              bgColor={"bg-blue-300"}
+              onClick={handleBackClick}
+              className="mr-20"
+            />
+          )}
+
+          {tabIndex < 3 && (
+            <button
+              type="submit"
+              form="main-form"
+              value="Save & Next"
+              tabIndex={tabIndex}
+              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  bottom-4 right-16`}
+              onClick={tabClickHandler}
+            >
+              Save & Next
+            </button>
+          )}
+        </div>
       </form>
-
-      <div className=" justify-between flex">
-        {tabIndex >= 1 && (
-          <Button
-            type="button"
-            value="Back"
-            tabIndex={tabIndex}
-            bgColor={"bg-blue-300"}
-            onClick={handleBackClick}
-          />
-        )}
-
-        {tabIndex < 3 && (
-          <button
-            type="button"
-            form="main-form"
-            value="Save & Next"
-            tabIndex={tabIndex}
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  bottom-4 right-16`}
-            onClick={tabClickHandler}
-          >
-            Save & Next
-          </button>
-        )}
-      </div>
     </div>
   );
 };
