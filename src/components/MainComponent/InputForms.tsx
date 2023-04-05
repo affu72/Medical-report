@@ -1,7 +1,7 @@
 import Medicines, { IMedicine } from "./Medicines";
 import MedicalRecord from "./MedicalRecord";
 import MedicalBill, { IMedicalBill } from "./MedicalBill";
-import { FormEvent } from "react";
+import { FormEvent, useEffect, useRef } from "react";
 import PersonaDetails, { IPersonalData } from "./PersonaDetails";
 import { useMyFormContext } from "../../Context/MyFormContext";
 import Button from "../CustomComp/Button";
@@ -22,9 +22,11 @@ export interface IFormValue {
 const InputForms = () => {
   const {
     setValue,
+    getValues,
     register,
     handleSubmit,
     control,
+    setFocus,
     formState: { errors },
   } = useForm<IFormValue>({
     defaultValues: {
@@ -67,7 +69,13 @@ const InputForms = () => {
       errors={errors}
       setValue={setValue}
     />,
-    <Medicines key={2} register={register} errors={errors} control={control} />,
+    <Medicines
+      key={2}
+      register={register}
+      errors={errors}
+      control={control}
+      getValues={getValues}
+    />,
     <MedicalBill
       key={3}
       register={register}
@@ -79,6 +87,10 @@ const InputForms = () => {
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
+
+  useEffect(() => {
+    setFocus(`medicines.${0}.name`);
+  });
 
   return (
     <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto">

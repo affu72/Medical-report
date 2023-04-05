@@ -7,6 +7,7 @@ import { getInputClassName } from "../../ts/Contants";
 import { ErrorMessage } from "@hookform/error-message";
 import FormError from "../CustomComp/FormError";
 import { error } from "console";
+import { useEffect } from "react";
 
 export interface IMedicine {
   id: number;
@@ -21,9 +22,10 @@ export type PropRHF = {
   errors: any;
   control: Control<IFormValue>;
   setValue?: any;
+  getValues?: any;
 };
 
-const Medicines = ({ register, errors, control }: PropRHF) => {
+const Medicines = ({ register, errors, control, getValues }: PropRHF) => {
   const { append, fields, remove } = useFieldArray({
     name: "medicines",
     control,
@@ -37,12 +39,14 @@ const Medicines = ({ register, errors, control }: PropRHF) => {
     medicineInputChangeHandler,
   } = useMyFormContext();
 
-  const isPrevFieldEmpty = (fields: Array<any>) =>
-    fields.at(-1).name === "" &&
-    fields.at(-1).type === "" &&
-    fields.at(-1).dose === "";
-
-  const showError = () => <p>Error</p>;
+  const isPrevFieldEmpty = (fields: Array<any>) => {
+    if (fields.length === 0) return false;
+    return (
+      fields.at(-1).name === "" ||
+      fields.at(-1).type === "" ||
+      fields.at(-1).dose === ""
+    );
+  };
 
   return (
     <div className="flex flex-col gap-8">
@@ -113,11 +117,8 @@ const Medicines = ({ register, errors, control }: PropRHF) => {
           value="Add Medicine"
           bgColor={"bg-blue-500"}
           onClick={() => {
-            if (isPrevFieldEmpty(fields) === false)
+            if (!isPrevFieldEmpty(getValues("medicines")))
               append({ name: "", dose: "", type: "", id: 0 });
-            else {
-              showError();
-            }
           }}
         />
 
@@ -125,7 +126,7 @@ const Medicines = ({ register, errors, control }: PropRHF) => {
           type="button"
           bgColor={"bg-yellow-500"}
           value="Clear All"
-          onClick={clearMedicineHandler}
+          onClick={() => remove()}
         />
       </div>
     </div>
