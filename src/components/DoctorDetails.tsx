@@ -74,7 +74,7 @@ const DoctorDetails = () => {
             )}
           />
           {errors.clinicName && (
-            <FormError errors={errors} inputName="clinicName" />
+            <FormError errors={errors} name="clinicName" />
           )}
         </div> */}
 
@@ -94,9 +94,7 @@ const DoctorDetails = () => {
               },
             })}
           />
-          {errors.doctorName && (
-            <FormError errors={errors} inputName="doctorName" />
-          )}
+          {errors.doctorName && <FormError errors={errors} name="doctorName" />}
         </div>
 
         <div>
@@ -116,9 +114,7 @@ const DoctorDetails = () => {
             })}
           />
 
-          {errors.regNumber && (
-            <FormError errors={errors} inputName="regNumber" />
-          )}
+          {errors.regNumber && <FormError errors={errors} name="regNumber" />}
         </div>
 
         <div>
@@ -138,7 +134,7 @@ const DoctorDetails = () => {
             })}
           />
           {errors.clinicAddress && (
-            <FormError errors={errors} inputName="clinicAddress" />
+            <FormError errors={errors} name="clinicAddress" />
           )}
         </div>
 
@@ -171,7 +167,7 @@ const DoctorDetails = () => {
             })}
           />
           {errors.doctorPhoneNumber && (
-            <FormError errors={errors} inputName="doctorPhoneNumber" />
+            <FormError errors={errors} name="doctorPhoneNumber" />
           )}
         </div>
 
@@ -192,7 +188,7 @@ const DoctorDetails = () => {
             })}
           />
           {errors.qualification && (
-            <FormError errors={errors} inputName="qualification" />
+            <FormError errors={errors} name="qualification" />
           )}
         </div>
 
@@ -212,7 +208,7 @@ const DoctorDetails = () => {
             })}
           />
           {errors.openingTime && (
-            <FormError errors={errors} inputName="clinicName" />
+            <FormError errors={errors} name="clinicName" />
           )}
         </div>
 
@@ -232,7 +228,7 @@ const DoctorDetails = () => {
             })}
           />
           {errors.closingTime && (
-            <FormError errors={errors} inputName="closingTime" />
+            <FormError errors={errors} name="closingTime" />
           )}
         </div>
 
@@ -253,7 +249,7 @@ const DoctorDetails = () => {
               },
             })}
           />
-          {errors.logo && <FormError errors={errors} inputName="logo" />}
+          {errors.logo && <FormError errors={errors} name="logo" />}
         </div>
 
         <div>
@@ -272,9 +268,7 @@ const DoctorDetails = () => {
               },
             })}
           />
-          {errors.closingDay && (
-            <FormError errors={errors} inputName="closingDay" />
-          )}
+          {errors.closingDay && <FormError errors={errors} name="closingDay" />}
         </div>
 
         <div className=" flex justify-between mt-8 col-span-2 relative">

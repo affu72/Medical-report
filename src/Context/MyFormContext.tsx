@@ -37,9 +37,6 @@ interface IFormContext {
   ) => void;
   removeMedicineHandler: (index: number) => void;
   clearMedicineHandler: () => void;
-  bills: IMedicalBill[];
-  setBills: (newBills: IMedicalBill[]) => void;
-  handleAddBill: () => void;
   showFormHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
   tabIndex: number;
   setTabIndex: (tabIndex: number) => void;
@@ -110,7 +107,7 @@ export const MyFormContextProvider = ({
 
   //medical bills
   const [bills, setBills] = useState<IMedicalBill[]>([
-    { billName: "", billValue: "", id: 0 },
+    { billName: "", billValue: null, id: 0 },
   ]);
 
   const [tabIndex, setTabIndex] = useState(0);
@@ -226,23 +223,6 @@ export const MyFormContextProvider = ({
 
     //Medical Bill
 
-    const handleAddBill = () => {
-      if (
-        bills[bills.length - 1].billName === "" ||
-        bills[bills.length - 1].billValue === ""
-      ) {
-        setTimeout(() => {
-          setError(false);
-        }, 3000);
-        return;
-      }
-
-      setBills((prev) => [
-        ...prev,
-        { billName: "", billValue: "", id: prev[prev.length - 1]["id"] + 1 },
-      ]);
-    };
-
     const showFormHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
       setTabIndex(+event.currentTarget.value);
     };
@@ -270,9 +250,6 @@ export const MyFormContextProvider = ({
       removeMedicineHandler,
       clearMedicineHandler,
       addMedicine,
-      bills,
-      setBills,
-      handleAddBill,
       showFormHandler,
       tabIndex,
       setTabIndex,
@@ -300,8 +277,7 @@ export const MyFormContextProvider = ({
     setSymptoms,
     medicines,
     setMedicines,
-    bills,
-    setBills,
+
     tabIndex,
     error,
     doctorData,

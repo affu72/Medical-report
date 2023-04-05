@@ -8,7 +8,7 @@ export interface IPersonalData {
   city: string;
   firstName: string;
   lastName: string;
-  age: number;
+  age: number | null;
   mobile: string;
   gender: string;
   state: string;
@@ -17,8 +17,6 @@ export interface IPersonalData {
 
 function PersonaDetails({ control, errors, register }: PropRHF) {
   const { personalData, inputPersonalDetailsHandler } = useMyFormContext();
-
-  console.log(errors);
 
   return (
     <div className="">
@@ -62,7 +60,6 @@ function PersonaDetails({ control, errors, register }: PropRHF) {
               type="radio"
               id="male"
               className="mt-0"
-              onChange={inputPersonalDetailsHandler}
               value={"male"}
             />
           </div>
@@ -75,7 +72,9 @@ function PersonaDetails({ control, errors, register }: PropRHF) {
               Female
             </label>
             <input
-              {...register("personalDetails.gender")}
+              {...register("personalDetails.gender", {
+                required: "This field is required",
+              })}
               type="radio"
               id="female"
               className="mt-0"

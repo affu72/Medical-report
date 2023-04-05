@@ -3,10 +3,11 @@ import Input from "../CustomComp/Input";
 import { useMyFormContext } from "../../Context/MyFormContext";
 import { PropRHF } from "./Medicines";
 import { useFieldArray } from "react-hook-form";
+import InputRHF from "../CustomComp/InputRHF";
 
 export interface IMedicalBill {
   billName: string;
-  billValue: string;
+  billValue: number | null;
   id: number;
 }
 
@@ -16,21 +17,6 @@ const MedicalBill = ({ register, errors, control }: PropRHF) => {
     control,
   });
 
-  const { bills, setBills, handleAddBill } = useMyFormContext();
-
-  const handlerMedicalBill = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const { value, name } = event.target;
-
-    const newBills = [...bills];
-
-    newBills[index][name as "billName" | "billValue"] = value;
-
-    setBills(newBills);
-  };
-
   return (
     <div className="">
       {fields.map((bill, index) => (
@@ -38,17 +24,17 @@ const MedicalBill = ({ register, errors, control }: PropRHF) => {
           key={bill.id}
           className="px-4 rounded-md py-4 flex gap-4 items-center border-2"
         >
-          <Input
+          <InputRHF
             placeholder="Bill Name"
-            value={bill.billName}
-            {...register(`medicalBills.${index}.billName`)}
+            control={control}
+            name={`medicalBills.${index}.billName`}
           />
 
-          <Input
+          <InputRHF
             placeholder="Bill Value"
             type="number"
-            value={bill.billValue}
-            {...register(`medicalBills.${index}.billValue`)}
+            control={control}
+            name={`medicalBills.${index}.billValue`}
           />
 
           {fields.length === 1 || (
@@ -66,7 +52,7 @@ const MedicalBill = ({ register, errors, control }: PropRHF) => {
         type="button"
         value="Add Anoher Bill"
         bgColor="bg-blue-500"
-        onClick={() => append({ billName: "", billValue: "", id: 0 })}
+        onClick={() => append({ billName: "", billValue: null, id: 0 })}
       />
     </div>
   );

@@ -29,7 +29,7 @@ const InputForms = () => {
   } = useForm<IFormValue>({
     defaultValues: {
       medicines: [{ name: "", dose: "", id: 0, type: "" }],
-      medicalBills: [{ billName: "", id: 0, billValue: "" }],
+      medicalBills: [{ billName: "", id: 0, billValue: null }],
       medicalRecord: {
         histories: { label: "", value: "" },
         symptoms: { label: "", value: "" },
@@ -37,7 +37,7 @@ const InputForms = () => {
       personalDetails: {
         firstName: "",
         lastName: "",
-        age: 0,
+        age: null,
         gender: "",
         mobile: "",
         address: "",
@@ -45,6 +45,9 @@ const InputForms = () => {
         state: "",
       },
     },
+    criteriaMode: "all",
+    mode: "all",
+
     // shouldUnregister: false,
   });
 
