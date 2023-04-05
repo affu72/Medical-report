@@ -31,7 +31,7 @@ const InputRHF = ({
         control={control}
         name={name}
         render={({
-          field: { onChange, onBlur, value, name, ref },
+          field: { onChange, onBlur, value, name },
           fieldState: { invalid, isTouched, isDirty },
           formState: { errors },
         }) => {
@@ -41,7 +41,9 @@ const InputRHF = ({
                 id={id}
                 onChange={(e) => onChange(e.target.value)}
                 className={getInputClassName(
-                  `${errors?.name ? " outline-red-700" : ""} ${className}`
+                  `${
+                    errors.name?.type === "required" ? " outline-red-700" : ""
+                  }`
                 )}
                 value={value}
                 placeholder={placeholder}

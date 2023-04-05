@@ -54,7 +54,7 @@ const Medicines = ({ register, errors, control, getValues }: PropRHF) => {
         <>
           <div
             key={medicine.id}
-            className="xl:justify-between px-4 rounded-md py-4 flex gap-4 items-center border-2 flex-wrap"
+            className="xl:justify-between px-4 rounded-md py-4 flex items-center border-2 flex-wrap "
           >
             <div className="relative flex w-2/3 border-2 border-gray-300  rounded-md">
               <input

@@ -11,7 +11,7 @@ export interface IMedicalBill {
   id: number;
 }
 
-const MedicalBill = ({ register, errors, control }: PropRHF) => {
+const MedicalBill = ({ register, errors, control, getValues }: PropRHF) => {
   const { fields, remove, append } = useFieldArray({
     name: "medicalBills",
     control,
@@ -52,7 +52,15 @@ const MedicalBill = ({ register, errors, control }: PropRHF) => {
         type="button"
         value="Add Anoher Bill"
         bgColor="bg-blue-500"
-        onClick={() => append({ billName: "", billValue: null, id: 0 })}
+        onClick={() => {
+          if (
+            getValues().medicalBills.at(-1).billName === "" ||
+            getValues().medicalBills.at(-1).billValue === null
+          )
+            return;
+
+          append({ billName: "", billValue: null, id: 0 });
+        }}
       />
     </div>
   );

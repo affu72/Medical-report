@@ -81,6 +81,7 @@ const InputForms = () => {
       register={register}
       errors={errors}
       control={control}
+      getValues={getValues}
     />,
   ];
 
@@ -89,6 +90,7 @@ const InputForms = () => {
   };
 
   useEffect(() => {
+    setFocus(`medicalBills.${0}.billName`);
     setFocus(`medicines.${0}.name`);
   });
 
