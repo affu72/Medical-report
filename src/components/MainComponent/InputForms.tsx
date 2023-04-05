@@ -9,8 +9,8 @@ import { useForm } from "react-hook-form";
 import IOption from "../../ts/Option";
 
 interface IMedicalRecord {
-  histories: IOption[];
-  symptoms: IOption[];
+  histories: IOption;
+  symptoms: IOption;
 }
 export interface IFormValue {
   medicines: IMedicine[];
@@ -31,17 +31,32 @@ const InputForms = () => {
       medicines: [{ name: "", dose: "", id: 0, type: "" }],
       medicalBills: [{ billName: "", id: 0, billValue: "" }],
       medicalRecord: {
-        histories: [{ label: "", value: "" }],
-        symptoms: [{ label: "", value: "" }],
+        histories: { label: "", value: "" },
+        symptoms: { label: "", value: "" },
+      },
+      personalDetails: {
+        firstName: "",
+        lastName: "",
+        age: 0,
+        gender: "",
+        mobile: "",
+        address: "",
+        city: "",
+        state: "",
       },
     },
-    shouldUnregister: false,
+    // shouldUnregister: false,
   });
 
   const { tabClickHandler, handleBackClick, tabIndex } = useMyFormContext();
 
   const formSection = [
-    <PersonaDetails key={0} />,
+    <PersonaDetails
+      key={0}
+      register={register}
+      control={control}
+      errors={errors}
+    />,
     <MedicalRecord
       key={1}
       control={control}
@@ -85,7 +100,7 @@ const InputForms = () => {
 
           {tabIndex < 3 && (
             <button
-              type="submit"
+              type="button"
               form="main-form"
               value="Save & Next"
               tabIndex={tabIndex}
@@ -95,6 +110,7 @@ const InputForms = () => {
               Save & Next
             </button>
           )}
+          <Button type="submit" value="preview" bgColor="bg-yellow-500" />
         </div>
       </form>
     </div>

@@ -1,33 +1,36 @@
 import React from "react";
 import { getInputClassName } from "../../ts/Contants";
 import FormError from "./FormError";
-import { type } from "os";
+import { Controller } from "react-hook-form";
 
 interface PropInput {
   name: string;
-  register: any;
   label: string;
-  error: any;
+  control: any;
   placeholder: string;
   type?: string;
 }
 
-const InputRHF = ({ register, name, label, error, ...rest }: PropInput) => {
-  console.log(error);
+const InputRHF = ({ name, label, control }: PropInput) => {
   return (
     <div>
       <label>{label}</label>
 
-      <input
-        {...register(name, {
-          required: `This field is Required`,
-        })}
-        className={getInputClassName(
-          `${error[name] ? " outline-red-700" : ""}`
+      <Controller
+        control={control}
+        name={name}
+        render={({
+          field: { onChange, onBlur, value, name, ref },
+          fieldState: { invalid, isTouched, isDirty, error },
+          formState,
+        }) => (
+          <input
+            onChange={(e) => onChange(e.target.value)}
+            className={getInputClassName(`${error ? " outline-red-700" : ""}`)}
+            value={value}
+          />
         )}
-        {...rest}
       />
-      {error[name] && <FormError errors={error} inputName={name} />}
     </div>
   );
 };

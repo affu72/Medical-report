@@ -1,7 +1,8 @@
-import Input from "../CustomComp/Input";
-import IndianStateDropdown from "../CustomComp/IndianStateDropDown";
+import IndianStateDropdown from "../CustomComp/Select";
 import { useMyFormContext } from "../../Context/MyFormContext";
-import { useForm } from "react-hook-form";
+import { PropRHF } from "./Medicines";
+import InputRHF from "../CustomComp/InputRHF";
+import { states } from "../../ts/Contants";
 export interface IPersonalData {
   pin: number | undefined;
   city: string;
@@ -14,57 +15,39 @@ export interface IPersonalData {
   address: string;
 }
 
-type PropType = {
-  getData?: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => void;
-};
-
-function PersonaDetails({ getData }: PropType) {
+function PersonaDetails({ control, errors, register }: PropRHF) {
   const { personalData, inputPersonalDetailsHandler } = useMyFormContext();
 
-  const { register } = useForm({
-    mode: "onChange",
-  });
-
-  const myname = register("firstName", {
-    required: "It is required field",
-  });
+  console.log(errors);
 
   return (
     <div className="">
       <div className="flex gap-8 md:justify-between">
-        <Input
-          name="firstName"
+        <InputRHF
+          name="personalDetails.firstName"
           label="First Name"
           placeholder="First Name"
-          value={personalData.firstName}
-          onChange={inputPersonalDetailsHandler}
-        ></Input>
+          control={control}
+        ></InputRHF>
 
-        <Input
-          name="lastName"
+        <InputRHF
+          name="personalDetails.lastName"
           label="Last Name"
-          placeholder="Last Name"
-          value={personalData.lastName}
-          // onChange={inputPersonalDetailsHandler}
-          onChange={myname.onChange}
-        ></Input>
+          placeholder="Enter last Name"
+          control={control}
+        ></InputRHF>
       </div>
 
-      <Input
-        name="age"
+      <InputRHF
+        name="personalDetails.age"
         label="Age"
         placeholder="Age"
         type="number"
-        onChange={inputPersonalDetailsHandler}
-        value={personalData.age}
-      ></Input>
+        control={control}
+      />
 
       <div className=" flex gap-16 items-center w-full mb-4">
-        <label htmlFor="gender" className="m-0">
-          Gender
-        </label>
+        <label className="m-0">Gender</label>
 
         <div className="flex gap-8">
           <div className="flex items-center gap-4 p-2">
@@ -75,11 +58,12 @@ function PersonaDetails({ getData }: PropType) {
               Male
             </label>
             <input
+              {...register("personalDetails.gender")}
               type="radio"
-              name="gender"
               id="male"
               className="mt-0"
               onChange={inputPersonalDetailsHandler}
+              value={"male"}
             />
           </div>
 
@@ -91,43 +75,38 @@ function PersonaDetails({ getData }: PropType) {
               Female
             </label>
             <input
+              {...register("personalDetails.gender")}
               type="radio"
-              name="gender"
               id="female"
               className="mt-0"
-              onChange={inputPersonalDetailsHandler}
-              value={personalData.gender}
+              value={"female"}
             />
           </div>
         </div>
       </div>
 
-      <Input
-        name="mobile"
+      <InputRHF
+        name="personalDetails.mobile"
         placeholder="Mobile"
         label="Mobile"
         type="number"
-        onChange={inputPersonalDetailsHandler}
-        value={personalData.mobile}
-      ></Input>
+        control={control}
+      ></InputRHF>
 
-      <Input
-        name="address"
+      <InputRHF
+        name="personalDetails.address"
         placeholder="Address"
         label="Address"
-        labelOptional={true}
-        onChange={inputPersonalDetailsHandler}
-        value={personalData.address}
-      ></Input>
+        control={control}
+      ></InputRHF>
 
       <div className="flex justify-between gap-8">
-        <Input
-          name="city"
+        <InputRHF
+          name="personalDetails.city"
           placeholder="City"
           label="City"
-          onChange={inputPersonalDetailsHandler}
-          value={personalData.city}
-        ></Input>
+          control={control}
+        ></InputRHF>
 
         {/* <Input
           name="pin"
@@ -140,8 +119,9 @@ function PersonaDetails({ getData }: PropType) {
         <div className="w-full flex flex-col">
           <label htmlFor="name">State</label>
           <IndianStateDropdown
-            value={personalData.state}
-            onChange={inputPersonalDetailsHandler}
+            control={control}
+            name="personalDetails.state"
+            options={states}
           ></IndianStateDropdown>
         </div>
       </div>

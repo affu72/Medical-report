@@ -9,7 +9,7 @@ const components = {
   DropdownIndicator: null,
 };
 
-const MedicalRecord = ({ control, setValue }: PropRHF) => {
+const MedicalRecord = ({ control, setValue, register }: PropRHF) => {
   const {
     inputMedicalHistory,
     setInputMedicalHistory,
@@ -28,21 +28,17 @@ const MedicalRecord = ({ control, setValue }: PropRHF) => {
       <div>
         <label className=" font-semibold">Medical History</label>
 
-        <Controller
-          control={control}
-          name="medicalRecord.histories"
-          render={({ field }) => (
-            <CreatableSelect
-              components={components}
-              isClearable
-              isMulti
-              menuIsOpen={false}
-              onChange={(value) => console.log(value)}
-              onInputChange={(value) => console.log(value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Type Medical history and press enter..."
-            />
-          )}
+        <CreatableSelect
+          inputValue={inputMedicalHistory}
+          components={components}
+          isClearable
+          isMulti
+          menuIsOpen={false}
+          onKeyDown={handleKeyDown}
+          placeholder="Type Medical history and press enter..."
+          onInputChange={(newValue) => setInputMedicalHistory(newValue)}
+          onChange={(newValue) => setMedicalHistories(newValue as IOption[])}
+          value={medicalHistories}
         />
       </div>
 

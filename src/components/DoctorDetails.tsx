@@ -22,6 +22,7 @@ export interface IDoctorDetails {
 const DoctorDetails = () => {
   const {
     setFocus,
+    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -50,11 +51,10 @@ const DoctorDetails = () => {
         </h2>
 
         <InputRHF
-          label="First Name"
-          name="firstName"
-          register={register}
-          error={errors}
-          placeholder="First Name"
+          label="Clinic Name"
+          name="clinicName"
+          control={control}
+          placeholder="Enter Clinic Name"
         />
 
         {/* <div>
