@@ -1,31 +1,13 @@
-import IOption from "../../ts/Option";
-import CreatableSelect from "react-select/creatable";
-import { useMyFormContext } from "../../Context/MyFormContext";
-import { option } from "../../ts/Contants";
-import { Controller } from "react-hook-form";
-import { PropRHF } from "./Medicines";
-import { getValue } from "@testing-library/user-event/dist/utils";
 import { useState } from "react";
+import CreatableSelect from "react-select/creatable";
+import { option } from "../../ts/Contants";
+import { Controller, useFormContext } from "react-hook-form";
 
-const components = {
-  DropdownIndicator: null,
-};
-
-const MedicalRecord = ({ control, setValue, register, getValues }: PropRHF) => {
+const MedicalRecord = () => {
   const [inputHistory, setInputHistory] = useState("");
   const [inputSymptom, setInputSymptom] = useState("");
 
-  const {
-    inputMedicalHistory,
-    setInputMedicalHistory,
-    medicalHistories,
-    setMedicalHistories,
-    inputSymptoms,
-    setInputSymptoms,
-    symptoms,
-    setSymptoms,
-    handleKeyDown,
-  } = useMyFormContext();
+  const { getValues, setValue, control } = useFormContext();
 
   const keyDownHandler = (
     name: string,
@@ -66,7 +48,7 @@ const MedicalRecord = ({ control, setValue, register, getValues }: PropRHF) => {
           }) => (
             <CreatableSelect
               inputValue={inputHistory}
-              components={components}
+              components={{ DropdownIndicator: null }}
               isClearable
               isMulti
               menuIsOpen={false}

@@ -1,8 +1,7 @@
 import IndianStateDropdown from "../CustomComp/Select";
-import { useMyFormContext } from "../../Context/MyFormContext";
-import { PropRHF } from "./Medicines";
 import InputRHF from "../CustomComp/InputRHF";
 import { states } from "../../ts/Contants";
+import { useFormContext } from "react-hook-form";
 export interface IPersonalData {
   pin: number | undefined;
   city: string;
@@ -15,8 +14,8 @@ export interface IPersonalData {
   address: string;
 }
 
-function PersonaDetails({ control, errors, register }: PropRHF) {
-  const { personalData, inputPersonalDetailsHandler } = useMyFormContext();
+function PersonaDetails() {
+  const { control, register } = useFormContext();
 
   return (
     <div className="">

@@ -1,13 +1,7 @@
-import Input from "../CustomComp/Input";
 import Button from "../CustomComp/Button";
-import { useMyFormContext } from "../../Context/MyFormContext";
-import { Control, UseFormRegister, useFieldArray } from "react-hook-form";
-import { IFormValue } from "./InputForms";
-import { getInputClassName } from "../../ts/Contants";
-import { ErrorMessage } from "@hookform/error-message";
+import { useFieldArray, useFormContext } from "react-hook-form";
+
 import FormError from "../CustomComp/FormError";
-import { error } from "console";
-import { useEffect } from "react";
 
 export interface IMedicine {
   id: number;
@@ -17,27 +11,18 @@ export interface IMedicine {
   quantity?: string;
 }
 
-export type PropRHF = {
-  register: UseFormRegister<IFormValue>;
-  errors: any;
-  control: Control<IFormValue>;
-  setValue?: any;
-  getValues?: any;
-};
+const Medicines = () => {
+  const {
+    control,
+    register,
+    formState: { errors },
+    getValues,
+  } = useFormContext();
 
-const Medicines = ({ register, errors, control, getValues }: PropRHF) => {
   const { append, fields, remove } = useFieldArray({
     name: "medicines",
     control,
   });
-
-  const {
-    addMedicine,
-    medicines,
-    clearMedicineHandler,
-    removeMedicineHandler,
-    medicineInputChangeHandler,
-  } = useMyFormContext();
 
   const isPrevFieldEmpty = (fields: Array<any>) => {
     if (fields.length === 0) return false;
@@ -63,7 +48,6 @@ const Medicines = ({ register, errors, control, getValues }: PropRHF) => {
                 {...register(`medicines.${index}.name`, {
                   required: " Name Required",
                 })}
-                defaultValue={medicine.name}
                 className={`py-2 px-4 w-full`}
               />
 
@@ -73,7 +57,6 @@ const Medicines = ({ register, errors, control, getValues }: PropRHF) => {
                 {...register(`medicines.${index}.type`, {
                   required: "Type Required",
                 })}
-                defaultValue={medicine.type}
               >
                 <option value="" disabled>
                   Type
@@ -91,7 +74,6 @@ const Medicines = ({ register, errors, control, getValues }: PropRHF) => {
               {...register(`medicines.${index}.dose`, {
                 required: "Dose Required",
               })}
-              defaultValue={medicine.dose}
             />
 
             {fields.length === 1 || (

@@ -1,8 +1,5 @@
 import Button from "../CustomComp/Button";
-import Input from "../CustomComp/Input";
-import { useMyFormContext } from "../../Context/MyFormContext";
-import { PropRHF } from "./Medicines";
-import { useFieldArray } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import InputRHF from "../CustomComp/InputRHF";
 
 export interface IMedicalBill {
@@ -11,7 +8,8 @@ export interface IMedicalBill {
   id: number;
 }
 
-const MedicalBill = ({ register, errors, control, getValues }: PropRHF) => {
+const MedicalBill = () => {
+  const { control, getValues } = useFormContext();
   const { fields, remove, append } = useFieldArray({
     name: "medicalBills",
     control,
