@@ -47,8 +47,9 @@ const InputForms = () => {
         state: "",
       },
     },
-    criteriaMode: "all",
-    mode: "all",
+
+    mode: "onBlur",
+    shouldFocusError: true,
 
     // shouldUnregister: false,
   });
