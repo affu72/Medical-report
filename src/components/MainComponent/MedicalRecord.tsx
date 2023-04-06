@@ -12,7 +12,8 @@ const components = {
 };
 
 const MedicalRecord = ({ control, setValue, register, getValues }: PropRHF) => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputHistory, setInputHistory] = useState("");
+  const [inputSymptom, setInputSymptom] = useState("");
 
   const {
     inputMedicalHistory,
@@ -26,24 +27,26 @@ const MedicalRecord = ({ control, setValue, register, getValues }: PropRHF) => {
     handleKeyDown,
   } = useMyFormContext();
 
-  const createOption = (label: string) => ({
-    label,
-    value: label,
-  });
-
-  const handleKeySymptoms = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const keyDownHandler = (
+    name: string,
+    inputValue: string,
+    setInputValue: Function,
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
     if (!inputValue) return;
 
     switch (event.key) {
       case "Enter":
       case "Tab":
-        const value = getValues("medicalRecord.symptoms");
+        const value = getValues(name);
+
+        console.log("value", value);
 
         const newvalue = [...value, { label: inputValue, value: inputValue }];
 
         console.log(newvalue);
 
-        setValue("medicalRecord.symptoms", newvalue);
+        setValue(name, newvalue);
         setInputValue("");
         event.preventDefault();
     }
@@ -51,65 +54,66 @@ const MedicalRecord = ({ control, setValue, register, getValues }: PropRHF) => {
 
   return (
     <div className="xs:pb-8 space-y-4 ">
-      {/* <div>
+      <div>
         <label className="font-semibold">Medical History</label>
 
-        <CreatableSelect
-          inputValue={inputMedicalHistory}
-          components={components}
-          isClearable
-          isMulti
-          menuIsOpen={false}
-          onKeyDown={handleKeyDown}
-          placeholder="Type Medical history and press enter..."
-          onInputChange={(newValue) => setInputMedicalHistory(newValue)}
-          onChange={(newValue) => setMedicalHistories(newValue as IOption[])}
-          value={medicalHistories}
+        <Controller
+          control={control}
+          name="medicalRecord.histories"
+          render={({
+            field: { onChange, value, name },
+            formState: { errors },
+          }) => (
+            <CreatableSelect
+              inputValue={inputHistory}
+              components={components}
+              isClearable
+              isMulti
+              menuIsOpen={false}
+              onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
+                keyDownHandler(name, inputHistory, setInputHistory, event)
+              }
+              placeholder="Type Medical history and press enter..."
+              onInputChange={(newValue) => {
+                setInputHistory(newValue);
+              }}
+              onChange={onChange}
+              value={value}
+            />
+          )}
         />
-      </div> */}
+      </div>
 
-      {/* <div>
+      <div>
         <label className="font-semibold">Symptoms </label>
         <span className="text-sm">
           ( type to search or press enter to create new one )
         </span>
-        <CreatableSelect
-          inputValue={inputSymptoms}
-          isClearable
-          isMulti
-          options={option}
-          onChange={(newValue) => setSymptoms(newValue as IOption[])}
-          onInputChange={(newValue) => {
-            setInputSymptoms(newValue);
-          }}
-          onKeyDown={handleKeySymptoms}
-          placeholder="Type to select or press enter to create..."
-          value={symptoms}
+        <Controller
+          control={control}
+          name={"medicalRecord.symptoms"}
+          render={({
+            field: { onChange, onBlur, value, name },
+            formState: { errors },
+          }) => (
+            <CreatableSelect
+              inputValue={inputSymptom}
+              isClearable
+              isMulti
+              options={option}
+              onChange={onChange}
+              onInputChange={(newValue) => {
+                setInputSymptom(newValue);
+              }}
+              onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
+                keyDownHandler(name, inputSymptom, setInputSymptom, event)
+              }
+              placeholder="Type to select or press enter to create..."
+              value={value}
+            />
+          )}
         />
-      </div> */}
-
-      <Controller
-        control={control}
-        name="medicalRecord.symptoms"
-        render={({
-          field: { onChange, onBlur, value },
-          formState: { errors },
-        }) => (
-          <CreatableSelect
-            inputValue={inputValue}
-            isClearable
-            isMulti
-            options={option}
-            onChange={onChange}
-            onInputChange={(newValue) => {
-              setInputValue(newValue);
-            }}
-            onKeyDown={handleKeySymptoms}
-            placeholder="Type to select or press enter to create..."
-            value={value}
-          />
-        )}
-      />
+      </div>
     </div>
   );
 };

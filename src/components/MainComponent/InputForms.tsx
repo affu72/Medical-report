@@ -1,7 +1,7 @@
 import Medicines, { IMedicine } from "./Medicines";
 import MedicalRecord from "./MedicalRecord";
 import MedicalBill, { IMedicalBill } from "./MedicalBill";
-import { FormEvent, useEffect, useRef } from "react";
+import { FormEvent, useEffect } from "react";
 import PersonaDetails, { IPersonalData } from "./PersonaDetails";
 import { useMyFormContext } from "../../Context/MyFormContext";
 import Button from "../CustomComp/Button";
@@ -9,9 +9,8 @@ import { useForm } from "react-hook-form";
 import IOption from "../../ts/Option";
 
 interface IMedicalRecord {
-  // histories: IOption;
+  histories: IOption[];
   symptoms: IOption[];
-  // inputSymptopms: string;
 }
 export interface IFormValue {
   medicines: IMedicine[];
@@ -34,7 +33,7 @@ const InputForms = () => {
       medicines: [{ name: "", dose: "", id: 0, type: "" }],
       medicalBills: [{ billName: "", id: 0, billValue: null }],
       medicalRecord: {
-        // histories: { label: "", value: "" },
+        histories: [],
         symptoms: [],
       },
       personalDetails: {
@@ -95,7 +94,7 @@ const InputForms = () => {
   useEffect(() => {
     setFocus(`medicalBills.${0}.billName`);
     setFocus(`medicines.${0}.name`);
-  });
+  }, [setFocus]);
 
   return (
     <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto">
