@@ -9,8 +9,9 @@ import { useForm } from "react-hook-form";
 import IOption from "../../ts/Option";
 
 interface IMedicalRecord {
-  histories: IOption;
-  symptoms: IOption;
+  // histories: IOption;
+  symptoms: IOption[];
+  // inputSymptopms: string;
 }
 export interface IFormValue {
   medicines: IMedicine[];
@@ -33,8 +34,8 @@ const InputForms = () => {
       medicines: [{ name: "", dose: "", id: 0, type: "" }],
       medicalBills: [{ billName: "", id: 0, billValue: null }],
       medicalRecord: {
-        histories: { label: "", value: "" },
-        symptoms: { label: "", value: "" },
+        // histories: { label: "", value: "" },
+        symptoms: [],
       },
       personalDetails: {
         firstName: "",
@@ -69,6 +70,7 @@ const InputForms = () => {
       register={register}
       errors={errors}
       setValue={setValue}
+      getValues={getValues}
     />,
     <Medicines
       key={2}
