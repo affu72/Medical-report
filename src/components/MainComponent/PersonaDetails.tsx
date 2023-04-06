@@ -2,6 +2,7 @@ import IndianStateDropdown from "../CustomComp/Select";
 import InputRHF from "../CustomComp/InputRHF";
 import { states } from "../../ts/Contants";
 import { useFormContext } from "react-hook-form";
+import FormError from "../CustomComp/FormError";
 export interface IPersonalData {
   pin: number | undefined;
   city: string;
@@ -15,7 +16,11 @@ export interface IPersonalData {
 }
 
 function PersonaDetails() {
-  const { control, register } = useFormContext();
+  const {
+    control,
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <div className="">
@@ -81,6 +86,7 @@ function PersonaDetails() {
             />
           </div>
         </div>
+        <FormError errors={errors} name={"personalDetails.gender"} />
       </div>
 
       <InputRHF

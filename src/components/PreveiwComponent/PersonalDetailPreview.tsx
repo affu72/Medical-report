@@ -22,12 +22,16 @@ const PersonalInfoPreview = () => {
       <div className="flex justify-between">
         <p>
           <span className="font-bold">Patient Name:</span>
-          {` ${patientData?.personalDetails.firstName} ${patientData?.personalDetails.lastName}`}
+          {` ${patientData?.personalDetails?.firstName ?? ""} ${
+            patientData?.personalDetails?.lastName ?? ""
+          }`}
         </p>
 
         <p>
           <span className="font-bold">Sex / Age: </span>
-          {` ${patientData?.personalDetails.gender} / ${patientData?.personalDetails.age}yr.`}
+          {` ${patientData?.personalDetails?.gender ?? ""} / ${
+            patientData?.personalDetails.age ?? ""
+          }yr.`}
         </p>
       </div>
 
@@ -35,13 +39,15 @@ const PersonalInfoPreview = () => {
         <div>
           <p>
             <span className="font-bold">Address: </span>{" "}
-            {`${patientData?.personalDetails.address} ${patientData?.personalDetails?.city} ${patientData?.personalDetails?.state}`}
+            {`${patientData?.personalDetails?.address ?? ""} ${
+              patientData?.personalDetails?.city ?? ""
+            } ${patientData?.personalDetails?.state ?? ""}`}
           </p>
         </div>
 
         <p>
           <span className="font-bold">Mobile: </span>
-          {patientData?.personalDetails.mobile}
+          {patientData?.personalDetails?.mobile}
         </p>
       </div>
     </div>

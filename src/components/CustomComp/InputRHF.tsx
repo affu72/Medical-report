@@ -30,6 +30,7 @@ const InputRHF = ({
         rules={{ required: "This field is required" }}
         control={control}
         name={name}
+        defaultValue={"Afzal"}
         render={({
           field: { onChange, onBlur, value, name },
           fieldState: { invalid, isTouched, isDirty },
@@ -38,16 +39,15 @@ const InputRHF = ({
           return (
             <>
               <input
-                id={id}
                 onChange={(e) => onChange(e.target.value)}
                 className={getInputClassName(
                   `${
                     errors.name?.type === "required" ? " outline-red-700" : ""
                   }`
                 )}
-                value={value}
                 placeholder={placeholder}
                 type={type}
+                value={value}
               />
 
               <FormError errors={errors} name={name} />

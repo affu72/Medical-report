@@ -40,7 +40,7 @@ const InputForms = () => {
       },
     },
 
-    mode: "onBlur",
+    mode: "all",
     shouldFocusError: true,
   });
 
@@ -59,12 +59,22 @@ const InputForms = () => {
     methods.setFocus(`medicines.${0}.name`);
   }, [methods, methods.setFocus]);
 
+  // useEffect(() => {
+  //   if (methods.formState.isSubmitSuccessful) {
+  //     reset();
+  //   }
+  // }, [methods.formState, data, reset]);
+
   return (
     <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto">
       <FormProvider {...methods}>
         <form
           id="main-form"
-          onSubmit={methods.handleSubmit((data) => patientDataHandler(data))}
+          onSubmit={methods.handleSubmit((data) => {
+            methods.reset();
+            patientDataHandler(data);
+            console.log(data);
+          })}
           className="xs:pb-8"
         >
           {formSection[tabIndex]}
@@ -93,7 +103,11 @@ const InputForms = () => {
                 Save & Next
               </button>
             )}
-            <Button type="submit" value="preview" bgColor="bg-yellow-500" />
+            <Button
+              type="submit"
+              value="preview"
+              bgColor="bg-yellow-500 absolute bottom-5 right-5"
+            />
           </div>
         </form>
       </FormProvider>
