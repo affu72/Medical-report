@@ -12,7 +12,7 @@ interface IMedicalRecord {
   histories: IOption[];
   symptoms: IOption[];
 }
-export interface IFormValue {
+export interface IFormData {
   medicines: IMedicine[];
   personalDetails: IPersonalData;
   medicalBills: IMedicalBill[];
@@ -20,7 +20,7 @@ export interface IFormValue {
 }
 
 const InputForms = () => {
-  const methods = useForm<IFormValue>({
+  const methods = useForm<IFormData>({
     defaultValues: {
       medicines: [{ name: "", dose: "", id: 0, type: "" }],
       medicalBills: [{ billName: "", id: 0, billValue: null }],
@@ -44,7 +44,8 @@ const InputForms = () => {
     shouldFocusError: true,
   });
 
-  const { tabClickHandler, handleBackClick, tabIndex } = useMyFormContext();
+  const { tabClickHandler, handleBackClick, tabIndex, patientDataHandler } =
+    useMyFormContext();
 
   const formSection = [
     <PersonaDetails key={0} />,
@@ -63,7 +64,7 @@ const InputForms = () => {
       <FormProvider {...methods}>
         <form
           id="main-form"
-          onSubmit={methods.handleSubmit((data) => console.log(data))}
+          onSubmit={methods.handleSubmit((data) => patientDataHandler(data))}
           className="xs:pb-8"
         >
           {formSection[tabIndex]}

@@ -2,7 +2,7 @@ import React from "react";
 import { useMyFormContext } from "../../Context/MyFormContext";
 
 function MedicineTable() {
-  const { medicines } = useMyFormContext();
+  const { patientData } = useMyFormContext();
   return (
     <table className="w-full">
       <thead className="  bg-blue-300">
@@ -14,7 +14,7 @@ function MedicineTable() {
         </tr>
       </thead>
       <tbody>
-        {medicines.map((medicine, i) => (
+        {patientData?.medicines.map((medicine, i) => (
           <tr key={medicine.name}>
             <td className="border px-4 py-2">{i + 1}</td>
             <td className="border px-4 py-2">{`${medicine.type}  ${medicine.name}`}</td>

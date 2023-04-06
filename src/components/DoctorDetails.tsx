@@ -57,45 +57,12 @@ const DoctorDetails = () => {
           placeholder="Enter Clinic Name"
         />
 
-        {/* <div>
-          <label>Clinic Name</label>
-
-          <input
-            placeholder="Clinic Name"
-            type="text"
-            {...register("clinicName", {
-              required: {
-                value: true,
-                message: getErrorMsg("Clinic name"),
-              },
-            })}
-            className={getInputClassName(
-              `${errors.clinicName ? " outline-red-700" : ""}`
-            )}
-          />
-          {errors.clinicName && (
-            <FormError errors={errors} name="clinicName" />
-          )}
-        </div> */}
-
-        <div>
-          <label>Doctor's Name</label>
-
-          <input
-            type="text"
-            placeholder={"Doctor's Name"}
-            className={getInputClassName(
-              `${errors.doctorName ? " outline-red-700" : ""}`
-            )}
-            {...register("doctorName", {
-              required: {
-                value: true,
-                message: getErrorMsg("Doctor's Name"),
-              },
-            })}
-          />
-          {errors.doctorName && <FormError errors={errors} name="doctorName" />}
-        </div>
+        <InputRHF
+          label="Clinic Name"
+          name="doctorName"
+          control={control}
+          placeholder="Enter Doctor's Name"
+        />
 
         <div>
           <label>Registration No.</label>

@@ -8,7 +8,7 @@ import Pdf from "react-to-pdf";
 import Button from "../CustomComp/Button";
 
 function PreviewPage() {
-  const { tabIndex, personalData, setHasDoctorData } = useMyFormContext();
+  const { tabIndex, patientData, setHasDoctorData } = useMyFormContext();
 
   const ref = useRef(null);
 
@@ -34,7 +34,7 @@ function PreviewPage() {
 
         <Pdf
           targetRef={ref}
-          filename={`${personalData.firstName}.pdf`}
+          filename={`${patientData?.personalDetails.firstName}.pdf`}
           options={options}
           x={1}
           y={1}
