@@ -22,6 +22,7 @@ export interface IDoctorDetails {
 const DoctorDetails = () => {
   const {
     setFocus,
+    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -50,54 +51,18 @@ const DoctorDetails = () => {
         </h2>
 
         <InputRHF
-          label="First Name"
-          name="firstName"
-          register={register}
-          error={errors}
-          placeholder="First Name"
+          label="Clinic Name"
+          name="clinicName"
+          control={control}
+          placeholder="Enter Clinic Name"
         />
 
-        {/* <div>
-          <label>Clinic Name</label>
-
-          <input
-            placeholder="Clinic Name"
-            type="text"
-            {...register("clinicName", {
-              required: {
-                value: true,
-                message: getErrorMsg("Clinic name"),
-              },
-            })}
-            className={getInputClassName(
-              `${errors.clinicName ? " outline-red-700" : ""}`
-            )}
-          />
-          {errors.clinicName && (
-            <FormError errors={errors} inputName="clinicName" />
-          )}
-        </div> */}
-
-        <div>
-          <label>Doctor's Name</label>
-
-          <input
-            type="text"
-            placeholder={"Doctor's Name"}
-            className={getInputClassName(
-              `${errors.doctorName ? " outline-red-700" : ""}`
-            )}
-            {...register("doctorName", {
-              required: {
-                value: true,
-                message: getErrorMsg("Doctor's Name"),
-              },
-            })}
-          />
-          {errors.doctorName && (
-            <FormError errors={errors} inputName="doctorName" />
-          )}
-        </div>
+        <InputRHF
+          label="Clinic Name"
+          name="doctorName"
+          control={control}
+          placeholder="Enter Doctor's Name"
+        />
 
         <div>
           <label>Registration No.</label>
@@ -116,9 +81,7 @@ const DoctorDetails = () => {
             })}
           />
 
-          {errors.regNumber && (
-            <FormError errors={errors} inputName="regNumber" />
-          )}
+          {errors.regNumber && <FormError errors={errors} name="regNumber" />}
         </div>
 
         <div>
@@ -138,7 +101,7 @@ const DoctorDetails = () => {
             })}
           />
           {errors.clinicAddress && (
-            <FormError errors={errors} inputName="clinicAddress" />
+            <FormError errors={errors} name="clinicAddress" />
           )}
         </div>
 
@@ -171,7 +134,7 @@ const DoctorDetails = () => {
             })}
           />
           {errors.doctorPhoneNumber && (
-            <FormError errors={errors} inputName="doctorPhoneNumber" />
+            <FormError errors={errors} name="doctorPhoneNumber" />
           )}
         </div>
 
@@ -192,7 +155,7 @@ const DoctorDetails = () => {
             })}
           />
           {errors.qualification && (
-            <FormError errors={errors} inputName="qualification" />
+            <FormError errors={errors} name="qualification" />
           )}
         </div>
 
@@ -212,7 +175,7 @@ const DoctorDetails = () => {
             })}
           />
           {errors.openingTime && (
-            <FormError errors={errors} inputName="clinicName" />
+            <FormError errors={errors} name="clinicName" />
           )}
         </div>
 
@@ -232,7 +195,7 @@ const DoctorDetails = () => {
             })}
           />
           {errors.closingTime && (
-            <FormError errors={errors} inputName="closingTime" />
+            <FormError errors={errors} name="closingTime" />
           )}
         </div>
 
@@ -253,7 +216,7 @@ const DoctorDetails = () => {
               },
             })}
           />
-          {errors.logo && <FormError errors={errors} inputName="logo" />}
+          {errors.logo && <FormError errors={errors} name="logo" />}
         </div>
 
         <div>
@@ -272,9 +235,7 @@ const DoctorDetails = () => {
               },
             })}
           />
-          {errors.closingDay && (
-            <FormError errors={errors} inputName="closingDay" />
-          )}
+          {errors.closingDay && <FormError errors={errors} name="closingDay" />}
         </div>
 
         <div className=" flex justify-between mt-8 col-span-2 relative">

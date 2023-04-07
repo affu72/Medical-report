@@ -1,75 +1,116 @@
+import { useEffect } from "react";
 import Medicines, { IMedicine } from "./Medicines";
 import MedicalRecord from "./MedicalRecord";
 import MedicalBill, { IMedicalBill } from "./MedicalBill";
-import { FormEvent } from "react";
 import PersonaDetails, { IPersonalData } from "./PersonaDetails";
 import { useMyFormContext } from "../../Context/MyFormContext";
 import Button from "../CustomComp/Button";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
+import IOption from "../../ts/Option";
+import SideBar from "../SideBar";
+import { IMedicalReadings } from "./MedicalReadings";
 
-export interface IFormValue {
+interface IMedicalRecord {
+  histories: IOption[];
+  symptoms: IOption[];
+  medicalReadings: IMedicalReadings[];
+}
+export interface IFormData {
   medicines: IMedicine[];
   personalDetails: IPersonalData;
-  medicallBill: IMedicalBill[];
-  medicalRecord: { name: string; value: string }[];
+  medicalBills: IMedicalBill[];
+  medicalRecord: IMedicalRecord;
 }
 
 const InputForms = () => {
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<IFormValue>({
+  const methods = useForm<IFormData>({
     defaultValues: {
-      medicines: [{ name: "", dose: "", id: 0, type: "" }],
+      medicines: [{ name: "", dose: "", id: "", type: "" }],
+      medicalBills: [{ billName: "", id: "", billValue: null }],
+      medicalRecord: {
+        histories: [],
+        symptoms: [],
+        medicalReadings: [{ readingName: "", readingValue: "", key: "" }],
+      },
+      personalDetails: {
+        firstName: "",
+        lastName: "",
+        age: null,
+        gender: "",
+        mobile: "",
+        address: "",
+        city: "",
+        state: "",
+      },
     },
+
+    mode: "all",
+    shouldFocusError: true,
   });
 
-  const { tabClickHandler, handleBackClick, tabIndex } = useMyFormContext();
+  const { tabClickHandler, handleBackClick, tabIndex, patientDataHandler } =
+    useMyFormContext();
 
   const formSection = [
     <PersonaDetails key={0} />,
     <MedicalRecord key={1} />,
-    <Medicines key={2} register={register} errors={errors} control={control} />,
+    <Medicines key={2} />,
     <MedicalBill key={3} />,
   ];
 
-  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  };
+  useEffect(() => {
+    methods.setFocus(`medicalBills.${0}.billName`);
+    methods.setFocus(`medicines.${0}.name`);
+  }, [methods, methods.setFocus]);
 
   return (
-    <div className="bg-white flex flex-col justify-between gap-8 p-6 basis-2/3 xl:basis-11/12 relative overflow-auto flex-none">
-      <form id="main-form" onSubmit={submitHandler} className="xs:pb-8">
-        {formSection[tabIndex]}
-      </form>
-
-      <div className=" justify-between flex">
-        {tabIndex >= 1 && (
-          <Button
-            type="button"
-            value="Back"
-            tabIndex={tabIndex}
-            bgColor={"bg-blue-300"}
-            onClick={handleBackClick}
-          />
-        )}
-
-        {tabIndex < 3 && (
-          <button
-            type="button"
-            form="main-form"
-            value="Save & Next"
-            tabIndex={tabIndex}
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  bottom-4 right-16`}
-            onClick={tabClickHandler}
+    <>
+      <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto">
+        <FormProvider {...methods}>
+          <form
+            id="main-form"
+            onSubmit={methods.handleSubmit((data) => {
+              methods.reset();
+              patientDataHandler(data);
+            })}
+            className="xs:pb-8 h-full"
           >
-            Save & Next
-          </button>
-        )}
+            {formSection[tabIndex]}
+
+            <div className="mt-12 flex gap-4">
+              {tabIndex >= 1 && (
+                <Button
+                  type="button"
+                  value="Back"
+                  tabIndex={tabIndex}
+                  bgColor={"bg-blue-300"}
+                  onClick={handleBackClick}
+                  className=""
+                />
+              )}
+
+              {tabIndex < 3 && (
+                <Button
+                  type="button"
+                  value="Save & Next"
+                  tabIndex={tabIndex}
+                  onClick={tabClickHandler}
+                  bgColor={"bg-blue-500"}
+                />
+              )}
+
+              <Button
+                type="submit"
+                value="preview"
+                bgColor="bg-yellow-500"
+                className="ml-auto"
+              />
+            </div>
+          </form>
+          <SideBar />
+        </FormProvider>
       </div>
-    </div>
+    </>
   );
 };
 

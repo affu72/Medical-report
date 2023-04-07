@@ -1,27 +1,36 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Header from "./Header";
 import PersonalInfoPreview from "./PersonalDetailPreview";
 import MedicalRecordPreview from "./MedicalRecordPreview";
 import { useMyFormContext } from "../../Context/MyFormContext";
-import MedicineTable from "./MedicineTable";
 import Pdf from "react-to-pdf";
 import Button from "../CustomComp/Button";
+import MedicineTable from "./MedicineTable";
+import MedicalBillPreview from "./MedicalBillPreview";
+import MedicalReadingPreview from "./MedicalReadingPreview";
 
 function PreviewPage() {
-  const { tabIndex, personalData, setHasDoctorData } = useMyFormContext();
+  const { tabIndex, patientData, setHasDoctorData } = useMyFormContext();
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
+
+  console.log(patientData);
+
+  useEffect(() => {
+    const h = ref.current?.getClientRects();
+    console.log("h", h);
+  });
 
   const options = {
     orientation: "p",
     unit: "px",
-    format: "a4",
-    floatPrecision: 2,
+    format: [453, 500],
+    floatPrecision: 20,
   };
 
   //JSX
   return (
-    <div className="flex flex-col gap-4  bg-slate-100  p-4">
+    <div className="flex flex-col gap-4  bg-slate-100  p-4 relative">
       <div className="w-full flex bg-slate-100 py-[6px] px-2 drop-shadow-md box-border text-right justify-between md:hidden">
         <Button
           value="Edit Doctor's Details"
@@ -34,7 +43,7 @@ function PreviewPage() {
 
         <Pdf
           targetRef={ref}
-          filename={`${personalData.firstName}.pdf`}
+          filename={`${patientData?.at(-1)?.personalDetails.firstName}.pdf`}
           options={options}
           x={1}
           y={1}
@@ -56,17 +65,19 @@ function PreviewPage() {
       </div>
       <div
         ref={ref}
-        className="w-[800px] min-h-screen px-6 flex-none relative bg-white"
+        className="w-[800px] min-h-[841px] px-6 flex-none bg-white"
       >
         <Header></Header>
 
         <PersonalInfoPreview />
 
-        <div className="">
-          <MedicalRecordPreview />
-
+        <MedicalRecordPreview />
+        <div className="flex p-6 justify-around">
+          <MedicalReadingPreview />
           <MedicineTable />
         </div>
+
+        <MedicalBillPreview />
       </div>
 
       {/* react-pdf */}

@@ -1,7 +1,9 @@
 import { useMyFormContext } from "../../Context/MyFormContext";
 
 const PersonalInfoPreview = () => {
-  const { personalData } = useMyFormContext();
+  const { patientData } = useMyFormContext();
+
+  const patient = patientData?.at(-1)?.personalDetails;
 
   return (
     <div className="flex flex-col p-6 gap border-double  border-b-4 border-stone-600">
@@ -22,12 +24,14 @@ const PersonalInfoPreview = () => {
       <div className="flex justify-between">
         <p>
           <span className="font-bold">Patient Name:</span>
-          {` ${personalData.firstName} ${personalData.lastName}`}
+          {`${patient?.gender === "male" ? "Mr. " : "Mrs. "} ${
+            patient?.firstName ?? ""
+          } ${patient?.lastName ?? ""}`}
         </p>
 
         <p>
           <span className="font-bold">Sex / Age: </span>
-          {` ${personalData.gender} / ${personalData.age}yr.`}
+          {` ${patient?.gender ?? ""} / ${patient?.age ?? ""}yr.`}
         </p>
       </div>
 
@@ -35,13 +39,15 @@ const PersonalInfoPreview = () => {
         <div>
           <p>
             <span className="font-bold">Address: </span>{" "}
-            {`${personalData.address} ${personalData?.city} ${personalData?.state}`}
+            {`${patient?.address ?? ""} ${patient?.city ?? ""} ${
+              patient?.state ?? ""
+            }`}
           </p>
         </div>
 
         <p>
           <span className="font-bold">Mobile: </span>
-          {personalData.mobile}
+          {patient?.mobile}
         </p>
       </div>
     </div>

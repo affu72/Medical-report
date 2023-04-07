@@ -1,75 +1,66 @@
 import Button from "../CustomComp/Button";
-import Input from "../CustomComp/Input";
-import { useMyFormContext } from "../../Context/MyFormContext";
+import { useFieldArray, useFormContext } from "react-hook-form";
+import InputRHF from "../CustomComp/InputRHF";
 
 export interface IMedicalBill {
   billName: string;
-  billValue: string;
-  id: number;
+  billValue: number | null;
+  id: string;
 }
 
 const MedicalBill = () => {
-  const { bills, setBills, handleAddBill } = useMyFormContext();
+  const { control, getValues } = useFormContext();
+  const { fields, remove, append } = useFieldArray({
+    name: "medicalBills",
+    control,
+  });
 
-  const handlerMedicalBill = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const { value, name } = event.target;
-
-    const newBills = [...bills];
-
-    newBills[index][name as "billName" | "billValue"] = value;
-
-    setBills(newBills);
-  };
-
-  const handleRemoveClick = (index: number) => {
-    const list = [...bills];
-    list.splice(index, 1);
-    setBills(list);
-  };
+  console.log(fields);
 
   return (
-    <div className="flex flex-col space-y-2  md:w-full md:item-between">
-      {bills.map((bill) => (
+    <div>
+      {fields.map((bill, index) => (
         <div
           key={bill.id}
-          className="flex space-x-4 place-items-start xl:justify-between"
+          className="px-4 rounded-md py-4 flex gap-4 items-center border-2"
         >
-          <Input
-            name="billName"
+          <InputRHF
             placeholder="Bill Name"
-            value={bill.billName}
-            onChange={(event) => handlerMedicalBill(event, bill.id)}
-            label="Bill Name"
+            control={control}
+            name={`medicalBills.${index}.billName`}
           />
 
-          <Input
+          <InputRHF
             placeholder="Bill Value"
             type="number"
-            name="billValue"
-            value={bill.billValue}
-            onChange={(event) => handlerMedicalBill(event, bill.id)}
-            label="Bill value"
+            control={control}
+            name={`medicalBills.${index}.billValue`}
           />
 
-          {bills.length !== 1 && (
+          {fields.length === 1 || (
             <Button
               type="button"
               value="x"
               bgColor="bg-red-500"
-              margin={0.5}
-              onClick={() => handleRemoveClick(bill.id)}
+              onClick={() => remove(index)}
             />
           )}
         </div>
       ))}
+
       <Button
         type="button"
         value="Add Anoher Bill"
         bgColor="bg-blue-500"
-        onClick={handleAddBill}
+        onClick={() => {
+          if (
+            getValues().medicalBills.at(-1).billName === "" ||
+            getValues().medicalBills.at(-1).billValue === null
+          )
+            return;
+
+          append({ billName: "", billValue: null });
+        }}
       />
     </div>
   );
