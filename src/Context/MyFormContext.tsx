@@ -22,6 +22,8 @@ interface IFormContext {
   setHasDoctorData: (value: boolean) => void;
   patientDataHandler: (data: IFormData) => void;
   patientData: IFormData | null;
+  showNavbar: boolean;
+  setShowNavbar: (data: boolean) => void;
 }
 
 // creatig conetxt
@@ -52,6 +54,8 @@ export const MyFormContextProvider = ({
   const [hasDoctorData, setHasDoctorData] = useState(false);
 
   const [tabIndex, setTabIndex] = useState(0);
+
+  const [showNavbar, setShowNavbar] = useState<boolean>(false);
 
   const value = useMemo(() => {
     //Doctors Details
@@ -86,10 +90,13 @@ export const MyFormContextProvider = ({
       setHasDoctorData,
       patientDataHandler,
       patientData,
+      showNavbar,
+      setShowNavbar,
     };
 
     return value;
-  }, [tabIndex, doctorData, hasDoctorData, patientData]);
+  }, [tabIndex, doctorData, hasDoctorData, patientData, showNavbar]);
+
   return (
     <MyFormContext.Provider value={value}>{children}</MyFormContext.Provider>
   );

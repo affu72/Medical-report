@@ -59,12 +59,6 @@ const InputForms = () => {
     methods.setFocus(`medicines.${0}.name`);
   }, [methods, methods.setFocus]);
 
-  // useEffect(() => {
-  //   if (methods.formState.isSubmitSuccessful) {
-  //     reset();
-  //   }
-  // }, [methods.formState, data, reset]);
-
   return (
     <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto">
       <FormProvider {...methods}>
@@ -73,7 +67,6 @@ const InputForms = () => {
           onSubmit={methods.handleSubmit((data) => {
             methods.reset();
             patientDataHandler(data);
-            console.log(data);
           })}
           className="xs:pb-8"
         >
