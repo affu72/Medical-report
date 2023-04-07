@@ -21,7 +21,6 @@ export interface IDoctorDetails {
 
 const DoctorDetails = () => {
   const {
-    getValues,
     setFocus,
     control,
     register,

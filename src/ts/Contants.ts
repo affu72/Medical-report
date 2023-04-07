@@ -78,14 +78,14 @@ export const formDataArr: IFormData[] = [
   {
     medicines: [
       {
-        id: 1,
+        id: "a",
         type: "Tablet",
         name: "Paracetamol",
         dose: "500 mg",
         quantity: "10",
       },
       {
-        id: 2,
+        id: "b",
         type: "Capsule",
         name: "Amoxicillin",
         dose: "250 mg",
@@ -104,8 +104,8 @@ export const formDataArr: IFormData[] = [
       address: "123 Main St",
     },
     medicalBills: [
-      { billName: "Doctor Visit", billValue: 100, id: 1 },
-      { billName: "Medicines", billValue: 50, id: 2 },
+      { billName: "Doctor Visit", billValue: 100, id: "a" },
+      { billName: "Medicines", billValue: 50, id: "b" },
     ],
     medicalRecord: {
       histories: [
@@ -118,19 +118,20 @@ export const formDataArr: IFormData[] = [
         { label: "Cough", value: "cough" },
         { label: "Headache", value: "headache" },
       ],
+      medicalReadings: [],
     },
   },
   {
     medicines: [
       {
-        id: 3,
+        id: "c",
         type: "Tablet",
         name: "Ibuprofen",
         dose: "400 mg",
         quantity: "30",
       },
       {
-        id: 4,
+        id: "d",
         type: "Capsule",
         name: "Clarithromycin",
         dose: "500 mg",
@@ -149,8 +150,8 @@ export const formDataArr: IFormData[] = [
       address: "456 Elm St",
     },
     medicalBills: [
-      { billName: "Tests", billValue: 200, id: 1 },
-      { billName: "Medicines", billValue: 75, id: 2 },
+      { billName: "Tests", billValue: 200, id: "a" },
+      { billName: "Medicines", billValue: 75, id: "b" },
     ],
     medicalRecord: {
       histories: [
@@ -163,19 +164,20 @@ export const formDataArr: IFormData[] = [
         { label: "Pain in joints", value: "pain-in-joints" },
         { label: "Loss of appetite", value: "loss-of-appetite" },
       ],
+      medicalReadings: [],
     },
   },
   {
     medicines: [
       {
-        id: 5,
+        id: "e",
         type: "Tablet",
         name: "Metformin",
         dose: "500 mg",
         quantity: "60",
       },
       {
-        id: 6,
+        id: "f",
         type: "Capsule",
         name: "Losartan",
         dose: "50 mg",
@@ -194,8 +196,8 @@ export const formDataArr: IFormData[] = [
       address: "789 Oak St",
     },
     medicalBills: [
-      { billName: "Tests", billValue: 150, id: 1 },
-      { billName: "Medicines", billValue: 100, id: 2 },
+      { billName: "Tests", billValue: 150, id: "a" },
+      { billName: "Medicines", billValue: 100, id: "b" },
     ],
     medicalRecord: {
       histories: [
@@ -208,20 +210,21 @@ export const formDataArr: IFormData[] = [
         { label: "Dizziness", value: "dizziness" },
         { label: "Nausea", value: "nausea" },
       ],
+      medicalReadings: [],
     },
   },
 
   {
     medicines: [
       {
-        id: 1,
+        id: "a",
         type: "Tablet",
         name: "Paracetamol",
         dose: "500 mg",
         quantity: "10",
       },
       {
-        id: 2,
+        id: "b",
         type: "Capsule",
         name: "Amoxicillin",
         dose: "250 mg",
@@ -240,8 +243,8 @@ export const formDataArr: IFormData[] = [
       address: "42, Sadar Thana Rd, Sadar Bazaar",
     },
     medicalBills: [
-      { billName: "Doctor Visit", billValue: 100, id: 1 },
-      { billName: "Medicines", billValue: 50, id: 2 },
+      { billName: "Doctor Visit", billValue: 100, id: "a" },
+      { billName: "Medicines", billValue: 50, id: "b" },
     ],
     medicalRecord: {
       histories: [
@@ -254,19 +257,20 @@ export const formDataArr: IFormData[] = [
         { label: "Cough", value: "cough" },
         { label: "Headache", value: "headache" },
       ],
+      medicalReadings: [],
     },
   },
   {
     medicines: [
       {
-        id: 3,
+        id: "c",
         type: "Tablet",
         name: "Ibuprofen",
         dose: "400 mg",
         quantity: "30",
       },
       {
-        id: 4,
+        id: "d",
         type: "Capsule",
         name: "Clarithromycin",
         dose: "500 mg",
@@ -285,8 +289,8 @@ export const formDataArr: IFormData[] = [
       address: "121, Shivaji Nagar",
     },
     medicalBills: [
-      { billName: "Tests", billValue: 200, id: 1 },
-      { billName: "Medicines", billValue: 75, id: 2 },
+      { billName: "Tests", billValue: 200, id: "a" },
+      { billName: "Medicines", billValue: 75, id: "b" },
     ],
     medicalRecord: {
       histories: [
@@ -299,19 +303,20 @@ export const formDataArr: IFormData[] = [
         { label: "Pain in joints", value: "pain-in-joints" },
         { label: "Loss of appetite", value: "loss-of-appetite" },
       ],
+      medicalReadings: [],
     },
   },
   {
     medicines: [
       {
-        id: 5,
+        id: "e",
         type: "Tablet",
         name: "Metformin",
         dose: "500 mg",
         quantity: "60",
       },
       {
-        id: 6,
+        id: "f",
         type: "Capsule",
         name: "Losartan",
         dose: "50 mg",
@@ -330,8 +335,8 @@ export const formDataArr: IFormData[] = [
       address: "7, Anna Salai",
     },
     medicalBills: [
-      { billName: "Tests", billValue: 150, id: 1 },
-      { billName: "Medicines", billValue: 100, id: 2 },
+      { billName: "Tests", billValue: 150, id: "a" },
+      { billName: "Medicines", billValue: 100, id: "b" },
     ],
     medicalRecord: {
       histories: [
@@ -344,6 +349,7 @@ export const formDataArr: IFormData[] = [
         { label: "Dizziness", value: "dizziness" },
         { label: "Nausea", value: "nausea" },
       ],
+      medicalReadings: [],
     },
   },
 ];

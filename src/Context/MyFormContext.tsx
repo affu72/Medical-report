@@ -62,7 +62,6 @@ export const MyFormContextProvider = ({
     //Doctors Details
     const handleDoctorForm = (data: IDoctorDetails) => {
       localStorage.setItem("doctorData", JSON.stringify(data));
-      console.log("doctors data");
       setHasDoctorData(true);
     };
 

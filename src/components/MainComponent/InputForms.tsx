@@ -7,12 +7,13 @@ import { useMyFormContext } from "../../Context/MyFormContext";
 import Button from "../CustomComp/Button";
 import { useForm, FormProvider } from "react-hook-form";
 import IOption from "../../ts/Option";
-import { formDataArr } from "../../ts/Contants";
 import SideBar from "../SideBar";
+import { IMedicalReadings } from "./MedicalReadings";
 
 interface IMedicalRecord {
   histories: IOption[];
   symptoms: IOption[];
+  medicalReadings: IMedicalReadings[];
 }
 export interface IFormData {
   medicines: IMedicine[];
@@ -24,11 +25,12 @@ export interface IFormData {
 const InputForms = () => {
   const methods = useForm<IFormData>({
     defaultValues: {
-      medicines: [{ name: "", dose: "", id: 0, type: "" }],
-      medicalBills: [{ billName: "", id: 0, billValue: null }],
+      medicines: [{ name: "", dose: "", id: "", type: "" }],
+      medicalBills: [{ billName: "", id: "", billValue: null }],
       medicalRecord: {
         histories: [],
         symptoms: [],
+        medicalReadings: [{ readingName: "", readingValue: "", key: "" }],
       },
       personalDetails: {
         firstName: "",
@@ -83,30 +85,25 @@ const InputForms = () => {
                   tabIndex={tabIndex}
                   bgColor={"bg-blue-300"}
                   onClick={handleBackClick}
-                  className="mr-20"
+                  className=""
                 />
               )}
 
               {tabIndex < 3 && (
-                <button
+                <Button
                   type="button"
-                  form="main-form"
                   value="Save & Next"
                   tabIndex={tabIndex}
-                  className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  bottom-4 right-16`}
                   onClick={tabClickHandler}
-                >
-                  Save & Next
-                </button>
+                  bgColor={"bg-blue-500"}
+                />
               )}
-            </div>
 
-            <div className="flex justify-end">
               <Button
                 type="submit"
                 value="preview"
                 bgColor="bg-yellow-500"
-                className=""
+                className="ml-auto"
               />
             </div>
           </form>

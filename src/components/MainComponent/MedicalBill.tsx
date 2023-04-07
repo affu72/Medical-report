@@ -5,7 +5,7 @@ import InputRHF from "../CustomComp/InputRHF";
 export interface IMedicalBill {
   billName: string;
   billValue: number | null;
-  id: number;
+  id: string;
 }
 
 const MedicalBill = () => {
@@ -15,8 +15,10 @@ const MedicalBill = () => {
     control,
   });
 
+  console.log(fields);
+
   return (
-    <div className="">
+    <div>
       {fields.map((bill, index) => (
         <div
           key={bill.id}
@@ -57,7 +59,7 @@ const MedicalBill = () => {
           )
             return;
 
-          append({ billName: "", billValue: null, id: 0 });
+          append({ billName: "", billValue: null });
         }}
       />
     </div>

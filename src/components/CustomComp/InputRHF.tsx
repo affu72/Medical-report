@@ -30,7 +30,7 @@ const InputRHF = ({
         rules={{ required: "This field is required" }}
         control={control}
         name={name}
-        defaultValue={"Afzal"}
+        defaultValue={""}
         render={({
           field: { onChange, onBlur, value, name },
           fieldState: { invalid, isTouched, isDirty },

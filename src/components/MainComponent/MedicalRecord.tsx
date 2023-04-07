@@ -2,6 +2,7 @@ import { useState } from "react";
 import CreatableSelect from "react-select/creatable";
 import { option } from "../../ts/Contants";
 import { Controller, useFormContext } from "react-hook-form";
+import MedicalReaings from "./MedicalReadings";
 
 const MedicalRecord = () => {
   const [inputHistory, setInputHistory] = useState("");
@@ -20,13 +21,10 @@ const MedicalRecord = () => {
     switch (event.key) {
       case "Enter":
       case "Tab":
+        
         const value = getValues(name);
 
-        console.log("value", value);
-
         const newvalue = [...value, { label: inputValue, value: inputValue }];
-
-        console.log(newvalue);
 
         setValue(name, newvalue);
         setInputValue("");
@@ -95,6 +93,11 @@ const MedicalRecord = () => {
             />
           )}
         />
+      </div>
+      <br />
+      <div>
+        <label className="font-semibold">Medical Reading</label>
+        <MedicalReaings />
       </div>
     </div>
   );
