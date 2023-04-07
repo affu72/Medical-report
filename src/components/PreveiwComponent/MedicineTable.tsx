@@ -14,7 +14,7 @@ function MedicineTable() {
         </tr>
       </thead>
       <tbody>
-        {patientData?.medicines.map((medicine, i) => (
+        {patientData?.at(-1)?.medicines.map((medicine, i) => (
           <tr key={medicine.name}>
             <td className="border px-4 py-2">{i + 1}</td>
             <td className="border px-4 py-2">{`${medicine.type}  ${medicine.name}`}</td>

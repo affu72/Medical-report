@@ -34,7 +34,7 @@ function PreviewPage() {
 
         <Pdf
           targetRef={ref}
-          filename={`${patientData?.personalDetails.firstName}.pdf`}
+          filename={`${patientData?.at(-1)?.personalDetails.firstName}.pdf`}
           options={options}
           x={1}
           y={1}

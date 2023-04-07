@@ -21,7 +21,7 @@ interface IFormContext {
   setDoctorData: (data: IDoctorDetails) => void;
   setHasDoctorData: (value: boolean) => void;
   patientDataHandler: (data: IFormData) => void;
-  patientData: IFormData | null;
+  patientData: IFormData[] | null;
   showNavbar: boolean;
   setShowNavbar: (data: boolean) => void;
 }
@@ -36,7 +36,7 @@ export const MyFormContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [patientData, setPatientData] = useState<IFormData | null>(null);
+  const [patientData, setPatientData] = useState<IFormData[]>([]);
   //deoctor's details
   const [doctorData, setDoctorData] = useState<IDoctorDetails>({
     clinicName: "",
@@ -66,7 +66,7 @@ export const MyFormContextProvider = ({
     };
 
     const patientDataHandler = (data: IFormData) => {
-      setPatientData(data);
+      setPatientData((prev) => [...prev, data]);
     };
 
     const showFormHandler = (event: React.MouseEvent<HTMLButtonElement>) => {

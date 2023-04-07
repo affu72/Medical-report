@@ -7,20 +7,22 @@ const MedicalRecordPreview = () => {
     <div className="gap-2 p-6">
       <div className="break-words">
         <span className="font-bold">Medical history: </span>
-        {patientData?.medicalRecord.histories.map((option, index) => (
+        {patientData?.at(-1)?.medicalRecord?.histories.map((option, index) => (
           <span key={option.value} className="px-2 py-1">
             {option.value}
-            {index < patientData?.medicalRecord.histories.length - 1 ? "," : ""}
+            {/* {index < patientData?.at(-1)?.medicalRecord?.histories.length - 1
+              ? ","
+              : ""} */}
           </span>
         ))}
       </div>
 
       <div className="break-words">
         <span className="font-bold">Known Symptoms: </span>
-        {patientData?.medicalRecord.symptoms.map((option, index) => (
+        {patientData?.at(-1)?.medicalRecord.symptoms.map((option, index) => (
           <span key={option.value} className="px-2 py-1">
             {option.value}
-            {index < patientData?.medicalRecord.symptoms.length - 1 ? "," : ""}
+            {/* {index < patientData?.medicalRecord.symptoms.length - 1 ? "," : ""} */}
           </span>
         ))}
       </div>

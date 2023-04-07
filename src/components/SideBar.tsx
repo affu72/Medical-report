@@ -1,16 +1,15 @@
 import React, { useEffect, useRef } from "react";
 import { useMyFormContext } from "../Context/MyFormContext";
-import InputRHF from "./CustomComp/InputRHF";
-import { getInputClassName } from "../ts/Contants";
+import { BiEditAlt, BiDownload } from "react-icons/bi";
 
 const SideBar = () => {
-  const { showNavbar, setShowNavbar } = useMyFormContext();
+  const { showNavbar, setShowNavbar, patientData } = useMyFormContext();
 
-  const navStyle = `${showNavbar ? "" : "-translate-x-[208px]"}`;
+  const navStyle = `${showNavbar ? "" : "-translate-x-[225px]"}`;
 
   return (
     <div
-      className={`h-screen px-4 py-8 min-w-[208px] fixed top-0 left-0 bg-gray-100 ${navStyle} transition-transform duration-500 backdrop-opacity-0 box-border`}
+      className={`h-screen py-8 min-w-[225px] fixed top-0 left-0 bg-gray-100 ${navStyle} transition-transform duration-500 box-border z-10`}
     >
       <button type="button" onClick={() => setShowNavbar(!showNavbar)}>
         <svg
@@ -28,13 +27,34 @@ const SideBar = () => {
           />
         </svg>
       </button>
+      <div className="flex justify-center">
+        <input
+          autoFocus={true}
+          type="text"
+          className="rounded-2xl py-2 border-2 border-gray-500 box-border text-center w-2/3"
+          placeholder="Search"
+        />
+      </div>
 
-      <input
-        autoFocus={true}
-        type="text"
-        className="rounded-2xl py-2 border-2 border-gray-500 box-border text-center"
-        placeholder="Search"
-      />
+      <div className="mt-12 flex flex-col gap-2">
+        {patientData?.map((patient, index) => (
+          <div
+            key={+patient.personalDetails.mobile + index}
+            className="flex justify-between px-4 py-4 border-b-2 border-gray-400 bg-white text-2xl align-middle w-full"
+          >
+            <span>
+              {`${patient.personalDetails.firstName}
+                ${patient.personalDetails.lastName}`}
+            </span>
+            <button type="button">
+              {<BiEditAlt size={"22px"}></BiEditAlt>}
+            </button>
+            <button type="button">
+              {<BiDownload size={"22px"}></BiDownload>}
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

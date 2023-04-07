@@ -11,16 +11,17 @@ function App() {
 
   return (
     <div>
-      {!hasDoctorData && !localStorage.getItem("doctorData") ? (
+      {/* {!hasDoctorData && !localStorage.getItem("doctorData") ? (
         <DoctorDetails />
-      ) : (
-        <div className={`flex justify-evenly xs:block m-auto md:flex-col`}>
-          <Header></Header>
-          <SideBar />
-          {/* <MainPage></MainPage>
-          <PreviewPage></PreviewPage> */}
-        </div>
-      )}
+      ) : ( */}
+      <Header></Header>
+      <SideBar />
+      <div className={`flex justify-evenly xs:block m-auto md:flex-col z-1`}>
+        <MainPage></MainPage>
+        <PreviewPage></PreviewPage>
+      </div>
+      {/* )} */}
+      {showNavbar && <div className="overlay"></div>}
     </div>
   );
 }
