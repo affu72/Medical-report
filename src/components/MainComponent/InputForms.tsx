@@ -7,6 +7,8 @@ import { useMyFormContext } from "../../Context/MyFormContext";
 import Button from "../CustomComp/Button";
 import { useForm, FormProvider } from "react-hook-form";
 import IOption from "../../ts/Option";
+import { formDataArr } from "../../ts/Contants";
+import SideBar from "../SideBar";
 
 interface IMedicalRecord {
   histories: IOption[];
@@ -60,51 +62,58 @@ const InputForms = () => {
   }, [methods, methods.setFocus]);
 
   return (
-    <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto">
-      <FormProvider {...methods}>
-        <form
-          id="main-form"
-          onSubmit={methods.handleSubmit((data) => {
-            methods.reset();
-            patientDataHandler(data);
-          })}
-          className="xs:pb-8"
-        >
-          {formSection[tabIndex]}
+    <>
+      <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto">
+        <FormProvider {...methods}>
+          <form
+            id="main-form"
+            onSubmit={methods.handleSubmit((data) => {
+              methods.reset();
+              patientDataHandler(data);
+            })}
+            className="xs:pb-8 h-full"
+          >
+            {formSection[tabIndex]}
 
-          <div className="mt-12 flex justify-between">
-            {tabIndex >= 1 && (
+            <div className="mt-12 flex gap-4">
+              {tabIndex >= 1 && (
+                <Button
+                  type="button"
+                  value="Back"
+                  tabIndex={tabIndex}
+                  bgColor={"bg-blue-300"}
+                  onClick={handleBackClick}
+                  className="mr-20"
+                />
+              )}
+
+              {tabIndex < 3 && (
+                <button
+                  type="button"
+                  form="main-form"
+                  value="Save & Next"
+                  tabIndex={tabIndex}
+                  className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  bottom-4 right-16`}
+                  onClick={tabClickHandler}
+                >
+                  Save & Next
+                </button>
+              )}
+            </div>
+
+            <div className="flex justify-end">
               <Button
-                type="button"
-                value="Back"
-                tabIndex={tabIndex}
-                bgColor={"bg-blue-300"}
-                onClick={handleBackClick}
-                className="mr-20"
+                type="submit"
+                value="preview"
+                bgColor="bg-yellow-500"
+                className=""
               />
-            )}
-
-            {tabIndex < 3 && (
-              <button
-                type="button"
-                form="main-form"
-                value="Save & Next"
-                tabIndex={tabIndex}
-                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  bottom-4 right-16`}
-                onClick={tabClickHandler}
-              >
-                Save & Next
-              </button>
-            )}
-            <Button
-              type="submit"
-              value="preview"
-              bgColor="bg-yellow-500 absolute bottom-5 right-5"
-            />
-          </div>
-        </form>
-      </FormProvider>
-    </div>
+            </div>
+          </form>
+          <SideBar />
+        </FormProvider>
+      </div>
+    </>
   );
 };
 

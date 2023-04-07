@@ -23,7 +23,7 @@ function PersonaDetails() {
   } = useFormContext();
 
   return (
-    <div className="">
+    <div className="flex flex-col gap-4">
       <div className="flex gap-8 md:justify-between">
         <InputRHF
           name="personalDetails.firstName"
@@ -49,7 +49,7 @@ function PersonaDetails() {
       />
 
       <div className=" flex gap-16 items-center w-full mb-4">
-        <label className="m-0">Gender</label>
+        <label className="m-0 font-medium">Gender</label>
 
         <div className="flex gap-8">
           <div className="flex items-center gap-4 p-2">
@@ -121,7 +121,9 @@ function PersonaDetails() {
         ></Input> */}
 
         <div className="w-full flex flex-col">
-          <label htmlFor="name">State</label>
+          <label htmlFor="name" className="font-medium m-0">
+            State
+          </label>
           <IndianStateDropdown
             control={control}
             name="personalDetails.state"

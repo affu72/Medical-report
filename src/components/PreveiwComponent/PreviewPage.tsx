@@ -3,12 +3,15 @@ import Header from "./Header";
 import PersonalInfoPreview from "./PersonalDetailPreview";
 import MedicalRecordPreview from "./MedicalRecordPreview";
 import { useMyFormContext } from "../../Context/MyFormContext";
-import MedicineTable from "./MedicineTable";
 import Pdf from "react-to-pdf";
 import Button from "../CustomComp/Button";
+import MedicineTable from "./MedicineTable";
+import MedicalBillPreview from "./MedicalBillPreview";
 
 function PreviewPage() {
   const { tabIndex, patientData, setHasDoctorData } = useMyFormContext();
+
+  console.log(patientData);
 
   const ref = useRef(null);
 
@@ -67,6 +70,8 @@ function PreviewPage() {
 
           <MedicineTable />
         </div>
+
+        <MedicalBillPreview />
       </div>
 
       {/* react-pdf */}

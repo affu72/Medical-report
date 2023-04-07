@@ -1,11 +1,22 @@
-import React, { useEffect, useRef } from "react";
 import { useMyFormContext } from "../Context/MyFormContext";
-import { BiEditAlt, BiDownload } from "react-icons/bi";
+import { BiEdit, BiDownload } from "react-icons/bi";
+import { formDataArr } from "../ts/Contants";
+import { useFormContext } from "react-hook-form";
 
 const SideBar = () => {
   const { showNavbar, setShowNavbar, patientData } = useMyFormContext();
 
+  const { setValue } = useFormContext();
+
   const navStyle = `${showNavbar ? "" : "-translate-x-[225px]"}`;
+
+  const editFormHandler = (e: any) => {
+    const index = e.currentTarget.tabIndex;
+    setValue("personalDetails", patientData?.[index]?.personalDetails);
+    setValue("medicalRecord", patientData?.[index]?.medicalRecord);
+    setValue("medicines", patientData?.[index]?.medicines);
+    setValue("medicalBills", patientData?.[index]?.medicalBills);
+  };
 
   return (
     <div
@@ -31,14 +42,14 @@ const SideBar = () => {
         <input
           autoFocus={true}
           type="text"
-          className="rounded-2xl py-2 border-2 border-gray-500 box-border text-center w-2/3"
+          className="rounded-2xl py-2 border-2 border-gray-500 box-border text-center"
           placeholder="Search"
         />
       </div>
 
-      <div className="mt-12 flex flex-col gap-2">
+      <ul className="mt-12 flex flex-col gap-2">
         {patientData?.map((patient, index) => (
-          <div
+          <li
             key={+patient.personalDetails.mobile + index}
             className="flex justify-between px-4 py-4 border-b-2 border-gray-400 bg-white text-2xl align-middle w-full"
           >
@@ -46,15 +57,18 @@ const SideBar = () => {
               {`${patient.personalDetails.firstName}
                 ${patient.personalDetails.lastName}`}
             </span>
-            <button type="button">
-              {<BiEditAlt size={"22px"}></BiEditAlt>}
-            </button>
-            <button type="button">
-              {<BiDownload size={"22px"}></BiDownload>}
-            </button>
-          </div>
+
+            <div className="flex gap-6">
+              <button type="button" onClick={editFormHandler} tabIndex={index}>
+                {<BiEdit size={"22px"}></BiEdit>}
+              </button>
+              <button type="button">
+                {<BiDownload size={"22px"} tabIndex={index}></BiDownload>}
+              </button>
+            </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

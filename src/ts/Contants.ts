@@ -1,4 +1,5 @@
 import { IDoctorDetails } from "../components/DoctorDetails";
+import { IFormData } from "../components/MainComponent/InputForms";
 import IOption from "./Option";
 
 export const getInputClassName = (className: string = "") => {
@@ -71,4 +72,278 @@ export const states = [
   { label: "Uttar Pradesh", value: "Uttar Pradesh" },
   { label: "Uttarakhand", value: "Uttarakhand" },
   { label: "West Bengal", value: "West Bengal" },
+];
+
+export const formDataArr: IFormData[] = [
+  {
+    medicines: [
+      {
+        id: 1,
+        type: "Tablet",
+        name: "Paracetamol",
+        dose: "500 mg",
+        quantity: "10",
+      },
+      {
+        id: 2,
+        type: "Capsule",
+        name: "Amoxicillin",
+        dose: "250 mg",
+        quantity: "20",
+      },
+    ],
+    personalDetails: {
+      pin: 123456,
+      city: "New York",
+      firstName: "John",
+      lastName: "Doe",
+      age: 30,
+      mobile: "1234567890",
+      gender: "Male",
+      state: "NY",
+      address: "123 Main St",
+    },
+    medicalBills: [
+      { billName: "Doctor Visit", billValue: 100, id: 1 },
+      { billName: "Medicines", billValue: 50, id: 2 },
+    ],
+    medicalRecord: {
+      histories: [
+        { label: "Heart Attack", value: "heart-attack" },
+        { label: "Malaria", value: "malaria" },
+        { label: "Flu", value: "flu" },
+      ],
+      symptoms: [
+        { label: "Fever", value: "fever" },
+        { label: "Cough", value: "cough" },
+        { label: "Headache", value: "headache" },
+      ],
+    },
+  },
+  {
+    medicines: [
+      {
+        id: 3,
+        type: "Tablet",
+        name: "Ibuprofen",
+        dose: "400 mg",
+        quantity: "30",
+      },
+      {
+        id: 4,
+        type: "Capsule",
+        name: "Clarithromycin",
+        dose: "500 mg",
+        quantity: "10",
+      },
+    ],
+    personalDetails: {
+      pin: 654321,
+      city: "Los Angeles",
+      firstName: "Jane",
+      lastName: "Doe",
+      age: 40,
+      mobile: "0987654321",
+      gender: "Female",
+      state: "CA",
+      address: "456 Elm St",
+    },
+    medicalBills: [
+      { billName: "Tests", billValue: 200, id: 1 },
+      { billName: "Medicines", billValue: 75, id: 2 },
+    ],
+    medicalRecord: {
+      histories: [
+        { label: "Arthritis", value: "arthritis" },
+        { label: "Asthma", value: "asthma" },
+        { label: "Cancer", value: "cancer" },
+      ],
+      symptoms: [
+        { label: "Shortness of breath", value: "shortness-of-breath" },
+        { label: "Pain in joints", value: "pain-in-joints" },
+        { label: "Loss of appetite", value: "loss-of-appetite" },
+      ],
+    },
+  },
+  {
+    medicines: [
+      {
+        id: 5,
+        type: "Tablet",
+        name: "Metformin",
+        dose: "500 mg",
+        quantity: "60",
+      },
+      {
+        id: 6,
+        type: "Capsule",
+        name: "Losartan",
+        dose: "50 mg",
+        quantity: "30",
+      },
+    ],
+    personalDetails: {
+      pin: 789012,
+      city: "Chicago",
+      firstName: "Bob",
+      lastName: "Smith",
+      age: 50,
+      mobile: "9876543210",
+      gender: "Male",
+      state: "IL",
+      address: "789 Oak St",
+    },
+    medicalBills: [
+      { billName: "Tests", billValue: 150, id: 1 },
+      { billName: "Medicines", billValue: 100, id: 2 },
+    ],
+    medicalRecord: {
+      histories: [
+        { label: "Diabetes", value: "diabetes" },
+        { label: "High Blood Pressure", value: "high-blood-pressure" },
+        { label: "Cholesterol", value: "cholesterol" },
+      ],
+      symptoms: [
+        { label: "Fatigue", value: "fatigue" },
+        { label: "Dizziness", value: "dizziness" },
+        { label: "Nausea", value: "nausea" },
+      ],
+    },
+  },
+
+  {
+    medicines: [
+      {
+        id: 1,
+        type: "Tablet",
+        name: "Paracetamol",
+        dose: "500 mg",
+        quantity: "10",
+      },
+      {
+        id: 2,
+        type: "Capsule",
+        name: "Amoxicillin",
+        dose: "250 mg",
+        quantity: "20",
+      },
+    ],
+    personalDetails: {
+      pin: 110001,
+      city: "New Delhi",
+      firstName: "Amit",
+      lastName: "Kumar",
+      age: 30,
+      mobile: "9876543210",
+      gender: "Male",
+      state: "Delhi",
+      address: "42, Sadar Thana Rd, Sadar Bazaar",
+    },
+    medicalBills: [
+      { billName: "Doctor Visit", billValue: 100, id: 1 },
+      { billName: "Medicines", billValue: 50, id: 2 },
+    ],
+    medicalRecord: {
+      histories: [
+        { label: "Heart Attack", value: "heart-attack" },
+        { label: "Malaria", value: "malaria" },
+        { label: "Flu", value: "flu" },
+      ],
+      symptoms: [
+        { label: "Fever", value: "fever" },
+        { label: "Cough", value: "cough" },
+        { label: "Headache", value: "headache" },
+      ],
+    },
+  },
+  {
+    medicines: [
+      {
+        id: 3,
+        type: "Tablet",
+        name: "Ibuprofen",
+        dose: "400 mg",
+        quantity: "30",
+      },
+      {
+        id: 4,
+        type: "Capsule",
+        name: "Clarithromycin",
+        dose: "500 mg",
+        quantity: "10",
+      },
+    ],
+    personalDetails: {
+      pin: 411001,
+      city: "Pune",
+      firstName: "Rahul",
+      lastName: "Sharma",
+      age: 40,
+      mobile: "8765432109",
+      gender: "Male",
+      state: "Maharashtra",
+      address: "121, Shivaji Nagar",
+    },
+    medicalBills: [
+      { billName: "Tests", billValue: 200, id: 1 },
+      { billName: "Medicines", billValue: 75, id: 2 },
+    ],
+    medicalRecord: {
+      histories: [
+        { label: "Arthritis", value: "arthritis" },
+        { label: "Asthma", value: "asthma" },
+        { label: "Cancer", value: "cancer" },
+      ],
+      symptoms: [
+        { label: "Shortness of breath", value: "shortness-of-breath" },
+        { label: "Pain in joints", value: "pain-in-joints" },
+        { label: "Loss of appetite", value: "loss-of-appetite" },
+      ],
+    },
+  },
+  {
+    medicines: [
+      {
+        id: 5,
+        type: "Tablet",
+        name: "Metformin",
+        dose: "500 mg",
+        quantity: "60",
+      },
+      {
+        id: 6,
+        type: "Capsule",
+        name: "Losartan",
+        dose: "50 mg",
+        quantity: "30",
+      },
+    ],
+    personalDetails: {
+      pin: 600001,
+      city: "Chennai",
+      firstName: "Priya",
+      lastName: "Nair",
+      age: 50,
+      mobile: "7654321098",
+      gender: "Female",
+      state: "Tamil Nadu",
+      address: "7, Anna Salai",
+    },
+    medicalBills: [
+      { billName: "Tests", billValue: 150, id: 1 },
+      { billName: "Medicines", billValue: 100, id: 2 },
+    ],
+    medicalRecord: {
+      histories: [
+        { label: "Diabetes", value: "diabetes" },
+        { label: "High Blood Pressure", value: "high-blood-pressure" },
+        { label: "Cholesterol", value: "cholesterol" },
+      ],
+      symptoms: [
+        { label: "Fatigue", value: "fatigue" },
+        { label: "Dizziness", value: "dizziness" },
+        { label: "Nausea", value: "nausea" },
+      ],
+    },
+  },
 ];

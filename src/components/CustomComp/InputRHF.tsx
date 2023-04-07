@@ -24,7 +24,7 @@ const InputRHF = ({
 }: PropInput) => {
   return (
     <div>
-      {label || <label>{label}</label>}
+      {label || <label className="">{label}</label>}
 
       <Controller
         rules={{ required: "This field is required" }}

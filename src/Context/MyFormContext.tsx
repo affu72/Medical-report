@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { IDoctorDetails } from "../components/DoctorDetails";
 import { IFormData } from "../components/MainComponent/InputForms";
+import { formDataArr } from "../ts/Contants";
 //context value type
 interface IFormContext {
   showFormHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -36,7 +37,7 @@ export const MyFormContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [patientData, setPatientData] = useState<IFormData[]>([]);
+  const [patientData, setPatientData] = useState<IFormData[]>(formDataArr);
   //deoctor's details
   const [doctorData, setDoctorData] = useState<IDoctorDetails>({
     clinicName: "",
