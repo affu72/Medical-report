@@ -7,7 +7,7 @@ import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 
 function App() {
-  const { hasDoctorData, showNavbar } = useMyFormContext();
+  const { hasDoctorData, isOpen } = useMyFormContext();
 
   return (
     <div>
@@ -24,7 +24,7 @@ function App() {
           </div>
         </>
       )}
-      {showNavbar && <div className="overlay"></div>}
+      {isOpen && <div className="overlay"></div>}
     </div>
   );
 }

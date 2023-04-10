@@ -14,11 +14,8 @@ function PreviewPage() {
 
   const ref = useRef<HTMLDivElement>(null);
 
-  console.log(patientData);
-
   useEffect(() => {
-    const h = ref.current?.getClientRects();
-    console.log("h", h);
+    // const h = ref.current?.getClientRects();
   });
 
   const options = {

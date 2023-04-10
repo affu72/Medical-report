@@ -23,8 +23,8 @@ interface IFormContext {
   setHasDoctorData: (value: boolean) => void;
   patientDataHandler: (data: IFormData) => void;
   patientData: IFormData[] | null;
-  showNavbar: boolean;
-  setShowNavbar: (data: boolean) => void;
+  isOpen: boolean;
+  setIsOpen: (data: boolean) => void;
 }
 
 // creatig conetxt
@@ -37,7 +37,7 @@ export const MyFormContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [patientData, setPatientData] = useState<IFormData[]>(formDataArr);
+  const [patientData, setPatientData] = useState<IFormData[]>([]);
   //deoctor's details
   const [doctorData, setDoctorData] = useState<IDoctorDetails>({
     clinicName: "",
@@ -56,7 +56,7 @@ export const MyFormContextProvider = ({
 
   const [tabIndex, setTabIndex] = useState(0);
 
-  const [showNavbar, setShowNavbar] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const value = useMemo(() => {
     //Doctors Details
@@ -90,12 +90,12 @@ export const MyFormContextProvider = ({
       setHasDoctorData,
       patientDataHandler,
       patientData,
-      showNavbar,
-      setShowNavbar,
+      isOpen,
+      setIsOpen,
     };
 
     return value;
-  }, [tabIndex, doctorData, hasDoctorData, patientData, showNavbar]);
+  }, [tabIndex, doctorData, hasDoctorData, patientData, isOpen]);
 
   return (
     <MyFormContext.Provider value={value}>{children}</MyFormContext.Provider>

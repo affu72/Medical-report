@@ -34,12 +34,15 @@ const Medicines = () => {
     );
   };
 
-  console.log();
+
 
   return (
     <div className="flex flex-col gap-8">
       {fields.map((medicine, index) => (
-        <div className="xl:justify-between px-4 rounded-md py-4 flex items-center border-2 flex-wrap ">
+        <div
+          key={medicine.id}
+          className="xl:justify-between px-4 rounded-md py-4 flex items-center border-2 flex-wrap "
+        >
           <div className="relative flex w-2/3 border-2 border-gray-300  rounded-md">
             <input
               type="text"

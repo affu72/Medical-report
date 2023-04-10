@@ -15,7 +15,7 @@ const MedicalBill = () => {
     control,
   });
 
-  console.log(fields);
+
 
   return (
     <div>

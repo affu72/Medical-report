@@ -13,7 +13,7 @@ const MedicalBillPreview = () => {
       return +val! + curr!;
     }, 0);
 
-  console.log(total);
+
 
   return (
     <div className="w-1/4  my-16">

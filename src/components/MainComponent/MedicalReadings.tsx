@@ -15,7 +15,6 @@ const MedicalReadings = () => {
     control,
   });
 
-  console.log(fields.length);
 
   return (
     <div className="">
