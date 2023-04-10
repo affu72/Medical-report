@@ -72,8 +72,8 @@ const InputForms = () => {
             id="main-form"
             onSubmit={methods.handleSubmit((data) => {
               const uniquId =
-                data.personalDetails.firstName +
                 data.personalDetails.mobile +
+                data.personalDetails.firstName +
                 data.personalDetails.age;
               methods.reset();
               patientDataHandler({ ...data, id: uniquId });

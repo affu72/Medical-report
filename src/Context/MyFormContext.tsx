@@ -7,7 +7,6 @@ import React, {
 } from "react";
 import { IDoctorDetails } from "../components/DoctorDetails";
 import { IFormData } from "../components/MainComponent/InputForms";
-
 import { formDataArr } from "../ts/Contants";
 //context value type
 interface IFormContext {
@@ -40,6 +39,7 @@ export const MyFormContextProvider = ({
   children: ReactNode;
 }) => {
   const [patientData, setPatientData] = useState<IFormData[]>(formDataArr);
+
   //deoctor's details
   const [doctorData, setDoctorData] = useState<IDoctorDetails>({
     clinicName: "",
@@ -68,14 +68,15 @@ export const MyFormContextProvider = ({
     };
 
     const patientDataHandler = (data: IFormData) => {
-      // setPatientData((prev) => [...prev, data]);
+      const prevData = patientData;
 
-      setPatientData((prev) => {
-        console.log(prev, data);
+      const indx = prevData.findIndex((ele) => ele.id === data.id);
 
-        if (prev?.some((ele) => ele.id === data.id)) return { ...prev };
-        else return { ...prev, data };
-      });
+      if (indx !== -1) prevData.splice(indx, 1);
+
+      setPatientData([...prevData, data]);
+
+      localStorage.setItem("patientsData", JSON.stringify(patientData));
     };
 
     const deletePatientDataHandler = (event: any) => {

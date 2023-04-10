@@ -11,8 +11,6 @@ const SideBar = () => {
   const { isOpen, setIsOpen, patientData, deletePatientDataHandler } =
     useMyFormContext();
 
-  console.log(patientData);
-
   const { setValue } = useFormContext();
 
   const navbarRef = useRef<HTMLDivElement>(null);
@@ -48,8 +46,6 @@ const SideBar = () => {
     }
   }, [isOpen]);
 
-  console.log(patientData);
-
   return (
     <div
       ref={navbarRef}
@@ -72,8 +68,8 @@ const SideBar = () => {
             className="w-12 h-12 self-center ml-4"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M6 18L18 6M6 6l12 12"
             />
           </svg>
