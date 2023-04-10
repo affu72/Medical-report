@@ -1,7 +1,5 @@
 import React from "react";
 import { useMyFormContext } from "../../Context/MyFormContext";
-import MedicalBill from "../MainComponent/MedicalBill";
-import { access } from "fs";
 
 const MedicalBillPreview = () => {
   const { patientData } = useMyFormContext();
@@ -12,8 +10,6 @@ const MedicalBillPreview = () => {
     .reduce((curr, val) => {
       return +val! + curr!;
     }, 0);
-
-
 
   return (
     <div className="w-1/4  my-16">

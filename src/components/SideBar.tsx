@@ -1,12 +1,19 @@
 import { useMyFormContext } from "../Context/MyFormContext";
-import { BiEdit, BiDownload } from "react-icons/bi";
+import {
+  RiEdit2Line,
+  RiDeleteBack2Line,
+  RiDownload2Line,
+} from "react-icons/ri";
 import { useFormContext } from "react-hook-form";
 import { ReactComponent as OpenNavBtn } from "../assets/OpenSidenavIcon.svg";
 import { ReactComponent as CloseNavBtn } from "../assets/CloseNavbarIcon.svg";
 import { useEffect, useRef } from "react";
 
 const SideBar = () => {
-  const { isOpen, setIsOpen, patientData } = useMyFormContext();
+  const { isOpen, setIsOpen, patientData, deletePatientDataHandler } =
+    useMyFormContext();
+
+  console.log(patientData);
 
   const { setValue } = useFormContext();
 
@@ -43,17 +50,19 @@ const SideBar = () => {
     }
   }, [isOpen]);
 
+  console.log(isOpen);
+
   return (
     <div
       ref={navbarRef}
       className={`h-screen py-8 min-w-[225px] fixed top-0 left-0 bg-gray-100 ${
-        isOpen ? "" : "-translate-x-[225px]"
+        isOpen ? "" : "-translate-x-full"
       } transition-transform duration-500 box-border z-10`}
     >
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className=" absolute -right-16 top-4"
+        className="absolute -right-16 top-4"
       >
         {isOpen ? <CloseNavBtn /> : <OpenNavBtn />}
       </button>
@@ -63,7 +72,6 @@ const SideBar = () => {
           type="text"
           className="rounded-2xl py-2 border-2 border-gray-500 box-border text-center"
           placeholder="Search"
-          value=""
           ref={searchRef}
         />
       </div>
@@ -83,10 +91,17 @@ const SideBar = () => {
 
             <div className="flex gap-6">
               <button type="button" onClick={editFormHandler} tabIndex={index}>
-                {<BiEdit size={"22px"}></BiEdit>}
+                {<RiEdit2Line size={"22px"} />}
               </button>
               <button type="button">
-                {<BiDownload size={"22px"} tabIndex={index}></BiDownload>}
+                {<RiDownload2Line size={"22px"} tabIndex={index} />}
+              </button>
+              <button
+                type="button"
+                onClick={deletePatientDataHandler}
+                tabIndex={index}
+              >
+                <RiDeleteBack2Line size={"22px"} />
               </button>
             </div>
           </li>

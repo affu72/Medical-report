@@ -4,9 +4,11 @@ import React, {
   useState,
   ReactNode,
   useMemo,
+  MouseEventHandler,
 } from "react";
 import { IDoctorDetails } from "../components/DoctorDetails";
 import { IFormData } from "../components/MainComponent/InputForms";
+
 import { formDataArr } from "../ts/Contants";
 //context value type
 interface IFormContext {
@@ -25,6 +27,7 @@ interface IFormContext {
   patientData: IFormData[] | null;
   isOpen: boolean;
   setIsOpen: (data: boolean) => void;
+  deletePatientDataHandler: (event: any) => void;
 }
 
 // creatig conetxt
@@ -37,7 +40,7 @@ export const MyFormContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [patientData, setPatientData] = useState<IFormData[]>([]);
+  const [patientData, setPatientData] = useState<IFormData[]>(formDataArr);
   //deoctor's details
   const [doctorData, setDoctorData] = useState<IDoctorDetails>({
     clinicName: "",
@@ -68,6 +71,10 @@ export const MyFormContextProvider = ({
     const patientDataHandler = (data: IFormData) => {
       setPatientData((prev) => [...prev, data]);
     };
+    const deletePatientDataHandler = (event: any) => {
+      const index = event.currentTarget.tabIndex;
+      setPatientData((prev) => prev.filter((data, i) => i !== index));
+    };
 
     const showFormHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
       setTabIndex(+event.currentTarget.value);
@@ -92,6 +99,7 @@ export const MyFormContextProvider = ({
       patientData,
       isOpen,
       setIsOpen,
+      deletePatientDataHandler,
     };
 
     return value;
