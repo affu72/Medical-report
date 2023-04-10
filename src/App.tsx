@@ -7,10 +7,10 @@ import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 
 function App() {
-  const { hasDoctorData, showNavbar } = useMyFormContext();
+  const { hasDoctorData, isOpen } = useMyFormContext();
 
   return (
-    <div>
+    <div className="h-full overflow-hidden">
       {!hasDoctorData && !localStorage.getItem("doctorData") ? (
         <DoctorDetails />
       ) : (
@@ -24,7 +24,7 @@ function App() {
           </div>
         </>
       )}
-      {showNavbar && <div className="overlay"></div>}
+      {isOpen && <div className="overlay"></div>}
     </div>
   );
 }

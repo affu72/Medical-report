@@ -23,8 +23,9 @@ interface IFormContext {
   setHasDoctorData: (value: boolean) => void;
   patientDataHandler: (data: IFormData) => void;
   patientData: IFormData[] | null;
-  showNavbar: boolean;
-  setShowNavbar: (data: boolean) => void;
+  isOpen: boolean;
+  setIsOpen: (data: boolean) => void;
+  deletePatientDataHandler: (event: any) => void;
 }
 
 // creatig conetxt
@@ -38,6 +39,7 @@ export const MyFormContextProvider = ({
   children: ReactNode;
 }) => {
   const [patientData, setPatientData] = useState<IFormData[]>(formDataArr);
+
   //deoctor's details
   const [doctorData, setDoctorData] = useState<IDoctorDetails>({
     clinicName: "",
@@ -56,7 +58,7 @@ export const MyFormContextProvider = ({
 
   const [tabIndex, setTabIndex] = useState(0);
 
-  const [showNavbar, setShowNavbar] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const value = useMemo(() => {
     //Doctors Details
@@ -66,7 +68,20 @@ export const MyFormContextProvider = ({
     };
 
     const patientDataHandler = (data: IFormData) => {
-      setPatientData((prev) => [...prev, data]);
+      const prevData = patientData;
+
+      const indx = prevData.findIndex((ele) => ele.id === data.id);
+
+      if (indx !== -1) prevData.splice(indx, 1);
+
+      setPatientData([...prevData, data]);
+
+      localStorage.setItem("patientsData", JSON.stringify(patientData));
+    };
+
+    const deletePatientDataHandler = (event: any) => {
+      const index = event.currentTarget.tabIndex;
+      setPatientData((prev) => prev.filter((data, i) => i !== index));
     };
 
     const showFormHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -90,12 +105,13 @@ export const MyFormContextProvider = ({
       setHasDoctorData,
       patientDataHandler,
       patientData,
-      showNavbar,
-      setShowNavbar,
+      isOpen,
+      setIsOpen,
+      deletePatientDataHandler,
     };
 
     return value;
-  }, [tabIndex, doctorData, hasDoctorData, patientData, showNavbar]);
+  }, [tabIndex, doctorData, hasDoctorData, patientData, isOpen]);
 
   return (
     <MyFormContext.Provider value={value}>{children}</MyFormContext.Provider>

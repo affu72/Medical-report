@@ -15,8 +15,6 @@ const MedicalReadings = () => {
     control,
   });
 
-  console.log(fields.length);
-
   return (
     <div className="">
       {fields.map((reading, index) => (
@@ -53,13 +51,13 @@ const MedicalReadings = () => {
         value="Add Anoher reading"
         bgColor="bg-blue-500"
         onClick={() => {
-          // if (
-          //   getValues().medicalRecord?.medicalReadings.at(-1).readingName ===
-          //     "" ||
-          //   getValues().medicalRecord?.medicalReadings.at(-1).readingValue ===
-          //     null
-          // )
-          //   return;
+          if (
+            getValues().medicalRecord?.medicalReadings.at(-1).readingName ===
+              "" ||
+            getValues().medicalRecord?.medicalReadings.at(-1).readingValue ===
+              null
+          )
+            return;
 
           append({ readingName: "", readingValue: null });
         }}
