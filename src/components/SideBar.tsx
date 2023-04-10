@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useMyFormContext } from "../Context/MyFormContext";
 import {
   RiEdit2Line,
@@ -5,9 +6,6 @@ import {
   RiDownload2Line,
 } from "react-icons/ri";
 import { useFormContext } from "react-hook-form";
-import { ReactComponent as OpenNavBtn } from "../assets/OpenSidenavIcon.svg";
-import { ReactComponent as CloseNavBtn } from "../assets/CloseNavbarIcon.svg";
-import { useEffect, useRef } from "react";
 
 const SideBar = () => {
   const { isOpen, setIsOpen, patientData, deletePatientDataHandler } =
@@ -50,7 +48,7 @@ const SideBar = () => {
     }
   }, [isOpen]);
 
-  console.log(isOpen);
+  console.log(patientData);
 
   return (
     <div

@@ -10,7 +10,7 @@ function App() {
   const { hasDoctorData, isOpen } = useMyFormContext();
 
   return (
-    <div>
+    <div className="h-full overflow-hidden">
       {!hasDoctorData && !localStorage.getItem("doctorData") ? (
         <DoctorDetails />
       ) : (

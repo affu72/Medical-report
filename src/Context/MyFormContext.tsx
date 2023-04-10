@@ -4,7 +4,6 @@ import React, {
   useState,
   ReactNode,
   useMemo,
-  MouseEventHandler,
 } from "react";
 import { IDoctorDetails } from "../components/DoctorDetails";
 import { IFormData } from "../components/MainComponent/InputForms";
@@ -69,8 +68,16 @@ export const MyFormContextProvider = ({
     };
 
     const patientDataHandler = (data: IFormData) => {
-      setPatientData((prev) => [...prev, data]);
+      // setPatientData((prev) => [...prev, data]);
+
+      setPatientData((prev) => {
+        console.log(prev, data);
+
+        if (prev?.some((ele) => ele.id === data.id)) return { ...prev };
+        else return { ...prev, data };
+      });
     };
+
     const deletePatientDataHandler = (event: any) => {
       const index = event.currentTarget.tabIndex;
       setPatientData((prev) => prev.filter((data, i) => i !== index));

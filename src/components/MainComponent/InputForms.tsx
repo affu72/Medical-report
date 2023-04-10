@@ -20,6 +20,7 @@ export interface IFormData {
   personalDetails: IPersonalData;
   medicalBills: IMedicalBill[];
   medicalRecord: IMedicalRecord;
+  id: string;
 }
 
 const InputForms = () => {
@@ -65,13 +66,17 @@ const InputForms = () => {
 
   return (
     <>
-      <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto">
+      <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto max-h-screen">
         <FormProvider {...methods}>
           <form
             id="main-form"
             onSubmit={methods.handleSubmit((data) => {
+              const uniquId =
+                data.personalDetails.firstName +
+                data.personalDetails.mobile +
+                data.personalDetails.age;
               methods.reset();
-              patientDataHandler(data);
+              patientDataHandler({ ...data, id: uniquId });
             })}
             className="xs:pb-8 h-full"
           >

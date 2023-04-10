@@ -76,6 +76,7 @@ export const states = [
 
 export const formDataArr: IFormData[] = [
   {
+    id: "hello",
     medicines: [
       {
         id: "a",
@@ -122,6 +123,7 @@ export const formDataArr: IFormData[] = [
     },
   },
   {
+    id: "hello2",
     medicines: [
       {
         id: "c",
@@ -168,6 +170,7 @@ export const formDataArr: IFormData[] = [
     },
   },
   {
+    id: "hello3",
     medicines: [
       {
         id: "e",
@@ -215,6 +218,7 @@ export const formDataArr: IFormData[] = [
   },
 
   {
+    id: "hello4",
     medicines: [
       {
         id: "a",
@@ -261,6 +265,7 @@ export const formDataArr: IFormData[] = [
     },
   },
   {
+    id: "hello5",
     medicines: [
       {
         id: "c",
@@ -307,6 +312,7 @@ export const formDataArr: IFormData[] = [
     },
   },
   {
+    id: "hello6",
     medicines: [
       {
         id: "e",

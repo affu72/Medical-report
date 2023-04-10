@@ -28,7 +28,7 @@ function PreviewPage() {
   //JSX
   return (
     <div className="flex flex-col gap-4  bg-slate-100  p-4 relative">
-      <div className="w-full flex bg-slate-100 py-[6px] px-2 drop-shadow-md box-border text-right justify-between md:hidden">
+      <div className="w-full flex bg-slate-100 py-[6px] px-2 drop-shadow-md box-border text-right justify-between md:hidden ">
         <Button
           value="Edit Doctor's Details"
           bgColor="bg-blue-500"
@@ -62,7 +62,7 @@ function PreviewPage() {
       </div>
       <div
         ref={ref}
-        className="w-[800px] min-h-[841px] px-6 flex-none bg-white"
+        className="w-[800px] max-h-[841px] px-6 flex-none bg-white overflow-auto"
       >
         <Header></Header>
 
