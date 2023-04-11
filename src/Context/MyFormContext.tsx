@@ -29,7 +29,6 @@ interface IFormContext {
   deletePatientDataHandler: (event: any) => void;
   isFormOpen: boolean;
   setIsFormOpen: (st: boolean) => void;
-  editFormHandler: (e: any) => void;
 }
 
 // creatig conetxt
@@ -66,10 +65,8 @@ export const MyFormContextProvider = ({
 
   const [isNavbarOpen, setIsNavbarOpen] = useState<boolean>(false);
 
-  const [defaultValue, setDefaultvalue] = useState(deafaultFormValue);
-
   const methods = useForm<IFormData>({
-    defaultValues: defaultValue,
+    defaultValues: deafaultFormValue,
     mode: "all",
     criteriaMode: "all",
   });
@@ -104,17 +101,6 @@ export const MyFormContextProvider = ({
 
     const handleBackClick = () => setTabIndex((prev) => prev - 1);
 
-    const editFormHandler = (e: any) => {
-      const index = e.currentTarget.tabIndex;
-
-      console.log(index, patientData[index]);
-
-      setDefaultvalue(patientData[index]);
-
-      setIsFormOpen(true);
-      setIsNavbarOpen(false);
-    };
-
     const value: IFormContext = {
       showFormHandler,
       tabIndex,
@@ -133,7 +119,6 @@ export const MyFormContextProvider = ({
       deletePatientDataHandler,
       isFormOpen,
       setIsFormOpen,
-      editFormHandler,
     };
 
     return value;

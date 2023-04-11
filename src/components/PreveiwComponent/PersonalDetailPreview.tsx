@@ -4,7 +4,9 @@ import { useMyFormContext } from "../../Context/MyFormContext";
 const PersonalInfoPreview = () => {
   const { patientData } = useMyFormContext();
 
-  const patient = patientData?.at(-1)?.personalDetails;
+  const { watch } = useFormContext();
+
+  const patient = watch("personalDetails");
 
   return (
     <div className="flex flex-col p-6 gap border-double  border-b-4 border-stone-600">

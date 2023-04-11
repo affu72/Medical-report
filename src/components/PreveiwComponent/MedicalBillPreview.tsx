@@ -1,12 +1,18 @@
 import React from "react";
 import { useMyFormContext } from "../../Context/MyFormContext";
+import { useFormContext } from "react-hook-form";
+import { IMedicalBill } from "../MainComponent/MedicalBill";
 
 const MedicalBillPreview = () => {
   const { patientData } = useMyFormContext();
+  const { watch } = useFormContext();
 
-  const total = patientData
-    ?.at(-1)
-    ?.medicalBills?.map((bill) => bill.billValue)
+  const bills: IMedicalBill[] = watch("medicalBills");
+
+  console.log(bills);
+
+  const total = bills
+    .map((bill) => bill.billValue)
     .reduce((curr, val) => {
       return +val! + curr!;
     }, 0);
@@ -16,7 +22,7 @@ const MedicalBillPreview = () => {
       <h2 className="text-3xl">Fees: (All in Rs)</h2>
       <table className="border-2 border-slate-900">
         <tbody className="border-2 border-slate-900">
-          {patientData?.at(-1)?.medicalBills.map((bill, i) => (
+          {bills.map((bill, i) => (
             <tr key={bill.billName} className="border-2 border-slate-900">
               <td className=" px-4 py-2 border-2 border-slate-900">{`${bill.billName}`}</td>
               <td className=" px-4 py-2 border-2 border-slate-900">{`${bill.billValue}/`}</td>

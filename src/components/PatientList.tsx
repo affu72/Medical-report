@@ -5,13 +5,29 @@ import {
   RiDeleteBack2Line,
   RiDownload2Line,
 } from "react-icons/ri";
+// import { useFormContext } from "react-hook-form";
 import { IFormData } from "./MainComponent/InputForms";
+import { useFormContext } from "react-hook-form";
 
 const PatientList = () => {
-  let { patientData, deletePatientDataHandler, editFormHandler } =
-    useMyFormContext();
+  let {
+    patientData,
+    deletePatientDataHandler,
+    setIsNavbarOpen,
+    setIsFormOpen,
+  } = useMyFormContext();
+
+  const { reset } = useFormContext();
 
   const [searchValue, setSearchValue] = useState("");
+
+  const editFormHandler = (e: any) => {
+    const index = e.currentTarget.tabIndex;
+    reset({ ...patientData?.at(index) });
+
+    setIsFormOpen(true);
+    setIsNavbarOpen(false);
+  };
 
   //search patient
   const isIncluded = (patient: IFormData) => {
