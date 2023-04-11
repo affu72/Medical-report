@@ -58,7 +58,7 @@ const DoctorDetails = () => {
         />
 
         <InputRHF
-          label="Clinic Name"
+          label="Doctor's Name"
           name="doctorName"
           control={control}
           placeholder="Enter Doctor's Name"

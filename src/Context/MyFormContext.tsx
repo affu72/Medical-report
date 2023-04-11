@@ -26,6 +26,8 @@ interface IFormContext {
   isOpen: boolean;
   setIsOpen: (data: boolean) => void;
   deletePatientDataHandler: (event: any) => void;
+  isFormOpen: boolean;
+  setIsFormOpen: (st: boolean) => void;
 }
 
 // creatig conetxt
@@ -38,6 +40,8 @@ export const MyFormContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
   const [patientData, setPatientData] = useState<IFormData[]>(formDataArr);
 
   //deoctor's details
@@ -75,8 +79,6 @@ export const MyFormContextProvider = ({
       if (indx !== -1) prevData.splice(indx, 1);
 
       setPatientData([...prevData, data]);
-
-      localStorage.setItem("patientsData", JSON.stringify(patientData));
     };
 
     const deletePatientDataHandler = (event: any) => {
@@ -108,10 +110,12 @@ export const MyFormContextProvider = ({
       isOpen,
       setIsOpen,
       deletePatientDataHandler,
+      isFormOpen,
+      setIsFormOpen,
     };
 
     return value;
-  }, [tabIndex, doctorData, hasDoctorData, patientData, isOpen]);
+  }, [tabIndex, doctorData, hasDoctorData, patientData, isOpen, isFormOpen]);
 
   return (
     <MyFormContext.Provider value={value}>{children}</MyFormContext.Provider>

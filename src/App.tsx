@@ -1,13 +1,11 @@
-import React, { useState } from "react";
 import PreviewPage from "./components/PreveiwComponent/PreviewPage";
 import MainPage from "./components/MainComponent/MainPage";
 import { useMyFormContext } from "./Context/MyFormContext";
 import DoctorDetails from "./components/DoctorDetails";
 import Header from "./components/Header";
-import SideBar from "./components/SideBar";
 
 function App() {
-  const { hasDoctorData, isOpen } = useMyFormContext();
+  const { hasDoctorData, isFormOpen, isOpen } = useMyFormContext();
 
   return (
     <div className="h-full overflow-hidden">
@@ -15,9 +13,11 @@ function App() {
         <DoctorDetails />
       ) : (
         <>
-          <Header></Header>
+          {isFormOpen && <Header />}
           <div
-            className={`flex justify-evenly xs:block m-auto md:flex-col z-1`}
+            className={`flex justify-evenly xs:block m-auto md:flex-col ${
+              isFormOpen ? "mt-20" : ""
+            }`}
           >
             <MainPage></MainPage>
             <PreviewPage></PreviewPage>

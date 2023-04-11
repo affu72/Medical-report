@@ -68,38 +68,3 @@ const SideNav = () => {
 };
 
 export default SideNav;
-
-// interface PropTab {
-//   tabIndex?: number;
-//   tabBarIndex: number;
-//   id?: string;
-//   value: string;
-//   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-//   className: string;
-// }
-
-// export const TabButton: React.FC<PropTab> = ({
-//   tabIndex = 0,
-//   tabBarIndex,
-//   id,
-//   value,
-//   onClick,
-//   className = `w-full flex items-center gap-4  border-b-2  py-4 ${
-//     tabBarIndex === 0
-//       ? "font-semibold transition-all duration-100 bg-blue-100  translate-x-1"
-//       : ""
-//   } border-cyan-500 `,
-// }) => {
-//   return (
-//     <button
-//       tabIndex={tabIndex}
-//       id={id}
-//       value={value}
-//       onClick={onClick}
-//       className={className}
-//     >
-//       <FaMoneyBillAlt />
-//       Medical Bill
-//     </button>
-//   );
-// };

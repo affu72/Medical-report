@@ -14,14 +14,14 @@ function PreviewPage() {
 
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    // const h = ref.current?.getClientRects();
-  });
+  let height: number;
+
+  height = ref.current?.clientHeight!;
 
   const options = {
     orientation: "p",
     unit: "px",
-    format: [453, 500],
+    format: [453, height],
     floatPrecision: 20,
   };
 
@@ -46,23 +46,21 @@ function PreviewPage() {
           y={1}
           scale={1}
         >
-          {({ toPdf }: any) =>
-            tabIndex === 3 && (
-              <button
-                form="main-form"
-                type="submit"
-                onClick={toPdf}
-                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded `}
-              >
-                Generate Pdf
-              </button>
-            )
-          }
+          {({ toPdf }: any) => (
+            <button
+              form="main-form"
+              type="submit"
+              onClick={toPdf}
+              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded `}
+            >
+              Generate Pdf
+            </button>
+          )}
         </Pdf>
       </div>
       <div
         ref={ref}
-        className="w-[800px] max-h-[841px] px-6 flex-none bg-white overflow-auto"
+        className="w-[800px] px-6 flex-none bg-white overflow-auto"
       >
         <Header></Header>
 

@@ -20,6 +20,7 @@ const InputRHF = ({
   control,
   placeholder,
   className,
+
   type = "text",
 }: PropInput) => {
   return (
@@ -32,19 +33,14 @@ const InputRHF = ({
         name={name}
         defaultValue={""}
         render={({
-          field: { onChange, onBlur, value, name },
-          fieldState: { invalid, isTouched, isDirty },
+          field: { onChange, onBlur, value },
           formState: { errors },
         }) => {
           return (
             <>
               <input
                 onChange={(e) => onChange(e.target.value)}
-                className={getInputClassName(
-                  `${
-                    errors.name?.type === "required" ? " outline-red-700" : ""
-                  }`
-                )}
+                className={getInputClassName(className)}
                 placeholder={placeholder}
                 type={type}
                 value={value}

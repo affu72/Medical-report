@@ -9,6 +9,8 @@ import { useForm, FormProvider } from "react-hook-form";
 import IOption from "../../ts/Option";
 import SideBar from "../SideBar";
 import { IMedicalReadings } from "./MedicalReadings";
+import SideNav from "./SideNav";
+import PatientList from "../PatientList";
 
 interface IMedicalRecord {
   histories: IOption[];
@@ -44,13 +46,18 @@ const InputForms = () => {
         state: "",
       },
     },
-
     mode: "all",
-    shouldFocusError: true,
+    criteriaMode: "all",
   });
 
-  const { tabClickHandler, handleBackClick, tabIndex, patientDataHandler } =
-    useMyFormContext();
+  const {
+    tabClickHandler,
+    handleBackClick,
+    tabIndex,
+    patientDataHandler,
+    isFormOpen,
+    setIsFormOpen,
+  } = useMyFormContext();
 
   const formSection = [
     <PersonaDetails key={0} />,
@@ -65,9 +72,19 @@ const InputForms = () => {
   }, [methods, methods.setFocus]);
 
   return (
-    <>
-      <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto max-h-screen">
-        <FormProvider {...methods}>
+    <FormProvider {...methods}>
+      {!isFormOpen ? (
+        <>
+          <button
+            onClick={() => setIsFormOpen(true)}
+            className="bg-blue-700 py-5 text-white font-semibold shadow-lg rounded-md hover:bg-blue-900 transition-all duration-300"
+          >
+            Add New Patient
+          </button>
+          <PatientList />
+        </>
+      ) : (
+        <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto max-h-screen">
           <form
             id="main-form"
             onSubmit={methods.handleSubmit((data) => {
@@ -113,9 +130,9 @@ const InputForms = () => {
             </div>
           </form>
           <SideBar />
-        </FormProvider>
-      </div>
-    </>
+        </div>
+      )}
+    </FormProvider>
   );
 };
 
