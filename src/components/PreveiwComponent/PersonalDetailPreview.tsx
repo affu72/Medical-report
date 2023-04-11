@@ -1,9 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import { useMyFormContext } from "../../Context/MyFormContext";
-
 const PersonalInfoPreview = () => {
-  const { patientData } = useMyFormContext();
-
   const { watch } = useFormContext();
 
   const patient = watch("personalDetails");

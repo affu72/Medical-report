@@ -1,11 +1,8 @@
 import React from "react";
-import { useMyFormContext } from "../../Context/MyFormContext";
 import { useFormContext } from "react-hook-form";
 import { IMedicalReadings } from "../MainComponent/MedicalReadings";
 
 const MedicalReadingPreview = () => {
-  const { patientData } = useMyFormContext();
-
   const { watch } = useFormContext();
 
   const readings: IMedicalReadings[] = watch("medicalRecord.medicalReadings");

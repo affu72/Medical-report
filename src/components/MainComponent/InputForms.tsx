@@ -5,12 +5,12 @@ import MedicalBill, { IMedicalBill } from "./MedicalBill";
 import PersonaDetails, { IPersonalData } from "./PersonaDetails";
 import { useMyFormContext } from "../../Context/MyFormContext";
 import Button from "../CustomComp/Button";
-import { useForm, FormProvider, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import IOption from "../../ts/Option";
 import SideBar from "../SideBar";
 import { IMedicalReadings } from "./MedicalReadings";
-import SideNav from "./SideNav";
 import PatientList from "../PatientList";
+import { deafaultFormValue } from "../../ts/Contants";
 
 interface IMedicalRecord {
   histories: IOption[];
@@ -70,7 +70,7 @@ const InputForms = () => {
                 data.personalDetails.mobile +
                 data.personalDetails.firstName +
                 data.personalDetails.age;
-              reset();
+              reset({ ...deafaultFormValue });
               patientDataHandler({
                 medicalBills: data.medicalBills,
                 personalDetails: data.personalDetails,
@@ -105,12 +105,12 @@ const InputForms = () => {
                 />
               )}
 
-              <Button
+              {/* <Button
                 type="submit"
                 value="preview"
                 bgColor="bg-yellow-500"
                 className="ml-auto"
-              />
+              /> */}
             </div>
           </form>
           <SideBar />

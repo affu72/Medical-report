@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import Header from "./Header";
 import PersonalInfoPreview from "./PersonalDetailPreview";
 import MedicalRecordPreview from "./MedicalRecordPreview";
@@ -10,7 +10,7 @@ import MedicalBillPreview from "./MedicalBillPreview";
 import MedicalReadingPreview from "./MedicalReadingPreview";
 
 function PreviewPage() {
-  const { tabIndex, patientData, setHasDoctorData } = useMyFormContext();
+  const { patientData, setHasDoctorData } = useMyFormContext();
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -53,7 +53,7 @@ function PreviewPage() {
               onClick={toPdf}
               className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded `}
             >
-              Generate Pdf
+              Submit & Generate Pdf
             </button>
           )}
         </Pdf>

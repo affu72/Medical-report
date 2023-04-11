@@ -1,10 +1,7 @@
-import React from "react";
-import { useMyFormContext } from "../../Context/MyFormContext";
 import { useFormContext } from "react-hook-form";
 import { IMedicalBill } from "../MainComponent/MedicalBill";
 
 const MedicalBillPreview = () => {
-  const { patientData } = useMyFormContext();
   const { watch } = useFormContext();
 
   const bills: IMedicalBill[] = watch("medicalBills");
@@ -25,12 +22,12 @@ const MedicalBillPreview = () => {
           {bills.map((bill, i) => (
             <tr key={bill.billName} className="border-2 border-slate-900">
               <td className=" px-4 py-2 border-2 border-slate-900">{`${bill.billName}`}</td>
-              <td className=" px-4 py-2 border-2 border-slate-900">{`${bill.billValue}/`}</td>
+              <td className=" px-4 py-2 border-2 border-slate-900">{`${bill.billValue}/-`}</td>
             </tr>
           ))}
           <tr className=" px-4 py-2 border-2 border-slate-900">
             <td className=" px-4 py-2 border-2 border-slate-900">Total</td>
-            <td className=" px-4 py-2 border-2 border-slate-900">{total}/</td>
+            <td className=" px-4 py-2 border-2 border-slate-900">{total}/-</td>
           </tr>
         </tbody>
       </table>

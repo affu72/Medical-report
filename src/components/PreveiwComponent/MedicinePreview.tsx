@@ -1,6 +1,4 @@
-import { useFormContext } from "react-hook-form";
 import { IMedicine } from "../MainComponent/Medicines";
-
 interface PropMedicinePreview {
   medicines: IMedicine[];
 }
