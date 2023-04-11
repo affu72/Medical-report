@@ -3,7 +3,7 @@ import { useMyFormContext } from "../Context/MyFormContext";
 import PatientList from "./PatientList";
 
 const SideBar = () => {
-  const { isOpen, setIsOpen } = useMyFormContext();
+  const { isNavbarOpen, setIsNavbarOpen } = useMyFormContext();
 
   const navbarRef = useRef<HTMLDivElement>(null);
 
@@ -13,7 +13,7 @@ const SideBar = () => {
         navbarRef.current &&
         !navbarRef.current?.contains(event.target as Node)
       )
-        setIsOpen(false);
+        setIsNavbarOpen(false);
     };
 
     document.addEventListener("mousedown", outsideClickHandler);
@@ -21,21 +21,21 @@ const SideBar = () => {
     return () => {
       document.removeEventListener("mousedown", outsideClickHandler);
     };
-  }, [navbarRef, setIsOpen]);
+  }, [navbarRef, setIsNavbarOpen]);
 
   return (
     <div
       ref={navbarRef}
       className={`h-screen py-8 min-w-[225px] fixed top-0 left-0 bg-gray-100 ${
-        isOpen ? "" : "-translate-x-full"
+        isNavbarOpen ? "" : "-translate-x-full"
       } transition-transform duration-500 box-border z-10`}
     >
       <button
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsNavbarOpen(!isNavbarOpen)}
         className="absolute -right-16 top-4"
       >
-        {isOpen ? (
+        {isNavbarOpen ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

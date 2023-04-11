@@ -7,7 +7,8 @@ import React, {
 } from "react";
 import { IDoctorDetails } from "../components/DoctorDetails";
 import { IFormData } from "../components/MainComponent/InputForms";
-import { formDataArr } from "../ts/Contants";
+import { deafaultFormValue, formDataArr } from "../ts/Contants";
+import { FormProvider, useForm } from "react-hook-form";
 //context value type
 interface IFormContext {
   showFormHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -23,11 +24,12 @@ interface IFormContext {
   setHasDoctorData: (value: boolean) => void;
   patientDataHandler: (data: IFormData) => void;
   patientData: IFormData[] | null;
-  isOpen: boolean;
-  setIsOpen: (data: boolean) => void;
+  isNavbarOpen: boolean;
+  setIsNavbarOpen: (data: boolean) => void;
   deletePatientDataHandler: (event: any) => void;
   isFormOpen: boolean;
   setIsFormOpen: (st: boolean) => void;
+  editFormHandler: (e: any) => void;
 }
 
 // creatig conetxt
@@ -62,7 +64,15 @@ export const MyFormContextProvider = ({
 
   const [tabIndex, setTabIndex] = useState(0);
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isNavbarOpen, setIsNavbarOpen] = useState<boolean>(false);
+
+  const [defaultValue, setDefaultvalue] = useState(deafaultFormValue);
+
+  const methods = useForm<IFormData>({
+    defaultValues: defaultValue,
+    mode: "all",
+    criteriaMode: "all",
+  });
 
   const value = useMemo(() => {
     //Doctors Details
@@ -94,6 +104,17 @@ export const MyFormContextProvider = ({
 
     const handleBackClick = () => setTabIndex((prev) => prev - 1);
 
+    const editFormHandler = (e: any) => {
+      const index = e.currentTarget.tabIndex;
+
+      console.log(index, patientData[index]);
+
+      setDefaultvalue(patientData[index]);
+
+      setIsFormOpen(true);
+      setIsNavbarOpen(false);
+    };
+
     const value: IFormContext = {
       showFormHandler,
       tabIndex,
@@ -107,18 +128,28 @@ export const MyFormContextProvider = ({
       setHasDoctorData,
       patientDataHandler,
       patientData,
-      isOpen,
-      setIsOpen,
+      isNavbarOpen,
+      setIsNavbarOpen,
       deletePatientDataHandler,
       isFormOpen,
       setIsFormOpen,
+      editFormHandler,
     };
 
     return value;
-  }, [tabIndex, doctorData, hasDoctorData, patientData, isOpen, isFormOpen]);
+  }, [
+    tabIndex,
+    doctorData,
+    hasDoctorData,
+    patientData,
+    isNavbarOpen,
+    isFormOpen,
+  ]);
 
   return (
-    <MyFormContext.Provider value={value}>{children}</MyFormContext.Provider>
+    <FormProvider {...methods}>
+      <MyFormContext.Provider value={value}>{children}</MyFormContext.Provider>
+    </FormProvider>
   );
 };
 

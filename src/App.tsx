@@ -5,7 +5,7 @@ import DoctorDetails from "./components/DoctorDetails";
 import Header from "./components/Header";
 
 function App() {
-  const { hasDoctorData, isFormOpen, isOpen } = useMyFormContext();
+  const { hasDoctorData, isFormOpen, isNavbarOpen } = useMyFormContext();
 
   return (
     <div className="h-full overflow-hidden">
@@ -24,7 +24,7 @@ function App() {
           </div>
         </>
       )}
-      {isOpen && <div className="overlay"></div>}
+      {isNavbarOpen && <div className="overlay"></div>}
     </div>
   );
 }

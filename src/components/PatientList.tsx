@@ -1,41 +1,27 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useMyFormContext } from "../Context/MyFormContext";
 import {
   RiEdit2Line,
   RiDeleteBack2Line,
   RiDownload2Line,
 } from "react-icons/ri";
-import { useFormContext } from "react-hook-form";
 import { IFormData } from "./MainComponent/InputForms";
 
 const PatientList = () => {
-  let { patientData, deletePatientDataHandler, setIsFormOpen } =
+  let { patientData, deletePatientDataHandler, editFormHandler } =
     useMyFormContext();
-  const { setValue, register, watch } = useFormContext();
 
-  const editFormHandler = (e: any) => {
-    const index = e.currentTarget.tabIndex;
-    setValue("personalDetails", patientData?.[index]?.personalDetails);
-    setValue("medicalRecord", patientData?.[index]?.medicalRecord);
-    setValue("medicines", patientData?.[index]?.medicines);
-    setValue("medicalBills", patientData?.[index]?.medicalBills);
-
-    setIsFormOpen(true);
-  };
+  const [searchValue, setSearchValue] = useState("");
 
   //search patient
-
-  const searchValue = watch("search");
-
   const isIncluded = (patient: IFormData) => {
     const name =
       patient.personalDetails.firstName + patient.personalDetails.lastName;
 
-    return name.includes(searchValue);
+    return name.includes(searchValue?.charAt(0).toLocaleUpperCase());
   };
 
-  if (searchValue.length >= 1)
-    patientData = patientData?.filter((patient) => isIncluded(patient))!;
+  patientData = patientData?.filter((patient) => isIncluded(patient))!;
 
   return (
     <>
@@ -44,8 +30,9 @@ const PatientList = () => {
           autoFocus={true}
           className="rounded-2xl py-2 border-2 border-gray-500 box-border text-center"
           placeholder="Search"
-          {...register("search")}
-          defaultValue={""}
+          onChange={(e) => setSearchValue(e.target.value)}
+          type="text"
+          value={searchValue}
         />
       </div>
       <ul className="mt-12 flex flex-col gap-2">

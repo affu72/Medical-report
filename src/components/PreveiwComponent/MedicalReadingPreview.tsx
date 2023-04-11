@@ -3,6 +3,8 @@ import { useMyFormContext } from "../../Context/MyFormContext";
 
 const MedicalReadingPreview = () => {
   const { patientData } = useMyFormContext();
+
+  console.log(patientData);
   return (
     <div>
       <h2 className="text-xl font-semibold ml-auto">Medical Reading</h2>

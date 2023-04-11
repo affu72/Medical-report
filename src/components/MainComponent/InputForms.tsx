@@ -5,7 +5,7 @@ import MedicalBill, { IMedicalBill } from "./MedicalBill";
 import PersonaDetails, { IPersonalData } from "./PersonaDetails";
 import { useMyFormContext } from "../../Context/MyFormContext";
 import Button from "../CustomComp/Button";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, FormProvider, useFormContext } from "react-hook-form";
 import IOption from "../../ts/Option";
 import SideBar from "../SideBar";
 import { IMedicalReadings } from "./MedicalReadings";
@@ -26,29 +26,7 @@ export interface IFormData {
 }
 
 const InputForms = () => {
-  const methods = useForm<IFormData>({
-    defaultValues: {
-      medicines: [{ name: "", dose: "", id: "", type: "" }],
-      medicalBills: [{ billName: "", id: "", billValue: null }],
-      medicalRecord: {
-        histories: [],
-        symptoms: [],
-        medicalReadings: [{ readingName: "", readingValue: "", key: "" }],
-      },
-      personalDetails: {
-        firstName: "",
-        lastName: "",
-        age: null,
-        gender: "",
-        mobile: "",
-        address: "",
-        city: "",
-        state: "",
-      },
-    },
-    mode: "all",
-    criteriaMode: "all",
-  });
+  const { setFocus, handleSubmit, reset } = useFormContext();
 
   const {
     tabClickHandler,
@@ -67,12 +45,12 @@ const InputForms = () => {
   ];
 
   useEffect(() => {
-    methods.setFocus(`medicalBills.${0}.billName`);
-    methods.setFocus(`medicines.${0}.name`);
-  }, [methods, methods.setFocus]);
+    setFocus(`medicalBills.${0}.billName`);
+    setFocus(`medicines.${0}.name`);
+  }, [setFocus]);
 
   return (
-    <FormProvider {...methods}>
+    <>
       {!isFormOpen ? (
         <>
           <button
@@ -87,13 +65,19 @@ const InputForms = () => {
         <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto max-h-screen">
           <form
             id="main-form"
-            onSubmit={methods.handleSubmit((data) => {
+            onSubmit={handleSubmit((data) => {
               const uniquId =
                 data.personalDetails.mobile +
                 data.personalDetails.firstName +
                 data.personalDetails.age;
-              methods.reset();
-              patientDataHandler({ ...data, id: uniquId });
+              reset();
+              patientDataHandler({
+                medicalBills: data.medicalBills,
+                personalDetails: data.personalDetails,
+                medicalRecord: data.MedicalRecord,
+                medicines: data.medicines,
+                id: uniquId,
+              });
             })}
             className="xs:pb-8 h-full"
           >
@@ -132,7 +116,7 @@ const InputForms = () => {
           <SideBar />
         </div>
       )}
-    </FormProvider>
+    </>
   );
 };
 

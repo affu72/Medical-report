@@ -74,6 +74,28 @@ export const states = [
   { label: "West Bengal", value: "West Bengal" },
 ];
 
+export const deafaultFormValue: IFormData = {
+  medicines: [{ name: "", dose: "", id: "", type: "" }],
+  medicalBills: [{ billName: "", id: "", billValue: null }],
+  medicalRecord: {
+    histories: [],
+    symptoms: [],
+    medicalReadings: [{ readingName: "", readingValue: "", key: "" }],
+  },
+  personalDetails: {
+    firstName: "",
+    lastName: "",
+    age: null,
+    gender: "",
+    mobile: "",
+    address: "",
+    city: "",
+    state: "",
+    pin: 0,
+  },
+  id: "",
+};
+
 export const formDataArr: IFormData[] = [
   {
     id: "1234567890John30",
