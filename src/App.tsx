@@ -8,17 +8,13 @@ function App() {
   const { hasDoctorData, isFormOpen, isNavbarOpen } = useMyFormContext();
 
   return (
-    <div className="h-full overflow-hidden">
+    <div className="h-full">
       {!hasDoctorData && !localStorage.getItem("doctorData") ? (
         <DoctorDetails />
       ) : (
         <>
           {isFormOpen && <Header />}
-          <div
-            className={`flex justify-evenly xs:block m-auto md:flex-col ${
-              isFormOpen ? "mt-20" : ""
-            }`}
-          >
+          <div className={`flex justify-evenly xs:block m-auto md:flex-col`}>
             <MainPage></MainPage>
             <PreviewPage></PreviewPage>
           </div>

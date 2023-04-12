@@ -107,12 +107,12 @@ const InputForms = () => {
                 />
               )}
 
-              {/* <Button
+              <Button
                 type="submit"
-                value="preview"
+                value="Save"
                 bgColor="bg-yellow-500"
                 className="ml-auto"
-              /> */}
+              />
             </div>
           </form>
           <SideBar />

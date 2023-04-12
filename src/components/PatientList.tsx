@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { useMyFormContext } from "../Context/MyFormContext";
-import {
-  RiEdit2Line,
-  RiDeleteBack2Line,
-  RiDownload2Line,
-} from "react-icons/ri";
+import { RiEdit2Line, RiDeleteBack2Line } from "react-icons/ri";
 
 import { IFormData } from "./MainComponent/InputForms";
 import { useFormContext } from "react-hook-form";
@@ -34,13 +30,15 @@ const PatientList = () => {
     const name =
       patient.personalDetails.firstName + patient.personalDetails.lastName;
 
-    return name.includes(searchValue?.charAt(0).toLocaleUpperCase());
+    return name.includes(
+      searchValue?.charAt(0).toUpperCase() + searchValue.slice(1)
+    );
   };
 
   patientData = patientData?.filter((patient) => isIncluded(patient))!;
 
   return (
-    <>
+    <div className="overflow-auto">
       <div className="flex justify-center">
         <input
           autoFocus={true}
@@ -68,9 +66,6 @@ const PatientList = () => {
               <button type="button" onClick={editFormHandler} tabIndex={index}>
                 {<RiEdit2Line size={"22px"} />}
               </button>
-              <button type="button">
-                {<RiDownload2Line size={"22px"} tabIndex={index} />}
-              </button>
               <button
                 type="button"
                 onClick={deletePatientDataHandler}
@@ -82,7 +77,7 @@ const PatientList = () => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 

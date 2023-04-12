@@ -33,7 +33,7 @@ const SideBar = () => {
       <button
         type="button"
         onClick={() => setIsNavbarOpen(!isNavbarOpen)}
-        className="absolute -right-16 top-4"
+        className="absolute -right-16 top-3"
       >
         {isNavbarOpen ? (
           <svg
@@ -42,7 +42,7 @@ const SideBar = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="white"
-            className="w-12 h-12 self-center ml-4"
+            className="w-8 h-8 self-center ml-2"
           >
             <path
               strokeLinecap="round"
@@ -57,7 +57,7 @@ const SideBar = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="white"
-            className="w-12 h-12"
+            className="w-8 h-8 self-center ml-2"
           >
             <path
               strokeLinecap="round"

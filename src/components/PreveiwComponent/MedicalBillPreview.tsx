@@ -6,8 +6,6 @@ const MedicalBillPreview = () => {
 
   const bills: IMedicalBill[] = watch("medicalBills");
 
-  console.log(bills);
-
   const total = bills
     .map((bill) => bill.billValue)
     .reduce((curr, val) => {

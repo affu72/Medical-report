@@ -1,4 +1,3 @@
-import React from "react";
 import { getInputClassName } from "../../ts/Contants";
 import { Controller } from "react-hook-form";
 import FormError from "./FormError";
@@ -25,7 +24,7 @@ const InputRHF = ({
 }: PropInput) => {
   return (
     <div>
-      {label || <label className="">{label}</label>}
+      {label || <label className="font-semibold">{label}</label>}
 
       <Controller
         rules={{ required: "This field is required" }}

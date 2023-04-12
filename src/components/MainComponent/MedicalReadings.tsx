@@ -5,13 +5,12 @@ import InputRHF from "../CustomComp/InputRHF";
 export interface IMedicalReadings {
   readingName: string;
   readingValue: string;
-  key: string;
 }
 
 const MedicalReadings = () => {
-  const { control, getValues } = useFormContext();
+  const { control } = useFormContext();
   const { fields, remove, append } = useFieldArray({
-    name: "medicalReadings",
+    name: "medicalRecord.medicalReadings",
     control,
   });
 
@@ -51,14 +50,6 @@ const MedicalReadings = () => {
         value="Add Anoher reading"
         bgColor="bg-blue-500"
         onClick={() => {
-          if (
-            getValues().medicalRecord?.medicalReadings.at(-1).readingName ===
-              "" ||
-            getValues().medicalRecord?.medicalReadings.at(-1).readingValue ===
-              null
-          )
-            return;
-
           append({ readingName: "", readingValue: null });
         }}
       />

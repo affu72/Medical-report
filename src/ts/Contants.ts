@@ -80,7 +80,7 @@ export const deafaultFormValue: IFormData = {
   medicalRecord: {
     histories: [],
     symptoms: [],
-    medicalReadings: [{ readingName: "", readingValue: "", key: "" }],
+    medicalReadings: [{ readingName: "", readingValue: "" }],
   },
   personalDetails: {
     firstName: "",
