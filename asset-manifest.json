@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/Medical-report/static/css/main.84079f23.css",
-    "main.js": "/Medical-report/static/js/main.e48693e5.js",
+    "main.css": "/Medical-report/static/css/main.801b9644.css",
+    "main.js": "/Medical-report/static/js/main.040007d6.js",
     "static/js/236.a0a164a0.chunk.js": "/Medical-report/static/js/236.a0a164a0.chunk.js",
     "static/js/703.dda93d0e.chunk.js": "/Medical-report/static/js/703.dda93d0e.chunk.js",
     "static/js/598.b440aa38.chunk.js": "/Medical-report/static/js/598.b440aa38.chunk.js",
     "static/media/logo.png": "/Medical-report/static/media/logo.d2e454945101295b2237.png",
     "index.html": "/Medical-report/index.html",
-    "main.84079f23.css.map": "/Medical-report/static/css/main.84079f23.css.map",
-    "main.e48693e5.js.map": "/Medical-report/static/js/main.e48693e5.js.map",
+    "main.801b9644.css.map": "/Medical-report/static/css/main.801b9644.css.map",
+    "main.040007d6.js.map": "/Medical-report/static/js/main.040007d6.js.map",
     "236.a0a164a0.chunk.js.map": "/Medical-report/static/js/236.a0a164a0.chunk.js.map",
     "703.dda93d0e.chunk.js.map": "/Medical-report/static/js/703.dda93d0e.chunk.js.map",
     "598.b440aa38.chunk.js.map": "/Medical-report/static/js/598.b440aa38.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.84079f23.css",
-    "static/js/main.e48693e5.js"
+    "static/css/main.801b9644.css",
+    "static/js/main.040007d6.js"
   ]
 }
