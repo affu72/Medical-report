@@ -78,6 +78,8 @@ const InputForms = () => {
                 medicines: data.medicines,
                 id: uniquId,
               });
+
+              setIsFormOpen(false);
             })}
             className="xs:pb-8 h-full"
           >
