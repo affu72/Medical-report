@@ -1,6 +1,7 @@
 import Button from "../CustomComp/Button";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import InputRHF from "../CustomComp/InputRHF";
+import { toast, ToastContainer } from "react-toastify";
 
 export interface IMedicalReadings {
   readingName: string;
@@ -8,23 +9,32 @@ export interface IMedicalReadings {
 }
 
 const MedicalReadings = () => {
-  const { control } = useFormContext();
+  const { control, getValues, setError, trigger, setFocus } = useFormContext();
   const { fields, remove, append } = useFieldArray({
     name: "medicalRecord.medicalReadings",
     control,
   });
 
+  const isPrevFieldEmpty = (fields: Array<any>) => {
+    if (fields?.length === 0) return false;
+    return (
+      fields.at(-1).readingName === "" ||
+      fields.at(-1).readingValue === null ||
+      fields.at(-1).readingValue === ""
+    );
+  };
+
+  const notify = () => toast.error("Fill previous field first");
+
   return (
-    <div className="">
+    <div>
       {fields.map((reading, index) => (
-        <div
-          key={reading.id}
-          className="px-4 rounded-md py-4 flex gap-4 items-center border-2"
-        >
+        <div key={reading.id} className="rounded-md flex gap-2">
           <InputRHF
             placeholder="Reading Name"
             control={control}
             name={`medicalRecord.medicalReadings.${index}.readingName`}
+            className="self-center"
           />
 
           <InputRHF
@@ -40,6 +50,7 @@ const MedicalReadings = () => {
               value="x"
               bgColor="bg-red-500"
               onClick={() => remove(index)}
+              className="self-center"
             />
           )}
         </div>
@@ -50,6 +61,10 @@ const MedicalReadings = () => {
         value="Add Anoher reading"
         bgColor="bg-blue-500"
         onClick={() => {
+          if (isPrevFieldEmpty(getValues("medicalRecord.medicalReadings"))) {
+            notify();
+            return;
+          }
           append({ readingName: "", readingValue: null });
         }}
       />

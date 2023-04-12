@@ -3,6 +3,7 @@ import CreatableSelect from "react-select/creatable";
 import { option } from "../../ts/Contants";
 import { Controller, useFormContext } from "react-hook-form";
 import MedicalReaings from "./MedicalReadings";
+import { ToastContainer, toast } from "react-toastify";
 
 const MedicalRecord = () => {
   const [inputHistory, setInputHistory] = useState("");
@@ -14,21 +15,28 @@ const MedicalRecord = () => {
     name: string,
     inputValue: string,
     setInputValue: Function,
-    event: React.KeyboardEvent<HTMLInputElement>
+    event: any
   ) => {
     if (!inputValue) return;
 
-    switch (event.key) {
-      case "Enter":
-      case "Tab":
-        
-        const value = getValues(name);
+    if (event.type === "keydown") {
+      switch (event?.key) {
+        case "Enter":
+        case "Tab":
+          const value = getValues(name);
 
-        const newvalue = [...value, { label: inputValue, value: inputValue }];
+          const newvalue = [...value, { label: inputValue, value: inputValue }];
 
-        setValue(name, newvalue);
-        setInputValue("");
-        event.preventDefault();
+          setValue(name, newvalue);
+          setInputValue("");
+          event?.preventDefault();
+      }
+    } else {
+      const value = getValues(name);
+      const newvalue = [...value, { label: inputValue, value: inputValue }];
+      setValue(name, newvalue);
+      setInputValue("");
+      event?.preventDefault();
     }
   };
 
@@ -59,6 +67,9 @@ const MedicalRecord = () => {
               }}
               onChange={onChange}
               value={value}
+              onBlur={(event) => {
+                keyDownHandler(name, inputHistory, setInputHistory, event);
+              }}
             />
           )}
         />
@@ -90,13 +101,16 @@ const MedicalRecord = () => {
               }
               placeholder="Type to select or press enter to create..."
               value={value}
+              onBlur={(event) => {
+                keyDownHandler(name, inputSymptom, setInputSymptom, event);
+              }}
             />
           )}
         />
       </div>
       <br />
       <div>
-        <label className="font-semibold">Medical Reading</label>
+        <label className="font-semibold mb-0">Medical Reading</label>
         <MedicalReaings />
       </div>
     </div>

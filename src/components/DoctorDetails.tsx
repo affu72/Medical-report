@@ -27,8 +27,8 @@ const DoctorDetails = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IDoctorDetails>({
-    criteriaMode: "all",
-    mode: "all",
+    criteriaMode: "firstError",
+    mode: "onChange",
     // delayError: 500,
   });
 
@@ -105,11 +105,11 @@ const DoctorDetails = () => {
           )}
         </div>
 
-        <div>
+        <div className="">
           <label>Mobile No. </label>
 
           <input
-            type="tel"
+            type="number"
             placeholder="Mobile no."
             className={getInputClassName(
               `${errors.doctorPhoneNumber ? " outline-red-700" : ""}`
@@ -128,8 +128,8 @@ const DoctorDetails = () => {
                 message: "Should be of 10 digit",
               },
               pattern: {
-                value: /^(\+\d{1,3}[- ]?)?\d{10}$/,
-                message: "Should be numbers only",
+                value: /^([+]d{2})?d{10}$/,
+                message: "Enter valid Mobile Number",
               },
             })}
           />

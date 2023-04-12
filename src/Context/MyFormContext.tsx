@@ -9,6 +9,7 @@ import { IDoctorDetails } from "../components/DoctorDetails";
 import { IFormData } from "../components/MainComponent/InputForms";
 import { deafaultFormValue, formDataArr } from "../ts/Contants";
 import { FormProvider, useForm } from "react-hook-form";
+
 //context value type
 interface IFormContext {
   showFormHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -68,7 +69,8 @@ export const MyFormContextProvider = ({
   const methods = useForm<IFormData>({
     defaultValues: deafaultFormValue,
     mode: "all",
-    criteriaMode: "all",
+    criteriaMode: "firstError",
+    shouldFocusError: true,
   });
 
   const value = useMemo(() => {

@@ -22,20 +22,29 @@ function PersonaDetails() {
     formState: { errors },
   } = useFormContext();
 
+  const customStyles = {
+    control: (provided: any) => ({
+      ...provided,
+      minHeight: "25px",
+      height: "25px",
+      padding: 0,
+    }),
+  };
+
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex gap-8 md:justify-between">
+    <div className="gap-4">
+      <div className="flex gap-8">
         <InputRHF
           name="personalDetails.firstName"
           label="First Name"
-          placeholder="First Name"
+          placeholder="Enter First Name eg. John"
           control={control}
         ></InputRHF>
 
         <InputRHF
           name="personalDetails.lastName"
           label="Last Name"
-          placeholder="Enter last Name"
+          placeholder="Enter last Name eg. Doe"
           control={control}
         ></InputRHF>
       </div>
@@ -43,13 +52,13 @@ function PersonaDetails() {
       <InputRHF
         name="personalDetails.age"
         label="Age"
-        placeholder="Age"
+        placeholder="eg. 23"
         type="number"
         control={control}
       />
 
-      <div className=" flex gap-16 items-center w-full mb-4">
-        <label className="m-0 font-medium">Gender</label>
+      <div className=" flex gap-16 items-center w-full mb-4 h-32">
+        <label className="m-0 font-semibold">Gender</label>
 
         <div className="flex gap-8">
           <div className="flex items-center gap-4 p-2">
@@ -104,7 +113,7 @@ function PersonaDetails() {
         control={control}
       ></InputRHF>
 
-      <div className="flex justify-between gap-8">
+      <div className="flex gap-8">
         <InputRHF
           name="personalDetails.city"
           placeholder="City"
@@ -120,8 +129,8 @@ function PersonaDetails() {
           type="number"
         ></Input> */}
 
-        <div className="w-full flex flex-col">
-          <label htmlFor="name" className="font-medium m-0">
+        <div className="flex flex-col basis-1/2">
+          <label htmlFor="personalDetails.state" className="font-semibold">
             State
           </label>
           <Controller

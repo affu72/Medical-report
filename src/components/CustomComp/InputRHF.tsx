@@ -1,10 +1,10 @@
 import { getInputClassName } from "../../ts/Contants";
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import FormError from "./FormError";
 
 interface PropInput {
   name: string;
-  label?: string;
+  label?: string | null;
   control: any;
   placeholder?: string;
   type?: string;
@@ -22,35 +22,71 @@ const InputRHF = ({
 
   type = "text",
 }: PropInput) => {
+  const {
+    formState: { touchedFields },
+  } = useFormContext();
+
   return (
-    <div>
-      {label || <label className="font-semibold">{label}</label>}
+    <>
+      {label ? (
+        <div className={`basis-1/2 h-32 mb-1`}>
+          <label className="font-[600]">{label}</label>
+          <Controller
+            rules={{ required: "This field is required" }}
+            control={control}
+            name={name}
+            defaultValue={""}
+            render={({
+              field: { onChange, onBlur, value },
+              formState: { errors },
+            }) => {
+              return (
+                <>
+                  <input
+                    onChange={(e) => onChange(e.target.value)}
+                    className={getInputClassName(className)}
+                    placeholder={placeholder}
+                    type={type}
+                    value={value}
+                  />
 
-      <Controller
-        rules={{ required: "This field is required" }}
-        control={control}
-        name={name}
-        defaultValue={""}
-        render={({
-          field: { onChange, onBlur, value },
-          formState: { errors },
-        }) => {
-          return (
-            <>
-              <input
-                onChange={(e) => onChange(e.target.value)}
-                className={getInputClassName("outline-blue-500")}
-                placeholder={placeholder}
-                type={type}
-                value={value}
-              />
+                  {touchedFields.name || (
+                    <FormError errors={errors} name={name} />
+                  )}
 
-              <FormError errors={errors} name={name} />
-            </>
-          );
-        }}
-      />
-    </div>
+                  {/* <FormError /> */}
+                </>
+              );
+            }}
+          />
+        </div>
+      ) : (
+        <Controller
+          rules={{ required: "This field is required" }}
+          control={control}
+          name={name}
+          defaultValue={""}
+          render={({
+            field: { onChange, onBlur, value },
+            formState: { errors },
+          }) => {
+            return (
+              <div>
+                <input
+                  onChange={(e) => onChange(e.target.value)}
+                  className={getInputClassName(className)}
+                  placeholder={placeholder}
+                  type={type}
+                  value={value}
+                />
+
+                <FormError errors={errors} name={name} />
+              </div>
+            );
+          }}
+        />
+      )}
+    </>
   );
 };
 

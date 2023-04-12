@@ -3,7 +3,7 @@ import { IFormData } from "../components/MainComponent/InputForms";
 import IOption from "./Option";
 
 export const getInputClassName = (className: string = "") => {
-  return `border-[1px] border-gray-300 py-2 px-4 w-full rounded-md ${className}`;
+  return `border-[2px] border-gray-300 py-[5px] px-4 w-full rounded-md ${className} outline-blue-500`;
 };
 
 export const getErrorMsg = (name: string) => `${name} cannot be empty`;
