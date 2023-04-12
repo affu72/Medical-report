@@ -9,7 +9,7 @@ function MainPage() {
     <div
       className={`w-full flex gap-4 bg-slate-100 p-4 ${
         isFormOpen ? " xl:flex-col md:flex-row" : "flex-col"
-      } xs:w-full md:w-full md:max-h-[400px] md:overflow-auto md:justify-between relative`}
+      } xs:w-full md:w-full md:max-h-[450px] md:overflow-auto md:justify-between relative`}
     >
       {isFormOpen && <SideNav />}
       <InputForms></InputForms>

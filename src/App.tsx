@@ -8,7 +8,7 @@ function App() {
   const { hasDoctorData, isFormOpen, isNavbarOpen } = useMyFormContext();
 
   return (
-    <div className="h-full">
+    <div className="md:w-fit mx-auto">
       {!hasDoctorData && !localStorage.getItem("doctorData") ? (
         <DoctorDetails />
       ) : (
