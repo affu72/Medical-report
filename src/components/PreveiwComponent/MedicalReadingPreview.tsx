@@ -1,12 +1,18 @@
 import React from "react";
-import { useMyFormContext } from "../../Context/MyFormContext";
+import { useFormContext } from "react-hook-form";
+import { IMedicalReadings } from "../MainComponent/MedicalReadings";
 
 const MedicalReadingPreview = () => {
-  const { patientData } = useMyFormContext();
+  const { watch } = useFormContext();
+
+  const readings: IMedicalReadings[] = watch("medicalRecord.medicalReadings");
+
+  console.log(readings);
+
   return (
     <div>
       <h2 className="text-xl font-semibold ml-auto">Medical Reading</h2>
-      {patientData?.at(-1)?.medicalRecord.medicalReadings.map((reading) => {
+      {readings?.map((reading) => {
         return (
           <div key={reading.readingName}>
             <span className="font-semibold">{reading.readingName}: </span>

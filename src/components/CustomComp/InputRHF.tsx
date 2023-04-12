@@ -1,4 +1,3 @@
-import React from "react";
 import { getInputClassName } from "../../ts/Contants";
 import { Controller } from "react-hook-form";
 import FormError from "./FormError";
@@ -20,11 +19,12 @@ const InputRHF = ({
   control,
   placeholder,
   className,
+
   type = "text",
 }: PropInput) => {
   return (
     <div>
-      {label || <label className="">{label}</label>}
+      {label || <label className="font-semibold">{label}</label>}
 
       <Controller
         rules={{ required: "This field is required" }}
@@ -32,19 +32,14 @@ const InputRHF = ({
         name={name}
         defaultValue={""}
         render={({
-          field: { onChange, onBlur, value, name },
-          fieldState: { invalid, isTouched, isDirty },
+          field: { onChange, onBlur, value },
           formState: { errors },
         }) => {
           return (
             <>
               <input
                 onChange={(e) => onChange(e.target.value)}
-                className={getInputClassName(
-                  `${
-                    errors.name?.type === "required" ? " outline-red-700" : ""
-                  }`
-                )}
+                className={getInputClassName("outline-blue-500")}
                 placeholder={placeholder}
                 type={type}
                 value={value}

@@ -5,10 +5,12 @@ import MedicalBill, { IMedicalBill } from "./MedicalBill";
 import PersonaDetails, { IPersonalData } from "./PersonaDetails";
 import { useMyFormContext } from "../../Context/MyFormContext";
 import Button from "../CustomComp/Button";
-import { useForm, FormProvider } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import IOption from "../../ts/Option";
 import SideBar from "../SideBar";
 import { IMedicalReadings } from "./MedicalReadings";
+import PatientList from "../PatientList";
+import { deafaultFormValue } from "../../ts/Contants";
 
 interface IMedicalRecord {
   histories: IOption[];
@@ -20,36 +22,20 @@ export interface IFormData {
   personalDetails: IPersonalData;
   medicalBills: IMedicalBill[];
   medicalRecord: IMedicalRecord;
+  id: string;
 }
 
 const InputForms = () => {
-  const methods = useForm<IFormData>({
-    defaultValues: {
-      medicines: [{ name: "", dose: "", id: "", type: "" }],
-      medicalBills: [{ billName: "", id: "", billValue: null }],
-      medicalRecord: {
-        histories: [],
-        symptoms: [],
-        medicalReadings: [{ readingName: "", readingValue: "", key: "" }],
-      },
-      personalDetails: {
-        firstName: "",
-        lastName: "",
-        age: null,
-        gender: "",
-        mobile: "",
-        address: "",
-        city: "",
-        state: "",
-      },
-    },
+  const { setFocus, handleSubmit, reset } = useFormContext();
 
-    mode: "all",
-    shouldFocusError: true,
-  });
-
-  const { tabClickHandler, handleBackClick, tabIndex, patientDataHandler } =
-    useMyFormContext();
+  const {
+    tabClickHandler,
+    handleBackClick,
+    tabIndex,
+    patientDataHandler,
+    isFormOpen,
+    setIsFormOpen,
+  } = useMyFormContext();
 
   const formSection = [
     <PersonaDetails key={0} />,
@@ -59,19 +45,41 @@ const InputForms = () => {
   ];
 
   useEffect(() => {
-    methods.setFocus(`medicalBills.${0}.billName`);
-    methods.setFocus(`medicines.${0}.name`);
-  }, [methods, methods.setFocus]);
+    setFocus(`medicalBills.${0}.billName`);
+    setFocus(`medicines.${0}.name`);
+  }, [setFocus]);
 
   return (
     <>
-      <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto">
-        <FormProvider {...methods}>
+      {!isFormOpen ? (
+        <>
+          <button
+            onClick={() => setIsFormOpen(true)}
+            className="bg-blue-700 py-5 text-white font-semibold shadow-lg rounded-md hover:bg-blue-900 transition-all duration-300"
+          >
+            Add New Patient
+          </button>
+          <PatientList />
+        </>
+      ) : (
+        <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto max-h-screen">
           <form
             id="main-form"
-            onSubmit={methods.handleSubmit((data) => {
-              methods.reset();
-              patientDataHandler(data);
+            onSubmit={handleSubmit((data) => {
+              const uniquId =
+                data.personalDetails.mobile +
+                data.personalDetails.firstName +
+                data.personalDetails.age;
+              reset({ ...deafaultFormValue });
+              patientDataHandler({
+                medicalBills: data.medicalBills,
+                personalDetails: data.personalDetails,
+                medicalRecord: data.MedicalRecord,
+                medicines: data.medicines,
+                id: uniquId,
+              });
+
+              setIsFormOpen(false);
             })}
             className="xs:pb-8 h-full"
           >
@@ -92,7 +100,7 @@ const InputForms = () => {
               {tabIndex < 3 && (
                 <Button
                   type="button"
-                  value="Save & Next"
+                  value="Next"
                   tabIndex={tabIndex}
                   onClick={tabClickHandler}
                   bgColor={"bg-blue-500"}
@@ -101,15 +109,15 @@ const InputForms = () => {
 
               <Button
                 type="submit"
-                value="preview"
+                value="Save"
                 bgColor="bg-yellow-500"
                 className="ml-auto"
               />
             </div>
           </form>
           <SideBar />
-        </FormProvider>
-      </div>
+        </div>
+      )}
     </>
   );
 };

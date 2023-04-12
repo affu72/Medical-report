@@ -1,7 +1,5 @@
-import { useMyFormContext } from "../Context/MyFormContext";
-
 const Header = () => {
-  return <div className="h-20 bg-[#1971c2] w-full flex"></div>;
+  return <div className="h-14 bg-blue-900 sticky top-0 w-full z-2"></div>;
 };
 
 export default Header;

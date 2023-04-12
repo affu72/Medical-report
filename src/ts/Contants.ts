@@ -3,7 +3,7 @@ import { IFormData } from "../components/MainComponent/InputForms";
 import IOption from "./Option";
 
 export const getInputClassName = (className: string = "") => {
-  return `border-2 border-gray-300 py-2 px-4 w-full rounded-md ${className}`;
+  return `border-[1px] border-gray-300 py-2 px-4 w-full rounded-md ${className}`;
 };
 
 export const getErrorMsg = (name: string) => `${name} cannot be empty`;
@@ -74,8 +74,31 @@ export const states = [
   { label: "West Bengal", value: "West Bengal" },
 ];
 
+export const deafaultFormValue: IFormData = {
+  medicines: [{ name: "", dose: "", id: "", type: "" }],
+  medicalBills: [{ billName: "", id: "", billValue: null }],
+  medicalRecord: {
+    histories: [],
+    symptoms: [],
+    medicalReadings: [{ readingName: "", readingValue: "" }],
+  },
+  personalDetails: {
+    firstName: "",
+    lastName: "",
+    age: null,
+    gender: "",
+    mobile: "",
+    address: "",
+    city: "",
+    state: "",
+    pin: 0,
+  },
+  id: "",
+};
+
 export const formDataArr: IFormData[] = [
   {
+    id: "1234567890John30",
     medicines: [
       {
         id: "a",
@@ -122,6 +145,7 @@ export const formDataArr: IFormData[] = [
     },
   },
   {
+    id: "0987654321Jane40",
     medicines: [
       {
         id: "c",
@@ -168,6 +192,7 @@ export const formDataArr: IFormData[] = [
     },
   },
   {
+    id: "9876543210Bob50",
     medicines: [
       {
         id: "e",
@@ -215,6 +240,7 @@ export const formDataArr: IFormData[] = [
   },
 
   {
+    id: "9876543210Amit30",
     medicines: [
       {
         id: "a",
@@ -261,6 +287,7 @@ export const formDataArr: IFormData[] = [
     },
   },
   {
+    id: "8765432109Rahul40",
     medicines: [
       {
         id: "c",
@@ -307,6 +334,7 @@ export const formDataArr: IFormData[] = [
     },
   },
   {
+    id: "7654321098Priya50",
     medicines: [
       {
         id: "e",

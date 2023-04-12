@@ -1,5 +1,4 @@
 import { IMedicine } from "../MainComponent/Medicines";
-
 interface PropMedicinePreview {
   medicines: IMedicine[];
 }

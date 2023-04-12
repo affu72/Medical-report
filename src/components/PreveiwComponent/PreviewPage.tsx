@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import Header from "./Header";
 import PersonalInfoPreview from "./PersonalDetailPreview";
 import MedicalRecordPreview from "./MedicalRecordPreview";
@@ -10,28 +10,21 @@ import MedicalBillPreview from "./MedicalBillPreview";
 import MedicalReadingPreview from "./MedicalReadingPreview";
 
 function PreviewPage() {
-  const { tabIndex, patientData, setHasDoctorData } = useMyFormContext();
+  const { patientData, setHasDoctorData } = useMyFormContext();
 
   const ref = useRef<HTMLDivElement>(null);
-
-  console.log(patientData);
-
-  useEffect(() => {
-    const h = ref.current?.getClientRects();
-    console.log("h", h);
-  });
 
   const options = {
     orientation: "p",
     unit: "px",
-    format: [453, 500],
+    format: "a4",
     floatPrecision: 20,
   };
 
   //JSX
   return (
     <div className="flex flex-col gap-4  bg-slate-100  p-4 relative">
-      <div className="w-full flex bg-slate-100 py-[6px] px-2 drop-shadow-md box-border text-right justify-between md:hidden">
+      <div className="w-full flex bg-slate-100 py-3 px-2 shadow-md box-border text-right justify-between">
         <Button
           value="Edit Doctor's Details"
           bgColor="bg-blue-500"
@@ -49,23 +42,21 @@ function PreviewPage() {
           y={1}
           scale={1}
         >
-          {({ toPdf }: any) =>
-            tabIndex === 3 && (
-              <button
-                form="main-form"
-                type="submit"
-                onClick={toPdf}
-                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded `}
-              >
-                Generate Pdf
-              </button>
-            )
-          }
+          {({ toPdf }: any) => (
+            <button
+              form="main-form"
+              type="submit"
+              onClick={toPdf}
+              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded `}
+            >
+              Submit & Generate Pdf
+            </button>
+          )}
         </Pdf>
       </div>
       <div
         ref={ref}
-        className="w-[800px] min-h-[841px] px-6 flex-none bg-white"
+        className="w-[800px] px-6 flex-none bg-white overflow-auto"
       >
         <Header></Header>
 
