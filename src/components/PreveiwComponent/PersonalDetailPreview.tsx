@@ -23,9 +23,9 @@ const PersonalInfoPreview = () => {
       <div className="flex justify-between">
         <p>
           <span className="font-bold">Patient Name:</span>
-          {`${patient?.gender === "male" ? "Mr. " : "Mrs. "} ${
-            patient?.firstName ?? ""
-          } ${patient?.lastName ?? ""}`}
+          {`${patient?.gender === "male" ? "Mr. " : ""}${
+            patient.gender === "female" ? "Mrs" : ""
+          } ${patient?.firstName ?? ""} ${patient?.lastName ?? ""}`}
         </p>
 
         <p>

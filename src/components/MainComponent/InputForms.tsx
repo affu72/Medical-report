@@ -100,7 +100,7 @@ const InputForms = () => {
               {tabIndex < 3 && (
                 <Button
                   type="button"
-                  value="Save & Next"
+                  value="Next"
                   tabIndex={tabIndex}
                   onClick={tabClickHandler}
                   bgColor={"bg-blue-500"}

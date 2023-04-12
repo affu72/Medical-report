@@ -49,7 +49,7 @@ const PatientList = () => {
           value={searchValue}
         />
       </div>
-      <ul className="mt-12 flex flex-col gap-2">
+      <ul className="mt-8 flex flex-col gap-2">
         {patientData?.map((patient, index) => (
           <li
             key={
@@ -57,10 +57,10 @@ const PatientList = () => {
             }
             className="flex justify-between px-4 py-4 border-b-2 border-gray-400 bg-white text-2xl align-middle w-full"
           >
-            <span>
+            <p className="flex text-lg">
               {`${patient.personalDetails.firstName}
                 ${patient.personalDetails.lastName}`}
-            </span>
+            </p>
 
             <div className="flex gap-6">
               <button type="button" onClick={editFormHandler} tabIndex={index}>

@@ -21,7 +21,7 @@ function PreviewPage() {
   const options = {
     orientation: "p",
     unit: "px",
-    format: [453, height],
+    format: "a4",
     floatPrecision: 20,
   };
 
