@@ -39,7 +39,7 @@ const InputRHF = ({
             <>
               <input
                 onChange={(e) => onChange(e.target.value)}
-                className={getInputClassName(className)}
+                className={getInputClassName("outline-blue-500")}
                 placeholder={placeholder}
                 type={type}
                 value={value}

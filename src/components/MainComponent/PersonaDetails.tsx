@@ -1,8 +1,8 @@
-import IndianStateDropdown from "../CustomComp/Select";
 import InputRHF from "../CustomComp/InputRHF";
 import { states } from "../../ts/Contants";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import FormError from "../CustomComp/FormError";
+import Select from "react-select";
 export interface IPersonalData {
   pin: number | undefined;
   city: string;
@@ -124,11 +124,13 @@ function PersonaDetails() {
           <label htmlFor="name" className="font-medium m-0">
             State
           </label>
-          <IndianStateDropdown
+          <Controller
             control={control}
             name="personalDetails.state"
-            options={states}
-          ></IndianStateDropdown>
+            render={({ formState: { errors }, field: { onChange } }) => (
+              <Select options={states} onChange={onChange}></Select>
+            )}
+          />
         </div>
       </div>
     </div>

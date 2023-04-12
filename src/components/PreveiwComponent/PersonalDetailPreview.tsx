@@ -39,7 +39,7 @@ const PersonalInfoPreview = () => {
           <p>
             <span className="font-bold">Address: </span>{" "}
             {`${patient?.address ?? ""} ${patient?.city ?? ""} ${
-              patient?.state ?? ""
+              patient?.state.value ?? ""
             }`}
           </p>
         </div>
