@@ -14,10 +14,6 @@ function PreviewPage() {
 
   const ref = useRef<HTMLDivElement>(null);
 
-  let height: number;
-
-  height = ref.current?.clientHeight!;
-
   const options = {
     orientation: "p",
     unit: "px",
@@ -28,7 +24,7 @@ function PreviewPage() {
   //JSX
   return (
     <div className="flex flex-col gap-4  bg-slate-100  p-4 relative">
-      <div className="w-full flex bg-slate-100 py-[6px] px-2 drop-shadow-md box-border text-right justify-between md:hidden ">
+      <div className="w-full flex bg-slate-100 py-3 px-2 shadow-md box-border text-right justify-between md:hidden ">
         <Button
           value="Edit Doctor's Details"
           bgColor="bg-blue-500"
