@@ -11,7 +11,18 @@ function App() {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+        position="top-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="md:w-fit mx-auto">
         {!hasDoctorData && !localStorage.getItem("doctorData") ? (
           <DoctorDetails />

@@ -1,6 +1,6 @@
 import Button from "../CustomComp/Button";
 import { useFieldArray, useFormContext } from "react-hook-form";
-
+import { toast } from "react-toastify";
 import FormError from "../CustomComp/FormError";
 
 export interface IMedicine {
@@ -34,14 +34,12 @@ const Medicines = () => {
     );
   };
 
-
-
   return (
     <div className="flex flex-col gap-8">
       {fields.map((medicine, index) => (
         <div
           key={medicine.id}
-          className="xl:justify-between px-4 rounded-md py-4 flex items-center border-2 flex-wrap "
+          className="px-4 rounded-md py-4 flex items-center border-2 flex-wrap"
         >
           <div className="relative flex w-2/3 border-2 border-gray-300  rounded-md">
             <input
@@ -102,6 +100,9 @@ const Medicines = () => {
           onClick={() => {
             if (!isPrevFieldEmpty(getValues("medicines")))
               append({ name: "", dose: "", type: "", id: 0 });
+            else {
+              toast.error("Fill previous field first");
+            }
           }}
         />
 

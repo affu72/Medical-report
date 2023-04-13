@@ -1,7 +1,7 @@
 import Button from "../CustomComp/Button";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import InputRHF from "../CustomComp/InputRHF";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 export interface IMedicalReadings {
   readingName: string;
@@ -9,7 +9,7 @@ export interface IMedicalReadings {
 }
 
 const MedicalReadings = () => {
-  const { control, getValues, setError, trigger, setFocus } = useFormContext();
+  const { control, getValues } = useFormContext();
   const { fields, remove, append } = useFieldArray({
     name: "medicalRecord.medicalReadings",
     control,
@@ -29,7 +29,7 @@ const MedicalReadings = () => {
   return (
     <div>
       {fields.map((reading, index) => (
-        <div key={reading.id} className="rounded-md flex gap-2">
+        <div key={reading.id} className="rounded-md flex gap-2 mb-2">
           <InputRHF
             placeholder="Reading Name"
             control={control}
@@ -67,6 +67,12 @@ const MedicalReadings = () => {
           }
           append({ readingName: "", readingValue: null });
         }}
+      />
+      <Button
+        type="button"
+        bgColor={"bg-red-500"}
+        value="Clear All"
+        onClick={() => remove()}
       />
     </div>
   );
