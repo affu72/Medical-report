@@ -1,8 +1,11 @@
 import { useFormContext } from "react-hook-form";
-const PersonalInfoPreview = () => {
+import { IPersonalData } from "../../ts/interfaces";
+const PersonalDetails = () => {
   const { watch } = useFormContext();
 
-  const patient = watch("personalDetails");
+  const patient: IPersonalData = watch("personalDetails");
+
+  console.log(patient);
 
   return (
     <div className="flex flex-col p-6 gap border-double  border-b-4 border-stone-600">
@@ -39,7 +42,7 @@ const PersonalInfoPreview = () => {
           <p>
             <span className="font-bold">Address: </span>{" "}
             {`${patient?.address ?? ""} ${patient?.city ?? ""} ${
-              patient?.state.value ?? ""
+              patient?.state ?? ""
             }`}
           </p>
         </div>
@@ -53,4 +56,4 @@ const PersonalInfoPreview = () => {
   );
 };
 
-export default PersonalInfoPreview;
+export default PersonalDetails;

@@ -1,30 +1,15 @@
 import { useEffect } from "react";
-import Medicines, { IMedicine } from "./Medicines";
+import Medicines from "./Medicines";
 import MedicalRecord from "./MedicalRecord";
-import MedicalBill, { IMedicalBill } from "./MedicalBill";
-import PersonaDetails, { IPersonalData } from "./PersonaDetails";
+import MedicalBill from "./MedicalBill";
+import PersonaDetails from "./PersonaDetails";
 import { useMyFormContext } from "../../Context/MyFormContext";
 import Button from "../CustomComp/Button";
 import { FieldValues, useFormContext } from "react-hook-form";
-import IOption from "../../ts/Option";
 import SideBar from "../SideBar";
-import { IMedicalReadings } from "./MedicalReadings";
 import PatientList from "../PatientList";
 import { deafaultFormValue } from "../../ts/Contants";
 import { toast } from "react-toastify";
-
-interface IMedicalRecord {
-  histories: IOption[];
-  symptoms: IOption[];
-  medicalReadings: IMedicalReadings[];
-}
-export interface IFormData {
-  medicines: IMedicine[];
-  personalDetails: IPersonalData;
-  medicalBills: IMedicalBill[];
-  medicalRecord: IMedicalRecord;
-  id: string;
-}
 
 const InputForms = () => {
   const { setFocus, handleSubmit, reset } = useFormContext();
@@ -48,16 +33,19 @@ const InputForms = () => {
   useEffect(() => {
     setFocus(`medicalBills.${0}.billName`);
     setFocus(`medicines.${0}.name`);
+    setFocus("personalDetails.firstName");
   }, [setFocus]);
 
-  const formSubmitHandler = (data: FieldValues) => {
+  const submitFormHandler = (data: FieldValues) => {
     toast.success("Report has been successfully  saved");
 
     const uniquId =
       data.personalDetails.mobile +
       data.personalDetails.firstName +
       data.personalDetails.age;
+
     reset({ ...deafaultFormValue });
+
     patientDataHandler({
       medicalBills: data.medicalBills,
       personalDetails: data.personalDetails,
@@ -75,18 +63,18 @@ const InputForms = () => {
         <>
           <button
             onClick={() => setIsFormOpen(true)}
-            className="bg-blue-700 py-5 text-white font-semibold shadow-lg rounded-md hover:bg-blue-900 transition-all duration-300"
+            className="bg-blue-700 py-5 text-white font-semibold shadow-lg rounded-md hover:bg-blue-900 transition-all duration-300 "
           >
             Add New Patient
           </button>
           <PatientList />
         </>
       ) : (
-        <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto max-h-screen">
+        <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto">
           <form
             id="main-form"
-            onSubmit={handleSubmit(formSubmitHandler)}
-            className="xs:pb-8 h-full"
+            onSubmit={handleSubmit(submitFormHandler)}
+            className="xs:pb-8 h-full min-h-screen"
           >
             {formSection[tabIndex]}
 

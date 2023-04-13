@@ -5,9 +5,16 @@ import DoctorDetails from "./components/DoctorDetails";
 import Header from "./components/Header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.min.css";
+import { useEffect } from "react";
 
 function App() {
-  const { hasDoctorData, isFormOpen, isNavbarOpen } = useMyFormContext();
+  const { hasDoctorData, setHasDoctorData, isFormOpen, isNavbarOpen } =
+    useMyFormContext();
+
+  useEffect(() => {
+    const DocData = localStorage.getItem("doctorData");
+    if (DocData) setHasDoctorData(true);
+  }, [setHasDoctorData]);
 
   return (
     <>

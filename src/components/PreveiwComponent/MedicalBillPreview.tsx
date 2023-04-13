@@ -1,6 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import { IMedicalBill } from "../MainComponent/MedicalBill";
-
+import { IMedicalBill } from "../../ts/interfaces";
 const MedicalBillPreview = () => {
   const { watch } = useFormContext();
 

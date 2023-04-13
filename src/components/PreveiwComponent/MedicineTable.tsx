@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { IMedicine } from "../MainComponent/Medicines";
+import { IMedicine } from "../../ts/interfaces";
 
 function MedicineTable() {
   const { watch } = useFormContext();

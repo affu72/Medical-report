@@ -1,9 +1,9 @@
 import Button from "./CustomComp/Button";
 import { useMyFormContext } from "../Context/MyFormContext";
-import { useForm } from "react-hook-form";
 import { getInputClassName, getErrorMsg, testData } from "../ts/Contants";
 import FormError from "./CustomComp/FormError";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
 export interface IDoctorDetails {
   clinicName: string;
@@ -25,14 +25,17 @@ const DoctorDetails = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IDoctorDetails>({
+    defaultValues: testData,
     criteriaMode: "firstError",
-    mode: "onBlur",
-    // delayError: 500,
+    mode: "onTouched",
+    shouldFocusError: true,
   });
 
   const { handleDoctorForm } = useMyFormContext();
 
-  const onFormSubmit = (data: IDoctorDetails) => handleDoctorForm(data);
+  const onFormSubmit = (data: IDoctorDetails) => {
+    handleDoctorForm(data);
+  };
 
   useEffect(() => {
     setFocus("clinicName");

@@ -1,6 +1,5 @@
 import { IDoctorDetails } from "../components/DoctorDetails";
-import { IFormData } from "../components/MainComponent/InputForms";
-import IOption from "./Option";
+import { IOption, IFormData } from "./interfaces";
 
 export const getInputClassName = (className: string = "") => {
   return `border-2 border-gray-300 hover:border-gray-400 transition-all duration-100 py-[8.5px] px-4 w-full rounded-md ${className} outline-blue-500`;
@@ -49,6 +48,7 @@ export const states = [
   { label: "Assam", value: "Assam" },
   { label: "Bihar", value: "Bihar" },
   { label: "Chhattisgarh", value: "Chhattisgarh" },
+  { label: "Delhi", value: "Delhi" },
   { label: "Goa", value: "Goa" },
   { label: "Gujarat", value: "Gujarat" },
   { label: "Haryana", value: "Haryana" },

@@ -7,7 +7,7 @@ function MainPage() {
 
   return (
     <div
-      className={`w-full flex gap-4 bg-slate-100 p-4 ${
+      className={`w-full flex gap-4 bg-slate-100 py-4 px-2 ${
         isFormOpen ? " xl:flex-col md:flex-row" : "flex-col"
       } xs:w-full md:w-full md:max-h-[450px] md:overflow-auto md:justify-between relative`}
     >

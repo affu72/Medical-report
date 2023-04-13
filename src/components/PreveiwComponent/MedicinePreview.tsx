@@ -1,4 +1,4 @@
-import { IMedicine } from "../MainComponent/Medicines";
+import { IMedicine } from "../../ts/interfaces";
 interface PropMedicinePreview {
   medicines: IMedicine[];
 }

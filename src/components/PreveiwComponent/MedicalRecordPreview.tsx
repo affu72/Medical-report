@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import IOption from "../../ts/Option";
+import { IOption } from "../../ts/interfaces";
 
 const MedicalRecordPreview = () => {
   const { watch } = useFormContext();

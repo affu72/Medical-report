@@ -3,17 +3,6 @@ import { states } from "../../ts/Contants";
 import { Controller, useFormContext } from "react-hook-form";
 import FormError from "../CustomComp/FormError";
 import Select from "react-select";
-export interface IPersonalData {
-  pin: number | undefined;
-  city: string;
-  firstName: string;
-  lastName: string;
-  age: number | null;
-  mobile: string;
-  gender: string;
-  state: string;
-  address: string;
-}
 
 function PersonaDetails() {
   const {

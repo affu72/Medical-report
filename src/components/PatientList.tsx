@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useMyFormContext } from "../Context/MyFormContext";
 import { RiEdit2Line, RiDeleteBack2Line } from "react-icons/ri";
-
-import { IFormData } from "./MainComponent/InputForms";
 import { useFormContext } from "react-hook-form";
+import { IFormData } from "../ts/interfaces";
 
 const PatientList = () => {
   let {

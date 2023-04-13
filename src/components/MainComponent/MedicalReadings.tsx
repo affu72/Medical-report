@@ -3,11 +3,6 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import InputRHF from "../CustomComp/InputRHF";
 import { toast } from "react-toastify";
 
-export interface IMedicalReadings {
-  readingName: string;
-  readingValue: string;
-}
-
 const MedicalReadings = () => {
   const { control, getValues } = useFormContext();
   const { fields, remove, append } = useFieldArray({
@@ -50,7 +45,7 @@ const MedicalReadings = () => {
               value="X"
               bgColor="bg-red-500"
               onClick={() => remove(index)}
-              className="self-start py-2 text-white"
+              className="self-start py-[9px] mt-[1px] text-white"
             />
           )}
         </div>

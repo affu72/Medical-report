@@ -3,14 +3,6 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { toast } from "react-toastify";
 import InputRHF from "../CustomComp/InputRHF";
 
-export interface IMedicine {
-  id: string;
-  type: string;
-  name: string;
-  dose: string;
-  quantity?: string;
-}
-
 const Medicines = () => {
   const { control, register, getValues } = useFormContext();
 
@@ -73,7 +65,7 @@ const Medicines = () => {
               value="X"
               bgColor="bg-red-500"
               onClick={() => remove(index)}
-              className="self-start py-1.5 text-white"
+              className="self-start py-[9px] mt-[1px] text-white"
             />
           )}
         </div>

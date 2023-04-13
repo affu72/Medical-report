@@ -6,9 +6,9 @@ import React, {
   useMemo,
 } from "react";
 import { IDoctorDetails } from "../components/DoctorDetails";
-import { IFormData } from "../components/MainComponent/InputForms";
 import { deafaultFormValue, formDataArr } from "../ts/Contants";
 import { FormProvider, useForm } from "react-hook-form";
+import { IFormData } from "../ts/interfaces";
 
 //context value type
 interface IFormContext {
@@ -30,6 +30,7 @@ interface IFormContext {
   deletePatientDataHandler: (event: any) => void;
   isFormOpen: boolean;
   setIsFormOpen: (st: boolean) => void;
+  editDoctorsDataHandler: () => void;
 }
 
 // creatig conetxt
@@ -67,8 +68,8 @@ export const MyFormContextProvider = ({
   const [isNavbarOpen, setIsNavbarOpen] = useState<boolean>(false);
 
   const methods = useForm<IFormData>({
-    defaultValues: deafaultFormValue,
-    mode: "all",
+    defaultValues: { ...deafaultFormValue },
+    mode: "onTouched",
     criteriaMode: "firstError",
     shouldFocusError: true,
   });
@@ -78,6 +79,13 @@ export const MyFormContextProvider = ({
     const handleDoctorForm = (data: IDoctorDetails) => {
       localStorage.setItem("doctorData", JSON.stringify(data));
       setHasDoctorData(true);
+    };
+
+    const editDoctorsDataHandler = () => {
+      const data = localStorage.getItem("doctorData")!;
+
+      localStorage.removeItem("doctorData");
+      setHasDoctorData(false);
     };
 
     const patientDataHandler = (data: IFormData) => {
@@ -121,6 +129,7 @@ export const MyFormContextProvider = ({
       deletePatientDataHandler,
       isFormOpen,
       setIsFormOpen,
+      editDoctorsDataHandler,
     };
 
     return value;

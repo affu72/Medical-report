@@ -3,14 +3,9 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import InputRHF from "../CustomComp/InputRHF";
 import { toast } from "react-toastify";
 
-export interface IMedicalBill {
-  billName: string;
-  billValue: number | null;
-  id: string;
-}
-
 const MedicalBill = () => {
   const { control, getValues } = useFormContext();
+
   const { fields, remove, append } = useFieldArray({
     name: "medicalBills",
     control,
@@ -19,11 +14,7 @@ const MedicalBill = () => {
   return (
     <div>
       {fields.map((bill, index) => (
-        <div
-          key={bill.id}
-          // className="px-4 rounded-md py-4 flex gap-4 items-center border-2 h-20"
-          className="rounded-md flex gap-2 h-20"
-        >
+        <div key={bill.id} className="rounded-md flex gap-2 h-20">
           <InputRHF
             placeholder="Bill Name"
             control={control}
@@ -43,7 +34,7 @@ const MedicalBill = () => {
               value="x"
               bgColor="bg-red-500"
               onClick={() => remove(index)}
-              className="text-white self-start py-2"
+              className="self-start py-[9px] mt-[1px] text-white"
             />
           )}
         </div>

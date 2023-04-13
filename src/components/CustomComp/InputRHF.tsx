@@ -68,6 +68,7 @@ const InputRHF = ({
                     placeholder={placeholder}
                     type={type}
                     value={value}
+                    onBlur={onBlur}
                   />
 
                   {touchedFields.name || (
@@ -96,8 +97,8 @@ const InputRHF = ({
                   placeholder={placeholder}
                   type={type}
                   value={value}
+                  onBlur={onBlur}
                 />
-
                 <FormError errors={errors} name={name} />
               </div>
             );
