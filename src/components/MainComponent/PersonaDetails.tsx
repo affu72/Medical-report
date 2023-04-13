@@ -22,15 +22,6 @@ function PersonaDetails() {
     formState: { errors },
   } = useFormContext();
 
-  const customStyles = {
-    control: (provided: any) => ({
-      ...provided,
-      minHeight: "25px",
-      height: "25px",
-      padding: 0,
-    }),
-  };
-
   return (
     <div className="gap-4">
       <div className="flex gap-8">
@@ -57,7 +48,7 @@ function PersonaDetails() {
         control={control}
       />
 
-      <div className=" flex gap-16 items-center w-full mb-4 h-32">
+      <div className=" flex gap-16 items-center w-full">
         <label className="m-0 font-semibold">Gender</label>
 
         <div className="flex gap-8">

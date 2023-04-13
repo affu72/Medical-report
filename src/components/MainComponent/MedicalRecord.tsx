@@ -3,7 +3,6 @@ import CreatableSelect from "react-select/creatable";
 import { option } from "../../ts/Contants";
 import { Controller, useFormContext } from "react-hook-form";
 import MedicalReaings from "./MedicalReadings";
-import { ToastContainer, toast } from "react-toastify";
 
 const MedicalRecord = () => {
   const [inputHistory, setInputHistory] = useState("");

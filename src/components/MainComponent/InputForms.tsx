@@ -91,9 +91,9 @@ const InputForms = () => {
                   type="button"
                   value="Back"
                   tabIndex={tabIndex}
-                  bgColor={"bg-blue-300"}
+                  bgColor={""}
                   onClick={handleBackClick}
-                  className=""
+                  className="text-black border-2 rounded-md"
                 />
               )}
 
@@ -103,14 +103,14 @@ const InputForms = () => {
                   value="Next"
                   tabIndex={tabIndex}
                   onClick={tabClickHandler}
-                  bgColor={"bg-blue-500"}
+                  bgColor={"bg-yellow-500"}
                 />
               )}
 
               <Button
                 type="submit"
                 value="Save"
-                bgColor="bg-yellow-500"
+                bgColor="bg-blue-500"
                 className="ml-auto"
               />
             </div>

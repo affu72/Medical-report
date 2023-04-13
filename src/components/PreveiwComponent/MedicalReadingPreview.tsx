@@ -7,8 +7,6 @@ const MedicalReadingPreview = () => {
 
   const readings: IMedicalReadings[] = watch("medicalRecord.medicalReadings");
 
-  console.log(readings);
-
   return (
     <div>
       <h2 className="text-xl font-semibold ml-auto">Medical Reading</h2>

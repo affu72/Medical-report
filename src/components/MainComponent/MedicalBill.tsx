@@ -15,14 +15,13 @@ const MedicalBill = () => {
     control,
   });
 
-
-
   return (
     <div>
       {fields.map((bill, index) => (
         <div
           key={bill.id}
-          className="px-4 rounded-md py-4 flex gap-4 items-center border-2"
+          // className="px-4 rounded-md py-4 flex gap-4 items-center border-2 h-20"
+          className="rounded-md flex gap-2 mb-2 h-24"
         >
           <InputRHF
             placeholder="Bill Name"
@@ -40,7 +39,7 @@ const MedicalBill = () => {
           {fields.length === 1 || (
             <Button
               type="button"
-              value="x"
+              value="X"
               bgColor="bg-red-500"
               onClick={() => remove(index)}
             />
