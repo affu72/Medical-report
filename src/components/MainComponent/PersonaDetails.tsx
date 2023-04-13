@@ -93,7 +93,7 @@ function PersonaDetails() {
         name="personalDetails.mobile"
         placeholder="Mobile"
         label="Mobile"
-        type="number"
+        type="tel"
         control={control}
       ></InputRHF>
 

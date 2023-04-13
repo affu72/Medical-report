@@ -9,9 +9,9 @@ const Header = () => {
     doctorData = JSON.parse(localStorage.getItem("doctorData")!);
 
   return (
-    <div className="flex justify-between p-6 border-b-4 border-stone-600 xs:hidden">
+    <div className="flex justify-between p-6 border-b-2 border-stone-600 xs:hidden">
       <div className="flex flex-col items-start">
-        <h3 className="text-3xl font-bold mb-2">{`Dr. ${doctorData.doctorName}`}</h3>
+        <h3 className="text-2xl font-bold mb-2">{`Dr. ${doctorData.doctorName}`}</h3>
         <p>{`${doctorData.qualification}`}</p>
         <p>
           <span className="font-semibold">Reg. No: </span>{" "}
@@ -27,7 +27,7 @@ const Header = () => {
       </div>
 
       <div className="flex flex-col items-end">
-        <h2 className="text-center from-neutral-800 text-3xl font-bold mb-2">
+        <h2 className="text-center from-neutral-800 text-2xl font-bold mb-2">
           {doctorData.clinicName}
         </h2>
         <p className="text-right">{`${doctorData.clinicAddress}`}</p>

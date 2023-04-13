@@ -28,7 +28,7 @@ const InputRHF = ({
 
   let rules = {};
 
-  if (type === "number") {
+  if (type === "tel") {
     rules = {
       required: "this field is required",
       minLength: {
@@ -37,7 +37,7 @@ const InputRHF = ({
       },
       maxLength: {
         value: 10,
-        message: "Number Should 10 digits",
+        message: "Number Should be of 10 digits",
       },
     };
   } else {

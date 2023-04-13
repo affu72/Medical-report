@@ -133,7 +133,7 @@ const DoctorDetails = () => {
           <label>Mobile No. </label>
 
           <input
-            type="number"
+            type="tel"
             placeholder="Mobile no."
             className={getInputClassName(
               `${errors.doctorPhoneNumber ? " outline-red-700" : ""}`

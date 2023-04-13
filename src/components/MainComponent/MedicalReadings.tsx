@@ -29,7 +29,7 @@ const MedicalReadings = () => {
   return (
     <div>
       {fields.map((reading, index) => (
-        <div key={reading.id} className="rounded-md flex gap-2 mb-2 h-12">
+        <div key={reading.id} className="rounded-md flex gap-2 mb-2 h-16">
           <InputRHF
             placeholder="Reading Name"
             control={control}
@@ -55,6 +55,8 @@ const MedicalReadings = () => {
           )}
         </div>
       ))}
+
+      <div></div>
 
       <Button
         className="text-white"
