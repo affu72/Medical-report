@@ -4,6 +4,7 @@ import React, {
   useState,
   ReactNode,
   useMemo,
+  useEffect,
 } from "react";
 import { IDoctorDetails } from "../components/DoctorDetails";
 import { deafaultFormValue, formDataArr } from "../ts/Contants";
@@ -77,13 +78,13 @@ export const MyFormContextProvider = ({
   const value = useMemo(() => {
     //Doctors Details
     const handleDoctorForm = (data: IDoctorDetails) => {
-      localStorage.setItem("doctorData", JSON.stringify(data));
+      setDoctorData(data);
+      localStorage.setItem("doctorData", JSON.stringify(doctorData));
       setHasDoctorData(true);
     };
 
     const editDoctorsDataHandler = () => {
-      const data = localStorage.getItem("doctorData")!;
-
+      // const data = localStorage.getItem("doctorData")!;
       localStorage.removeItem("doctorData");
       setHasDoctorData(false);
     };

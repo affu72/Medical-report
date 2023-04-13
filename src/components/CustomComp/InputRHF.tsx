@@ -49,7 +49,7 @@ const InputRHF = ({
   return (
     <>
       {label ? (
-        <div className={`basis-1/2 h-20 mb-1`}>
+        <div className={`basis-1/2 h-24 mb-1`}>
           <label className="font-[600]">{label}</label>
           <Controller
             rules={rules}

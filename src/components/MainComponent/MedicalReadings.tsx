@@ -24,7 +24,7 @@ const MedicalReadings = () => {
   return (
     <div>
       {fields.map((reading, index) => (
-        <div key={reading.id} className="rounded-md flex gap-2 mb-2 h-16">
+        <div key={reading.id} className="rounded-md flex gap-2 mb-2 h-20">
           <InputRHF
             placeholder="Reading Name"
             control={control}
@@ -51,8 +51,6 @@ const MedicalReadings = () => {
         </div>
       ))}
 
-      <div></div>
-
       <Button
         className="text-white"
         type="button"
@@ -66,13 +64,15 @@ const MedicalReadings = () => {
           append({ readingName: "", readingValue: null });
         }}
       />
-      <Button
-        type="button"
-        bgColor={"bg-red-500"}
-        value="Clear All"
-        onClick={() => remove()}
-        className="ml-4 text-white"
-      />
+      {fields.length > 1 && (
+        <Button
+          type="button"
+          bgColor={"bg-red-500"}
+          value="Clear All"
+          onClick={() => remove()}
+          className="ml-4 text-white"
+        />
+      )}
     </div>
   );
 };

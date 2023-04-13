@@ -1,6 +1,11 @@
 import Button from "./CustomComp/Button";
 import { useMyFormContext } from "../Context/MyFormContext";
-import { getInputClassName, getErrorMsg, testData } from "../ts/Contants";
+import {
+  getInputClassName,
+  getErrorMsg,
+  testData,
+  isEmpty,
+} from "../ts/Contants";
 import FormError from "./CustomComp/FormError";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -19,19 +24,22 @@ export interface IDoctorDetails {
 }
 
 const DoctorDetails = () => {
+  const { handleDoctorForm, doctorData } = useMyFormContext();
+
+  let defaultDoctorData = testData;
+
+  if (isEmpty(doctorData)) defaultDoctorData = doctorData;
   const {
     setFocus,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IDoctorDetails>({
-    defaultValues: testData,
+    defaultValues: defaultDoctorData,
     criteriaMode: "firstError",
     mode: "onTouched",
     shouldFocusError: true,
   });
-
-  const { handleDoctorForm } = useMyFormContext();
 
   const onFormSubmit = (data: IDoctorDetails) => {
     handleDoctorForm(data);
@@ -42,7 +50,7 @@ const DoctorDetails = () => {
   }, [setFocus]);
 
   return (
-    <div className="bg-blue-900 h-screen pt-6 flex items-center">
+    <div className=" h-screen pt-6 flex items-center bg-blue-950">
       <form
         onSubmit={handleSubmit(onFormSubmit)}
         className="grid grid-cols-2 gap-x-8 max-w-6xl mx-auto px-8 py-6 bg-white rounded-md shadow-md"
@@ -259,15 +267,16 @@ const DoctorDetails = () => {
           {errors.closingDay && <FormError errors={errors} name="closingDay" />}
         </div>
 
-        <div className=" flex justify-between mt-8 col-span-2 relative">
-          <p className="absolute -top-10 left-10">(only for test)</p>
+        <div className="flex justify-end mt-8 col-span-2 relative">
+          {/* <p className="absolute -top-10 left-10">(only for test)</p>
           <Button
             className="self-start text-white"
             type="button"
             value="Fill With Test Data"
             bgColor="bg-yellow-500"
             onClick={() => handleDoctorForm(testData)}
-          ></Button>
+          ></Button> */}
+
           <Button
             className="self-end text-white"
             type="submit"

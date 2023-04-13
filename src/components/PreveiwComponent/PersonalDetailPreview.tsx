@@ -5,8 +5,6 @@ const PersonalDetails = () => {
 
   const patient: IPersonalData = watch("personalDetails");
 
-  console.log(patient);
-
   return (
     <div className="flex flex-col p-6 gap border-double  border-b-4 border-stone-600">
       <div className="flex justify-between">
@@ -26,8 +24,8 @@ const PersonalDetails = () => {
       <div className="flex justify-between">
         <p>
           <span className="font-bold">Patient Name:</span>
-          {`${patient?.gender === "male" ? "Mr. " : ""}${
-            patient.gender === "female" ? "Ms. " : ""
+          {`${patient?.gender === "Male" ? "Mr. " : ""}${
+            patient.gender === "Female" ? "Ms. " : ""
           } ${patient?.firstName ?? ""} ${patient?.lastName ?? ""}`}
         </p>
 
@@ -42,7 +40,7 @@ const PersonalDetails = () => {
           <p>
             <span className="font-bold">Address: </span>{" "}
             {`${patient?.address ?? ""} ${patient?.city ?? ""} ${
-              patient?.state ?? ""
+              patient?.state.value ?? ""
             }`}
           </p>
         </div>

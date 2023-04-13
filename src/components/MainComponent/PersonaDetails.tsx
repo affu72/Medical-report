@@ -53,7 +53,7 @@ function PersonaDetails() {
               type="radio"
               id="male"
               className="mt-0"
-              value={"male"}
+              value={"Male"}
             />
           </div>
 
@@ -71,7 +71,7 @@ function PersonaDetails() {
               type="radio"
               id="female"
               className="mt-0"
-              value={"female"}
+              value={"Female"}
             />
           </div>
         </div>

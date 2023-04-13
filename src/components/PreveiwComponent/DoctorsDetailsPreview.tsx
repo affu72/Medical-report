@@ -5,8 +5,7 @@ import { useMyFormContext } from "../../Context/MyFormContext";
 const Header = () => {
   let { doctorData } = useMyFormContext();
 
-  if (!doctorData.clinicName)
-    doctorData = JSON.parse(localStorage.getItem("doctorData")!);
+  if (!doctorData) doctorData = JSON.parse(localStorage.getItem("doctorData")!);
 
   return (
     <div className="flex justify-between p-6 border-b-2 border-stone-600 xs:hidden">

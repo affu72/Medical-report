@@ -11,7 +11,7 @@ export interface IPersonalData {
   age: number | null;
   mobile: string;
   gender: string;
-  state: string;
+  state: { value: string; label: string };
   address: string;
 }
 

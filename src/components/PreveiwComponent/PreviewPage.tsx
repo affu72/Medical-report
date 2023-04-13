@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import Header from "./Header";
+import Header from "./DoctorsDetailsPreview";
 import PersonalInfoPreview from "./PersonalDetailPreview";
 import MedicalRecordPreview from "./MedicalRecordPreview";
 import { useMyFormContext } from "../../Context/MyFormContext";

@@ -36,9 +36,9 @@ const Medicines = () => {
               <option value="" disabled>
                 Type
               </option>
-              <option value="tablet">Tablet</option>
-              <option value="syrup">Syrup</option>
-              <option value="injection">Injection</option>
+              <option value="Tablet">Tablet</option>
+              <option value="Syrup">Syrup</option>
+              <option value="Injection">Injection</option>
             </select>
             <div className="w-full">
               <InputRHF
