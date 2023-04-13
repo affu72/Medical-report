@@ -36,7 +36,7 @@ const Medicines = () => {
           <div className="flex w-full">
             <select
               aria-label="Select medicine type"
-              className="border-2 border-gray-300 text-slate-500 bg-transparent self-start h-[37px] rounded-r-none rounded-l-md"
+              className="border-2 border-gray-300 text-slate-500 bg-transparent self-start h-[39px] px-2 rounded-r-none rounded-l-md outline-blue-500"
               {...register(`medicines.${index}.type`, {
                 required: "Type Required",
               })}

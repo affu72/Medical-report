@@ -128,7 +128,16 @@ function PersonaDetails() {
             control={control}
             name="personalDetails.state"
             render={({ formState: { errors }, field: { onChange } }) => (
-              <Select options={states} onChange={onChange}></Select>
+              <Select
+                options={states}
+                onChange={onChange}
+                styles={{
+                  control: (provided: any) => ({
+                    ...provided,
+                    border: "2px solid rgb(209 213 219)",
+                  }),
+                }}
+              ></Select>
             )}
           />
         </div>

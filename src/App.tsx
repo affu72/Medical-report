@@ -29,7 +29,11 @@ function App() {
         ) : (
           <>
             {isFormOpen && <Header />}
-            <div className={`flex justify-evenly xs:block m-auto md:flex-col`}>
+            <div
+              className={`flex justify-evenly xs:block m-auto md:flex-col ${
+                isFormOpen && "mt-16"
+              }`}
+            >
               <MainPage></MainPage>
               <PreviewPage></PreviewPage>
             </div>

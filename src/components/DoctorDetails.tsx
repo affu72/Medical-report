@@ -48,8 +48,8 @@ const DoctorDetails = () => {
           Fill Details That will be shown on Prescription
         </h2>
 
-        <div className="h-24 ">
-          <label>Clinic Name</label>
+        <div className="h-24">
+          <label className="font-semibold">Clinic Name</label>
           <input
             type="text"
             placeholder="Enter Clinic Name"
@@ -68,7 +68,7 @@ const DoctorDetails = () => {
         </div>
 
         <div className="h-24 ">
-          <label>Doctor's Name</label>
+          <label className="font-semibold">Doctor's Name</label>
           <input
             type="text"
             placeholder="Enter Doctor's Name"
@@ -87,7 +87,7 @@ const DoctorDetails = () => {
         </div>
 
         <div className="h-24 ">
-          <label>Registration No.</label>
+          <label className="font-semibold">Registration No.</label>
 
           <input
             type="text"
@@ -107,7 +107,7 @@ const DoctorDetails = () => {
         </div>
 
         <div className="h-24">
-          <label>Address</label>
+          <label className="font-semibold">Address</label>
 
           <input
             type="text"
@@ -128,7 +128,7 @@ const DoctorDetails = () => {
         </div>
 
         <div className="">
-          <label>Mobile No. </label>
+          <label className="font-semibold">Mobile No. </label>
 
           <input
             type="tel"
@@ -178,7 +178,7 @@ const DoctorDetails = () => {
         </div>
 
         <div className="h-24 ">
-          <label>Opening Time</label>
+          <label className="font-semibold">Opening Time</label>
 
           <input
             type="time"
@@ -198,7 +198,7 @@ const DoctorDetails = () => {
         </div>
 
         <div className="h-24 ">
-          <label>Closing Time</label>
+          <label className="font-semibold">Closing Time</label>
 
           <input
             type="time"
@@ -218,7 +218,7 @@ const DoctorDetails = () => {
         </div>
 
         <div className="h-24 ">
-          <label>Logo</label>
+          <label className="font-semibold">Logo</label>
 
           <input
             type="file"
@@ -238,7 +238,7 @@ const DoctorDetails = () => {
         </div>
 
         <div className="h-24 ">
-          <label>Closing Day</label>
+          <label className="font-semibold">Closing Day</label>
 
           <input
             type="text"

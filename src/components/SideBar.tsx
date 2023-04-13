@@ -33,7 +33,7 @@ const SideBar = () => {
       <button
         type="button"
         onClick={() => setIsNavbarOpen(!isNavbarOpen)}
-        className="absolute -right-16 top-3"
+        className="absolute -right-12 top-4"
       >
         {isNavbarOpen ? (
           <svg

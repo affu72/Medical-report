@@ -24,7 +24,7 @@ const PersonalInfoPreview = () => {
         <p>
           <span className="font-bold">Patient Name:</span>
           {`${patient?.gender === "male" ? "Mr. " : ""}${
-            patient.gender === "female" ? "Ms" : ""
+            patient.gender === "female" ? "Ms. " : ""
           } ${patient?.firstName ?? ""} ${patient?.lastName ?? ""}`}
         </p>
 

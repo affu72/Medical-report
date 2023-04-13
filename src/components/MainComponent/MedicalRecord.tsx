@@ -57,6 +57,12 @@ const MedicalRecord = () => {
               isClearable
               isMulti
               menuIsOpen={false}
+              styles={{
+                control: (provided: any) => ({
+                  ...provided,
+                  border: "2px solid rgb(209 213 219)",
+                }),
+              }}
               onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
                 keyDownHandler(name, inputHistory, setInputHistory, event)
               }
@@ -91,6 +97,12 @@ const MedicalRecord = () => {
               isClearable
               isMulti
               options={option}
+              styles={{
+                control: (provided: any) => ({
+                  ...provided,
+                  border: "2px solid rgb(209 213 219)",
+                }),
+              }}
               onChange={onChange}
               onInputChange={(newValue) => {
                 setInputSymptom(newValue);
