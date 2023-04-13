@@ -32,7 +32,10 @@ const InputRHF = ({
         <div className={`basis-1/2 h-32 mb-1`}>
           <label className="font-[600]">{label}</label>
           <Controller
-            rules={{ required: "This field is required" }}
+            rules={{
+              required: "This field is required",
+              minLength: { value: 4, message: "should of 4 length" },
+            }}
             control={control}
             name={name}
             defaultValue={""}
@@ -53,8 +56,6 @@ const InputRHF = ({
                   {touchedFields.name || (
                     <FormError errors={errors} name={name} />
                   )}
-
-                  {/* <FormError /> */}
                 </>
               );
             }}

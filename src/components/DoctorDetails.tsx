@@ -28,7 +28,7 @@ const DoctorDetails = () => {
     formState: { errors },
   } = useForm<IDoctorDetails>({
     criteriaMode: "firstError",
-    mode: "onChange",
+    mode: "onBlur",
     // delayError: 500,
   });
 
@@ -44,27 +44,51 @@ const DoctorDetails = () => {
     <div className="bg-blue-900 h-screen pt-6 flex items-center">
       <form
         onSubmit={handleSubmit(onFormSubmit)}
-        className="grid grid-cols-2 gap-x-8 gap-y-6 max-w-6xl mx-auto px-8 py-6 bg-white rounded-md shadow-md"
+        className="grid grid-cols-2 gap-x-8 max-w-6xl mx-auto px-8 py-6 bg-white rounded-md shadow-md"
       >
         <h2 className="col-span-2 text-center mb-2 font-semibold text-3xl text-blue-400">
           Fill Details That will be shown on Prescription
         </h2>
 
-        <InputRHF
-          label="Clinic Name"
-          name="clinicName"
-          control={control}
-          placeholder="Enter Clinic Name"
-        />
+        <div className="h-32 ">
+          <label>Clinic Name</label>
+          <input
+            type="text"
+            placeholder="Enter Clinic Name"
+            className={getInputClassName(
+              `${errors.clinicName ? " outline-red-700" : ""}`
+            )}
+            {...register("clinicName", {
+              required: {
+                value: true,
+                message: getErrorMsg("Clinic Name"),
+              },
+            })}
+          />
 
-        <InputRHF
-          label="Doctor's Name"
-          name="doctorName"
-          control={control}
-          placeholder="Enter Doctor's Name"
-        />
+          {errors.clinicName && <FormError errors={errors} name="clinicName" />}
+        </div>
 
-        <div>
+        <div className="h-32 ">
+          <label>Doctor's Name</label>
+          <input
+            type="text"
+            placeholder="Enter Doctor's Name"
+            className={getInputClassName(
+              `${errors.doctorName ? " outline-red-700" : ""}`
+            )}
+            {...register("doctorName", {
+              required: {
+                value: true,
+                message: getErrorMsg("Doctor's Name"),
+              },
+            })}
+          />
+
+          {errors.doctorName && <FormError errors={errors} name="doctorName" />}
+        </div>
+
+        <div className="h-32 ">
           <label>Registration No.</label>
 
           <input
@@ -84,7 +108,7 @@ const DoctorDetails = () => {
           {errors.regNumber && <FormError errors={errors} name="regNumber" />}
         </div>
 
-        <div>
+        <div className="h-32">
           <label>Address</label>
 
           <input
@@ -120,16 +144,12 @@ const DoctorDetails = () => {
                 message: "Mobile Cannot be empty",
               },
               minLength: {
-                value: 1,
-                message: "Should be of 10 digit",
+                value: 10,
+                message: "Should be 10 digit",
               },
               maxLength: {
                 value: 10,
-                message: "Should be of 10 digit",
-              },
-              pattern: {
-                value: /^([+]d{2})?d{10}$/,
-                message: "Enter valid Mobile Number",
+                message: "Enter valid Number",
               },
             })}
           />
@@ -138,12 +158,12 @@ const DoctorDetails = () => {
           )}
         </div>
 
-        <div>
-          <label>Qualification (ex. M.B.B.S, M.D, M.S)</label>
+        <div className="h-32 ">
+          <label className="font-semibold">Qualification</label>
 
           <input
             type="text"
-            placeholder="Qualification"
+            placeholder="ex. M.B.B.S, M.D, M.S"
             className={getInputClassName(
               `${errors.qualification ? " outline-red-700" : ""}`
             )}
@@ -159,7 +179,7 @@ const DoctorDetails = () => {
           )}
         </div>
 
-        <div>
+        <div className="h-32 ">
           <label>Opening Time</label>
 
           <input
@@ -179,7 +199,7 @@ const DoctorDetails = () => {
           )}
         </div>
 
-        <div>
+        <div className="h-32 ">
           <label>Closing Time</label>
 
           <input
@@ -199,7 +219,7 @@ const DoctorDetails = () => {
           )}
         </div>
 
-        <div>
+        <div className="h-32 ">
           <label>Logo</label>
 
           <input
@@ -219,7 +239,7 @@ const DoctorDetails = () => {
           {errors.logo && <FormError errors={errors} name="logo" />}
         </div>
 
-        <div>
+        <div className="h-32 ">
           <label>Closing Day</label>
 
           <input
