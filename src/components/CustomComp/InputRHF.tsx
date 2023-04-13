@@ -26,16 +26,35 @@ const InputRHF = ({
     formState: { touchedFields },
   } = useFormContext();
 
+  let rules = {};
+
+  if (type === "number") {
+    rules = {
+      required: "this field is required",
+      minLength: {
+        value: 10,
+        message: "Enter a valid number",
+      },
+      maxLength: {
+        value: 10,
+        message: "Number Should 10 digits",
+      },
+    };
+  } else {
+    rules = {
+      required: "This field is required",
+    };
+  }
+
+  console.log(rules);
+
   return (
     <>
       {label ? (
-        <div className={`basis-1/2 h-32 mb-1`}>
+        <div className={`basis-1/2 h-20 mb-1`}>
           <label className="font-[600]">{label}</label>
           <Controller
-            rules={{
-              required: "This field is required",
-              minLength: { value: 4, message: "should of 4 length" },
-            }}
+            rules={rules}
             control={control}
             name={name}
             defaultValue={""}

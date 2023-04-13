@@ -28,6 +28,7 @@ function PreviewPage() {
         <Button
           value="Edit Doctor's Details"
           bgColor="bg-blue-500"
+          className="text-white"
           onClick={() => {
             localStorage.removeItem("doctorData");
             setHasDoctorData(false);

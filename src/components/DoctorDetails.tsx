@@ -50,7 +50,7 @@ const DoctorDetails = () => {
           Fill Details That will be shown on Prescription
         </h2>
 
-        <div className="h-32 ">
+        <div className="h-24 ">
           <label>Clinic Name</label>
           <input
             type="text"
@@ -69,7 +69,7 @@ const DoctorDetails = () => {
           {errors.clinicName && <FormError errors={errors} name="clinicName" />}
         </div>
 
-        <div className="h-32 ">
+        <div className="h-24 ">
           <label>Doctor's Name</label>
           <input
             type="text"
@@ -88,7 +88,7 @@ const DoctorDetails = () => {
           {errors.doctorName && <FormError errors={errors} name="doctorName" />}
         </div>
 
-        <div className="h-32 ">
+        <div className="h-24 ">
           <label>Registration No.</label>
 
           <input
@@ -108,7 +108,7 @@ const DoctorDetails = () => {
           {errors.regNumber && <FormError errors={errors} name="regNumber" />}
         </div>
 
-        <div className="h-32">
+        <div className="h-24">
           <label>Address</label>
 
           <input
@@ -158,7 +158,7 @@ const DoctorDetails = () => {
           )}
         </div>
 
-        <div className="h-32 ">
+        <div className="h-24 ">
           <label className="font-semibold">Qualification</label>
 
           <input
@@ -179,7 +179,7 @@ const DoctorDetails = () => {
           )}
         </div>
 
-        <div className="h-32 ">
+        <div className="h-24 ">
           <label>Opening Time</label>
 
           <input
@@ -199,7 +199,7 @@ const DoctorDetails = () => {
           )}
         </div>
 
-        <div className="h-32 ">
+        <div className="h-24 ">
           <label>Closing Time</label>
 
           <input
@@ -219,7 +219,7 @@ const DoctorDetails = () => {
           )}
         </div>
 
-        <div className="h-32 ">
+        <div className="h-24 ">
           <label>Logo</label>
 
           <input
@@ -239,7 +239,7 @@ const DoctorDetails = () => {
           {errors.logo && <FormError errors={errors} name="logo" />}
         </div>
 
-        <div className="h-32 ">
+        <div className="h-24 ">
           <label>Closing Day</label>
 
           <input
@@ -261,14 +261,14 @@ const DoctorDetails = () => {
         <div className=" flex justify-between mt-8 col-span-2 relative">
           <p className="absolute -top-10 left-10">(only for test)</p>
           <Button
-            className="self-start"
+            className="self-start text-white"
             type="button"
             value="Fill With Test Data"
             bgColor="bg-yellow-500"
             onClick={() => handleDoctorForm(testData)}
           ></Button>
           <Button
-            className="self-end"
+            className="self-end text-white"
             type="submit"
             value="Save & Submit"
             bgColor="bg-blue-500"

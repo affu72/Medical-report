@@ -5,12 +5,13 @@ import MedicalBill, { IMedicalBill } from "./MedicalBill";
 import PersonaDetails, { IPersonalData } from "./PersonaDetails";
 import { useMyFormContext } from "../../Context/MyFormContext";
 import Button from "../CustomComp/Button";
-import { useFormContext } from "react-hook-form";
+import { FieldValues, useFormContext } from "react-hook-form";
 import IOption from "../../ts/Option";
 import SideBar from "../SideBar";
 import { IMedicalReadings } from "./MedicalReadings";
 import PatientList from "../PatientList";
 import { deafaultFormValue } from "../../ts/Contants";
+import { toast } from "react-toastify";
 
 interface IMedicalRecord {
   histories: IOption[];
@@ -49,6 +50,26 @@ const InputForms = () => {
     setFocus(`medicines.${0}.name`);
   }, [setFocus]);
 
+  const formSubmitHandler = (data: FieldValues) => {
+    toast.success("Report has been successfully  saved");
+
+    console.log("submitted");
+    const uniquId =
+      data.personalDetails.mobile +
+      data.personalDetails.firstName +
+      data.personalDetails.age;
+    reset({ ...deafaultFormValue });
+    patientDataHandler({
+      medicalBills: data.medicalBills,
+      personalDetails: data.personalDetails,
+      medicalRecord: data.MedicalRecord,
+      medicines: data.medicines,
+      id: uniquId,
+    });
+
+    setIsFormOpen(false);
+  };
+
   return (
     <>
       {!isFormOpen ? (
@@ -65,22 +86,7 @@ const InputForms = () => {
         <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto max-h-screen">
           <form
             id="main-form"
-            onSubmit={handleSubmit((data) => {
-              const uniquId =
-                data.personalDetails.mobile +
-                data.personalDetails.firstName +
-                data.personalDetails.age;
-              reset({ ...deafaultFormValue });
-              patientDataHandler({
-                medicalBills: data.medicalBills,
-                personalDetails: data.personalDetails,
-                medicalRecord: data.MedicalRecord,
-                medicines: data.medicines,
-                id: uniquId,
-              });
-
-              setIsFormOpen(false);
-            })}
+            onSubmit={handleSubmit(formSubmitHandler)}
             className="xs:pb-8 h-full"
           >
             {formSection[tabIndex]}
@@ -104,6 +110,7 @@ const InputForms = () => {
                   tabIndex={tabIndex}
                   onClick={tabClickHandler}
                   bgColor={"bg-yellow-500"}
+                  className="text-white"
                 />
               )}
 
@@ -111,7 +118,7 @@ const InputForms = () => {
                 type="submit"
                 value="Save"
                 bgColor="bg-blue-500"
-                className="ml-auto"
+                className="ml-auto text-white"
               />
             </div>
           </form>

@@ -14,7 +14,7 @@ const SideNav = () => {
   const { showFormHandler, tabIndex } = useMyFormContext();
 
   const tabClass = (index: number) =>
-    `w-full flex items-center gap-2 border-b-2 py-8 hover:bg-blue-100 ${
+    `w-full flex items-center gap-2 border-b-3 py-6 hover:bg-blue-100 ${
       tabIndex === index
         ? "font-semibold bg-blue-300 scale-110 transition-transform"
         : ""

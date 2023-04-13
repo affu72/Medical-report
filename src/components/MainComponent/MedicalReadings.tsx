@@ -29,7 +29,7 @@ const MedicalReadings = () => {
   return (
     <div>
       {fields.map((reading, index) => (
-        <div key={reading.id} className="rounded-md flex gap-2 mb-2 h-24">
+        <div key={reading.id} className="rounded-md flex gap-2 mb-2 h-20">
           <InputRHF
             placeholder="Reading Name"
             control={control}
@@ -50,13 +50,14 @@ const MedicalReadings = () => {
               value="X"
               bgColor="bg-red-500"
               onClick={() => remove(index)}
-              className="self-start py-2.5"
+              className="self-start py-2 text-white"
             />
           )}
         </div>
       ))}
 
       <Button
+        className="text-white"
         type="button"
         value="Add Anoher reading"
         bgColor="bg-blue-500"
@@ -73,7 +74,7 @@ const MedicalReadings = () => {
         bgColor={"bg-red-500"}
         value="Clear All"
         onClick={() => remove()}
-        className="ml-4"
+        className="ml-4 text-white"
       />
     </div>
   );

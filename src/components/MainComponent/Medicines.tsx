@@ -12,11 +12,7 @@ export interface IMedicine {
 }
 
 const Medicines = () => {
-  const {
-    control,
-    register,
-    getValues,
-  } = useFormContext();
+  const { control, register, getValues } = useFormContext();
 
   const { append, fields, remove } = useFieldArray({
     name: "medicines",
@@ -36,11 +32,11 @@ const Medicines = () => {
   return (
     <div className="flex flex-col gap-8">
       {fields.map((medicine, index) => (
-        <div key={medicine.id} className="rounded-md flex gap-2 h-12">
+        <div key={medicine.id} className="rounded-md flex gap-2 h-8">
           <div className="flex w-full">
             <select
               aria-label="Select medicine type"
-              className="border-2 border-gray-300 text-slate-500 bg-transparent self-start h-[35px] rounded-r-none rounded-l-md"
+              className="border-2 border-gray-300 text-slate-500 bg-transparent self-start h-[37px] rounded-r-none rounded-l-md"
               {...register(`medicines.${index}.type`, {
                 required: "Type Required",
               })}
@@ -77,7 +73,7 @@ const Medicines = () => {
               value="X"
               bgColor="bg-red-500"
               onClick={() => remove(index)}
-              className="self-start py-2.5"
+              className="self-start py-2 text-white"
             />
           )}
         </div>
@@ -85,6 +81,7 @@ const Medicines = () => {
 
       <div className="flex gap-4 mt-4">
         <Button
+          className="text-white"
           type="button"
           value="Add Medicine"
           bgColor={"bg-blue-500"}
@@ -102,6 +99,7 @@ const Medicines = () => {
           bgColor={"bg-red-500"}
           value="Clear All"
           onClick={() => remove()}
+          className="text-white"
         />
       </div>
     </div>

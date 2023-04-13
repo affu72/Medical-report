@@ -42,12 +42,14 @@ const MedicalBill = () => {
               value="X"
               bgColor="bg-red-500"
               onClick={() => remove(index)}
+              className="text-white self-start py-2"
             />
           )}
         </div>
       ))}
 
       <Button
+        className="text-white"
         type="button"
         value="Add Anoher Bill"
         bgColor="bg-blue-500"
