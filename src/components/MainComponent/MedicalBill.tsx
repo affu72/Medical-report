@@ -1,6 +1,7 @@
 import Button from "../CustomComp/Button";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import InputRHF from "../CustomComp/InputRHF";
+import { toast } from "react-toastify";
 
 export interface IMedicalBill {
   billName: string;
@@ -15,14 +16,13 @@ const MedicalBill = () => {
     control,
   });
 
-  console.log(fields);
-
   return (
     <div>
       {fields.map((bill, index) => (
         <div
           key={bill.id}
-          className="px-4 rounded-md py-4 flex gap-4 items-center border-2"
+          // className="px-4 rounded-md py-4 flex gap-4 items-center border-2 h-20"
+          className="rounded-md flex gap-2 h-20"
         >
           <InputRHF
             placeholder="Bill Name"
@@ -43,12 +43,14 @@ const MedicalBill = () => {
               value="x"
               bgColor="bg-red-500"
               onClick={() => remove(index)}
+              className="text-white self-start py-2"
             />
           )}
         </div>
       ))}
 
       <Button
+        className="text-white"
         type="button"
         value="Add Anoher Bill"
         bgColor="bg-blue-500"
@@ -56,8 +58,10 @@ const MedicalBill = () => {
           if (
             getValues().medicalBills.at(-1).billName === "" ||
             getValues().medicalBills.at(-1).billValue === null
-          )
+          ) {
+            toast.error("Fill previous field first");
             return;
+          }
 
           append({ billName: "", billValue: null });
         }}

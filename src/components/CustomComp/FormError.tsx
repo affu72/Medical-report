@@ -13,7 +13,7 @@ const FormError = ({ errors, name }: IError) => {
       errors={errors}
       name={name}
       render={({ message }) => (
-        <span className="text-red-500 m-0 ">
+        <p className="text-red-500 m-0 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -29,7 +29,7 @@ const FormError = ({ errors, name }: IError) => {
             />
           </svg>
           {`${message}`}
-        </span>
+        </p>
       )}
     />
   );

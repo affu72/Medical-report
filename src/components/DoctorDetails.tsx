@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { getInputClassName, getErrorMsg, testData } from "../ts/Contants";
 import FormError from "./CustomComp/FormError";
 import { useEffect } from "react";
-import InputRHF from "./CustomComp/InputRHF";
 
 export interface IDoctorDetails {
   clinicName: string;
@@ -22,13 +21,12 @@ export interface IDoctorDetails {
 const DoctorDetails = () => {
   const {
     setFocus,
-    control,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IDoctorDetails>({
-    criteriaMode: "all",
-    mode: "all",
+    criteriaMode: "firstError",
+    mode: "onBlur",
     // delayError: 500,
   });
 
@@ -44,28 +42,52 @@ const DoctorDetails = () => {
     <div className="bg-blue-900 h-screen pt-6 flex items-center">
       <form
         onSubmit={handleSubmit(onFormSubmit)}
-        className="grid grid-cols-2 gap-x-8 gap-y-6 max-w-6xl mx-auto px-8 py-6 bg-white rounded-md shadow-md"
+        className="grid grid-cols-2 gap-x-8 max-w-6xl mx-auto px-8 py-6 bg-white rounded-md shadow-md"
       >
         <h2 className="col-span-2 text-center mb-2 font-semibold text-3xl text-blue-400">
           Fill Details That will be shown on Prescription
         </h2>
 
-        <InputRHF
-          label="Clinic Name"
-          name="clinicName"
-          control={control}
-          placeholder="Enter Clinic Name"
-        />
+        <div className="h-24">
+          <label className="font-semibold">Clinic Name</label>
+          <input
+            type="text"
+            placeholder="Enter Clinic Name"
+            className={getInputClassName(
+              `${errors.clinicName ? " outline-red-700" : ""}`
+            )}
+            {...register("clinicName", {
+              required: {
+                value: true,
+                message: getErrorMsg("Clinic Name"),
+              },
+            })}
+          />
 
-        <InputRHF
-          label="Clinic Name"
-          name="doctorName"
-          control={control}
-          placeholder="Enter Doctor's Name"
-        />
+          {errors.clinicName && <FormError errors={errors} name="clinicName" />}
+        </div>
 
-        <div>
-          <label>Registration No.</label>
+        <div className="h-24 ">
+          <label className="font-semibold">Doctor's Name</label>
+          <input
+            type="text"
+            placeholder="Enter Doctor's Name"
+            className={getInputClassName(
+              `${errors.doctorName ? " outline-red-700" : ""}`
+            )}
+            {...register("doctorName", {
+              required: {
+                value: true,
+                message: getErrorMsg("Doctor's Name"),
+              },
+            })}
+          />
+
+          {errors.doctorName && <FormError errors={errors} name="doctorName" />}
+        </div>
+
+        <div className="h-24 ">
+          <label className="font-semibold">Registration No.</label>
 
           <input
             type="text"
@@ -84,8 +106,8 @@ const DoctorDetails = () => {
           {errors.regNumber && <FormError errors={errors} name="regNumber" />}
         </div>
 
-        <div>
-          <label>Address</label>
+        <div className="h-24">
+          <label className="font-semibold">Address</label>
 
           <input
             type="text"
@@ -105,8 +127,8 @@ const DoctorDetails = () => {
           )}
         </div>
 
-        <div>
-          <label>Mobile No. </label>
+        <div className="">
+          <label className="font-semibold">Mobile No. </label>
 
           <input
             type="tel"
@@ -120,16 +142,12 @@ const DoctorDetails = () => {
                 message: "Mobile Cannot be empty",
               },
               minLength: {
-                value: 1,
-                message: "Should be of 10 digit",
+                value: 10,
+                message: "Should be 10 digit",
               },
               maxLength: {
                 value: 10,
-                message: "Should be of 10 digit",
-              },
-              pattern: {
-                value: /^(\+\d{1,3}[- ]?)?\d{10}$/,
-                message: "Should be numbers only",
+                message: "Enter valid Number",
               },
             })}
           />
@@ -138,12 +156,12 @@ const DoctorDetails = () => {
           )}
         </div>
 
-        <div>
-          <label>Qualification (ex. M.B.B.S, M.D, M.S)</label>
+        <div className="h-24 ">
+          <label className="font-semibold">Qualification</label>
 
           <input
             type="text"
-            placeholder="Qualification"
+            placeholder="ex. M.B.B.S, M.D, M.S"
             className={getInputClassName(
               `${errors.qualification ? " outline-red-700" : ""}`
             )}
@@ -159,8 +177,8 @@ const DoctorDetails = () => {
           )}
         </div>
 
-        <div>
-          <label>Opening Time</label>
+        <div className="h-24 ">
+          <label className="font-semibold">Opening Time</label>
 
           <input
             type="time"
@@ -179,8 +197,8 @@ const DoctorDetails = () => {
           )}
         </div>
 
-        <div>
-          <label>Closing Time</label>
+        <div className="h-24 ">
+          <label className="font-semibold">Closing Time</label>
 
           <input
             type="time"
@@ -199,8 +217,8 @@ const DoctorDetails = () => {
           )}
         </div>
 
-        <div>
-          <label>Logo</label>
+        <div className="h-24 ">
+          <label className="font-semibold">Logo</label>
 
           <input
             type="file"
@@ -219,8 +237,8 @@ const DoctorDetails = () => {
           {errors.logo && <FormError errors={errors} name="logo" />}
         </div>
 
-        <div>
-          <label>Closing Day</label>
+        <div className="h-24 ">
+          <label className="font-semibold">Closing Day</label>
 
           <input
             type="text"
@@ -241,14 +259,14 @@ const DoctorDetails = () => {
         <div className=" flex justify-between mt-8 col-span-2 relative">
           <p className="absolute -top-10 left-10">(only for test)</p>
           <Button
-            className="self-start"
+            className="self-start text-white"
             type="button"
             value="Fill With Test Data"
             bgColor="bg-yellow-500"
             onClick={() => handleDoctorForm(testData)}
           ></Button>
           <Button
-            className="self-end"
+            className="self-end text-white"
             type="submit"
             value="Save & Submit"
             bgColor="bg-blue-500"
