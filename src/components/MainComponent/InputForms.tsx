@@ -53,7 +53,6 @@ const InputForms = () => {
   const formSubmitHandler = (data: FieldValues) => {
     toast.success("Report has been successfully  saved");
 
-    console.log("submitted");
     const uniquId =
       data.personalDetails.mobile +
       data.personalDetails.firstName +

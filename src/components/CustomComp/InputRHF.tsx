@@ -46,8 +46,6 @@ const InputRHF = ({
     };
   }
 
-  console.log(rules);
-
   return (
     <>
       {label ? (

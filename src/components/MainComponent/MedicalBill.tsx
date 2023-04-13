@@ -22,7 +22,7 @@ const MedicalBill = () => {
         <div
           key={bill.id}
           // className="px-4 rounded-md py-4 flex gap-4 items-center border-2 h-20"
-          className="rounded-md flex gap-2 h-18"
+          className="rounded-md flex gap-2 h-20"
         >
           <InputRHF
             placeholder="Bill Name"

@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { getInputClassName, getErrorMsg, testData } from "../ts/Contants";
 import FormError from "./CustomComp/FormError";
 import { useEffect } from "react";
-import InputRHF from "./CustomComp/InputRHF";
 
 export interface IDoctorDetails {
   clinicName: string;
@@ -22,7 +21,6 @@ export interface IDoctorDetails {
 const DoctorDetails = () => {
   const {
     setFocus,
-    control,
     register,
     handleSubmit,
     formState: { errors },
