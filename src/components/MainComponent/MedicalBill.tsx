@@ -39,7 +39,7 @@ const MedicalBill = () => {
           {fields.length === 1 || (
             <Button
               type="button"
-              value="X"
+              value="x"
               bgColor="bg-red-500"
               onClick={() => remove(index)}
               className="text-white self-start py-2"

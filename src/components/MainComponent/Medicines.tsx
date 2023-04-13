@@ -73,7 +73,7 @@ const Medicines = () => {
               value="X"
               bgColor="bg-red-500"
               onClick={() => remove(index)}
-              className="self-start py-2 text-white"
+              className="self-start py-1.5 text-white"
             />
           )}
         </div>

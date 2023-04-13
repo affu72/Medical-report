@@ -48,7 +48,7 @@ function PersonaDetails() {
         control={control}
       />
 
-      <div className=" flex gap-10 items-center w-full">
+      <div className=" flex gap-6 items-center w-full">
         <label className="m-0 font-semibold">Gender</label>
 
         <div className="flex gap-8">
