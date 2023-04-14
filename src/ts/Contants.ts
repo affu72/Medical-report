@@ -2,7 +2,7 @@ import { IDoctorDetails } from "../components/DoctorDetails";
 import { IOption, IFormData } from "./interfaces";
 
 export const getInputClassName = (className: string = "") => {
-  return `border-2 border-gray-300 hover:border-gray-400 transition-all duration-100 py-[8.5px] px-4 w-full rounded-md ${className} outline-blue-500`;
+  return `border-2 border-gray-300 hover:border-gray-400 transition-all duration-100 h-[2.9rem] py-2 px-4 w-full rounded-md ${className} outline-blue-500`;
 };
 
 export const getErrorMsg = (name: string) => `${name} cannot be empty`;
@@ -14,8 +14,8 @@ export const testData: IDoctorDetails = {
   regNumber: "270999",
   doctorPhoneNumber: 9874562130,
   clinicAddress: `123 Main road near Axis Bank Kothrud Pune`,
-  openingTime: "09:00AM",
-  closingTime: "02:00PM",
+  openingTime: "09-00",
+  closingTime: "14-00",
   closingDay: "Thursday",
   logo: "",
 };
@@ -76,7 +76,7 @@ export const states = [
 
 export const deafaultFormValue: IFormData = {
   medicines: [{ name: "", dose: "", id: "", type: "" }],
-  medicalBills: [{ billName: "", id: "", billValue: null }],
+  medicalBills: [{ billName: "", id: "", billValue: 0 }],
   medicalRecord: {
     histories: [],
     symptoms: [],
@@ -96,11 +96,9 @@ export const deafaultFormValue: IFormData = {
   id: "",
 };
 
-export const isEmpty = (obj: Object) => {
-  for (const data of Object.values(obj)) {
-    if (data === "" || data === null) return true;
-  }
-
+export const isEmpty = (data: any) => {
+  if (data.doctorName === "" || data.regNumber === "" || data.clinicName === "")
+    return true;
   return false;
 };
 

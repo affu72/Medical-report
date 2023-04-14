@@ -116,7 +116,7 @@ function PersonaDetails() {
           <Controller
             control={control}
             name="personalDetails.state"
-            render={({ formState: { errors }, field: { onChange } }) => (
+            render={({ field: { onChange } }) => (
               <Select
                 options={states}
                 onChange={onChange}
@@ -124,6 +124,8 @@ function PersonaDetails() {
                   control: (provided: any) => ({
                     ...provided,
                     border: "2px solid rgb(209 213 219)",
+                    minHeight: "2.9rem",
+                    height: "2.9em",
                   }),
                 }}
               ></Select>

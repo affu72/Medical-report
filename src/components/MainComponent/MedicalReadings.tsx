@@ -24,7 +24,7 @@ const MedicalReadings = () => {
   return (
     <div>
       {fields.map((reading, index) => (
-        <div key={reading.id} className="rounded-md flex gap-2 mb-2 h-20">
+        <div key={reading.id} className="rounded-md flex gap-2 h-20">
           <InputRHF
             placeholder="Reading Name"
             control={control}
@@ -64,7 +64,7 @@ const MedicalReadings = () => {
           append({ readingName: "", readingValue: null });
         }}
       />
-      {fields.length > 1 && (
+      {fields.length >= 1 && (
         <Button
           type="button"
           bgColor={"bg-red-500"}

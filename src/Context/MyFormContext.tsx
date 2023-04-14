@@ -49,7 +49,8 @@ export const MyFormContextProvider = ({
   const [patientData, setPatientData] = useState<IFormData[]>(formDataArr);
 
   //deoctor's details
-  const [doctorData, setDoctorData] = useState<IDoctorDetails>({
+
+  let doctorDataInitial = {
     clinicName: "",
     doctorName: "",
     clinicAddress: "",
@@ -60,7 +61,10 @@ export const MyFormContextProvider = ({
     openingTime: "",
     closingTime: "",
     closingDay: "",
-  });
+  };
+
+  const [doctorData, setDoctorData] =
+    useState<IDoctorDetails>(doctorDataInitial);
 
   const [hasDoctorData, setHasDoctorData] = useState(false);
 
@@ -79,13 +83,13 @@ export const MyFormContextProvider = ({
     //Doctors Details
     const handleDoctorForm = (data: IDoctorDetails) => {
       setDoctorData(data);
-      localStorage.setItem("doctorData", JSON.stringify(doctorData));
+      localStorage.setItem("doctorData", JSON.stringify(data));
       setHasDoctorData(true);
     };
 
     const editDoctorsDataHandler = () => {
       // const data = localStorage.getItem("doctorData")!;
-      localStorage.removeItem("doctorData");
+
       setHasDoctorData(false);
     };
 

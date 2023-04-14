@@ -53,7 +53,7 @@ function PreviewPage() {
       </div>
       <div
         ref={ref}
-        className="w-[800px] px-6 flex-none bg-white overflow-auto"
+        className="w-[800px] px-6 flex-none bg-white overflow-auto min-h-screen"
       >
         <Header></Header>
 

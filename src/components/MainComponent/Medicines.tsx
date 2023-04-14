@@ -22,13 +22,12 @@ const Medicines = () => {
   };
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 rounded-md outline-blue-500">
       {fields.map((medicine, index) => (
-        <div key={medicine.id} className="rounded-md flex gap-2 h-8">
+        <div key={medicine.id} className="rounded-md flex gap-2 h-9">
           <div className="flex w-full">
             <select
-              aria-label="Select medicine type"
-              className="border-2 border-gray-300 text-slate-500 bg-transparent self-start h-[39px] px-2 rounded-r-none rounded-l-md outline-blue-500"
+              className="border-2 border-gray-300 h-[2.9rem] py-2 rounded-l-md"
               {...register(`medicines.${index}.type`, {
                 required: "Type Required",
               })}
@@ -86,13 +85,15 @@ const Medicines = () => {
           }}
         />
 
-        <Button
-          type="button"
-          bgColor={"bg-red-500"}
-          value="Clear All"
-          onClick={() => remove()}
-          className="text-white"
-        />
+        {fields.length >= 1 && (
+          <Button
+            type="button"
+            bgColor={"bg-red-500"}
+            value="Clear All"
+            onClick={() => remove()}
+            className="text-white"
+          />
+        )}
       </div>
     </div>
   );

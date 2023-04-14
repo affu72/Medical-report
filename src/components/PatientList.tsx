@@ -35,6 +35,7 @@ const PatientList = () => {
   };
 
   patientData = patientData?.filter((patient) => isIncluded(patient))!;
+  patientData = patientData.reverse();
 
   return (
     <div className="overflow-auto">

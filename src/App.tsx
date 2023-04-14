@@ -31,7 +31,7 @@ function App() {
         theme="light"
       />
       <div className="md:w-fit mx-auto">
-        {!hasDoctorData && !localStorage.getItem("doctorData") ? (
+        {!hasDoctorData ? (
           <DoctorDetails />
         ) : (
           <>

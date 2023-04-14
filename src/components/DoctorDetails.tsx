@@ -4,7 +4,6 @@ import {
   getInputClassName,
   getErrorMsg,
   testData,
-  isEmpty,
 } from "../ts/Contants";
 import FormError from "./CustomComp/FormError";
 import { useEffect } from "react";
@@ -24,12 +23,16 @@ export interface IDoctorDetails {
 }
 
 const DoctorDetails = () => {
-  const { handleDoctorForm, doctorData } = useMyFormContext();
+  const { handleDoctorForm } = useMyFormContext();
 
   let defaultDoctorData = testData;
 
-  if (isEmpty(doctorData)) defaultDoctorData = doctorData;
+  if (localStorage.getItem("doctorData")) {
+    defaultDoctorData = JSON.parse(localStorage.getItem("doctorData")!);
+  }
+
   const {
+    reset,
     setFocus,
     register,
     handleSubmit,
@@ -268,14 +271,13 @@ const DoctorDetails = () => {
         </div>
 
         <div className="flex justify-end mt-8 col-span-2 relative">
-          {/* <p className="absolute -top-10 left-10">(only for test)</p>
           <Button
             className="self-start text-white"
             type="button"
             value="Fill With Test Data"
             bgColor="bg-yellow-500"
-            onClick={() => handleDoctorForm(testData)}
-          ></Button> */}
+            onClick={() => reset(testData)}
+          ></Button>
 
           <Button
             className="self-end text-white"

@@ -47,16 +47,26 @@ const MedicalBill = () => {
         bgColor="bg-blue-500"
         onClick={() => {
           if (
-            getValues().medicalBills.at(-1).billName === "" ||
-            getValues().medicalBills.at(-1).billValue === null
+            getValues().medicalBills.at(-1)?.billName === "" ||
+            getValues().medicalBills.at(-1)?.billValue === 0
           ) {
             toast.error("Fill previous field first");
             return;
           }
 
-          append({ billName: "", billValue: null });
+          append({ billName: "", billValue: 0 });
         }}
       />
+
+      {fields.length >= 1 && (
+        <Button
+          type="button"
+          bgColor={"bg-red-500"}
+          value="Clear All"
+          onClick={() => remove()}
+          className="text-white ml-4"
+        />
+      )}
     </div>
   );
 };
