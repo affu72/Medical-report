@@ -23,6 +23,7 @@ const InputRHF = ({
   type = "text",
 }: PropInput) => {
   const {
+    getFieldState,
     formState: { touchedFields },
   } = useFormContext();
 
@@ -57,21 +58,25 @@ const InputRHF = ({
             name={name}
             defaultValue={""}
             render={({
-              field: { onChange, onBlur, value },
+              field: { onChange, onBlur, value, name },
               formState: { errors },
             }) => {
+              console.log(getFieldState(name));
               return (
                 <>
                   <input
                     onChange={(e) => onChange(e.target.value)}
-                    className={getInputClassName(className)}
+                    className={getInputClassName(
+                      getFieldState(name),
+                      className
+                    )}
                     placeholder={placeholder}
                     type={type}
                     value={value}
                     onBlur={onBlur}
                   />
 
-                  {touchedFields.name || (
+                  {getFieldState(name).error && (
                     <FormError errors={errors} name={name} />
                   )}
                 </>

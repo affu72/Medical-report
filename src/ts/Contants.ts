@@ -1,8 +1,12 @@
 import { IDoctorDetails } from "../components/DoctorDetails";
 import { IOption, IFormData } from "./interfaces";
 
-export const getInputClassName = (className: string = "") => {
-  return `border-2 border-gray-300 hover:border-gray-400 transition-all duration-100 h-[2.9rem] py-2 px-4 w-full rounded-md ${className} outline-blue-500`;
+export const getInputClassName = (fieldState: any, className: string = "") => {
+  return `border-2 transition-all duration-100 h-[2.9rem] py-2 px-4 w-full rounded-md ${className} ${
+    fieldState?.error
+      ? "outline-red-500 border-red-300 hover:border-red-400"
+      : "outline-blue-500 border-gray-300 hover:border-gray-400"
+  }`;
 };
 
 export const getErrorMsg = (name: string) => `${name} cannot be empty`;
