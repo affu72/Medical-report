@@ -1,19 +1,8 @@
-import IndianStateDropdown from "../CustomComp/Select";
 import InputRHF from "../CustomComp/InputRHF";
 import { states } from "../../ts/Contants";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import FormError from "../CustomComp/FormError";
-export interface IPersonalData {
-  pin: number | undefined;
-  city: string;
-  firstName: string;
-  lastName: string;
-  age: number | null;
-  mobile: string;
-  gender: string;
-  state: string;
-  address: string;
-}
+import Select from "react-select";
 
 function PersonaDetails() {
   const {
@@ -23,19 +12,19 @@ function PersonaDetails() {
   } = useFormContext();
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex gap-8 md:justify-between">
+    <div className="gap-4">
+      <div className="flex gap-8">
         <InputRHF
           name="personalDetails.firstName"
           label="First Name"
-          placeholder="First Name"
+          placeholder="Enter First Name eg. John"
           control={control}
         ></InputRHF>
 
         <InputRHF
           name="personalDetails.lastName"
           label="Last Name"
-          placeholder="Enter last Name"
+          placeholder="Enter last Name eg. Doe"
           control={control}
         ></InputRHF>
       </div>
@@ -43,13 +32,13 @@ function PersonaDetails() {
       <InputRHF
         name="personalDetails.age"
         label="Age"
-        placeholder="Age"
+        placeholder="eg. 23"
         type="number"
         control={control}
       />
 
-      <div className=" flex gap-16 items-center w-full mb-4">
-        <label className="m-0 font-medium">Gender</label>
+      <div className=" flex gap-6 items-center w-full">
+        <label className="m-0 font-semibold">Gender</label>
 
         <div className="flex gap-8">
           <div className="flex items-center gap-4 p-2">
@@ -64,7 +53,7 @@ function PersonaDetails() {
               type="radio"
               id="male"
               className="mt-0"
-              value={"male"}
+              value={"Male"}
             />
           </div>
 
@@ -82,7 +71,7 @@ function PersonaDetails() {
               type="radio"
               id="female"
               className="mt-0"
-              value={"female"}
+              value={"Female"}
             />
           </div>
         </div>
@@ -93,7 +82,7 @@ function PersonaDetails() {
         name="personalDetails.mobile"
         placeholder="Mobile"
         label="Mobile"
-        type="number"
+        type="tel"
         control={control}
       ></InputRHF>
 
@@ -104,7 +93,7 @@ function PersonaDetails() {
         control={control}
       ></InputRHF>
 
-      <div className="flex justify-between gap-8">
+      <div className="flex gap-8">
         <InputRHF
           name="personalDetails.city"
           placeholder="City"
@@ -120,15 +109,29 @@ function PersonaDetails() {
           type="number"
         ></Input> */}
 
-        <div className="w-full flex flex-col">
-          <label htmlFor="name" className="font-medium m-0">
+        <div className="flex flex-col basis-1/2">
+          <label htmlFor="personalDetails.state" className="font-semibold">
             State
           </label>
-          <IndianStateDropdown
+          <Controller
             control={control}
             name="personalDetails.state"
-            options={states}
-          ></IndianStateDropdown>
+            render={({ field: { onChange, value } }) => (
+              <Select
+                options={states}
+                onChange={onChange}
+                styles={{
+                  control: (provided: any) => ({
+                    ...provided,
+                    border: "2px solid rgb(209 213 219)",
+                    minHeight: "2.9rem",
+                    height: "2.9em",
+                  }),
+                }}
+                value={value}
+              ></Select>
+            )}
+          />
         </div>
       </div>
     </div>

@@ -1,55 +1,27 @@
 import { useEffect } from "react";
-import Medicines, { IMedicine } from "./Medicines";
+import Medicines from "./Medicines";
 import MedicalRecord from "./MedicalRecord";
-import MedicalBill, { IMedicalBill } from "./MedicalBill";
-import PersonaDetails, { IPersonalData } from "./PersonaDetails";
+import MedicalBill from "./MedicalBill";
+import PersonaDetails from "./PersonaDetails";
 import { useMyFormContext } from "../../Context/MyFormContext";
 import Button from "../CustomComp/Button";
-import { useForm, FormProvider } from "react-hook-form";
-import IOption from "../../ts/Option";
+import { FieldValues, useFormContext } from "react-hook-form";
 import SideBar from "../SideBar";
-import { IMedicalReadings } from "./MedicalReadings";
-
-interface IMedicalRecord {
-  histories: IOption[];
-  symptoms: IOption[];
-  medicalReadings: IMedicalReadings[];
-}
-export interface IFormData {
-  medicines: IMedicine[];
-  personalDetails: IPersonalData;
-  medicalBills: IMedicalBill[];
-  medicalRecord: IMedicalRecord;
-}
+import PatientList from "../PatientList";
+import { deafaultFormValue } from "../../ts/Contants";
+import { toast } from "react-toastify";
 
 const InputForms = () => {
-  const methods = useForm<IFormData>({
-    defaultValues: {
-      medicines: [{ name: "", dose: "", id: "", type: "" }],
-      medicalBills: [{ billName: "", id: "", billValue: null }],
-      medicalRecord: {
-        histories: [],
-        symptoms: [],
-        medicalReadings: [{ readingName: "", readingValue: "", key: "" }],
-      },
-      personalDetails: {
-        firstName: "",
-        lastName: "",
-        age: null,
-        gender: "",
-        mobile: "",
-        address: "",
-        city: "",
-        state: "",
-      },
-    },
+  const { setFocus, handleSubmit, reset } = useFormContext();
 
-    mode: "all",
-    shouldFocusError: true,
-  });
-
-  const { tabClickHandler, handleBackClick, tabIndex, patientDataHandler } =
-    useMyFormContext();
+  const {
+    tabClickHandler,
+    handleBackClick,
+    tabIndex,
+    patientDataHandler,
+    isFormOpen,
+    setIsFormOpen,
+  } = useMyFormContext();
 
   const formSection = [
     <PersonaDetails key={0} />,
@@ -59,21 +31,50 @@ const InputForms = () => {
   ];
 
   useEffect(() => {
-    methods.setFocus(`medicalBills.${0}.billName`);
-    methods.setFocus(`medicines.${0}.name`);
-  }, [methods, methods.setFocus]);
+    setFocus(`medicalBills.${0}.billName`);
+    setFocus(`medicines.${0}.name`);
+    setFocus("personalDetails.firstName");
+  }, [setFocus]);
+
+  const submitFormHandler = (data: FieldValues) => {
+    toast.success("Report has been successfully  saved");
+
+    const uniquId =
+      data.personalDetails.mobile +
+      data.personalDetails.firstName +
+      data.personalDetails.age;
+
+    reset({ ...deafaultFormValue });
+
+    patientDataHandler({
+      medicalBills: data.medicalBills,
+      personalDetails: data.personalDetails,
+      medicalRecord: data.MedicalRecord,
+      medicines: data.medicines,
+      id: uniquId,
+    });
+
+    setIsFormOpen(false);
+  };
 
   return (
     <>
-      <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto">
-        <FormProvider {...methods}>
+      {!isFormOpen ? (
+        <>
+          <button
+            onClick={() => setIsFormOpen(true)}
+            className="bg-blue-700 py-5 text-white font-semibold shadow-lg rounded-md hover:bg-blue-900 transition-all duration-300 "
+          >
+            Add New Patient
+          </button>
+          <PatientList />
+        </>
+      ) : (
+        <div className="bg-white flex-1 flex-col  gap-8 p-6 relative overflow-auto">
           <form
             id="main-form"
-            onSubmit={methods.handleSubmit((data) => {
-              methods.reset();
-              patientDataHandler(data);
-            })}
-            className="xs:pb-8 h-full"
+            onSubmit={handleSubmit(submitFormHandler)}
+            className="xs:pb-8 h-full min-h-screen"
           >
             {formSection[tabIndex]}
 
@@ -83,33 +84,34 @@ const InputForms = () => {
                   type="button"
                   value="Back"
                   tabIndex={tabIndex}
-                  bgColor={"bg-blue-300"}
+                  bgColor={""}
                   onClick={handleBackClick}
-                  className=""
+                  className="text-black border-2 rounded-md"
                 />
               )}
 
               {tabIndex < 3 && (
                 <Button
                   type="button"
-                  value="Save & Next"
+                  value="Next"
                   tabIndex={tabIndex}
                   onClick={tabClickHandler}
-                  bgColor={"bg-blue-500"}
+                  bgColor={"bg-yellow-500"}
+                  className="text-white"
                 />
               )}
 
               <Button
                 type="submit"
-                value="preview"
-                bgColor="bg-yellow-500"
-                className="ml-auto"
+                value="Save"
+                bgColor="bg-blue-500"
+                className="ml-auto text-white"
               />
             </div>
           </form>
           <SideBar />
-        </FormProvider>
-      </div>
+        </div>
+      )}
     </>
   );
 };

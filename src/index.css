@@ -1,10 +1,5 @@
 @tailwind base;
 @layer base {
-  label {
-    @apply: margin-bottom: "4px";
-    box-sizing: border-box;
-  }
-
   .overlay {
     @apply fixed top-0 left-0 w-full h-full bg-gray-900 transition-all duration-500 opacity-80;
   }

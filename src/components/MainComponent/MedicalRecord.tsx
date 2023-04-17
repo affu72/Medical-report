@@ -14,21 +14,28 @@ const MedicalRecord = () => {
     name: string,
     inputValue: string,
     setInputValue: Function,
-    event: React.KeyboardEvent<HTMLInputElement>
+    event: any
   ) => {
     if (!inputValue) return;
 
-    switch (event.key) {
-      case "Enter":
-      case "Tab":
-        
-        const value = getValues(name);
+    if (event.type === "keydown") {
+      switch (event?.key) {
+        case "Enter":
+        case "Tab":
+          const value = getValues(name);
 
-        const newvalue = [...value, { label: inputValue, value: inputValue }];
+          const newvalue = [...value, { label: inputValue, value: inputValue }];
 
-        setValue(name, newvalue);
-        setInputValue("");
-        event.preventDefault();
+          setValue(name, newvalue);
+          setInputValue("");
+          event?.preventDefault();
+      }
+    } else {
+      const value = getValues(name);
+      const newvalue = [...value, { label: inputValue, value: inputValue }];
+      setValue(name, newvalue);
+      setInputValue("");
+      event?.preventDefault();
     }
   };
 
@@ -50,6 +57,12 @@ const MedicalRecord = () => {
               isClearable
               isMulti
               menuIsOpen={false}
+              styles={{
+                control: (provided: any) => ({
+                  ...provided,
+                  border: "2px solid rgb(209 213 219)",
+                }),
+              }}
               onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
                 keyDownHandler(name, inputHistory, setInputHistory, event)
               }
@@ -59,6 +72,9 @@ const MedicalRecord = () => {
               }}
               onChange={onChange}
               value={value}
+              onBlur={(event) => {
+                keyDownHandler(name, inputHistory, setInputHistory, event);
+              }}
             />
           )}
         />
@@ -81,6 +97,12 @@ const MedicalRecord = () => {
               isClearable
               isMulti
               options={option}
+              styles={{
+                control: (provided: any) => ({
+                  ...provided,
+                  border: "2px solid rgb(209 213 219)",
+                }),
+              }}
               onChange={onChange}
               onInputChange={(newValue) => {
                 setInputSymptom(newValue);
@@ -90,13 +112,16 @@ const MedicalRecord = () => {
               }
               placeholder="Type to select or press enter to create..."
               value={value}
+              onBlur={(event) => {
+                keyDownHandler(name, inputSymptom, setInputSymptom, event);
+              }}
             />
           )}
         />
       </div>
       <br />
       <div>
-        <label className="font-semibold">Medical Reading</label>
+        <label className="font-semibold mb-0">Medical Reading</label>
         <MedicalReaings />
       </div>
     </div>
