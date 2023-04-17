@@ -116,7 +116,7 @@ function PersonaDetails() {
           <Controller
             control={control}
             name="personalDetails.state"
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <Select
                 options={states}
                 onChange={onChange}
@@ -128,6 +128,7 @@ function PersonaDetails() {
                     height: "2.9em",
                   }),
                 }}
+                value={value}
               ></Select>
             )}
           />

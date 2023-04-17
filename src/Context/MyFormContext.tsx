@@ -4,7 +4,6 @@ import React, {
   useState,
   ReactNode,
   useMemo,
-  useEffect,
 } from "react";
 import { IDoctorDetails } from "../components/DoctorDetails";
 import { deafaultFormValue, formDataArr } from "../ts/Contants";
