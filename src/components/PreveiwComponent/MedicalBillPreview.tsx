@@ -12,7 +12,7 @@ const MedicalBillPreview = () => {
     }, 0);
 
   return (
-    <div className="w-1/3  my-4">
+    <div className="w-1/3 relative mt-12 pl-8">
       <h2 className="text-2xl">Fees: (All in Rs)</h2>
       <table className="border-2 border-slate-900">
         <tbody className="border-2 border-slate-900">
