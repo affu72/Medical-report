@@ -14,14 +14,17 @@ const SideNav = () => {
   const { showFormHandler, tabIndex } = useMyFormContext();
 
   const tabClass = (index: number) =>
-    `w-full flex items-center gap-2 border-b-2 py-8 hover:bg-blue-100 ${
+    `w-full flex items-center gap-2 px-2 border-b-2 py-4 hover:bg-blue-100 ${
       tabIndex === index
-        ? "font-semibold transition-all duration-100 bg-blue-300 min-xl:translate-x-3 xl:translate-y-4"
+        ? "font-semibold bg-blue-300 scale-110 transition-transform"
         : ""
-    } border-cyan-500 xl:w-auto xl:py-2 xl:px-1 rounded-4 rounded`;
+    } border-cyan-500 xl:w-auto xl:py-1 xl:px-2 xl:gap-2`;
 
   return (
-    <div className="flex flex-col bg-slate-100 p-2 drop-shadow-md  box-border xl:flex-row xl:justify-between xl:basis-auto md:flex-col md:justify-start md:gap-4">
+    <div
+      self-start
+      className="flex flex-col max-h-[500px] gap-2 px-2 bg-slate-100 py-3 drop-shadow-md box-border xl:flex-row xl:justify-between xl:basis-auto md:flex-col md:justify-start md:gap-4"
+    >
       <button
         tabIndex={0}
         id="personal-tab"
@@ -68,38 +71,3 @@ const SideNav = () => {
 };
 
 export default SideNav;
-
-// interface PropTab {
-//   tabIndex?: number;
-//   tabBarIndex: number;
-//   id?: string;
-//   value: string;
-//   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-//   className: string;
-// }
-
-// export const TabButton: React.FC<PropTab> = ({
-//   tabIndex = 0,
-//   tabBarIndex,
-//   id,
-//   value,
-//   onClick,
-//   className = `w-full flex items-center gap-4  border-b-2  py-4 ${
-//     tabBarIndex === 0
-//       ? "font-semibold transition-all duration-100 bg-blue-100  translate-x-1"
-//       : ""
-//   } border-cyan-500 `,
-// }) => {
-//   return (
-//     <button
-//       tabIndex={tabIndex}
-//       id={id}
-//       value={value}
-//       onClick={onClick}
-//       className={className}
-//     >
-//       <FaMoneyBillAlt />
-//       Medical Bill
-//     </button>
-//   );
-// };

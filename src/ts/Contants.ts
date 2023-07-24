@@ -1,9 +1,12 @@
 import { IDoctorDetails } from "../components/DoctorDetails";
-import { IFormData } from "../components/MainComponent/InputForms";
-import IOption from "./Option";
+import { IOption, IFormData } from "./interfaces";
 
-export const getInputClassName = (className: string = "") => {
-  return `border-2 border-gray-300 py-2 px-4 w-full rounded-md ${className}`;
+export const getInputClassName = (fieldState: any, className: string = "") => {
+  return `border-2 transition-all duration-100 h-[2.9rem] py-2 px-4 w-full rounded-md ${className} ${
+    fieldState?.error
+      ? "outline-red-500 border-red-300 hover:border-red-400"
+      : "outline-blue-500 border-gray-300 hover:border-gray-400"
+  }`;
 };
 
 export const getErrorMsg = (name: string) => `${name} cannot be empty`;
@@ -15,8 +18,8 @@ export const testData: IDoctorDetails = {
   regNumber: "270999",
   doctorPhoneNumber: 9874562130,
   clinicAddress: `123 Main road near Axis Bank Kothrud Pune`,
-  openingTime: "09:00AM",
-  closingTime: "02:00PM",
+  openingTime: "09-00",
+  closingTime: "14-00",
   closingDay: "Thursday",
   logo: "",
 };
@@ -49,6 +52,7 @@ export const states = [
   { label: "Assam", value: "Assam" },
   { label: "Bihar", value: "Bihar" },
   { label: "Chhattisgarh", value: "Chhattisgarh" },
+  { label: "Delhi", value: "Delhi" },
   { label: "Goa", value: "Goa" },
   { label: "Gujarat", value: "Gujarat" },
   { label: "Haryana", value: "Haryana" },
@@ -74,282 +78,390 @@ export const states = [
   { label: "West Bengal", value: "West Bengal" },
 ];
 
+export const deafaultFormValue: IFormData = {
+  medicines: [{ name: "", dose: "", id: "", type: "" }],
+  medicalBills: [{ billName: "", id: "", billValue: 0 }],
+  medicalRecord: {
+    histories: [],
+    symptoms: [],
+    medicalReadings: [{ readingName: "", readingValue: "" }],
+  },
+  personalDetails: {
+    firstName: "",
+    lastName: "",
+    age: null,
+    gender: "",
+    mobile: "",
+    address: "",
+    city: "",
+    state: { value: "", label: "" },
+    pin: 0,
+  },
+  id: "",
+};
+
+export const isEmpty = (data: any) => {
+  if (data.doctorName === "" || data.regNumber === "" || data.clinicName === "")
+    return true;
+  return false;
+};
+
 export const formDataArr: IFormData[] = [
   {
     medicines: [
       {
-        id: "a",
+        id: "98765432John40",
         type: "Tablet",
         name: "Paracetamol",
-        dose: "500 mg",
-        quantity: "10",
+        dose: "500mg",
+        quantity: "2",
       },
       {
-        id: "b",
-        type: "Capsule",
-        name: "Amoxicillin",
-        dose: "250 mg",
-        quantity: "20",
-      },
-    ],
-    personalDetails: {
-      pin: 123456,
-      city: "New York",
-      firstName: "John",
-      lastName: "Doe",
-      age: 30,
-      mobile: "1234567890",
-      gender: "Male",
-      state: "NY",
-      address: "123 Main St",
-    },
-    medicalBills: [
-      { billName: "Doctor Visit", billValue: 100, id: "a" },
-      { billName: "Medicines", billValue: 50, id: "b" },
-    ],
-    medicalRecord: {
-      histories: [
-        { label: "Heart Attack", value: "heart-attack" },
-        { label: "Malaria", value: "malaria" },
-        { label: "Flu", value: "flu" },
-      ],
-      symptoms: [
-        { label: "Fever", value: "fever" },
-        { label: "Cough", value: "cough" },
-        { label: "Headache", value: "headache" },
-      ],
-      medicalReadings: [],
-    },
-  },
-  {
-    medicines: [
-      {
-        id: "c",
-        type: "Tablet",
-        name: "Ibuprofen",
-        dose: "400 mg",
-        quantity: "30",
-      },
-      {
-        id: "d",
-        type: "Capsule",
-        name: "Clarithromycin",
-        dose: "500 mg",
-        quantity: "10",
-      },
-    ],
-    personalDetails: {
-      pin: 654321,
-      city: "Los Angeles",
-      firstName: "Jane",
-      lastName: "Doe",
-      age: 40,
-      mobile: "0987654321",
-      gender: "Female",
-      state: "CA",
-      address: "456 Elm St",
-    },
-    medicalBills: [
-      { billName: "Tests", billValue: 200, id: "a" },
-      { billName: "Medicines", billValue: 75, id: "b" },
-    ],
-    medicalRecord: {
-      histories: [
-        { label: "Arthritis", value: "arthritis" },
-        { label: "Asthma", value: "asthma" },
-        { label: "Cancer", value: "cancer" },
-      ],
-      symptoms: [
-        { label: "Shortness of breath", value: "shortness-of-breath" },
-        { label: "Pain in joints", value: "pain-in-joints" },
-        { label: "Loss of appetite", value: "loss-of-appetite" },
-      ],
-      medicalReadings: [],
-    },
-  },
-  {
-    medicines: [
-      {
-        id: "e",
-        type: "Tablet",
-        name: "Metformin",
-        dose: "500 mg",
-        quantity: "60",
-      },
-      {
-        id: "f",
-        type: "Capsule",
-        name: "Losartan",
-        dose: "50 mg",
-        quantity: "30",
-      },
-    ],
-    personalDetails: {
-      pin: 789012,
-      city: "Chicago",
-      firstName: "Bob",
-      lastName: "Smith",
-      age: 50,
-      mobile: "9876543210",
-      gender: "Male",
-      state: "IL",
-      address: "789 Oak St",
-    },
-    medicalBills: [
-      { billName: "Tests", billValue: 150, id: "a" },
-      { billName: "Medicines", billValue: 100, id: "b" },
-    ],
-    medicalRecord: {
-      histories: [
-        { label: "Diabetes", value: "diabetes" },
-        { label: "High Blood Pressure", value: "high-blood-pressure" },
-        { label: "Cholesterol", value: "cholesterol" },
-      ],
-      symptoms: [
-        { label: "Fatigue", value: "fatigue" },
-        { label: "Dizziness", value: "dizziness" },
-        { label: "Nausea", value: "nausea" },
-      ],
-      medicalReadings: [],
-    },
-  },
-
-  {
-    medicines: [
-      {
-        id: "a",
-        type: "Tablet",
-        name: "Paracetamol",
-        dose: "500 mg",
-        quantity: "10",
-      },
-      {
-        id: "b",
-        type: "Capsule",
-        name: "Amoxicillin",
-        dose: "250 mg",
-        quantity: "20",
+        id: "98765432John40",
+        type: "Syrup",
+        name: "Cough syrup",
+        dose: "5ml",
       },
     ],
     personalDetails: {
       pin: 110001,
       city: "New Delhi",
-      firstName: "Amit",
-      lastName: "Kumar",
-      age: 30,
+      firstName: "John",
+      lastName: "Doe",
+      age: 40,
       mobile: "9876543210",
       gender: "Male",
-      state: "Delhi",
-      address: "42, Sadar Thana Rd, Sadar Bazaar",
+      state: { value: "Delhi", label: "Delhi" },
+      address: "123, ABC Street",
     },
     medicalBills: [
-      { billName: "Doctor Visit", billValue: 100, id: "a" },
-      { billName: "Medicines", billValue: 50, id: "b" },
+      { billName: "Consultation fee", billValue: 500, id: "98765432John40" },
+      { billName: "Medicine cost", billValue: 200, id: "98765432John40" },
     ],
     medicalRecord: {
-      histories: [
-        { label: "Heart Attack", value: "heart-attack" },
-        { label: "Malaria", value: "malaria" },
-        { label: "Flu", value: "flu" },
+      histories: [{ label: "Diabetes", value: "diabetes" }],
+      symptoms: [{ label: "Headache", value: "headache" }],
+      medicalReadings: [
+        { readingName: "Blood Pressure", readingValue: "120/80" },
+        { readingName: "Heart Rate", readingValue: "70 bpm" },
       ],
-      symptoms: [
-        { label: "Fever", value: "fever" },
-        { label: "Cough", value: "cough" },
-        { label: "Headache", value: "headache" },
-      ],
-      medicalReadings: [],
     },
+    id: "98765432John40",
   },
   {
     medicines: [
       {
-        id: "c",
+        id: "98765432Jane28",
+        type: "Capsule",
+        name: "Vitamin D3",
+        dose: "1000 IU",
+        quantity: "1",
+      },
+      { id: "98765432Jane28", type: "Syrup", name: "Antibiotic", dose: "5ml" },
+    ],
+    personalDetails: {
+      pin: 400001,
+      city: "Mumbai",
+      firstName: "Jane",
+      lastName: "Doe",
+      age: 28,
+      mobile: "9876543211",
+      gender: "Female",
+      state: { value: "Maharashtra", label: "Maharashtra" },
+      address: "456, XYZ Road",
+    },
+    medicalBills: [
+      { billName: "Consultation fee", billValue: 600, id: "98765432Jane28" },
+      { billName: "Medicine cost", billValue: 150, id: "98765432Jane28" },
+    ],
+    medicalRecord: {
+      histories: [{ label: "Asthma", value: "asthma" }],
+      symptoms: [{ label: "Fever", value: "fever" }],
+      medicalReadings: [
+        { readingName: "Blood Sugar", readingValue: "100 mg/dL" },
+        { readingName: "Cholesterol", readingValue: "150 mg/dL" },
+      ],
+    },
+    id: "98765432Jane28",
+  },
+  {
+    medicines: [
+      {
+        id: "98765432Bob35",
         type: "Tablet",
-        name: "Ibuprofen",
-        dose: "400 mg",
-        quantity: "30",
+        name: "Painkiller",
+        dose: "500mg",
+        quantity: "3",
       },
       {
-        id: "d",
-        type: "Capsule",
-        name: "Clarithromycin",
-        dose: "500 mg",
-        quantity: "10",
+        id: "98765432Bob35",
+        type: "Syrup",
+        name: "Cough syrup",
+        dose: "10ml",
       },
     ],
     personalDetails: {
-      pin: 411001,
-      city: "Pune",
-      firstName: "Rahul",
-      lastName: "Sharma",
-      age: 40,
-      mobile: "8765432109",
+      pin: 700001,
+      city: "Kolkata",
+      firstName: "Bob",
+      lastName: "Smith",
+      age: 35,
+      mobile: "9876543212",
       gender: "Male",
-      state: "Maharashtra",
-      address: "121, Shivaji Nagar",
+      state: { value: "West Bengal", label: "West Bengal" },
+      address: "789, PQR Lane",
     },
     medicalBills: [
-      { billName: "Tests", billValue: 200, id: "a" },
-      { billName: "Medicines", billValue: 75, id: "b" },
+      { billName: "Consultation fee", billValue: 800, id: "98765432Bob35" },
+      { billName: "Medicine cost", billValue: 300, id: "98765432Bob35" },
     ],
     medicalRecord: {
-      histories: [
-        { label: "Arthritis", value: "arthritis" },
-        { label: "Asthma", value: "asthma" },
-        { label: "Cancer", value: "cancer" },
+      histories: [{ label: "Hypertension", value: "hypertension" }],
+      symptoms: [{ label: "Nausea", value: "nausea" }],
+      medicalReadings: [
+        { readingName: "Body Temperature", readingValue: "98.6°F" },
+        { readingName: "Respiratory Rate", readingValue: "16 bpm" },
       ],
-      symptoms: [
-        { label: "Shortness of breath", value: "shortness-of-breath" },
-        { label: "Pain in joints", value: "pain-in-joints" },
-        { label: "Loss of appetite", value: "loss-of-appetite" },
-      ],
-      medicalReadings: [],
     },
+    id: "98765432Bob35",
   },
   {
     medicines: [
       {
-        id: "e",
+        id: "98765432Arun29",
         type: "Tablet",
-        name: "Metformin",
-        dose: "500 mg",
-        quantity: "60",
+        name: "Ibuprofen",
+        dose: "400mg",
       },
       {
-        id: "f",
-        type: "Capsule",
-        name: "Losartan",
-        dose: "50 mg",
-        quantity: "30",
+        id: "98765432Arun29",
+        type: "Syrup",
+        name: "Antacid",
+        dose: "5ml",
+        quantity: "2",
       },
     ],
     personalDetails: {
       pin: 600001,
       city: "Chennai",
-      firstName: "Priya",
-      lastName: "Nair",
-      age: 50,
-      mobile: "7654321098",
-      gender: "Female",
-      state: "Tamil Nadu",
-      address: "7, Anna Salai",
+      firstName: "Arun",
+      lastName: "Kumar",
+      age: 29,
+      mobile: "9876543213",
+      gender: "Male",
+      state: { value: "Tamil Nadu", label: "Tamil Nadu" },
+      address: "456, XYZ Road",
     },
     medicalBills: [
-      { billName: "Tests", billValue: 150, id: "a" },
-      { billName: "Medicines", billValue: 100, id: "b" },
+      { billName: "Consultation fee", billValue: 700, id: "98765432Arun29" },
+      { billName: "Medicine cost", billValue: 350, id: "98765432Arun29" },
     ],
     medicalRecord: {
-      histories: [
-        { label: "Diabetes", value: "diabetes" },
-        { label: "High Blood Pressure", value: "high-blood-pressure" },
-        { label: "Cholesterol", value: "cholesterol" },
+      histories: [{ label: "Migraine", value: "migraine" }],
+      symptoms: [{ label: "Stomach ache", value: "stomach-ache" }],
+      medicalReadings: [
+        { readingName: "Blood Pressure", readingValue: "130/90" },
+        { readingName: "Heart Rate", readingValue: "75 bpm" },
       ],
-      symptoms: [
-        { label: "Fatigue", value: "fatigue" },
-        { label: "Dizziness", value: "dizziness" },
-        { label: "Nausea", value: "nausea" },
-      ],
-      medicalReadings: [],
     },
+    id: "98765432Arun29",
+  },
+  {
+    medicines: [
+      {
+        id: "98765432Priya45",
+        type: "Capsule",
+        name: "Calcium",
+        dose: "500mg",
+      },
+      {
+        id: "98765432Priya45",
+        type: "Syrup",
+        name: "Antibiotic",
+        dose: "10ml",
+      },
+    ],
+    personalDetails: {
+      pin: 560001,
+      city: "Bengaluru",
+      firstName: "Priya",
+      lastName: "Sharma",
+      age: 45,
+      mobile: "9876543214",
+      gender: "Female",
+      state: { value: "Karnataka", label: "Karnataka" },
+      address: "12, LMN Street",
+    },
+    medicalBills: [
+      { billName: "Consultation fee", billValue: 900, id: "98765432Priya45" },
+      { billName: "Medicine cost", billValue: 400, id: "98765432Priya45" },
+    ],
+    medicalRecord: {
+      histories: [{ label: "Osteoporosis", value: "osteoporosis" }],
+      symptoms: [{ label: "Joint pain", value: "joint-pain" }],
+      medicalReadings: [
+        { readingName: "Blood Sugar", readingValue: "120 mg/dL" },
+        { readingName: "Cholesterol", readingValue: "170 mg/dL" },
+      ],
+    },
+    id: "98765432Priya45",
+  },
+  {
+    medicines: [
+      {
+        id: "98765432Akash36",
+        type: "Tablet",
+        name: "Antihistamine",
+        dose: "10mg",
+      },
+      {
+        id: "98765432Akash36",
+        type: "Syrup",
+        name: "Cough syrup",
+        dose: "5ml",
+        quantity: "1",
+      },
+    ],
+    personalDetails: {
+      pin: 500001,
+      city: "Hyderabad",
+      firstName: "Akash",
+      lastName: "Pandey",
+      age: 36,
+      mobile: "9876543215",
+      gender: "Male",
+      state: { value: "Telangana", label: "Telangana" },
+      address: "789, PQR Lane",
+    },
+    medicalBills: [
+      { billName: "Consultation fee", billValue: 750, id: "98765432Akash36" },
+      { billName: "Medicine cost", billValue: 250, id: "98765432Akash36" },
+    ],
+    medicalRecord: {
+      histories: [{ label: "Allergy", value: "allergy" }],
+      symptoms: [{ label: "Cough", value: "cough" }],
+      medicalReadings: [
+        { readingName: "Body Temperature", readingValue: "98.2°F" },
+        { readingName: "Respiratory Rate", readingValue: "18 bpm" },
+      ],
+    },
+    id: "98765432Akash36",
+  },
+  {
+    medicines: [
+      {
+        id: "98765432Riya31",
+        type: "Tablet",
+        name: "Antidepressant",
+        dose: "20mg",
+      },
+      {
+        id: "98765432Riya31",
+        type: "Syrup",
+        name: "Antibiotic",
+        dose: "10ml",
+        quantity: "2",
+      },
+    ],
+    personalDetails: {
+      pin: 380001,
+      city: "Ahmedabad",
+      firstName: "Riya",
+      lastName: "Patel",
+      age: 31,
+      mobile: "9876543216",
+      gender: "Female",
+      state: { value: "Gujarat", label: "Gujarat" },
+      address: "12, LMN Street",
+    },
+    medicalBills: [
+      { billName: "Consultation fee", billValue: 850, id: "98765432Riya31" },
+      { billName: "Medicine cost", billValue: 300, id: "98765432Riya31" },
+    ],
+    medicalRecord: {
+      histories: [{ label: "Anxiety", value: "anxiety" }],
+      symptoms: [{ label: "Depression", value: "depression" }],
+      medicalReadings: [
+        { readingName: "Blood Pressure", readingValue: "130/80" },
+        { readingName: "Heart Rate", readingValue: "72 bpm" },
+      ],
+    },
+    id: "98765432Riya31",
+  },
+  {
+    medicines: [
+      { id: "98765432Kunal50", type: "Tablet", name: "Statins", dose: "20mg" },
+      {
+        id: "98765432Kunal50",
+        type: "Syrup",
+        name: "Cough syrup",
+        dose: "10ml",
+        quantity: "3",
+      },
+    ],
+    personalDetails: {
+      pin: 600001,
+      city: "Chennai",
+      firstName: "Kunal",
+      lastName: "Sharma",
+      age: 50,
+      mobile: "9876543217",
+      gender: "Male",
+      state: { value: "Tamil Nadu", label: "Tamil Nadu" },
+      address: "456, XYZ Road",
+    },
+    medicalBills: [
+      { billName: "Consultation fee", billValue: 700, id: "98765432Kunal50" },
+      { billName: "Medicine cost", billValue: 450, id: "98765432Kunal50" },
+    ],
+    medicalRecord: {
+      histories: [{ label: "High Cholesterol", value: "high-cholesterol" }],
+      symptoms: [{ label: "Chest Pain", value: "chest-pain" }],
+      medicalReadings: [
+        { readingName: "Blood Sugar", readingValue: "110 mg/dL" },
+        { readingName: "Cholesterol", readingValue: "200 mg/dL" },
+      ],
+    },
+    id: "98765432Kunal50",
+  },
+  {
+    medicines: [
+      {
+        id: "98765432Radha40",
+        type: "Capsule",
+        name: "Iron supplement",
+        dose: "100mg",
+      },
+      {
+        id: "98765432Radha40",
+        type: "Syrup",
+        name: "Antibiotic",
+        dose: "5ml",
+      },
+    ],
+    personalDetails: {
+      pin: 302001,
+      city: "Jaipur",
+      firstName: "Radha",
+      lastName: "Singh",
+      age: 40,
+      mobile: "9876543218",
+      gender: "Female",
+      state: { value: "Rajasthan", label: "Rajasthan" },
+      address: "789, PQR Lane",
+    },
+    medicalBills: [
+      { billName: "Consultation fee", billValue: 800, id: "98765432Radha40" },
+      { billName: "Medicine cost", billValue: 200, id: "98765432Radha40" },
+    ],
+    medicalRecord: {
+      histories: [{ label: "Anemia", value: "anemia" }],
+      symptoms: [{ label: "Fatigue", value: "fatigue" }],
+      medicalReadings: [
+        { readingName: "Body Temperature", readingValue: "98.4°F" },
+        { readingName: "Respiratory Rate", readingValue: "20 bpm" },
+      ],
+    },
+    id: "98765432Radha40",
   },
 ];

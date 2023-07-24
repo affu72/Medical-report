@@ -1,29 +1,20 @@
 import Button from "../CustomComp/Button";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import InputRHF from "../CustomComp/InputRHF";
-
-export interface IMedicalBill {
-  billName: string;
-  billValue: number | null;
-  id: string;
-}
+import { toast } from "react-toastify";
 
 const MedicalBill = () => {
   const { control, getValues } = useFormContext();
+
   const { fields, remove, append } = useFieldArray({
     name: "medicalBills",
     control,
   });
 
-  console.log(fields);
-
   return (
     <div>
       {fields.map((bill, index) => (
-        <div
-          key={bill.id}
-          className="px-4 rounded-md py-4 flex gap-4 items-center border-2"
-        >
+        <div key={bill.id} className="rounded-md flex gap-2 h-20">
           <InputRHF
             placeholder="Bill Name"
             control={control}
@@ -43,25 +34,43 @@ const MedicalBill = () => {
               value="x"
               bgColor="bg-red-500"
               onClick={() => remove(index)}
+              className="self-start py-[9px] mt-[1px] text-white"
             />
           )}
         </div>
       ))}
 
       <Button
+        className="text-white"
         type="button"
         value="Add Anoher Bill"
         bgColor="bg-blue-500"
         onClick={() => {
           if (
-            getValues().medicalBills.at(-1).billName === "" ||
-            getValues().medicalBills.at(-1).billValue === null
-          )
+            getValues().medicalBills.at(-1)?.billName === "" ||
+            getValues().medicalBills.at(-1)?.billValue === 0
+          ) {
+            toast.error("Fill previous field first");
             return;
+          }
 
-          append({ billName: "", billValue: null });
+          append({billName: "", billValue: 0});
         }}
       />
+
+      {fields.length > 1 && (
+        <Button
+          type="button"
+          bgColor={"bg-red-500"}
+          value="Clear All"
+          onClick={() =>
+            remove(
+              Array.from({length: fields.length - 1}, (_, index) => index + 1)
+            )
+          }
+          className="text-white ml-4"
+        />
+      )}
     </div>
   );
 };

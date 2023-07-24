@@ -6,8 +6,10 @@ import React, {
   useMemo,
 } from "react";
 import { IDoctorDetails } from "../components/DoctorDetails";
-import { IFormData } from "../components/MainComponent/InputForms";
-import { formDataArr } from "../ts/Contants";
+import { deafaultFormValue, formDataArr } from "../ts/Contants";
+import { FormProvider, useForm } from "react-hook-form";
+import { IFormData } from "../ts/interfaces";
+
 //context value type
 interface IFormContext {
   showFormHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -23,8 +25,12 @@ interface IFormContext {
   setHasDoctorData: (value: boolean) => void;
   patientDataHandler: (data: IFormData) => void;
   patientData: IFormData[] | null;
-  showNavbar: boolean;
-  setShowNavbar: (data: boolean) => void;
+  isNavbarOpen: boolean;
+  setIsNavbarOpen: (data: boolean) => void;
+  deletePatientDataHandler: (event: any) => void;
+  isFormOpen: boolean;
+  setIsFormOpen: (st: boolean) => void;
+  editDoctorsDataHandler: () => void;
 }
 
 // creatig conetxt
@@ -37,9 +43,13 @@ export const MyFormContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
   const [patientData, setPatientData] = useState<IFormData[]>(formDataArr);
+
   //deoctor's details
-  const [doctorData, setDoctorData] = useState<IDoctorDetails>({
+
+  let doctorDataInitial = {
     clinicName: "",
     doctorName: "",
     clinicAddress: "",
@@ -50,23 +60,51 @@ export const MyFormContextProvider = ({
     openingTime: "",
     closingTime: "",
     closingDay: "",
-  });
+  };
+
+  const [doctorData, setDoctorData] =
+    useState<IDoctorDetails>(doctorDataInitial);
 
   const [hasDoctorData, setHasDoctorData] = useState(false);
 
   const [tabIndex, setTabIndex] = useState(0);
 
-  const [showNavbar, setShowNavbar] = useState<boolean>(false);
+  const [isNavbarOpen, setIsNavbarOpen] = useState<boolean>(false);
+
+  const methods = useForm<IFormData>({
+    defaultValues: { ...deafaultFormValue },
+    mode: "onTouched",
+    criteriaMode: "firstError",
+    shouldFocusError: true,
+  });
 
   const value = useMemo(() => {
     //Doctors Details
     const handleDoctorForm = (data: IDoctorDetails) => {
+      setDoctorData(data);
       localStorage.setItem("doctorData", JSON.stringify(data));
       setHasDoctorData(true);
     };
 
+    const editDoctorsDataHandler = () => {
+      // const data = localStorage.getItem("doctorData")!;
+
+      setHasDoctorData(false);
+    };
+
     const patientDataHandler = (data: IFormData) => {
-      setPatientData((prev) => [...prev, data]);
+      const prevData = patientData;
+
+      const indx = prevData.findIndex((ele) => ele.id === data.id);
+
+      if (indx !== -1) prevData.splice(indx, 1);
+
+      setPatientData([...prevData, data]);
+    };
+
+    const deletePatientDataHandler = (event: any) => {
+      const index = event.currentTarget.tabIndex;
+      setPatientData((prev) => prev.filter((data, i) => i !== index));
     };
 
     const showFormHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -90,15 +128,28 @@ export const MyFormContextProvider = ({
       setHasDoctorData,
       patientDataHandler,
       patientData,
-      showNavbar,
-      setShowNavbar,
+      isNavbarOpen,
+      setIsNavbarOpen,
+      deletePatientDataHandler,
+      isFormOpen,
+      setIsFormOpen,
+      editDoctorsDataHandler,
     };
 
     return value;
-  }, [tabIndex, doctorData, hasDoctorData, patientData, showNavbar]);
+  }, [
+    tabIndex,
+    doctorData,
+    hasDoctorData,
+    patientData,
+    isNavbarOpen,
+    isFormOpen,
+  ]);
 
   return (
-    <MyFormContext.Provider value={value}>{children}</MyFormContext.Provider>
+    <FormProvider {...methods}>
+      <MyFormContext.Provider value={value}>{children}</MyFormContext.Provider>
+    </FormProvider>
   );
 };
 

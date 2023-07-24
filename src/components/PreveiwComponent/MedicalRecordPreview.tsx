@@ -1,28 +1,30 @@
-import { useMyFormContext } from "../../Context/MyFormContext";
+import { useFormContext } from "react-hook-form";
+import { IOption } from "../../ts/interfaces";
 
 const MedicalRecordPreview = () => {
-  const { patientData } = useMyFormContext();
+  const { watch } = useFormContext();
+
+  const histories: IOption[] = watch("medicalRecord.histories");
+  const symptoms: IOption[] = watch("medicalRecord.symptoms");
 
   return (
     <div className="gap-2 p-6">
       <div className="break-words">
         <span className="font-bold">Medical history: </span>
-        {patientData?.at(-1)?.medicalRecord?.histories.map((option, index) => (
-          <span key={option.value} className="px-2 py-1">
+        {histories?.map((option, index) => (
+          <span key={option.value} className="py-1 mr-1">
             {option.value}
-            {/* {index < patientData?.at(-1)?.medicalRecord?.histories.length - 1
-              ? ","
-              : ""} */}
+            {histories?.length - 1 !== index ? "," : ""}
           </span>
         ))}
       </div>
 
       <div className="break-words">
         <span className="font-bold">Known Symptoms: </span>
-        {patientData?.at(-1)?.medicalRecord.symptoms.map((option, index) => (
-          <span key={option.value} className="px-2 py-1">
+        {symptoms?.map((option, index) => (
+          <span key={option.value} className="py-1 mr-1">
             {option.value}
-            {/* {index < patientData?.medicalRecord.symptoms.length - 1 ? "," : ""} */}
+            {symptoms?.length - 1 !== index ? "," : ""}
           </span>
         ))}
       </div>

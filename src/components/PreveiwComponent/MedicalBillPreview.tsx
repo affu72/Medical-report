@@ -1,35 +1,44 @@
-import React from "react";
-import { useMyFormContext } from "../../Context/MyFormContext";
-import MedicalBill from "../MainComponent/MedicalBill";
-import { access } from "fs";
-
+import { useFormContext } from "react-hook-form";
+import { IMedicalBill } from "../../ts/interfaces";
 const MedicalBillPreview = () => {
-  const { patientData } = useMyFormContext();
+  const { watch } = useFormContext();
 
-  const total = patientData
-    ?.at(-1)
-    ?.medicalBills?.map((bill) => bill.billValue)
+  const bills: IMedicalBill[] = watch("medicalBills");
+
+  const total = bills
+    ?.map((bill) => bill?.billValue)
     .reduce((curr, val) => {
       return +val! + curr!;
     }, 0);
 
-  console.log(total);
-
   return (
-    <div className="w-1/4  my-16">
-      <h2 className="text-3xl">Fees: (All in Rs)</h2>
+    <div className="w-1/3 relative mt-12 pl-8">
+      <h2 className="text-2xl">Fees: (All in Rs)</h2>
       <table className="border-2 border-slate-900">
         <tbody className="border-2 border-slate-900">
-          {patientData?.at(-1)?.medicalBills.map((bill, i) => (
-            <tr key={bill.billName} className="border-2 border-slate-900">
-              <td className=" px-4 py-2 border-2 border-slate-900">{`${bill.billName}`}</td>
-              <td className=" px-4 py-2 border-2 border-slate-900">{`${bill.billValue}/`}</td>
+          {bills?.map((bill, i) => {
+            if (bill.billName !== "" || bill.billValue !== 0) {
+              return (
+                <tr key={bill.billName} className="border-2 border-slate-900">
+                  <td className=" px-4 py-2 border-2 border-slate-900">{`${
+                    bill?.billName ?? ""
+                  }`}</td>
+                  <td className=" px-4 py-2 border-2 border-slate-900">{`${
+                    bill?.billValue ?? ""
+                  }/-`}</td>
+                </tr>
+              );
+            }
+            return "";
+          })}
+          {total !== 0 && (
+            <tr className=" px-4 py-2 border-2 border-slate-900">
+              <td className=" px-4 py-2 border-2 border-slate-900">Total</td>
+              <td className=" px-4 py-2 border-2 border-slate-900">
+                {total}/-
+              </td>
             </tr>
-          ))}
-          <tr className=" px-4 py-2 border-2 border-slate-900">
-            <td className=" px-4 py-2 border-2 border-slate-900">Total</td>
-            <td className=" px-4 py-2 border-2 border-slate-900">{total}/</td>
-          </tr>
+          )}
         </tbody>
       </table>
     </div>

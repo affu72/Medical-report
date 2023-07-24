@@ -1,31 +1,54 @@
-import React, { useState } from "react";
 import PreviewPage from "./components/PreveiwComponent/PreviewPage";
 import MainPage from "./components/MainComponent/MainPage";
 import { useMyFormContext } from "./Context/MyFormContext";
 import DoctorDetails from "./components/DoctorDetails";
 import Header from "./components/Header";
-import SideBar from "./components/SideBar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.min.css";
+import { useEffect } from "react";
 
 function App() {
-  const { hasDoctorData, showNavbar } = useMyFormContext();
+  const { hasDoctorData, setHasDoctorData, isFormOpen, isNavbarOpen } =
+    useMyFormContext();
+
+  useEffect(() => {
+    const DocData = localStorage.getItem("doctorData");
+    if (DocData) setHasDoctorData(true);
+  }, [setHasDoctorData]);
 
   return (
-    <div>
-      {!hasDoctorData && !localStorage.getItem("doctorData") ? (
-        <DoctorDetails />
-      ) : (
-        <>
-          <Header></Header>
-          <div
-            className={`flex justify-evenly xs:block m-auto md:flex-col z-1`}
-          >
-            <MainPage></MainPage>
-            <PreviewPage></PreviewPage>
-          </div>
-        </>
-      )}
-      {showNavbar && <div className="overlay"></div>}
-    </div>
+    <>
+      <ToastContainer
+        position="top-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <div className="md:w-fit mx-auto">
+        {!hasDoctorData ? (
+          <DoctorDetails />
+        ) : (
+          <>
+            {isFormOpen && <Header />}
+            <div
+              className={`flex justify-evenly xs:block m-auto md:flex-col ${
+                isFormOpen && "mt-16"
+              }`}
+            >
+              <MainPage></MainPage>
+              <PreviewPage></PreviewPage>
+            </div>
+          </>
+        )}
+        {isNavbarOpen && <div className="overlay"></div>}
+      </div>
+    </>
   );
 }
 

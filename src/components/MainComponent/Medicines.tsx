@@ -1,23 +1,10 @@
 import Button from "../CustomComp/Button";
 import { useFieldArray, useFormContext } from "react-hook-form";
-
-import FormError from "../CustomComp/FormError";
-
-export interface IMedicine {
-  id: string;
-  type: string;
-  name: string;
-  dose: string;
-  quantity?: string;
-}
+import { toast } from "react-toastify";
+import InputRHF from "../CustomComp/InputRHF";
 
 const Medicines = () => {
-  const {
-    control,
-    register,
-    formState: { errors },
-    getValues,
-  } = useFormContext();
+  const { control, register, getValues } = useFormContext();
 
   const { append, fields, remove } = useFieldArray({
     name: "medicines",
@@ -34,25 +21,13 @@ const Medicines = () => {
     );
   };
 
-  console.log();
-
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 rounded-md outline-blue-500">
       {fields.map((medicine, index) => (
-        <div className="xl:justify-between px-4 rounded-md py-4 flex items-center border-2 flex-wrap ">
-          <div className="relative flex w-2/3 border-2 border-gray-300  rounded-md">
-            <input
-              type="text"
-              placeholder="Medicine name..."
-              {...register(`medicines.${index}.name`, {
-                required: " Name Required",
-              })}
-              className={`py-2 px-4 w-full`}
-            />
-
+        <div key={medicine.id} className="rounded-md flex gap-2 h-9">
+          <div className="flex w-full">
             <select
-              aria-label="Select medicine type"
-              className="absolute border-l-2 text-slate-500 bg-transparent outline-none inline-block right-0 bottom-1/2 translate-y-1/2 py-2 px-2"
+              className="border-2 border-gray-300 h-[2.9rem] py-2 rounded-l-md"
               {...register(`medicines.${index}.type`, {
                 required: "Type Required",
               })}
@@ -60,54 +35,69 @@ const Medicines = () => {
               <option value="" disabled>
                 Type
               </option>
-              <option value="tablet">Tablet</option>
-              <option value="syrup">Syrup</option>
-              <option value="injection">Injection</option>
+              <option value="Tablet">Tablet</option>
+              <option value="Syrup">Syrup</option>
+              <option value="Injection">Injection</option>
             </select>
+            <div className="w-full">
+              <InputRHF
+                name={`medicines.${index}.name`}
+                control={control}
+                placeholder="Enter Medicine name"
+                type="text"
+                className="self-center border-l-0 rounded-l-none"
+              />
+            </div>
           </div>
 
-          <input
+          <InputRHF
+            name={`medicines.${index}.dose`}
+            control={control}
+            placeholder="1 Tab daily"
             type="text"
-            placeholder="dose"
-            className={`border-2 border-gray-300 py-2 px-4 rounded-md w-1/6`}
-            {...register(`medicines.${index}.dose`, {
-              required: "Dose Required",
-            })}
+            className="self-end"
           />
 
           {fields.length === 1 || (
             <Button
               type="button"
-              value="x"
+              value="X"
               bgColor="bg-red-500"
               onClick={() => remove(index)}
-              className=""
+              className="self-start py-[9px] mt-[1px] text-white"
             />
           )}
-
-          <FormError errors={errors} name={`medicines.${index}.name`} />
-          <FormError errors={errors} name={`medicines.${index}.type`} />
-          <FormError errors={errors} name={`medicines.${index}.dose`} />
         </div>
       ))}
 
       <div className="flex gap-4 mt-4">
         <Button
+          className="text-white"
           type="button"
           value="Add Medicine"
           bgColor={"bg-blue-500"}
           onClick={() => {
             if (!isPrevFieldEmpty(getValues("medicines")))
-              append({ name: "", dose: "", type: "", id: 0 });
+              append({name: "", dose: "", type: "", id: 0});
+            else {
+              toast.error("Fill previous field first");
+            }
           }}
         />
 
-        <Button
-          type="button"
-          bgColor={"bg-yellow-500"}
-          value="Clear All"
-          onClick={() => remove()}
-        />
+        {fields.length > 1 && (
+          <Button
+            type="button"
+            bgColor={"bg-red-500"}
+            value="Clear All"
+            onClick={() =>
+              remove(
+                Array.from({length: fields.length - 1}, (_, index) => index + 1)
+              )
+            }
+            className="text-white"
+          />
+        )}
       </div>
     </div>
   );

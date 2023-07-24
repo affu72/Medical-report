@@ -1,9 +1,9 @@
-import { useMyFormContext } from "../../Context/MyFormContext";
+import { useFormContext } from "react-hook-form";
+import { IPersonalData } from "../../ts/interfaces";
+const PersonalDetails = () => {
+  const { watch } = useFormContext();
 
-const PersonalInfoPreview = () => {
-  const { patientData } = useMyFormContext();
-
-  const patient = patientData?.at(-1)?.personalDetails;
+  const patient: IPersonalData = watch("personalDetails");
 
   return (
     <div className="flex flex-col p-6 gap border-double  border-b-4 border-stone-600">
@@ -24,9 +24,9 @@ const PersonalInfoPreview = () => {
       <div className="flex justify-between">
         <p>
           <span className="font-bold">Patient Name:</span>
-          {`${patient?.gender === "male" ? "Mr. " : "Mrs. "} ${
-            patient?.firstName ?? ""
-          } ${patient?.lastName ?? ""}`}
+          {`${patient?.gender === "Male" ? "Mr. " : ""}${
+            patient.gender === "Female" ? "Ms. " : ""
+          } ${patient?.firstName ?? ""} ${patient?.lastName ?? ""}`}
         </p>
 
         <p>
@@ -40,7 +40,7 @@ const PersonalInfoPreview = () => {
           <p>
             <span className="font-bold">Address: </span>{" "}
             {`${patient?.address ?? ""} ${patient?.city ?? ""} ${
-              patient?.state ?? ""
+              patient?.state.value ?? ""
             }`}
           </p>
         </div>
@@ -54,4 +54,4 @@ const PersonalInfoPreview = () => {
   );
 };
 
-export default PersonalInfoPreview;
+export default PersonalDetails;
