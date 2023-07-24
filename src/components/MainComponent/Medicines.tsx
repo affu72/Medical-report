@@ -78,19 +78,23 @@ const Medicines = () => {
           bgColor={"bg-blue-500"}
           onClick={() => {
             if (!isPrevFieldEmpty(getValues("medicines")))
-              append({ name: "", dose: "", type: "", id: 0 });
+              append({name: "", dose: "", type: "", id: 0});
             else {
               toast.error("Fill previous field first");
             }
           }}
         />
 
-        {fields.length >= 1 && (
+        {fields.length > 1 && (
           <Button
             type="button"
             bgColor={"bg-red-500"}
             value="Clear All"
-            onClick={() => remove()}
+            onClick={() =>
+              remove(
+                Array.from({length: fields.length - 1}, (_, index) => index + 1)
+              )
+            }
             className="text-white"
           />
         )}

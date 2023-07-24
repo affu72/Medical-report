@@ -65,13 +65,14 @@ const InputRHF = ({
               return (
                 <>
                   <input
-                    onChange={(e) => onChange(e.target.value)}
+                    onChange={e => onChange(e.target.value)}
                     className={getInputClassName(
                       getFieldState(name),
                       className
                     )}
                     placeholder={placeholder}
                     type={type}
+                    min={type === "number" ? 1 : ""}
                     value={value}
                     onBlur={onBlur}
                   />
@@ -97,12 +98,13 @@ const InputRHF = ({
             return (
               <div>
                 <input
-                  onChange={(e) => onChange(e.target.value)}
+                  onChange={e => onChange(e.target.value)}
                   className={getInputClassName(className)}
                   placeholder={placeholder}
                   type={type}
                   value={value}
                   onBlur={onBlur}
+                  min={type === "number" ? 1 : ""}
                 />
                 <FormError errors={errors} name={name} />
               </div>

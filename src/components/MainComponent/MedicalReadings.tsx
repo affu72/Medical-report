@@ -61,7 +61,7 @@ const MedicalReadings = () => {
             notify();
             return;
           }
-          append({ readingName: "", readingValue: null });
+          append({readingName: "", readingValue: null});
         }}
       />
       {fields.length >= 1 && (
@@ -69,7 +69,11 @@ const MedicalReadings = () => {
           type="button"
           bgColor={"bg-red-500"}
           value="Clear All"
-          onClick={() => remove()}
+          onClick={() =>
+            remove(
+              Array.from({length: fields.length - 1}, (_, index) => index + 1)
+            )
+          }
           className="ml-4 text-white"
         />
       )}

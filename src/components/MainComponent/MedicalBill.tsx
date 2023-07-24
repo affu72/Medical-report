@@ -54,16 +54,20 @@ const MedicalBill = () => {
             return;
           }
 
-          append({ billName: "", billValue: 0 });
+          append({billName: "", billValue: 0});
         }}
       />
 
-      {fields.length >= 1 && (
+      {fields.length > 1 && (
         <Button
           type="button"
           bgColor={"bg-red-500"}
           value="Clear All"
-          onClick={() => remove()}
+          onClick={() =>
+            remove(
+              Array.from({length: fields.length - 1}, (_, index) => index + 1)
+            )
+          }
           className="text-white ml-4"
         />
       )}
