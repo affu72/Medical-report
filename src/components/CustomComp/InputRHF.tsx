@@ -58,10 +58,9 @@ const InputRHF = ({
             name={name}
             defaultValue={""}
             render={({
-              field: { onChange, onBlur, value, name },
-              formState: { errors },
+              field: {onChange, onBlur, value, name},
+              formState: {errors},
             }) => {
-              console.log(getFieldState(name));
               return (
                 <>
                   <input
@@ -87,14 +86,11 @@ const InputRHF = ({
         </div>
       ) : (
         <Controller
-          rules={{ required: "This field is required" }}
+          rules={{required: "This field is required"}}
           control={control}
           name={name}
           defaultValue={""}
-          render={({
-            field: { onChange, onBlur, value },
-            formState: { errors },
-          }) => {
+          render={({field: {onChange, onBlur, value}, formState: {errors}}) => {
             return (
               <div>
                 <input

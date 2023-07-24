@@ -64,7 +64,7 @@ const MedicalReadings = () => {
           append({readingName: "", readingValue: null});
         }}
       />
-      {fields.length >= 1 && (
+      {fields.length > 1 && (
         <Button
           type="button"
           bgColor={"bg-red-500"}
