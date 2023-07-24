@@ -9,17 +9,22 @@ const MedicalReadingPreview = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold ml-auto text-center mb-2">
-        Medical Reading
-      </h2>
-      {readings?.map(reading => {
-        return (
-          <div key={reading.readingName} className="">
-            <span className="font-semibold">{reading.readingName}: </span>
-            <span>{reading.readingValue}</span>
-          </div>
-        );
-      })}
+      {readings.length >= 1 &&
+        (readings[0].readingValue !== "" || readings[0].readingName !== "") && (
+          <>
+            <h2 className="text-2xl font-bold ml-auto text-center mb-2">
+              Medical Reading
+            </h2>
+            {readings?.map(reading => {
+              return (
+                <div key={reading.readingName} className="">
+                  <span className="font-semibold">{reading.readingName}: </span>
+                  <span>{reading.readingValue}</span>
+                </div>
+              );
+            })}
+          </>
+        )}
     </div>
   );
 };
