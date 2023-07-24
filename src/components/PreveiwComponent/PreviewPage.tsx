@@ -39,7 +39,7 @@ function PreviewPage() {
           y={1}
           scale={1}
         >
-          {({ toPdf }: any) => (
+          {({toPdf}: any) => (
             <button
               form="main-form"
               type="submit"
@@ -53,16 +53,16 @@ function PreviewPage() {
       </div>
       <div
         ref={ref}
-        className="w-[800px] px-6 flex-none bg-white overflow-auto min-h-screen"
+        className="w-[800px] px-6 flex-none bg-white overflow-auto min-h-screen relative pb-12"
       >
         <Header></Header>
 
         <PersonalInfoPreview />
 
         <MedicalRecordPreview />
-        <div className="flex p-6 justify-around">
-          <MedicalReadingPreview />
+        <div className="flex p-6 justify-between">
           <MedicineTable />
+          <MedicalReadingPreview />
         </div>
 
         <MedicalBillPreview />

@@ -9,10 +9,12 @@ const MedicalReadingPreview = () => {
 
   return (
     <div>
-      <h2 className="text-xl font-semibold ml-auto">Medical Reading</h2>
-      {readings?.map((reading) => {
+      <h2 className="text-2xl font-bold ml-auto text-center mb-2">
+        Medical Reading
+      </h2>
+      {readings?.map(reading => {
         return (
-          <div key={reading.readingName}>
+          <div key={reading.readingName} className="">
             <span className="font-semibold">{reading.readingName}: </span>
             <span>{reading.readingValue}</span>
           </div>

@@ -12,7 +12,7 @@ const MedicalRecordPreview = () => {
       <div className="break-words">
         <span className="font-bold">Medical history: </span>
         {histories?.map((option, index) => (
-          <span key={option.value} className="px-2 py-1">
+          <span key={option.value} className="py-1 mr-1">
             {option.value}
             {histories?.length - 1 !== index ? "," : ""}
           </span>
@@ -22,7 +22,7 @@ const MedicalRecordPreview = () => {
       <div className="break-words">
         <span className="font-bold">Known Symptoms: </span>
         {symptoms?.map((option, index) => (
-          <span key={option.value} className="px-2 py-1">
+          <span key={option.value} className="py-1 mr-1">
             {option.value}
             {symptoms?.length - 1 !== index ? "," : ""}
           </span>
