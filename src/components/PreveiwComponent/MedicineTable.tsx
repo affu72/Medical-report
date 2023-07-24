@@ -9,8 +9,7 @@ function MedicineTable() {
   return (
     <>
       {medicines.length >= 1 &&
-        medicines[0].name !== "" &&
-        medicines[0].dose !== "" && (
+        (medicines[0].name !== "" || medicines[0].dose !== "") && (
           <table className="w-2/3">
             <thead className="  bg-blue-300">
               <tr>
